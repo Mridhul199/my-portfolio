@@ -31,15 +31,19 @@ Serve from the repo root so the relative paths (`netbanking-2/...`, `wallet/...`
 `styles/...`, `assets/...`) resolve. All URLs are relative, so the site also
 works under a GitHub Pages subpath (`username.github.io/<repo>/`).
 
-## Deploy (GitHub Pages)
+## Deploy (GitHub Pages — CI/CD)
 
-1. Create a GitHub repo and push this directory.
-2. Settings → Pages → Source: `Deploy from a branch`, branch `main`, folder `/ (root)`.
-3. Site goes live at `https://<user>.github.io/<repo>/`.
-4. (Optional) add a custom domain in Settings → Pages, then update absolute
-   references if any are added later.
+Live: **https://mridhul199.github.io/my-portfolio/**
 
-`.nojekyll` is present so GitHub Pages serves files as-is.
+Deployment is automated via GitHub Actions (`.github/workflows/deploy.yml`):
+every push to `main` publishes the repo root to GitHub Pages — no build step.
+
+One-time setup (already done): repo **Settings → Pages → Source: GitHub Actions**.
+After that, pushing to `main` is the entire release process.
+
+`.nojekyll` is present so Pages serves files as-is. All URLs are relative, so the
+site works under the `/my-portfolio/` subpath; a custom domain can be added later
+in Settings → Pages with no code changes.
 
 ## Placeholders to replace
 
