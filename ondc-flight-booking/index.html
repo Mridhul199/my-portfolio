@@ -1,0 +1,1294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<script>document.documentElement.classList.add('js')</script>
+<title>ONDC Flight Booking — Bank buyer app, BillDesk as TSP · Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* project-overview — base design system
+   Extracted from the SIHUB overview doc. Paste inside a <style> tag in the new doc's <head>.
+   Palette: neutral surfaces + one accent (--orange). Swap --orange to re-skin. */
+
+:root{
+  --orange:#F26522; --orange-hover:#D9541A; --orange-tint:#FEF0E8; --orange-tint-2:#FFF7F1;
+  --text-1:#0D1526; --text-2:#4A5568; --text-3:#8A97AC;
+  --canvas:#F7F8FA; --surface:#FFFFFF; --surface-2:#FAFBFC;
+  --border:#E2E8F0; --border-strong:#CBD5E0;
+  --success:#0A8F5C; --warning:#D97706; --error:#C0392B;
+  --success-tint:#E6F4EE; --warning-tint:#FEF3E2; --error-tint:#FBE9E7;
+  --f:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --r-s:4px; --r-m:6px; --r-l:8px; --r-xl:12px; --r-2xl:16px; --r-pill:999px;
+  --sh-1:0 1px 2px rgba(13,21,38,.04),0 0 0 1px rgba(13,21,38,.04);
+  --sh-2:0 4px 12px rgba(13,21,38,.06),0 0 0 1px rgba(13,21,38,.05);
+  --sh-3:0 12px 32px rgba(13,21,38,.08),0 0 0 1px rgba(13,21,38,.06);
+  --container:1200px; --gutter:32px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;scroll-behavior:smooth}
+body{font-family:var(--f);font-size:16px;line-height:1.55;color:var(--text-1);background:var(--canvas);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--orange);text-decoration:none}
+img,svg{display:block;max-width:100%}
+code{font-family:var(--mono);font-size:.85em;background:var(--canvas);padding:2px 5px;border-radius:var(--r-s);border:1px solid var(--border)}
+
+.shell{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+.shell.narrow{max-width:920px}
+
+/* Footer row (shared layout class) */
+.chrome-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+
+/* bg deco */
+.bg-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg-deco::before,.bg-deco::after{content:"";position:absolute;border-radius:50%;filter:blur(40px)}
+.bg-deco::before{width:600px;height:600px;top:-200px;left:-200px;background:radial-gradient(circle,rgba(242,101,34,.05),transparent 60%)}
+.bg-deco::after{width:800px;height:800px;bottom:-300px;right:-300px;background:radial-gradient(circle,rgba(242,101,34,.04),transparent 60%)}
+main{position:relative;z-index:1}
+
+/* Type */
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);padding:6px 10px;background:var(--orange-tint);border-radius:var(--r-pill)}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--orange)}
+h1,h2,h3,h4,h5{margin:0;letter-spacing:-.02em;font-weight:600;color:var(--text-1)}
+h1{font-size:54px;line-height:1.05;letter-spacing:-.03em}
+h2{font-size:32px;line-height:1.15;letter-spacing:-.025em}
+h3{font-size:20px;line-height:1.3}
+h4{font-size:16px;line-height:1.35}
+.lead{font-size:18px;line-height:1.6;color:var(--text-2);max-width:65ch}
+.lead.body{color:var(--text-2);font-size:17px}
+p{margin:0;color:var(--text-2)}
+p.para{font-size:16px;line-height:1.7;color:var(--text-2);max-width:68ch;margin-top:18px}
+p.para + p.para{margin-top:16px}
+.muted{color:var(--text-3)}
+
+section{padding:72px 0;position:relative;border-top:1px solid var(--border)}
+.section-head{margin-bottom:36px;max-width:760px}
+.section-head h2{margin-top:12px}
+.section-head .lead{margin-top:16px}
+.sec-num{font-family:var(--mono);font-size:12px;color:var(--orange);font-weight:500;letter-spacing:.06em}
+
+/* fill-in marker */
+.fill{background:repeating-linear-gradient(45deg,#FFF7ED 0 8px,#FEF0E8 8px 16px);border:1px dashed var(--orange);border-radius:var(--r-s);padding:0 6px;color:var(--orange-hover);font-size:.92em;font-weight:500;font-family:var(--mono)}
+
+/* Hero */
+.hero{padding:72px 0 8px}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:48px;align-items:center}
+.hero-copy{min-width:0}
+.hero h1{max-width:17ch;margin-top:20px}
+.hero .lead{margin-top:22px;font-size:20px;max-width:52ch}
+.hero .lead strong{color:var(--text-1);font-weight:600}
+.hero-art{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0}
+.hero-art::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-58%);width:115%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(242,101,34,.14),rgba(242,101,34,.04) 45%,transparent 68%);z-index:0;pointer-events:none}
+.hero-art img{position:relative;z-index:1;width:100%;max-width:540px;height:auto;display:block;filter:drop-shadow(0 36px 64px rgba(13,21,38,.26))}
+.hero-art-ph{display:none;position:relative;z-index:1;width:100%;max-width:440px;aspect-ratio:4/3;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:24px;font-family:var(--mono);font-size:12px;color:var(--text-3);background:var(--surface-2);border:1px dashed var(--border-strong);border-radius:var(--r-2xl)}
+.hero-art-ph code{font-size:12px;color:var(--text-2)}
+.hero-art-cap{position:relative;z-index:1;margin-top:14px;max-width:340px;text-align:center;font-size:13px;line-height:1.5;color:var(--text-3)}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:32px}.hero-art{max-width:380px;margin:4px auto 0}.hero .lead{max-width:none}}
+
+/* Meta bar */
+.meta-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;margin-top:48px}
+@media(max-width:760px){.meta-bar{grid-template-columns:1fr 1fr}}
+.meta-cell{background:var(--surface);padding:18px 20px}
+.meta-cell .mk{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:6px}
+.meta-cell .mv{font-size:14px;font-weight:500;color:var(--text-1);line-height:1.4}
+
+/* Stat strip */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+@media(max-width:760px){.stats{grid-template-columns:1fr}}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:22px 24px;box-shadow:var(--sh-1)}
+.stat .n{font-size:40px;font-weight:800;letter-spacing:-.03em;font-family:'Manrope',var(--f);line-height:1}
+.stat .n .u{color:var(--orange)}
+.stat .l{font-size:13px;color:var(--text-2);margin-top:8px}
+
+/* Callout */
+.step-callout{background:linear-gradient(180deg,var(--orange-tint-2) 0%,var(--surface) 60%);border:1px solid var(--orange-tint);border-radius:var(--r-xl);padding:24px;display:grid;grid-template-columns:40px 1fr;gap:16px;align-items:start;margin-top:28px}
+.step-callout-ico{width:40px;height:40px;border-radius:10px;background:var(--orange-tint);color:var(--orange);display:grid;place-items:center;font-size:20px;font-weight:700}
+.step-callout h4{font-size:15px;margin:0 0 8px;color:var(--text-1)}
+.step-callout p{font-size:14px;line-height:1.6;color:var(--text-2);margin:0}
+
+/* Figure */
+figure{margin:32px 0 0}
+.frame{border:1px solid var(--border);border-radius:var(--r-2xl);background:var(--surface);overflow:hidden;box-shadow:var(--sh-2)}
+.frame img{display:block;width:100%;height:auto}
+.placeholder{aspect-ratio:16/6;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:var(--text-3);background:repeating-linear-gradient(45deg,var(--surface) 0 12px,var(--surface-2) 12px 24px);font-size:13px;text-align:center;padding:24px}
+.placeholder code{font-family:var(--mono);font-size:12px}
+figcaption{font-size:12px;color:var(--text-3);margin-top:12px;text-align:center}
+
+/* Goal / card grids */
+.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+.cards-grid.three{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.cards-grid,.cards-grid.three{grid-template-columns:1fr}}
+.pcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:20px 22px;box-shadow:var(--sh-1)}
+.pcard .tag{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--error)}
+.pcard.ok .tag{color:var(--orange)}
+.pcard.goal .tag{color:var(--text-3)}
+.pcard h4{font-size:15px;margin:8px 0 6px}
+.pcard p{font-size:13px;line-height:1.6;color:var(--text-2)}
+
+/* Process timeline */
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:28px;position:relative}
+@media(max-width:760px){.timeline{grid-template-columns:1fr;gap:10px}}
+.tl-step{position:relative;padding:0 14px}
+.tl-step .tl-dot{width:14px;height:14px;border-radius:50%;background:var(--surface);border:2px solid var(--orange);position:relative;z-index:2}
+.tl-step .tl-line{position:absolute;top:6px;left:50%;right:-50%;height:2px;background:var(--border);z-index:1}
+.tl-step:last-child .tl-line{display:none}
+@media(max-width:760px){.tl-step .tl-line{display:none}}
+.tl-step .tl-num{font-family:var(--mono);font-size:10px;color:var(--text-3);margin-top:14px}
+.tl-step h4{font-size:14px;margin:4px 0 6px}
+.tl-step p{font-size:12px;line-height:1.55;color:var(--text-2)}
+
+/* Compare table */
+.compare{width:100%;border-collapse:separate;border-spacing:0;margin-top:24px;font-size:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-1)}
+.compare th{text-align:left;padding:14px 18px;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);border-bottom:1px solid var(--border);font-weight:600;background:var(--surface-2)}
+.compare th.after{color:var(--orange)}
+.compare td{padding:16px 18px;vertical-align:top;border-bottom:1px solid var(--border);color:var(--text-2);line-height:1.5}
+.compare tr:last-child td{border-bottom:none}
+.compare td.after{background:var(--orange-tint-2);color:var(--text-1)}
+@media(max-width:760px){
+  .compare,.compare tbody,.compare tr,.compare td{display:block;width:100%}
+  .compare thead{display:none}
+  .compare td{border:none;border-bottom:1px solid var(--border)}
+  .compare td.before::before{content:"Before — ";font-weight:600;color:var(--error)}
+  .compare td.after::before{content:"After — ";font-weight:600;color:var(--orange)}
+}
+
+/* Before/After two-up */
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;align-items:start}
+@media(max-width:760px){.ba-grid{grid-template-columns:1fr}}
+.ba-col .ba-label{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.ba-col.before .ba-label{color:var(--error)}
+.ba-col.after .ba-label{color:var(--orange)}
+.ba-col .ba-label .bdot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.ba-frame{border:1px solid var(--border);border-radius:var(--r-xl);background:var(--surface);overflow:hidden;box-shadow:var(--sh-1)}
+.ba-frame img{display:block;width:100%;height:auto}
+/* phone screens: render near native size, centered & crisp, not stretched */
+.ba-frame.phone{display:flex;justify-content:center;align-items:flex-start;background:linear-gradient(180deg,var(--canvas) 0%,var(--surface) 100%);padding:24px}
+.ba-frame.phone img{width:auto;max-width:300px;max-height:640px;border-radius:18px;box-shadow:var(--sh-2),0 0 0 1px rgba(13,21,38,.05)}
+.ba-frame .ph{aspect-ratio:9/16;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--text-3);background:repeating-linear-gradient(45deg,var(--surface) 0 12px,var(--surface-2) 12px 24px);font-size:12px;text-align:center;padding:20px}
+.ba-frame .ph code{font-family:var(--mono);font-size:11px}
+.ba-col.before .ba-frame .ph{aspect-ratio:16/10}
+.ba-cap{font-size:12px;color:var(--text-3);margin-top:10px;line-height:1.5}
+
+/* Decision blocks */
+.decision{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:24px 0;border-bottom:1px solid var(--border);align-items:start}
+.decision:last-child{border-bottom:none}
+.decision .d-num{font-family:'Manrope',var(--f);font-size:28px;font-weight:800;color:var(--orange-tint);letter-spacing:-.03em;line-height:1;width:48px}
+.decision h4{font-size:17px;margin-bottom:6px}
+.decision .d-rationale{font-size:14px;line-height:1.65;color:var(--text-2);margin-top:8px}
+.decision .d-rationale b{color:var(--text-1);font-weight:600}
+
+/* Pipeline (bank themes) */
+.pipeline{display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr 24px 1fr;gap:0;align-items:stretch;margin-top:28px}
+@media(max-width:760px){.pipeline{grid-template-columns:1fr;gap:10px}.pipe-arrow{display:none}}
+.pipe-node{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:18px 20px;box-shadow:var(--sh-1)}
+.pipe-node.accent{background:linear-gradient(180deg,var(--orange-tint-2),var(--surface));border-color:var(--orange-tint)}
+.pipe-node .pipe-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:8px}
+.pipe-node h4{font-size:14px;margin-bottom:6px}
+.pipe-node p{font-size:12px;line-height:1.6;color:var(--text-2)}
+.pipe-arrow{display:flex;align-items:center;justify-content:center;color:var(--orange);font-size:18px}
+
+/* Token ladder */
+.ladder-wrap{margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:22px;box-shadow:var(--sh-1)}
+.ladder-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.ladder-head .lh-sw{width:40px;height:40px;border-radius:var(--r-m);border:1px solid rgba(0,0,0,.08)}
+.ladder-head .lh-meta .lh-role{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);font-weight:600}
+.ladder-head .lh-meta .lh-hex{font-family:var(--mono);font-size:14px;font-weight:600;color:var(--text-1)}
+.ladder{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:6px}
+.lc{border:1px solid rgba(0,0,0,.06);border-radius:var(--r-m);overflow:hidden;background:var(--surface)}
+.lc .sw{height:52px}
+.lc .mt{padding:6px 8px;border-top:1px solid var(--border)}
+.lc .mt .role{font-size:8px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-3);font-weight:600}
+.lc .mt .hx{font-family:var(--mono);font-size:9.5px;color:var(--text-1);margin-top:1px}
+.ladder-note{font-size:12px;color:var(--text-3);margin-top:14px}
+
+/* Impact list */
+ul.clean{list-style:none;padding:0;margin:24px 0 0}
+ul.clean li{padding:16px 0 16px 30px;border-bottom:1px solid var(--border);position:relative;color:var(--text-2);font-size:15px;line-height:1.5}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{content:"→";position:absolute;left:0;color:var(--orange);font-weight:700}
+ul.clean li strong{color:var(--text-1);font-weight:600}
+
+/* Reflection quote */
+.reflect{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:0 var(--r-xl) var(--r-xl) 0;padding:28px 32px;margin-top:28px;box-shadow:var(--sh-1)}
+.reflect p{font-size:18px;line-height:1.55;color:var(--text-1);font-weight:500}
+
+footer{border-top:1px solid var(--border);padding:40px 0;color:var(--text-3);font-size:13px;background:var(--surface)}
+footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+/* ============================================================
+   PORTED FROM whitelabel-handoff.html — playground styles
+   ============================================================ */
+/* ===== Lightbox (from whitelabel-handoff) ===== */
+.lightbox{position:fixed;inset:0;background:rgba(13,21,38,.82);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:32px;cursor:zoom-out}
+.lightbox.is-open{display:flex}
+.lightbox img{max-width:94vw;max-height:92vh;border-radius:var(--r-l);box-shadow:0 30px 60px rgba(0,0,0,.4)}
+/* Click-to-zoom affordance on screenshots */
+[data-shot]{position:relative;cursor:zoom-in}
+.zoom-hint{position:absolute;top:10px;right:10px;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#fff;background:rgba(13,21,38,.62);backdrop-filter:blur(4px);padding:5px 10px;border-radius:999px;pointer-events:none;opacity:0;transform:translateY(-2px);transition:opacity 160ms,transform 160ms;z-index:3}
+[data-shot]:hover .zoom-hint{opacity:1;transform:none}
+.zoom-hint svg{width:12px;height:12px}
+
+/* ===== Download button ===== */
+.dl-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;background:var(--text-1);color:#fff;border-radius:var(--r-l);font-size:13px;font-weight:500;transition:background 150ms;cursor:pointer;border:none;width:100%;font-family:inherit}
+.dl-btn:hover{background:#1F2937}
+.dl-btn .dl-meta{font-size:11px;color:rgba(255,255,255,.55);font-family:var(--mono)}
+.dl-btn.secondary{background:var(--surface);color:var(--text-1);border:1px solid var(--border)}
+.dl-btn.secondary:hover{background:var(--canvas);border-color:var(--border-strong)}
+.dl-btn.secondary .dl-meta{color:var(--text-3)}
+
+/* ===== Preview carousel + playground (ported verbatim) ===== */
+.pv-wrap{display:flex;flex-direction:column;gap:12px}
+.pv-tabs{position:relative;display:inline-flex;height:36px;padding:2px;background:var(--canvas);border-radius:20px;align-self:flex-start}
+.pv-tabs::before{content:"";position:absolute;top:2px;bottom:2px;left:2px;width:calc(50% - 2px);border-radius:18px;background:var(--pv-fill);box-shadow:0 4px 8px rgba(13,21,38,.18);transition:left 240ms cubic-bezier(.4,0,.2,1)}
+.pv-tabs[data-active="desktop"]::before{left:50%}
+.pv-tab{position:relative;z-index:1;flex:1;min-width:104px;justify-content:center;font-size:12px;font-weight:600;color:var(--text-3);padding:0 24px;border-radius:18px;cursor:pointer;transition:color 160ms;display:inline-flex;align-items:center;gap:6px;background:transparent;border:none}
+.pv-tab:hover{color:var(--text-1)}
+.pv-tab.is-on,.pv-tab.is-on:hover{color:#fff}
+.pv-tab svg{flex-shrink:0}
+
+.pv-stage{background:linear-gradient(180deg,var(--canvas) 0%,var(--surface) 100%);border:1px solid var(--border);border-radius:var(--r-xl);padding:36px;display:flex;align-items:center;justify-content:center;height:660px;overflow:hidden}
+.pv-pane{display:none;width:100%;height:100%}
+.pv-pane.is-on{display:flex;justify-content:center;align-items:center}
+
+/* ===== Mobile phone mockup ===== */
+.pv-phone{width:360px;height:800px;border-radius:36px;overflow:hidden;background:#fff;box-shadow:0 20px 50px rgba(13,21,38,.18),0 0 0 10px #0D1526,0 0 0 11px rgba(255,255,255,.4);position:relative;font-size:12px;transform:scale(.7);transform-origin:center;display:flex;flex-direction:column}
+.pv-phone-content{flex:1}
+.pv-phone-statusbar{display:flex;justify-content:space-between;align-items:center;padding:14px 26px 8px;background:var(--pv-brand-dark);color:#fff;font-size:13px;font-weight:600}
+.pv-phone-statusbar .sb-icons{display:inline-flex;gap:6px;align-items:center}
+.pv-phone-urlbar-wrap{padding:6px 16px 14px;background:var(--pv-brand-dark)}
+.pv-phone-urlbar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border-radius:10px;padding:9px 14px;font-size:13px;color:#fff;justify-content:space-between}
+.pv-phone-urlbar .url-l{display:flex;gap:8px;align-items:center}
+.pv-phone-bankbar{padding:12px 22px;background:var(--pv-brand-dark);display:flex;align-items:center;min-height:46px}
+.pv-phone-bankbar img{height:26px;width:auto;display:block}
+.pv-phone-illu{background:#fff;display:block;line-height:0}
+.pv-phone-illu img{width:100%;height:auto;display:block}
+.pv-phone-content{padding:14px 24px 24px;display:flex;flex-direction:column}
+.pv-phone-content h4{font-size:17px;line-height:1.3;color:var(--text-1);margin-bottom:22px;font-weight:600;letter-spacing:-.01em}
+.pv-field{margin-bottom:14px}
+.pv-field label{display:block;font-size:12px;font-weight:500;color:var(--text-1);margin-bottom:6px}
+.pv-input{width:100%;border:1px solid var(--border);border-radius:6px;padding:11px 14px;font-size:13px;color:var(--text-3);background:#fff;font-family:inherit;caret-color:transparent}
+.pv-input.focused{border:1.5px solid var(--pv-border);box-shadow:0 0 0 3px var(--pv-focus-ring);color:var(--text-1);padding:10.5px 13.5px}
+.pv-input.typed{color:var(--text-1)}
+.pv-helper{font-size:11px;color:var(--text-3);line-height:1.45;margin:6px 0 22px}
+.pv-cta{width:100%;background:var(--pv-fill);color:#fff;font-size:14px;font-weight:600;padding:13px;border-radius:6px;border:none;cursor:default;font-family:inherit;margin-top:auto}
+.pv-cta.loading{display:flex;justify-content:center;align-items:center;gap:5px;padding:14px}
+.pv-cta-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.85)}
+.pv-foot{font-size:12px;color:var(--text-3);text-align:center;margin-top:14px}
+.pv-foot a{color:var(--pv-text);font-weight:600;text-decoration:underline}
+.pv-poweredby{padding:14px;background:linear-gradient(180deg,#fff 0%,#F0F4FA 100%);text-align:center;font-size:9px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;border-top:1px solid var(--border)}
+.pv-poweredby .bd-mark{display:inline-flex;align-items:center;gap:6px;text-transform:none;letter-spacing:0;font-size:11px;color:var(--text-1);font-weight:600;margin-top:5px}
+
+/* ===== Desktop browser mockup ===== */
+.pv-desktop{width:100%;max-width:880px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 20px 50px rgba(13,21,38,.16);border:1px solid var(--border)}
+.pv-desktop-chrome{background:#0D1526;padding:9px 14px;display:flex;align-items:center;gap:12px}
+.pv-desktop-chrome .dots{display:flex;gap:6px}
+.pv-desktop-chrome .dot{width:11px;height:11px;border-radius:50%}
+.pv-desktop-chrome .dot.r{background:#FF5F57}
+.pv-desktop-chrome .dot.y{background:#FEBC2E}
+.pv-desktop-chrome .dot.g{background:#28C840}
+.pv-desktop-chrome .tab{background:#1F2937;padding:5px 12px;border-radius:6px;font-size:11px;color:#fff;display:inline-flex;align-items:center;gap:6px}
+.pv-desktop-chrome .url{flex:1;background:#1F2937;padding:5px 12px;border-radius:6px;font-size:11px;color:rgba(255,255,255,.75);text-align:center}
+.pv-desktop-body{display:grid;grid-template-columns:38fr 62fr;min-height:540px}
+
+/* ===== Bandhan Bank — custom Add Biller portal (out-of-scope screen) ===== */
+.bd-portal{display:grid;grid-template-columns:200px 1fr;min-height:540px;background:#fff;font-family:var(--f)}
+.bd-portal *{box-sizing:border-box}
+.bd-side{border-right:1px solid var(--border);padding:14px 12px;display:flex;flex-direction:column;gap:14px;background:#fff}
+.bd-side-head{display:flex;align-items:center;justify-content:space-between;padding:2px 4px}
+.bd-side-head img{height:18px;width:auto;display:block}
+.bd-side-head .bd-menu{width:18px;height:18px;color:var(--text-3)}
+.bd-side-nav{display:flex;flex-direction:column;gap:1px;margin-top:4px}
+.bd-side-nav a{display:flex;align-items:center;gap:9px;padding:9px 10px;font-size:11px;font-weight:500;color:var(--text-2);border-radius:6px;cursor:default;line-height:1}
+.bd-side-nav a svg{width:14px;height:14px;flex-shrink:0;color:var(--text-3)}
+.bd-side-nav a.active{background:var(--canvas);color:var(--text-1);font-weight:600}
+.bd-side-nav a.active svg{color:var(--text-1)}
+
+.bd-main{display:flex;flex-direction:column;background:#fff}
+.bd-main-head{display:flex;align-items:center;gap:14px;padding:12px 24px;border-bottom:1px solid var(--border)}
+.bd-main-head .bd-back{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--pv-text);font-weight:500;cursor:default}
+.bd-main-head .bd-back svg{width:11px;height:11px}
+.bd-main-head .bd-search{flex:1;max-width:280px;margin-left:auto;display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text-3);font-size:11px}
+.bd-main-head .bd-search svg{width:11px;height:11px;flex-shrink:0}
+.bd-main-head .bd-exit{padding:6px 14px;border:1px solid var(--border);border-radius:6px;font-size:11px;font-weight:500;color:var(--text-1);cursor:default}
+.bd-main-head .bd-avatar{width:24px;height:24px;border-radius:50%;background:#F5C645;color:#3D2C00;display:grid;place-items:center;font-size:10px;font-weight:700;letter-spacing:.04em}
+
+.bd-body{padding:22px 24px;display:flex;flex-direction:column;gap:14px}
+.bd-h1{font-size:20px;font-weight:600;color:var(--text-1);letter-spacing:-.01em;margin:0}
+.bd-h1-sub{font-size:11px;color:var(--text-3);margin:0}
+
+.bd-section{display:grid;grid-template-columns:140px 1fr;gap:16px;margin-top:10px}
+.bd-cats{border:1px solid var(--border);border-radius:8px;padding:6px;display:flex;flex-direction:column;gap:1px;align-self:start;background:#fff}
+.bd-cats a{display:block;padding:8px 10px;font-size:11px;font-weight:500;color:var(--text-2);border-radius:5px;cursor:default;white-space:nowrap}
+.bd-cats a.active{background:var(--text-1);color:#fff}
+
+.bd-cards-wrap .bd-cards-head{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:14px}
+.bd-cards-wrap .bd-cards-head h3{font-size:13px;font-weight:600;color:var(--text-1);margin:0}
+.bd-cards-wrap .bd-cards-head .bd-cnt{font-size:10px;color:var(--text-3);font-weight:500}
+.bd-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.bd-card{border:1px solid var(--border);border-radius:8px;padding:12px 11px;background:#fff;cursor:default;transition:border-color 120ms;display:flex;flex-direction:column;gap:10px;min-height:118px}
+.bd-card .bd-card-illu{height:56px;display:flex;align-items:flex-start}
+.bd-card .bd-card-illu svg{width:56px;height:56px;display:block}
+.bd-card .bd-card-label{font-size:9px;color:var(--text-3);font-weight:500;letter-spacing:.04em}
+.bd-card .bd-card-title{font-size:11.5px;color:var(--text-1);font-weight:600;line-height:1.3}
+.bd-card.is-selected{border:1.5px solid var(--pv-fill);box-shadow:0 0 0 3px var(--pv-focus-ring);padding:11.5px 10.5px}
+
+/* ===== Preview tabs row — main + sub on the same row, visual hierarchy ===== */
+.pv-tabs-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.pv-subtabs-row{display:inline-flex;align-items:center;gap:8px;padding-left:20px;border-left:1px solid var(--border)}
+.pv-subtabs-row .pv-subtabs-label{font-size:10px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em}
+.pv-subtabs{display:inline-flex;gap:2px}
+.pv-subtabs[hidden]{display:none}
+.pv-subtab{padding:4px 10px;font:inherit;font-size:11px;font-weight:500;background:none;border:none;border-radius:5px;color:var(--text-3);cursor:pointer;transition:all 120ms}
+.pv-subtab:hover{color:var(--text-1);background:var(--canvas)}
+.pv-subtab.is-on{color:var(--text-1);background:var(--canvas)}
+.pv-subpane{display:none;width:100%}
+.pv-subpane.is-on{display:flex;align-items:center;justify-content:center;width:100%}
+
+/* ===== Bandhan Bank — MWeb Recharges screen (out-of-scope, mobile only) ===== */
+.bd-mweb{background:#fff;font-family:var(--f);display:flex;flex-direction:column;width:100%;height:100%}
+.bd-mweb-statusbar{padding:14px 26px 8px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:var(--text-1);background:#fff}
+.bd-mweb-statusbar .sb-icons{display:inline-flex;gap:6px;align-items:center;color:var(--text-1)}
+.bd-mweb-statusbar svg{display:block}
+.bd-mweb-urlbar-wrap{padding:0 12px 10px;background:#fff}
+.bd-mweb-urlbar{display:flex;align-items:center;gap:8px;background:#EEF1F4;border-radius:10px;padding:9px 14px;font-size:13px;color:var(--text-2);justify-content:space-between}
+.bd-mweb-urlbar .url-l{display:flex;gap:8px;align-items:center}
+.bd-mweb-urlbar svg{flex-shrink:0;color:var(--text-2)}
+
+.bd-mweb-head{display:flex;align-items:center;gap:14px;padding:12px 18px;border-bottom:1px solid var(--border)}
+.bd-mweb-head .mw-menu{width:18px;height:18px;color:var(--text-1);flex-shrink:0}
+.bd-mweb-head .mw-logo{flex:1;display:flex;align-items:center}
+.bd-mweb-head .mw-logo img{height:22px;width:auto;display:block}
+.bd-mweb-head .mw-avatar{width:28px;height:28px;border-radius:50%;background:#F5C645;color:#3D2C00;display:grid;place-items:center;font-size:11px;font-weight:700;letter-spacing:.04em}
+.bd-mweb-head .mw-exit{width:18px;height:18px;color:var(--pv-fill);flex-shrink:0}
+
+.bd-mweb-content{padding:18px 18px 16px;display:flex;flex-direction:column;gap:14px;flex:1}
+.bd-mweb-content h2{font-size:22px;font-weight:600;color:var(--text-1);margin:0;letter-spacing:-.015em}
+.bd-mweb-content .mw-sub{font-size:13px;color:var(--text-3);line-height:1.45;margin:0}
+.bd-mweb-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.bd-mweb-btn{padding:13px 14px;border-radius:6px;font:inherit;font-size:13px;font-weight:600;cursor:default;border:1px solid var(--border);background:#fff;color:var(--text-1)}
+.bd-mweb-btn.primary{background:var(--pv-fill);color:#fff;border-color:var(--pv-fill);display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.bd-mweb-btn.primary svg{flex-shrink:0}
+.bd-mweb-count{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.bd-mweb-count strong{font-size:14px;font-weight:600;color:var(--text-1)}
+.bd-mweb-count .mw-search{width:34px;height:34px;border:1px solid var(--border);border-radius:6px;display:grid;place-items:center;color:var(--text-2);cursor:default}
+
+.bd-mweb-list{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#fff}
+.bd-mweb-list-head{display:grid;grid-template-columns:1fr 1fr;padding:11px 14px;background:#F7F8FA;font-size:11px;font-weight:500;color:var(--text-3);letter-spacing:.04em}
+.bd-mweb-list-head .col-r{text-align:right}
+.bd-mweb-row{display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:11px 14px;border-top:1px solid var(--border);gap:10px}
+.bd-mweb-row .bl-cell{display:flex;align-items:center;gap:10px;min-width:0}
+.bd-mweb-row .bl-logo{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;overflow:hidden}
+.bd-mweb-row .bl-meta{min-width:0;display:flex;flex-direction:column}
+.bd-mweb-row .bl-meta strong{font-size:13px;color:var(--text-1);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bd-mweb-row .bl-meta small{font-size:11px;color:var(--text-3)}
+.bd-mweb-row .bl-ref{text-align:right;display:flex;flex-direction:column;gap:1px}
+.bd-mweb-row .bl-ref small{font-size:11px;color:var(--text-1);font-weight:500}
+.bd-mweb-row .bl-ref span{font-size:12px;color:var(--text-3);font-family:var(--mono)}
+
+.bd-mweb-pagination{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px}
+.bd-mweb-pagination .pg-show{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--border);border-radius:6px;font-size:12px;color:var(--text-1);font-weight:500;cursor:default}
+.bd-mweb-pagination .pg-show svg{width:10px;height:10px;color:var(--text-3)}
+.bd-mweb-pagination .pg-nav{display:inline-flex;align-items:center;gap:6px}
+.bd-mweb-pagination .pg-nav button,.bd-mweb-pagination .pg-nav .pg-num{width:32px;height:32px;border:1px solid var(--border);border-radius:6px;background:#fff;display:grid;place-items:center;font:inherit;font-size:12px;color:var(--text-1);cursor:default}
+.bd-mweb-pagination .pg-nav .pg-num{background:#fff;border-color:var(--text-1);font-weight:600}
+
+/* ===== Bandhan-specific skin overrides (per BBPS RIB style guide 2026) ===== */
+.bandhan-skin{--bandhan-bg:#CBE6E9;--bandhan-stroke:#3399E8}
+.bandhan-skin .pv-phone,
+.bandhan-skin .pv-desktop,
+.bandhan-skin .bd-mweb,
+.bandhan-skin .bd-portal,
+.bandhan-skin .pv-phone-content,
+.bandhan-skin .pv-phone-illu,
+.bandhan-skin .bd-mweb-content,
+.bandhan-skin .pv-desktop-body,
+.bandhan-skin .pv-desktop-left,
+.bandhan-skin .pv-desktop-right,
+.bandhan-skin .bd-body,
+.bandhan-skin .bd-main,
+.bandhan-skin .pv-cta,
+.bandhan-skin .pv-foot,
+.bandhan-skin .pv-input,
+.bandhan-skin .pv-field label,
+.bandhan-skin .pv-phone-content h4,
+.bandhan-skin .pv-desktop-left h4,
+.bandhan-skin .pv-desktop-left .pv-sub,
+.bandhan-skin .bd-mweb-content h2,
+.bandhan-skin .bd-mweb-content .mw-sub,
+.bandhan-skin .bd-mweb-btn,
+.bandhan-skin .bd-mweb-list-head,
+.bandhan-skin .bd-mweb-row,
+.bandhan-skin .bd-h1,
+.bandhan-skin .bd-h1-sub,
+.bandhan-skin .bd-side-nav a,
+.bandhan-skin .bd-cats a,
+.bandhan-skin .bd-card,
+.bandhan-skin .bd-cards-head h3{font-family:'Manrope',var(--f)}
+
+/* Screen body backgrounds → teal */
+.bandhan-skin .pv-phone-content{background:var(--bandhan-bg)}
+.bandhan-skin .bd-mweb-content{background:var(--bandhan-bg)}
+.bandhan-skin .bd-mweb-head{background:var(--bandhan-bg)}
+.bandhan-skin .bd-mweb-list,
+.bandhan-skin .bd-mweb-pagination .pg-show,
+.bandhan-skin .bd-mweb-pagination .pg-nav button,
+.bandhan-skin .bd-mweb-pagination .pg-nav .pg-num,
+.bandhan-skin .bd-mweb .mw-search{background:#fff}
+.bandhan-skin .pv-desktop-right{background:var(--bandhan-bg)}
+.bandhan-skin .bd-main{background:var(--bandhan-bg)}
+.bandhan-skin .bd-main-head{background:#fff}
+.bandhan-skin .bd-cats,
+.bandhan-skin .bd-card{background:#fff}
+/* Selected card stroke per spec — #3399E8 instead of token */
+.bandhan-skin .bd-card.is-selected{border:2px solid var(--bandhan-stroke);box-shadow:none;padding:11px 10px}
+
+/* CTA stays bank primary (#00488B → already var(--pv-fill)) — no change needed */
+
+/* Manrope letter-spacing per spec (negative on headers) */
+.bandhan-skin .pv-phone-content h4,
+.bandhan-skin .pv-desktop-left h4,
+.bandhan-skin .bd-mweb-content h2,
+.bandhan-skin .bd-h1{letter-spacing:-.02em;font-weight:800}
+
+.pv-desktop-left{padding:32px 40px 40px;display:flex;flex-direction:column}
+.pv-desktop-logo{margin-bottom:120px}
+.pv-desktop-logo .logo-frame{display:inline-flex}
+.pv-desktop-logo .logo-frame img{height:24px;width:auto;display:block}
+.pv-desktop-left h4{font-size:22px;color:var(--text-1);margin-bottom:8px;font-weight:600;letter-spacing:-.01em}
+.pv-desktop-left .pv-sub{font-size:13px;color:var(--text-3);line-height:1.55;margin-bottom:36px;max-width:34ch}
+.pv-otp-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.pv-otp-row .label{font-size:12px;color:var(--text-1);font-weight:500}
+.pv-otp-row .resend{font-size:11px;color:var(--text-3)}
+.pv-otp{display:flex;gap:10px;margin-bottom:14px}
+.pv-otp .box{flex:1;max-width:46px;aspect-ratio:1;border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;color:var(--text-1);background:#fff;font-family:var(--mono);position:relative}
+.pv-otp .box.focus{border:1.5px solid var(--pv-border);box-shadow:0 0 0 3px var(--pv-focus-ring)}
+.pv-otp-foot{display:flex;align-items:center;gap:8px;margin-bottom:24px;font-size:10px;color:var(--text-3);font-family:var(--mono)}
+.pv-otp-foot .ring-sw{width:14px;height:14px;border-radius:3px;background:var(--pv-focus-ring);border:1px solid rgba(0,0,0,.08)}
+.pv-otp-foot .ring-label{color:var(--text-3);text-transform:uppercase;font-family:var(--f);font-size:9px;letter-spacing:.08em;font-weight:500}
+.pv-otp-foot .ring-val{color:var(--text-1);font-weight:500}
+.pv-desktop-left .pv-cta{padding:14px;font-size:13px;border-radius:6px}
+.pv-desktop-left .pv-cta.loading{padding:16px}
+
+.pv-desktop-right{padding:0;display:block;position:relative;overflow:hidden;background:var(--pv-fill-light);line-height:0}
+.pv-desktop-right .illu-full{width:100%;height:100%;object-fit:cover;display:block}
+.pv-desktop-right h4{font-size:15px;color:var(--text-1);font-weight:600;margin-bottom:6px;line-height:1.25}
+.pv-desktop-right p{font-size:10px;color:var(--text-2);line-height:1.5}
+
+/* ===== Multi-screen carousel (prev/next arrows inside a pane) ===== */
+.pv-screens{position:relative;width:100%;display:flex;align-items:center;justify-content:center}
+.pv-screen{display:none;width:100%;justify-content:center}
+.pv-screen.is-on{display:flex}
+.pv-nav-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:6;width:46px;height:46px;border-radius:50%;background:var(--surface);border:1px solid var(--border);box-shadow:0 4px 16px rgba(13,21,38,.14);display:grid;place-items:center;cursor:pointer;color:var(--text-1);transition:border-color 140ms,box-shadow 140ms,color 140ms}
+.pv-nav-arrow:hover{border-color:var(--pv-border);color:var(--pv-text);box-shadow:0 6px 20px rgba(13,21,38,.18)}
+.pv-nav-arrow svg{width:18px;height:18px}
+.pv-nav-prev{left:0}
+.pv-nav-next{right:0}
+.pv-screen-count{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);z-index:6;display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:5px 11px;box-shadow:0 2px 8px rgba(13,21,38,.08)}
+.pv-screen-count .dot{width:6px;height:6px;border-radius:50%;background:var(--border-strong)}
+.pv-screen-count .dot.on{background:var(--pv-fill)}
+.pv-screen-count .lbl{font-size:11px;font-weight:500;color:var(--text-3)}
+
+/* ===== Desktop recurring-payments screen (themable for every bank) ===== */
+.pv-rp{font-family:var(--f);background:linear-gradient(180deg,#fff 0%,var(--pv-fill-light) 170%);height:100%;color:var(--text-1);display:flex;flex-direction:column}
+.pv-rp *{box-sizing:border-box}
+.pv-rp-bar{height:46px;margin:0 48px;flex-shrink:0;background:var(--pv-brand-dark);border-radius:0 0 14px 14px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;color:#fff}
+.pv-rp-brand{display:flex;align-items:center;gap:8px}
+.pv-rp-brand img{height:18px;width:auto;display:block}
+.pv-rp-brand .wm{font-size:13px;font-weight:600;letter-spacing:.02em}
+.pv-rp-right{display:flex;align-items:center;gap:10px}
+.pv-rp-chip{display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:8px;font-size:11.5px;font-weight:600;color:#fff}
+.pv-rp-chip svg.mc{display:block;flex-shrink:0}
+.pv-rp-avatar{width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--text-2)}
+.pv-rp-avatar svg{width:15px;height:15px}
+.pv-rp-body{margin:14px 48px;flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;background:#fff;border-radius:20px;box-shadow:0 1px 3px rgba(13,21,38,.06),0 12px 36px rgba(13,21,38,.05);padding:22px 26px}
+.pv-rp-h1{font-size:18px;font-weight:600;letter-spacing:-.02em;margin:0 0 3px}
+.pv-rp-sub{font-size:12px;color:var(--text-2);margin:0 0 16px}
+.pv-rp-sechead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.pv-rp-sectitle{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:-.01em}
+.pv-rp-badge{display:grid;place-items:center;min-width:18px;height:18px;padding:0 6px;background:var(--pv-fill);color:#fff;border-radius:999px;font-size:10.5px;font-weight:600}
+.pv-rp-viewall{height:30px;padding:0 12px;background:#fff;border:1px solid var(--border-strong);border-radius:6px;font-size:12px;font-weight:600;color:var(--text-1);cursor:default}
+.pv-rp-cards{display:flex;gap:12px;margin-bottom:18px}
+.pv-rp-card{flex:0 0 auto;width:290px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px 14px}
+.pv-rp-card.is-active{flex:0 0 auto;width:290px;background:var(--pv-fill-light);border:none;padding:4px}
+.pv-rp-card.is-active .pv-rp-inner{background:#fff;border:1.5px solid var(--pv-border);border-radius:9px;padding:11px 13px;height:100%}
+.pv-rp-ctop{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.pv-rp-cname{font-size:12.5px;font-weight:600;line-height:1.3}
+.pv-rp-camt{font-size:12.5px;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pv-rp-cmeta{font-size:11px;color:var(--text-2);margin-top:4px}
+.pv-rp-cmeta .sep{color:var(--border-strong);margin:0 5px}
+.pv-rp-cmeta .pend{color:#D81E5B;font-weight:500}
+.pv-rp-cmeta .up{color:#2563EB;font-weight:500}
+.pv-rp-cact{display:flex;gap:8px;margin-top:11px}
+.pv-rp-btn{height:30px;padding:0 12px;border-radius:6px;font-size:11.5px;font-weight:600;font-family:inherit;display:inline-flex;align-items:center;gap:6px;cursor:default;border:none}
+.pv-rp-btn.primary{background:var(--pv-fill);color:#fff}
+.pv-rp-btn.ghost{background:#fff;color:var(--text-1);border:1px solid var(--border-strong)}
+.pv-rp-btn svg{width:12px;height:12px}
+.pv-rp-seg{display:inline-flex;background:var(--canvas);border:1px solid var(--border);border-radius:8px;padding:2px}
+.pv-rp-seg button{height:26px;padding:0 13px;border:none;background:none;border-radius:6px;font-size:11.5px;font-weight:600;color:var(--text-3);font-family:inherit;cursor:default}
+.pv-rp-seg button.on{background:#fff;color:var(--text-1);box-shadow:0 1px 2px rgba(13,21,38,.1)}
+.pv-rp-table-wrap{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.pv-rp-table{width:100%;border-collapse:collapse;font-size:12px}
+.pv-rp-table thead{background:var(--surface-2)}
+.pv-rp-table th{padding:9px 18px;text-align:left;font-size:10.5px;font-weight:600;color:var(--text-2);border-bottom:1px solid var(--border);white-space:nowrap}
+.pv-rp-table th.r{text-align:right}
+.pv-rp-table td{padding:10px 18px;border-bottom:1px solid var(--border);font-weight:500;white-space:nowrap}
+.pv-rp-table td.muted{color:var(--text-2);font-weight:400}
+.pv-rp-table td.r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.pv-rp-table tr:last-child td{border-bottom:none}
+/* ===== Mobile recurring-payments screen (themable for every bank) ===== */
+.pv-mrp{display:flex;flex-direction:column;flex:1;background:#fff}
+.pv-mrp *{box-sizing:border-box}
+.pv-mrp-bankbar{padding:11px 18px;background:var(--pv-brand-dark);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pv-mrp-bankbar .brand img{height:22px;width:auto;display:block}
+.pv-mrp-bankbar .brand .wm{color:#fff;font-size:15px;font-weight:600;letter-spacing:.01em}
+.pv-mrp-bankbar .right{display:flex;align-items:center;gap:9px}
+.pv-mrp-chip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 9px;background:rgba(255,255,255,.1);border:1.5px solid var(--pv-fill);border-radius:8px;font-size:12px;font-weight:600;color:#fff}
+.pv-mrp-chip svg.mc{display:block;flex-shrink:0}
+.pv-mrp-avatar{width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--text-2);flex-shrink:0}
+.pv-mrp-avatar svg{width:15px;height:15px}
+.pv-mrp-body{flex:1;padding:18px 20px 0;display:flex;flex-direction:column}
+.pv-mrp-h1{font-size:21px;font-weight:600;letter-spacing:-.02em;margin:0 0 4px}
+.pv-mrp-sub{font-size:13px;color:var(--text-2);margin:0 0 22px}
+.pv-mrp-sechead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.pv-mrp-sectitle{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:600;letter-spacing:-.01em}
+.pv-mrp-badge{display:grid;place-items:center;min-width:20px;height:20px;padding:0 6px;background:var(--pv-fill);color:#fff;border-radius:999px;font-size:11px;font-weight:600}
+.pv-mrp-viewall{background:none;border:none;font-family:inherit;font-size:13px;font-weight:600;color:var(--pv-text);cursor:default;padding:0}
+.pv-mrp-carousel{display:flex;gap:12px;overflow:hidden;margin-bottom:12px}
+.pv-mrp-card{flex:0 0 90%;background:#fff;border:1px solid var(--border);border-radius:14px;padding:15px 16px}
+.pv-mrp-card.is-active{flex:0 0 90%;background:var(--pv-fill-light);border:none;padding:5px}
+.pv-mrp-card.is-active .pv-mrp-inner{background:#fff;border:1.5px solid var(--pv-border);border-radius:11px;padding:14px 15px;height:100%}
+.pv-mrp-ctop{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.pv-mrp-cname{font-size:14px;font-weight:600;line-height:1.3}
+.pv-mrp-camt{font-size:14px;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pv-mrp-cmeta{font-size:12px;color:var(--text-2);margin-top:6px}
+.pv-mrp-cmeta .sep{color:var(--border-strong);margin:0 6px}
+.pv-mrp-cmeta .pend{color:#D81E5B;font-weight:500}
+.pv-mrp-cact{display:flex;gap:9px;margin-top:15px}
+.pv-mrp-btn{flex:1;height:40px;border-radius:7px;font-size:13px;font-weight:600;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:7px;cursor:default;border:none}
+.pv-mrp-btn.primary{background:var(--pv-fill);color:#fff}
+.pv-mrp-btn.ghost{background:#fff;color:var(--text-1);border:1px solid var(--border-strong)}
+.pv-mrp-btn svg{width:14px;height:14px}
+.pv-mrp-dots{display:flex;justify-content:center;gap:6px;margin-bottom:26px}
+.pv-mrp-dots .d{width:6px;height:6px;border-radius:50%;background:var(--border-strong)}
+.pv-mrp-dots .d.on{background:var(--pv-fill);width:7px;height:7px}
+.pv-mrp-seg{display:inline-flex;background:var(--canvas);border:1px solid var(--border);border-radius:9px;padding:3px}
+.pv-mrp-seg button{height:28px;padding:0 14px;border:none;background:none;border-radius:6px;font-size:12px;font-weight:600;color:var(--text-3);font-family:inherit;cursor:default}
+.pv-mrp-seg button.on{background:#fff;color:var(--text-1);box-shadow:0 1px 2px rgba(13,21,38,.1)}
+.pv-mrp-list{background:#fff;border:1px solid var(--border);border-bottom:none;border-radius:16px 16px 0 0;overflow:hidden}
+.pv-mrp-mrow{padding:15px 17px;border-bottom:1px solid var(--border)}
+.pv-mrp-mtop{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.pv-mrp-mname{font-size:13.5px;font-weight:600;letter-spacing:-.01em}
+.pv-mrp-mamt{font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pv-mrp-msub{font-size:11.5px;color:var(--text-3);margin-top:5px}
+/* ===== Desktop payment-gateway screen (themable for every bank) ===== */
+.pv-pg{font-family:var(--f);background:#F4F5F7;height:540px;display:flex;flex-direction:column;color:var(--text-1);padding:0 64px;gap:0;overflow:hidden}
+.pv-pg *{box-sizing:border-box}
+.pv-pg-bar{flex-shrink:0;background:var(--pv-brand-dark);border-radius:0 0 16px 16px;display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+.pv-pg-bar .brand{display:flex;align-items:center;gap:9px}
+.pv-pg-bar .brand img{height:18px;width:auto;display:block}
+.pv-pg-bar .brand .wm{font-size:13px;font-weight:600;color:#fff}
+.pv-pg-bar .right{display:flex;align-items:center;gap:12px;color:#fff}
+.pv-pg-bar .right .kebab{display:flex;flex-direction:column;gap:2px}
+.pv-pg-bar .right .kebab span{width:2.5px;height:2.5px;border-radius:50%;background:rgba(255,255,255,.85)}
+.pv-pg-bar .right .sep{width:1px;height:18px;background:rgba(255,255,255,.3)}
+.pv-pg-bar .right .close{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;color:#fff}
+.pv-pg-bar .right .close svg{width:12px;height:12px}
+.pv-pg-body{flex:1;min-height:0;display:grid;grid-template-columns:1fr 240px;gap:12px;overflow:hidden;padding:14px 0}
+.pv-pg-main{background:#fff;border-radius:13px;box-shadow:0 2px 10px rgba(13,21,38,.05);overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.pv-pg-main-head{padding:10px 16px;border-bottom:1px solid var(--border);font-size:12.5px;font-weight:600;letter-spacing:-.01em}
+.pv-pg-cols{display:grid;grid-template-columns:182px 1fr;flex:1;min-height:0}
+.pv-pg-rail{border-right:1px solid var(--border);padding:7px 0;overflow:hidden}
+.pv-pg-rail a{display:flex;align-items:center;gap:9px;padding:8px 14px;font-size:10.5px;font-weight:500;color:var(--text-2);line-height:1.2}
+.pv-pg-rail a svg{width:14px;height:14px;flex-shrink:0;color:var(--text-3)}
+.pv-pg-rail a.active{background:linear-gradient(90deg,var(--pv-fill-light) 0%,rgba(255,255,255,0) 100%);color:var(--text-1);font-weight:600;box-shadow:inset 3px 0 0 var(--pv-fill)}
+.pv-pg-rail a.active svg{color:var(--pv-fill)}
+.pv-pg-rail a .upi{height:12px;width:auto}
+.pv-pg-detail{padding:11px 16px;overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.pv-pg-eyebrow{font-size:10px;color:var(--text-3);margin-bottom:8px}
+.pv-pg-toggle{display:inline-flex;background:#F4F5F7;border-radius:7px;padding:3px;margin-bottom:10px;align-self:flex-start}
+.pv-pg-toggle button{border:none;background:none;font-family:inherit;font-size:10.5px;font-weight:500;padding:5px 20px;border-radius:5px;color:var(--text-2);cursor:default}
+.pv-pg-toggle button.on{background:#fff;color:var(--text-1);font-weight:600;box-shadow:0 1px 4px rgba(13,21,38,.12)}
+.pv-pg-search{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:7px;padding:7px 11px;margin-bottom:2px;flex-shrink:0}
+.pv-pg-search svg{width:13px;height:13px;color:var(--text-3);flex-shrink:0}
+.pv-pg-search .ph{font-size:11px;color:var(--text-3)}
+.pv-pg-banks{flex:1;min-height:0;overflow:hidden}
+.pv-pg-brow2{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px dashed var(--border)}
+.pv-pg-brow2:last-child{border-bottom:none}
+.pv-pg-blogo{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center}
+.pv-pg-blogo img{max-width:24px;max-height:24px;width:auto;height:auto;display:block}
+.pv-pg-bk{flex:1;min-width:0}
+.pv-pg-bk .nm{font-size:11px;font-weight:500;color:var(--text-1)}
+.pv-pg-bk .sub{font-size:9.5px;color:var(--text-3);margin-top:1px}
+.pv-pg-brow2 .chev{width:13px;height:13px;color:var(--text-3);flex-shrink:0}
+.pv-pg-summary{background:#fff;border-radius:13px;box-shadow:0 2px 10px rgba(13,21,38,.05);padding:14px 16px;align-self:start}
+.pv-pg-sum-ic{width:20px;height:20px;color:var(--pv-text);margin-bottom:7px}
+.pv-pg-sum-h{font-size:12px;font-weight:600;margin:0 0 12px;letter-spacing:-.01em}
+.pv-pg-srow{display:flex;justify-content:space-between;align-items:center;font-size:10.5px;color:var(--text-2);margin-bottom:11px;gap:9px}
+.pv-pg-srow .v{color:var(--text-1);font-weight:500;font-variant-numeric:tabular-nums;text-align:right}
+.pv-pg-stotal{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:11px;font-size:12.5px;font-weight:600}
+.pv-pg-stotal .amt{font-variant-numeric:tabular-nums}
+.pv-pg-bdmark{display:flex;justify-content:center;margin-top:14px}
+.pv-pg-bdmark img{height:16px;width:auto}
+/* ===== Mobile payment-gateway screen (themable for every bank) ===== */
+.pv-mpg{display:flex;flex-direction:column;flex:1;background:#fff}
+.pv-mpg *{box-sizing:border-box}
+.pv-mpg-header{background:var(--pv-brand-dark);border-radius:0 0 18px 18px;padding:13px 16px 16px;color:#fff;flex-shrink:0}
+.pv-mpg-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.pv-mpg-top .back{width:18px;height:18px;flex-shrink:0}
+.pv-mpg-top .brand{flex:1;display:flex;align-items:center;justify-content:flex-start}
+.pv-mpg-top .brand img{height:24px;width:auto;display:block}
+.pv-mpg-top .brand .wm{font-size:16px;font-weight:700;letter-spacing:.02em}
+.pv-mpg-top .tr{width:18px;height:18px;flex-shrink:0}
+.pv-mpg-order{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:13px 15px}
+.pv-mpg-orow{display:flex;align-items:center;justify-content:space-between;font-size:13px}
+.pv-mpg-orow+.pv-mpg-orow{margin-top:9px}
+.pv-mpg-orow .k{color:rgba(255,255,255,.7)}
+.pv-mpg-orow .v{font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.pv-mpg-orow .v svg{width:13px;height:13px;opacity:.8}
+.pv-mpg-orow.tot .k,.pv-mpg-orow.tot .v{font-size:15px;font-weight:600}
+.pv-mpg-body{flex:1;padding:18px 0 0;overflow:hidden}
+.pv-mpg-h1{font-size:22px;font-weight:600;letter-spacing:-.02em;margin:0 0 16px;padding:0 16px}
+.pv-mpg-card{background:#fff;border-bottom:1px dashed var(--border);overflow:hidden}
+.pv-mpg-card:last-child{border-bottom:none}
+.pv-mpg-mrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 16px}
+.pv-mpg-mrow .l{display:flex;align-items:center;gap:12px;min-width:0}
+.pv-mpg-mrow .l>svg{width:19px;height:19px;color:var(--text-2);flex-shrink:0}
+.pv-mpg-mrow .nm{font-size:14px;font-weight:600;white-space:nowrap}
+.pv-mpg-mrow .chev{width:16px;height:16px;color:var(--text-3);flex-shrink:0}
+.pv-mpg-mini{display:inline-flex;align-items:center;gap:3px}
+.pv-mpg-mini .b{width:17px;height:17px;border-radius:50%;background:var(--surface-2);border:1px solid var(--border);display:grid;place-items:center;font-size:8px;font-weight:700;color:var(--text-2);overflow:hidden}
+.pv-mpg-nb{padding:0 16px 12px}
+.pv-mpg-nbcard{overflow:hidden;border:1px solid var(--border);border-radius:12px}
+.pv-mpg-brow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 14px}
+.pv-mpg-brow+.pv-mpg-brow{border-top:1px dashed var(--border)}
+.pv-mpg-brow .l{display:flex;align-items:center;gap:11px}
+.pv-mpg-blogo{width:24px;height:24px;display:grid;place-items:center;flex-shrink:0}
+.pv-mpg-blogo img{max-width:24px;max-height:24px;width:auto;height:auto;display:block}
+.pv-mpg-bname{font-size:13.5px;font-weight:500}
+.pv-mpg-radio{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border-strong);flex-shrink:0;display:grid;place-items:center}
+.pv-mpg-radio.on{border-color:var(--pv-fill)}
+.pv-mpg-radio.on::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--pv-fill)}
+.pv-mpg-pay{margin:6px 14px 10px;height:46px;width:calc(100% - 28px);background:var(--pv-fill);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:15px;font-weight:600;cursor:default}
+.pv-mpg-allbanks{display:flex;align-items:center;justify-content:space-between;padding:14px 14px;border-top:1px dashed var(--border)}
+.pv-mpg-allbanks .l{display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:500;color:var(--text-1)}
+.pv-mpg-allbanks .l svg{width:17px;height:17px;color:var(--text-2)}
+
+/* Token table */
+.token-table{width:100%;border-collapse:collapse;font-size:12px}
+.token-table thead th{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);text-align:left;padding:8px 10px;background:var(--surface-2);border-bottom:1px solid var(--border)}
+.token-table thead th:last-child{text-align:right}
+.token-table tbody tr{border-bottom:1px solid var(--border)}
+.token-table tbody tr:last-child{border-bottom:none}
+.token-table td{padding:6px 10px;vertical-align:middle}
+.token-table .tok-name{font-family:var(--mono);font-size:11px;color:var(--text-1);font-weight:500}
+.token-table .tok-swatch{width:18px;height:18px;border-radius:4px;display:inline-block;vertical-align:middle;border:1px solid rgba(0,0,0,.07);margin-right:8px}
+.token-table .tok-hex{font-family:var(--mono);font-size:11px;color:var(--text-2);text-align:right;white-space:nowrap}
+.token-wrap{border:1px solid var(--border);border-radius:var(--r-l);overflow:hidden;max-height:520px;overflow-y:auto}
+
+/* Playground */
+.pg-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-2xl);box-shadow:var(--sh-2);overflow:hidden;margin-top:16px}
+.pg-toolbar{display:flex;align-items:center;gap:16px;padding:16px 24px;border-bottom:1px solid var(--border);background:var(--surface-2);flex-wrap:wrap}
+.pg-combo{position:relative;min-width:240px}
+.pg-combo-input{display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--border);border-radius:var(--r-m);background:var(--surface);cursor:pointer;font-size:13px;color:var(--text-1);font-weight:500}
+.pg-combo-input:hover{border-color:var(--border-strong)}
+.pg-combo.is-open .pg-combo-input{border-color:var(--orange);box-shadow:0 0 0 2px var(--orange-tint)}
+.pg-combo-input input{flex:1;border:none;outline:none;background:transparent;font:inherit;color:inherit;padding:0;min-width:0}
+.pg-combo-input input::placeholder{color:var(--text-3);font-weight:400}
+.pg-combo-input .pg-combo-chev{flex-shrink:0;width:8px;height:8px;border-right:1.5px solid var(--text-3);border-bottom:1.5px solid var(--text-3);transform:rotate(45deg);transition:transform 150ms;margin-top:-3px}
+.pg-combo.is-open .pg-combo-input .pg-combo-chev{transform:rotate(-135deg);margin-top:3px}
+.pg-combo-panel{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-m);box-shadow:var(--sh-3);max-height:300px;overflow-y:auto;z-index:30;display:none;padding:4px}
+.pg-combo.is-open .pg-combo-panel{display:block}
+.pg-combo-option{padding:8px 10px;font-size:13px;color:var(--text-1);border-radius:var(--r-s);cursor:pointer;display:flex;align-items:center;gap:8px}
+.pg-combo-option:hover,.pg-combo-option.is-active{background:var(--orange-tint-2)}
+.pg-combo-option.is-selected{background:var(--orange-tint);color:var(--orange)}
+.pg-combo-option .swatch-mini{width:10px;height:10px;border-radius:2px;flex-shrink:0;border:1px solid rgba(0,0,0,.08)}
+.pg-combo-empty{padding:10px;font-size:12px;color:var(--text-3);font-style:italic;text-align:center}
+.pg-meta{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-3)}
+.pg-meta .pg-dot{width:12px;height:12px;border-radius:3px;border:1px solid rgba(0,0,0,.08)}
+.pg-spacer{flex:1}
+.pg-stage{padding:32px;background:linear-gradient(180deg,var(--canvas),var(--surface));display:grid;grid-template-columns:1.1fr 1fr;gap:24px}
+@media(max-width:900px){.pg-stage{grid-template-columns:1fr}}
+
+/* Unit divider band — marks the start of each major unit */
+.unit-divider{margin:96px 0 8px;padding:40px 0 28px;border-top:1px solid var(--border)}
+.unit-divider:first-of-type{margin-top:64px}
+.unit-kicker{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)}
+.unit-kicker .uk-num{display:grid;place-items:center;min-width:30px;height:30px;padding:0 8px;border-radius:8px;background:var(--orange);color:#fff;font-weight:700;font-size:14px;letter-spacing:0}
+.unit-title{font-family:var(--manrope,'Manrope',sans-serif);font-size:clamp(30px,4vw,44px);font-weight:700;letter-spacing:-.02em;line-height:1.05;margin:16px 0 10px}
+.unit-desc{font-size:17px;line-height:1.55;color:var(--text-2);max-width:60ch}
+.unit-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.unit-chips span{font-size:12px;font-weight:500;color:var(--text-2);background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:6px 12px}
+
+/* ===== Feature cards (landing) ===== */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-top:8px}
+.fcard{position:relative;text-align:left;font:inherit;cursor:pointer;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-2xl);padding:26px 24px 24px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--sh-1);transition:border-color 160ms,box-shadow 160ms,transform 160ms}
+.fcard:hover{border-color:var(--orange);box-shadow:var(--sh-3);transform:translateY(-3px)}
+.fcard:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+.fcard-thumb{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--surface-2);border:1px solid var(--border);margin-bottom:6px}
+.fcard-thumb img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block;transition:transform 300ms cubic-bezier(.16,1,.3,1)}
+.fcard:hover .fcard-thumb img{transform:scale(1.035)}
+.fcard-thumb .ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:0 12px;font-size:11px;font-family:var(--mono);color:var(--text-3)}
+.fcard .fc-kicker{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)}
+.fcard .fc-num{display:grid;place-items:center;min-width:28px;height:28px;padding:0 7px;border-radius:8px;background:var(--orange);color:#fff;font-weight:700;font-size:13px;letter-spacing:0}
+.fcard h3{font-family:'Manrope',var(--f);font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.15;color:var(--text-1);margin:2px 0 0}
+.fcard p{font-size:14px;line-height:1.55;color:var(--text-3);margin:0}
+.fcard .fc-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.fcard .fc-chips span{font-size:11px;font-weight:500;color:var(--text-2);background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:4px 10px}
+.fcard .fc-go{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--orange)}
+.fcard .fc-go svg{width:15px;height:15px;transition:transform 160ms}
+.fcard:hover .fc-go svg{transform:translateX(3px)}
+
+/* ===== Feature modal ===== */
+.fmodal{position:fixed;inset:0;z-index:80;display:none}
+.fmodal.is-open{display:block}
+.fmodal-scrim{position:absolute;inset:0;background:rgba(13,21,38,.55);backdrop-filter:blur(3px);animation:fmFade 180ms ease}
+.fmodal-card{position:absolute;inset:0;margin:auto;width:min(960px,calc(100vw - 40px));max-height:calc(100vh - 48px);background:var(--canvas);border-radius:var(--r-2xl);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 90px rgba(13,21,38,.35);animation:fmRise 220ms cubic-bezier(.16,1,.3,1)}
+.fmodal-x{position:absolute;top:16px;right:16px;z-index:3;width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text-2);font-size:16px;line-height:1;cursor:pointer;display:grid;place-items:center;box-shadow:var(--sh-1);transition:all 140ms}
+.fmodal-x:hover{color:var(--text-1);border-color:var(--border-strong);transform:rotate(90deg)}
+.fmodal-body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 0 40px}
+.fmodal-body .shell.narrow{max-width:820px}
+.fmodal .unit-divider{margin:0!important;border-top:none!important;padding:44px 0 24px}
+.fmodal section{scroll-margin-top:0}
+@keyframes fmFade{from{opacity:0}to{opacity:1}}
+@keyframes fmRise{from{opacity:0;transform:translateY(16px) scale(.99)}to{opacity:1;transform:none}}
+body.fmodal-open{overflow:hidden}
+@media(max-width:680px){.fmodal-card{inset:0;width:100vw;max-height:100vh;border-radius:0}}
+
+/* hero browser mockup (desktop screens) */
+.hero-art{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0}
+.hero-art::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-54%);width:118%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(242,101,34,.15),rgba(242,101,34,.05) 44%,transparent 66%);z-index:0;pointer-events:none}
+.browser-mock{position:relative;z-index:1;width:100%;max-width:560px;background:var(--surface);border:1px solid var(--border-strong);border-radius:12px;overflow:hidden;box-shadow:0 30px 64px rgba(13,21,38,.28);cursor:zoom-in}
+.browser-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--surface-2);border-bottom:1px solid var(--border)}
+.browser-bar .bdot{width:11px;height:11px;border-radius:50%;background:var(--border-strong)}
+.browser-bar .bdot.r{background:#FF5F57}.browser-bar .bdot.y{background:#FEBC2E}.browser-bar .bdot.g{background:#28C840}
+.browser-url{margin-left:10px;flex:1;font-family:var(--mono);font-size:11px;color:var(--text-3);background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:4px 12px;text-align:center}
+.browser-screen{position:relative;width:100%;background:var(--canvas)}
+.browser-screen img{display:block;width:100%;height:auto}
+.hero-art .hero-art-ph{display:none;align-items:center;justify-content:center;padding:48px 18px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--text-3);background:var(--surface-2)}
+.browser-mock .zoom-hint{top:auto;bottom:12px;right:12px}
+.browser-mock:hover .zoom-hint{opacity:1;transform:translateY(0)}
+.hero-art-cap{position:relative;z-index:1;margin-top:20px;max-width:380px;text-align:center;font-size:13px;line-height:1.5;color:var(--text-3)}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:28px}.hero-art{margin:4px auto 0}.hero .lead{max-width:none}}
+
+</style>
+<link rel="stylesheet" href="../styles/casestudy-dark.css"/>
+</head>
+<body data-auto-reveal>
+<style>
+.pf-bridge{position:sticky;top:0;z-index:50;background:rgba(11,11,12,.72);-webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.pf-bridge .pf-bridge-inner{display:flex;align-items:center;justify-content:space-between;height:48px}
+.pf-bridge-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text-1);letter-spacing:-.01em}
+.pf-bridge-link svg{width:15px;height:15px;stroke:var(--orange)}
+.pf-bridge-link:hover{color:var(--orange)}
+.pf-bridge-ctx{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+</style>
+<nav class="pf-bridge" aria-label="Portfolio">
+  <div class="shell pf-bridge-inner">
+    <a class="pf-bridge-link" href="../" aria-label="Back to Mridhul Aswin portfolio home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Mridhul Aswin
+    </a>
+    <span class="pf-bridge-ctx">Selected work · ONDC Flight Booking</span>
+  </div>
+</nav>
+<div class="bg-deco"></div>
+
+<main>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="shell hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="dot"></span> ONDC flight booking · bank buyer app, BillDesk as TSP</span>
+        <h1 data-split-words>Flight booking, built into the bank's own app.</h1>
+        <p class="lead">A bank can sell flights to its customers without building a travel stack — by joining
+        <strong>ONDC</strong> as a buyer app with <strong>BillDesk as its Technology Service Provider</strong>.
+        We designed the full flow, from search to seat to pay, that plugs into ONDC's open travel network. To
+        prove it whitelabels to any partner, we themed the entire booking journey into a real bank's identity
+        (HDFC) — same flow, the bank's brand.</p>
+        <div class="meta-bar" style="grid-template-columns:repeat(3,1fr)">
+          <div class="meta-cell"><div class="mk">Role</div><div class="mv">UX / Product design</div></div>
+          <div class="meta-cell"><div class="mk">BillDesk as</div><div class="mv">ONDC TSP · buyer-app build</div></div>
+          <div class="meta-cell"><div class="mk">Stage</div><div class="mv">Wireframe → visual design</div></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="browser-mock" data-shot="assets/results/results-vd.png">
+          <div class="browser-bar"><span class="bdot r"></span><span class="bdot y"></span><span class="bdot g"></span><span class="browser-url">flights · bank app</span></div>
+          <div class="browser-screen">
+            <img src="assets/results/results-vd.png" alt="Flight search results — fare-aware date strip, filters, flight list, sticky total"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="hero-art-ph">assets/results/results-vd.png</div>
+          </div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+        <span class="hero-art-cap">The flight results screen in the BillDesk design system — a fare-aware date strip, rich filters, and an always-visible total.</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 01 OVERVIEW -->
+  <section id="overview">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">01 — Overview</span>
+        <h2>A flight store inside the bank.</h2>
+        <p class="lead">The customer opens their bank app and books a flight without ever leaving it. The bank
+        gets a new, high-engagement service. Neither of them touches an airline integration — that's what
+        ONDC and the TSP model make possible.</p>
+      </div>
+      <div class="cards-grid three">
+        <div class="pcard"><span class="tag">Customer</span><h4>Book in the bank app</h4><p>Search, pick a seat, and pay for a flight inside the app they already trust — no third-party redirect.</p></div>
+        <div class="pcard"><span class="tag">Bank</span><h4>A new service, no travel stack</h4><p>The bank becomes an ONDC buyer app and offers flights as a value-added service, with BillDesk supplying the tech.</p></div>
+        <div class="pcard"><span class="tag">Network</span><h4>Powered by ONDC</h4><p>Open travel supply — many airline sellers reachable through one network, not one-by-one tie-ups.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 WHAT ONDC IS / TSP MODEL -->
+  <section id="ondc">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">02 — ONDC &amp; where we sit</span>
+        <h2>An open network, and a role in it.</h2>
+        <p class="lead"><strong>ONDC</strong> (Open Network for Digital Commerce) is a government-of-India
+        initiative — not an app, but a set of open protocols that let any buyer app transact with any seller
+        app, across categories. It defines four roles: <em>Buyer</em> and <em>Seller</em> network
+        participants, a <em>Gateway</em> that matches them, and <em>Technology Service Providers</em> who
+        supply the software. Travel is one of its newer categories.</p>
+      </div>
+      <div class="pipeline">
+        <div class="pipe-node accent"><div class="pipe-label">Bank — buyer app</div><p>The customer searches and books here. BillDesk builds it as the bank's TSP.</p></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node"><div class="pipe-label">ONDC gateway</div><p>Broadcasts the search across the network and matches buyer to sellers.</p></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node"><div class="pipe-label">Seller apps</div><p>Airlines &amp; travel sellers return fares, seats, and rules.</p></div>
+        <div class="pipe-arrow">→</div>
+        <div class="pipe-node accent"><div class="pipe-label">Booked &amp; paid</div><p>Confirmed back in the bank app; BillDesk PG settles the money.</p></div>
+      </div>
+      <div class="step-callout">
+        <div class="step-callout-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg></div>
+        <div>
+          <h4>BillDesk is the bank's Technology Service Provider</h4>
+          <p>The TSP model lets enterprises with a big customer base — banks, fintechs, telcos — join ONDC as
+          a buyer app without in-house commerce tech. The bank owns the customer and the brand; BillDesk
+          supplies the buyer-app software, the booking UX, and the payment rail. <strong>This work was
+          designed and delivered with ONDC.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 PROBLEM -->
+  <section id="problem">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">03 — The problem</span>
+        <h2>Travel is a great service to offer — and a hard one to build.</h2>
+        <p class="lead">Flights are high-intent, high-frequency, and keep customers inside the app. But a bank
+        can't reasonably build airline integrations, fare engines, seat maps, and cancellation rules — and
+        even with ONDC opening the supply, the network gives you a protocol, not a product.</p>
+      </div>
+      <ul class="clean">
+        <li><strong>No travel stack</strong> — banks have no airline tie-ups, fare search, or seat/meal inventory.</li>
+        <li><strong>Booking is a long, stateful flow</strong> — search, fare rules, travellers, seats, add-ons, payment, cancellation — each with edge cases.</li>
+        <li><strong>ONDC is a protocol, not a UI</strong> — the network returns data; someone still has to design the experience that makes it bookable.</li>
+        <li><strong>It has to feel like the bank</strong> — as a TSP build, the flow must wear the bank's identity, not a vendor's.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 04 GOALS -->
+  <section id="goals">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">04 — Goals</span>
+        <h2>What the booking flow had to do.</h2>
+      </div>
+      <div class="cards-grid three">
+        <div class="pcard ok"><span class="tag">Tap supply</span><h4>Ride ONDC's open network</h4><p>Pull fares and seats from many sellers through one network instead of building integrations.</p></div>
+        <div class="pcard ok"><span class="tag">Complete the journey</span><h4>Search → seat → pay, end to end</h4><p>A full, stateful booking flow with fares, travellers, seats, add-ons, and cancellation rules.</p></div>
+        <div class="pcard ok"><span class="tag">Wear the brand</span><h4>Themeable for the bank</h4><p>One flow that re-skins from the bank's identity to the BillDesk design system.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS — WIREFRAME → VD ============ -->
+  <section id="process">
+    <div class="shell narrow">
+      <div class="unit-divider" style="margin-top:64px">
+        <span class="unit-kicker"><span class="uk-num">05</span> Process</span>
+        <h2 class="unit-title">Wireframe → visual design — and a whitelabel proof</h2>
+        <p class="unit-desc">The flow was shaped first as wireframes <strong>themed into a real bank's
+        identity — HDFC</strong> — to prove a point: as a TSP build, the same booking journey can wear any
+        partner bank's brand. Those wireframes were then elevated into the BillDesk design system. The
+        before/after pairs below carry both threads at once — the surface lifting from wireframe to VD, and
+        the brand shifting from a bank's identity to the BillDesk base.</p>
+        <div class="unit-chips"><span>HDFC-themed wireframes</span><span>Whitelabel proof</span><span>BillDesk DLS visual design</span><span>Same flow, any brand</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE BOOKING FLOW ============ -->
+
+  <!-- Step · Search -->
+  <section id="search">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">Step 01 · Search</span>
+        <h2>Start with where and when.</h2>
+        <p class="lead">The entry point: trip type (one-way / round-trip / multi-city), From and To, dates,
+        and travellers with cabin class. Airport pick offers recent and popular routes; the date picker is
+        built to carry fares; traveller selection covers adults, children, infants, and class in one panel.</p>
+      </div>
+      <div class="ba-grid" style="align-items:start">
+        <div class="ba-col">
+          <div class="ba-label"><span class="bdot"></span> Wireframe — in the bank's app</div>
+          <div class="ba-frame" data-shot="assets/search/search-wf-destination.png">
+            <img src="assets/search/search-wf-destination.png" alt="Search wireframe inside the HDFC bank app shell — airport picker, persona discount chips"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="ph" style="display:none;">assets/search/search-wf-destination.png</div>
+            <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+          </div>
+          <p class="ba-cap">The wireframe sits in the bank's chrome — and already introduces persona fare chips (Student, Armed Forces, Senior Citizen, Doctors).</p>
+        </div>
+        <div class="ba-col">
+          <div class="ba-label"><span class="bdot"></span> Visual design — BillDesk DLS</div>
+          <div class="ba-frame" data-shot="assets/search/search-vd-oneway.png">
+            <img src="assets/search/search-vd-oneway.png" alt="Search visual design — One Way tab, From/To, departure, travellers, Search"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="ph" style="display:none;">assets/search/search-vd-oneway.png</div>
+            <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+          </div>
+          <p class="ba-cap">The visual design lifts it into a single, calm search bar against a world-map hero — the four inputs as one connected control.</p>
+        </div>
+      </div>
+      <div class="ba-grid" style="align-items:start">
+        <div class="ba-col">
+          <div class="ba-label"><span class="bdot"></span> Airport pick — recent &amp; popular</div>
+          <div class="ba-frame" data-shot="assets/search/search-vd-destination.png">
+            <img src="assets/search/search-vd-destination.png" alt="Destination selection with recent searches and popular destinations"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="ph" style="display:none;">assets/search/search-vd-destination.png</div>
+            <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+          </div>
+          <p class="ba-cap">Airport search leads with recent and popular routes — most trips are picked, not typed.</p>
+        </div>
+        <div class="ba-col">
+          <div class="ba-label"><span class="bdot"></span> Travellers &amp; cabin class</div>
+          <div class="ba-frame" data-shot="assets/search/search-vd-travelers.png">
+            <img src="assets/search/search-vd-travelers.png" alt="Traveller selection — adults, children, infants, cabin class"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="ph" style="display:none;">assets/search/search-vd-travelers.png</div>
+            <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+          </div>
+          <p class="ba-cap">Adults, children, infants and cabin class resolve in one stepper panel, not a separate page.</p>
+        </div>
+      </div>
+      <figure>
+        <div class="frame" data-shot="assets/search/search-vd-date.png">
+          <img src="assets/search/search-vd-date.png" alt="Date picker — dual-month calendar built to carry fares"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="placeholder" style="display:none;">Drop the date picker at<code>assets/search/search-vd-date.png</code></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+        <figcaption>A dual-month calendar — the foundation for fare-aware date discovery that pays off on the results screen.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Step · Results -->
+  <section id="results">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">Step 02 · Results</span>
+        <h2>251 flights, made decidable.</h2>
+        <p class="lead">The results screen turns network supply into a choice: filters for stops, baggage,
+        price, and departure time; a fare-aware date strip that surfaces the cheapest day at a glance; and a
+        sticky total that always shows the price you'll pay, with savings called out.</p>
+      </div>
+      <div class="ba-grid" style="align-items:start">
+        <div class="ba-col">
+          <div class="ba-label"><span class="bdot"></span> Wireframe — in the bank's app</div>
+          <div class="ba-frame" data-shot="assets/results/results-wf.png">
+            <img src="assets/results/results-wf.png" alt="Flight listing wireframe in the bank app — filters, fare tabs, flight rows"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="ph" style="display:none;">assets/results/results-wf.png</div>
+            <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+          </div>
+          <p class="ba-cap">The wireframe nails the information: filter rail, fare-by-day tabs, and dense flight rows in the bank's frame.</p>
+        </div>
+        <div class="ba-col">
+          <div class="ba-label"><span class="bdot"></span> Visual design — BillDesk DLS</div>
+          <div class="ba-frame" data-shot="assets/results/results-vd.png">
+            <img src="assets/results/results-vd.png" alt="Flight results visual design — date/fare strip, filters, flight list, sticky total with savings"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="ph" style="display:none;">assets/results/results-vd.png</div>
+            <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+          </div>
+          <p class="ba-cap">The VD gives the fare strip real weight — cheapest day in green — and pins a savings-aware total to the bottom.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step · Review & traveler -->
+  <section id="review">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">Step 03 · Review &amp; traveller details</span>
+        <h2>The fare rules, before the form.</h2>
+        <p class="lead">Once a flight is chosen, the review step confirms the itinerary, then does something
+        most booking flows bury: it shows the <strong>cancellation refund as a timeline</strong> — how much
+        you get back, and how that shrinks as departure nears. Then the traveller form, contact, and GST,
+        with a live fare summary alongside.</p>
+      </div>
+      <div class="ba-grid" style="align-items:start">
+        <div class="ba-col">
+          <div class="ba-label"><span class="bdot"></span> Wireframe — in the bank's app</div>
+          <div class="ba-frame" data-shot="assets/review/review-wf-booking.png">
+            <img src="assets/review/review-wf-booking.png" alt="Complete-booking wireframe — itinerary, cancellation policy, fare summary, coupons"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="ph" style="display:none;">assets/review/review-wf-booking.png</div>
+            <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+          </div>
+          <p class="ba-cap">The wireframe already carries the cancellation-and-date-change band and a coupons block in the bank frame.</p>
+        </div>
+        <div class="ba-col">
+          <div class="ba-label"><span class="bdot"></span> Visual design — BillDesk DLS</div>
+          <div class="ba-frame" data-shot="assets/review/review-vd-traveler.png">
+            <img src="assets/review/review-vd-traveler.png" alt="Review visual design — itinerary, refund-on-cancellation gradient timeline, traveller form, fare summary"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="ph" style="display:none;">assets/review/review-vd-traveler.png</div>
+            <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+          </div>
+          <p class="ba-cap">The VD turns the refund policy into a green→red gradient timeline — the fine print becomes a single glance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step · Add-ons -->
+  <section id="addons">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">Step 04 · Seats &amp; meals</span>
+        <h2>Pick the seat, see the price.</h2>
+        <p class="lead">Add-ons are their own step: a seat map colour-coded by class and price (Free, Premium,
+        Standard, XL), per-traveller assignment, and a Meals tab — with the fare summary updating live as
+        seats are chosen. Upsells (extra legroom, priority boarding) ride the same map.</p>
+      </div>
+      <div class="ba-grid" style="align-items:start">
+        <div class="ba-col">
+          <div class="ba-label"><span class="bdot"></span> Wireframe — in the bank's app</div>
+          <div class="ba-frame" data-shot="assets/addons/addons-wf-seatmeal.png">
+            <img src="assets/addons/addons-wf-seatmeal.png" alt="Seat & meal wireframe — seat map, SpiceMax upsell, urgency banner, fare summary"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="ph" style="display:none;">assets/addons/addons-wf-seatmeal.png</div>
+            <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+          </div>
+          <p class="ba-cap">The wireframe maps the seat grid, the class-based pricing, an urgency nudge, and a seller upsell (SpiceMax).</p>
+        </div>
+        <div class="ba-col">
+          <div class="ba-label"><span class="bdot"></span> Visual design — BillDesk DLS</div>
+          <div class="ba-frame" data-shot="assets/addons/addons-vd-seats.png">
+            <img src="assets/addons/addons-vd-seats.png" alt="Seats visual design — fuselage seat map, class legend with prices, per-traveller assignment, live fare"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="ph" style="display:none;">assets/addons/addons-vd-seats.png</div>
+            <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+          </div>
+          <p class="ba-cap">The VD draws the seat map into the fuselage, colour-codes by price band, and tracks each traveller's seat against a live total.</p>
+        </div>
+      </div>
+      <figure>
+        <div class="frame" data-shot="assets/addons/addons-vd-seatmap.png">
+          <img src="assets/addons/addons-vd-seatmap.png" alt="Seat-map states — available, selected with traveller, and assigned"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="placeholder" style="display:none;">Drop the seat-map states at<code>assets/addons/addons-vd-seatmap.png</code></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+        <figcaption>The seat component across states — open, selecting (traveller attached), and assigned — the interaction the seat step is built around.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Step · Payment -->
+  <section id="payment">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">Step 05 · Payment</span>
+        <h2>Close it on the bank's own rail.</h2>
+        <p class="lead">The journey ends where BillDesk is strongest — the payment gateway. Saved options,
+        UPI, card, netbanking, wallets, EMI; bank-card instant discounts surfaced inline; coupons applied
+        against the same fare summary that's followed the customer the whole way.</p>
+      </div>
+      <figure>
+        <div class="frame" data-shot="assets/payment/payment-wf.png">
+          <img src="assets/payment/payment-wf.png" alt="Payment wireframe — payment-method rail, card form, instant discount, fare summary, coupons"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="placeholder" style="display:none;">Drop the payment screen at<code>assets/payment/payment-wf.png</code></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+        <figcaption>The BillDesk payment gateway closes the booking — every method, an instant-discount nudge for the bank's own card, and coupons on the running fare.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- DESIGN DECISIONS -->
+  <section id="decisions">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">Design decisions</span>
+        <h2>The calls that made it bookable.</h2>
+      </div>
+      <div class="decision">
+        <div class="d-num">01</div>
+        <div>
+          <h4>Fares on the calendar, not behind it</h4>
+          <p class="d-rationale">Price drives flight choice more than time does. The results date strip shows
+          a fare under every day and greens the cheapest, so the cheapest-day decision happens before the
+          user even scans the list.</p>
+        </div>
+      </div>
+      <div class="decision">
+        <div class="d-num">02</div>
+        <div>
+          <h4>Cancellation as a timeline, not fine print</h4>
+          <p class="d-rationale">Refund rules are where booking trust is won or lost. Rendering them as a
+          green→red gradient — how much comes back, and when it drops — turns a buried policy into a glance,
+          before the customer commits.</p>
+        </div>
+      </div>
+      <div class="decision">
+        <div class="d-num">03</div>
+        <div>
+          <h4>The fare summary never leaves</h4>
+          <p class="d-rationale">A sticky total with strikethrough savings follows every step — results,
+          review, seats, payment. The price you'll pay is always one glance away, so add-ons never feel like
+          a trap.</p>
+        </div>
+      </div>
+      <div class="decision">
+        <div class="d-num">04</div>
+        <div>
+          <h4>Persona fares, surfaced early</h4>
+          <p class="d-rationale">ONDC's open supply means many seller offers — Student, Armed Forces, Senior
+          Citizen, Doctors. Putting those fare chips on the search screen makes the network's breadth a
+          benefit the customer sees up front.</p>
+        </div>
+      </div>
+      <div class="decision" style="border-bottom:none">
+        <div class="d-num">05</div>
+        <div>
+          <h4>One flow, any bank's skin</h4>
+          <p class="d-rationale">Because this is a TSP build, the flow has to be the bank's, not BillDesk's.
+          Theming the whole journey into HDFC's identity was a deliberate proof of whitelabel capability —
+          the same booking logic re-skins from a partner bank's brand to the BillDesk base with no change to
+          the flow. That's the pitch to the next bank.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 SCALING -->
+  <section id="scaling">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">07 — Scaling it</span>
+        <h2>One buyer app, many banks — and beyond flights.</h2>
+        <p class="lead">The TSP-plus-ONDC model is the leverage. The booking experience is built once and
+        themed per bank; the supply comes from the network, not from integrations. The same pattern extends
+        to any bank that wants to become a buyer app — and, because ONDC is multi-category, beyond travel.</p>
+      </div>
+      <div class="cards-grid three">
+        <div class="pcard"><span class="tag">Per bank</span><h4>Re-skin, don't rebuild</h4><p>Theme the same flow to each partner bank's identity — the wireframe-to-VD shift proves the seam.</p></div>
+        <div class="pcard"><span class="tag">Per network</span><h4>Supply from ONDC</h4><p>New sellers on the network appear without new integrations on our side.</p></div>
+        <div class="pcard"><span class="tag">Per category</span><h4>Beyond flights</h4><p>The same buyer-app role applies to other ONDC categories as they mature.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 IMPACT -->
+  <section id="impact">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">08 — Impact</span>
+        <h2>What was delivered.</h2>
+        <p class="lead">An end-to-end flight-booking experience for a bank buyer app on ONDC — designed from
+        wireframe through visual design, built as the bank's Technology Service Provider, with ONDC.</p>
+      </div>
+      <ul class="clean">
+        <li><strong>A complete booking flow</strong> — search, results, review, seats &amp; meals, and payment, designed as one journey.</li>
+        <li><strong>Bank as ONDC buyer app, BillDesk as TSP</strong> — the bank offers flights with no travel stack of its own.</li>
+        <li><strong>Whitelabel proven</strong> — the journey themed into HDFC's identity to show it wears any bank's brand, then lifted from wireframe into the BillDesk design system.</li>
+        <li><strong>Delivered with ONDC</strong> — the experience plugs into the open travel network and its seller supply.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 09 FUTURE -->
+  <section id="future">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">09 — Future scope</span>
+        <h2>Where it goes next.</h2>
+      </div>
+      <div class="cards-grid three">
+        <div class="pcard"><span class="tag">Trips</span><h4>Round-trip &amp; multi-city</h4><p>Carry the same fare-aware, sticky-total model into return and multi-leg journeys.</p></div>
+        <div class="pcard"><span class="tag">Manage</span><h4>Post-booking</h4><p>Web check-in, cancellation, and rebooking — using the refund timeline already designed.</p></div>
+        <div class="pcard"><span class="tag">Categories</span><h4>More of ONDC</h4><p>Hotels and the rest of travel as the network's categories open up.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 REFLECTION -->
+  <section id="reflection">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">10 — Reflection</span>
+        <h2>One honest learning.</h2>
+        <p class="lead">An open network solves supply, not experience. ONDC made the flights reachable, but
+        none of it is bookable until someone designs the fare discovery, the seat map, the cancellation
+        clarity, and the running total. The TSP's real job isn't the protocol — it's turning a protocol into
+        something a person can confidently buy a flight on.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="shell chrome-inner">
+    <span>ONDC Flight Booking — Bank buyer app, BillDesk as TSP · Case study</span>
+    <span>Built with the project-overview skill</span>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-hidden="true"><img id="lightbox-img" alt=""></div>
+<script>
+document.addEventListener('click', function(e){
+  var shot = e.target.closest('[data-shot]');
+  if (shot) {
+    var lb = document.getElementById('lightbox');
+    document.getElementById('lightbox-img').src = shot.dataset.shot;
+    lb.classList.add('is-open'); lb.setAttribute('aria-hidden','false');
+  }
+  if (e.target.id === 'lightbox' || e.target.id === 'lightbox-img') {
+    var lb2 = document.getElementById('lightbox');
+    lb2.classList.remove('is-open'); lb2.setAttribute('aria-hidden','true');
+    document.getElementById('lightbox-img').src = '';
+  }
+});
+document.addEventListener('keydown', function(e){
+  if (e.key !== 'Escape') return;
+  var lb = document.getElementById('lightbox');
+  if (lb && lb.classList.contains('is-open')) {
+    lb.classList.remove('is-open'); lb.setAttribute('aria-hidden','true');
+    document.getElementById('lightbox-img').src = '';
+  }
+});
+</script>
+<script src="../scripts/reveal.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+</body>
+</html>

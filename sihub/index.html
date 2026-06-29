@@ -1,0 +1,1019 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<script>document.documentElement.classList.add('js')</script>
+<title>SIHUB Revamp · Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#F26522; --orange-hover:#D9541A; --orange-tint:#FEF0E8; --orange-tint-2:#FFF7F1;
+  --text-1:#0D1526; --text-2:#4A5568; --text-3:#8A97AC;
+  --canvas:#F7F8FA; --surface:#FFFFFF; --surface-2:#FAFBFC;
+  --border:#E2E8F0; --border-strong:#CBD5E0;
+  --success:#0A8F5C; --warning:#D97706; --error:#C0392B;
+  --success-tint:#E6F4EE; --warning-tint:#FEF3E2; --error-tint:#FBE9E7;
+  --f:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --r-s:4px; --r-m:6px; --r-l:8px; --r-xl:12px; --r-2xl:16px; --r-pill:999px;
+  --sh-1:0 1px 2px rgba(13,21,38,.04),0 0 0 1px rgba(13,21,38,.04);
+  --sh-2:0 4px 12px rgba(13,21,38,.06),0 0 0 1px rgba(13,21,38,.05);
+  --sh-3:0 12px 32px rgba(13,21,38,.08),0 0 0 1px rgba(13,21,38,.06);
+  --container:1200px; --gutter:32px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;scroll-behavior:smooth}
+body{font-family:var(--f);font-size:16px;line-height:1.55;color:var(--text-1);background:var(--canvas);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--orange);text-decoration:none}
+img,svg{display:block;max-width:100%}
+code{font-family:var(--mono);font-size:.85em;background:var(--canvas);padding:2px 5px;border-radius:var(--r-s);border:1px solid var(--border)}
+
+.shell{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+.shell.narrow{max-width:920px}
+
+/* Chrome */
+.chrome{background:linear-gradient(180deg,#FFFCFA 0%,#FFFFFF 100%);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(12px)}
+.chrome-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:600;font-size:15px;letter-spacing:-.01em}
+.brand-logo{width:26px;height:26px;border-radius:7px;background:var(--orange);display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px;font-family:'Manrope',var(--f)}
+.brand-sub{color:var(--text-3);font-weight:400;font-size:13px;border-left:1px solid var(--border);padding-left:12px;margin-left:4px}
+.chrome-nav{display:flex;gap:4px}
+.chrome-nav a{font-size:12px;font-weight:500;color:var(--text-3);padding:6px 12px;border-radius:var(--r-m);transition:all 120ms}
+.chrome-nav a:hover{background:var(--orange-tint-2);color:var(--text-1)}
+@media(max-width:760px){.chrome-nav{display:none}}
+
+/* bg deco */
+.bg-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg-deco::before,.bg-deco::after{content:"";position:absolute;border-radius:50%;filter:blur(40px)}
+.bg-deco::before{width:600px;height:600px;top:-200px;left:-200px;background:radial-gradient(circle,rgba(242,101,34,.05),transparent 60%)}
+.bg-deco::after{width:800px;height:800px;bottom:-300px;right:-300px;background:radial-gradient(circle,rgba(242,101,34,.04),transparent 60%)}
+main{position:relative;z-index:1}
+
+/* Type */
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);padding:6px 10px;background:var(--orange-tint);border-radius:var(--r-pill)}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--orange)}
+h1,h2,h3,h4,h5{margin:0;letter-spacing:-.02em;font-weight:600;color:var(--text-1)}
+h1{font-size:54px;line-height:1.05;letter-spacing:-.03em}
+h2{font-size:32px;line-height:1.15;letter-spacing:-.025em}
+h3{font-size:20px;line-height:1.3}
+h4{font-size:16px;line-height:1.35}
+.lead{font-size:18px;line-height:1.6;color:var(--text-2);max-width:65ch}
+.lead.body{color:var(--text-2);font-size:17px}
+p{margin:0;color:var(--text-2)}
+p.para{font-size:16px;line-height:1.7;color:var(--text-2);max-width:68ch;margin-top:18px}
+p.para + p.para{margin-top:16px}
+.muted{color:var(--text-3)}
+
+section{padding:72px 0;position:relative;border-top:1px solid var(--border)}
+.section-head{margin-bottom:36px;max-width:760px}
+.section-head h2{margin-top:12px}
+.section-head .lead{margin-top:16px}
+.sec-num{font-family:var(--mono);font-size:12px;color:var(--orange);font-weight:500;letter-spacing:.06em}
+
+/* fill-in marker */
+.fill{background:repeating-linear-gradient(45deg,#FFF7ED 0 8px,#FEF0E8 8px 16px);border:1px dashed var(--orange);border-radius:var(--r-s);padding:0 6px;color:var(--orange-hover);font-size:.92em;font-weight:500;font-family:var(--mono)}
+
+/* Hero */
+.hero{padding:88px 0 8px}
+.hero h1{max-width:17ch;margin-top:20px}
+.hero .lead{margin-top:22px;font-size:20px;max-width:52ch}
+.hero .lead strong{color:var(--text-1);font-weight:600}
+
+/* Meta bar */
+.meta-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;margin-top:48px}
+@media(max-width:760px){.meta-bar{grid-template-columns:1fr 1fr}}
+.meta-cell{background:var(--surface);padding:18px 20px}
+.meta-cell .mk{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:6px}
+.meta-cell .mv{font-size:14px;font-weight:500;color:var(--text-1);line-height:1.4}
+
+/* Stat strip */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+@media(max-width:760px){.stats{grid-template-columns:1fr}}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:22px 24px;box-shadow:var(--sh-1)}
+.stat .n{font-size:40px;font-weight:800;letter-spacing:-.03em;font-family:'Manrope',var(--f);line-height:1}
+.stat .n .u{color:var(--orange)}
+.stat .l{font-size:13px;color:var(--text-2);margin-top:8px}
+
+/* Callout */
+.step-callout{background:linear-gradient(180deg,var(--orange-tint-2) 0%,var(--surface) 60%);border:1px solid var(--orange-tint);border-radius:var(--r-xl);padding:24px;display:grid;grid-template-columns:40px 1fr;gap:16px;align-items:start;margin-top:28px}
+.step-callout-ico{width:40px;height:40px;border-radius:10px;background:var(--orange-tint);color:var(--orange);display:grid;place-items:center;font-size:20px;font-weight:700}
+.step-callout h4{font-size:15px;margin:0 0 8px;color:var(--text-1)}
+.step-callout p{font-size:14px;line-height:1.6;color:var(--text-2);margin:0}
+
+/* Figure */
+figure{margin:32px 0 0}
+.frame{border:1px solid var(--border);border-radius:var(--r-2xl);background:var(--surface);overflow:hidden;box-shadow:var(--sh-2)}
+.frame img{display:block;width:100%;height:auto}
+.placeholder{aspect-ratio:16/6;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:var(--text-3);background:repeating-linear-gradient(45deg,var(--surface) 0 12px,var(--surface-2) 12px 24px);font-size:13px;text-align:center;padding:24px}
+.placeholder code{font-family:var(--mono);font-size:12px}
+figcaption{font-size:12px;color:var(--text-3);margin-top:12px;text-align:center}
+
+/* Goal / card grids */
+.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+.cards-grid.three{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.cards-grid,.cards-grid.three{grid-template-columns:1fr}}
+.pcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:20px 22px;box-shadow:var(--sh-1)}
+.pcard .tag{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--error)}
+.pcard.ok .tag{color:var(--orange)}
+.pcard.goal .tag{color:var(--text-3)}
+.pcard h4{font-size:15px;margin:8px 0 6px}
+.pcard p{font-size:13px;line-height:1.6;color:var(--text-2)}
+
+/* Process timeline */
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:28px;position:relative}
+@media(max-width:760px){.timeline{grid-template-columns:1fr;gap:10px}}
+.tl-step{position:relative;padding:0 14px}
+.tl-step .tl-dot{width:14px;height:14px;border-radius:50%;background:var(--surface);border:2px solid var(--orange);position:relative;z-index:2}
+.tl-step .tl-line{position:absolute;top:6px;left:50%;right:-50%;height:2px;background:var(--border);z-index:1}
+.tl-step:last-child .tl-line{display:none}
+@media(max-width:760px){.tl-step .tl-line{display:none}}
+.tl-step .tl-num{font-family:var(--mono);font-size:10px;color:var(--text-3);margin-top:14px}
+.tl-step h4{font-size:14px;margin:4px 0 6px}
+.tl-step p{font-size:12px;line-height:1.55;color:var(--text-2)}
+
+/* Compare table */
+.compare{width:100%;border-collapse:separate;border-spacing:0;margin-top:24px;font-size:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-1)}
+.compare th{text-align:left;padding:14px 18px;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);border-bottom:1px solid var(--border);font-weight:600;background:var(--surface-2)}
+.compare th.after{color:var(--orange)}
+.compare td{padding:16px 18px;vertical-align:top;border-bottom:1px solid var(--border);color:var(--text-2);line-height:1.5}
+.compare tr:last-child td{border-bottom:none}
+.compare td.after{background:var(--orange-tint-2);color:var(--text-1)}
+@media(max-width:760px){
+  .compare,.compare tbody,.compare tr,.compare td{display:block;width:100%}
+  .compare thead{display:none}
+  .compare td{border:none;border-bottom:1px solid var(--border)}
+  .compare td.before::before{content:"Before — ";font-weight:600;color:var(--error)}
+  .compare td.after::before{content:"After — ";font-weight:600;color:var(--orange)}
+}
+
+/* Before/After two-up */
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;align-items:start}
+@media(max-width:760px){.ba-grid{grid-template-columns:1fr}}
+.ba-col .ba-label{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.ba-col.before .ba-label{color:var(--error)}
+.ba-col.after .ba-label{color:var(--orange)}
+.ba-col .ba-label .bdot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.ba-frame{border:1px solid var(--border);border-radius:var(--r-xl);background:var(--surface);overflow:hidden;box-shadow:var(--sh-1)}
+.ba-frame img{display:block;width:100%;height:auto}
+/* phone screens: render near native size, centered & crisp, not stretched */
+.ba-frame.phone{display:flex;justify-content:center;align-items:flex-start;background:linear-gradient(180deg,var(--canvas) 0%,var(--surface) 100%);padding:24px}
+.ba-frame.phone img{width:auto;max-width:300px;max-height:640px;border-radius:18px;box-shadow:var(--sh-2),0 0 0 1px rgba(13,21,38,.05)}
+.ba-frame .ph{aspect-ratio:9/16;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--text-3);background:repeating-linear-gradient(45deg,var(--surface) 0 12px,var(--surface-2) 12px 24px);font-size:12px;text-align:center;padding:20px}
+.ba-frame .ph code{font-family:var(--mono);font-size:11px}
+.ba-col.before .ba-frame .ph{aspect-ratio:16/10}
+.ba-cap{font-size:12px;color:var(--text-3);margin-top:10px;line-height:1.5}
+
+/* Decision blocks */
+.decision{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:24px 0;border-bottom:1px solid var(--border);align-items:start}
+.decision:last-child{border-bottom:none}
+.decision .d-num{font-family:'Manrope',var(--f);font-size:28px;font-weight:800;color:var(--orange-tint);letter-spacing:-.03em;line-height:1;width:48px}
+.decision h4{font-size:17px;margin-bottom:6px}
+.decision .d-rationale{font-size:14px;line-height:1.65;color:var(--text-2);margin-top:8px}
+.decision .d-rationale b{color:var(--text-1);font-weight:600}
+
+/* Pipeline (bank themes) */
+.pipeline{display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr 24px 1fr;gap:0;align-items:stretch;margin-top:28px}
+@media(max-width:760px){.pipeline{grid-template-columns:1fr;gap:10px}.pipe-arrow{display:none}}
+.pipe-node{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:18px 20px;box-shadow:var(--sh-1)}
+.pipe-node.accent{background:linear-gradient(180deg,var(--orange-tint-2),var(--surface));border-color:var(--orange-tint)}
+.pipe-node .pipe-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:8px}
+.pipe-node h4{font-size:14px;margin-bottom:6px}
+.pipe-node p{font-size:12px;line-height:1.6;color:var(--text-2)}
+.pipe-arrow{display:flex;align-items:center;justify-content:center;color:var(--orange);font-size:18px}
+
+/* Token ladder */
+.ladder-wrap{margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:22px;box-shadow:var(--sh-1)}
+.ladder-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.ladder-head .lh-sw{width:40px;height:40px;border-radius:var(--r-m);border:1px solid rgba(0,0,0,.08)}
+.ladder-head .lh-meta .lh-role{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);font-weight:600}
+.ladder-head .lh-meta .lh-hex{font-family:var(--mono);font-size:14px;font-weight:600;color:var(--text-1)}
+.ladder{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:6px}
+.lc{border:1px solid rgba(0,0,0,.06);border-radius:var(--r-m);overflow:hidden;background:var(--surface)}
+.lc .sw{height:52px}
+.lc .mt{padding:6px 8px;border-top:1px solid var(--border)}
+.lc .mt .role{font-size:8px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-3);font-weight:600}
+.lc .mt .hx{font-family:var(--mono);font-size:9.5px;color:var(--text-1);margin-top:1px}
+.ladder-note{font-size:12px;color:var(--text-3);margin-top:14px}
+
+/* ===== Theme playground (recurring-payment screen, re-skins per bank) ===== */
+.pg-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:18px 0 14px}
+.pg-combo{position:relative;min-width:240px}
+.pg-combo-input{display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--border);border-radius:var(--r-m);background:var(--surface);cursor:pointer;font-size:13px;color:var(--text-1);font-weight:500}
+.pg-combo-input:hover{border-color:var(--border-strong)}
+.pg-combo.is-open .pg-combo-input{border-color:var(--orange);box-shadow:0 0 0 2px var(--orange-tint)}
+.pg-combo-input input{flex:1;border:none;outline:none;background:transparent;font:inherit;color:inherit;padding:0;min-width:0}
+.pg-combo-input input::placeholder{color:var(--text-3);font-weight:400}
+.pg-combo-input .pg-combo-chev{flex-shrink:0;width:8px;height:8px;border-right:1.5px solid var(--text-3);border-bottom:1.5px solid var(--text-3);transform:rotate(45deg);transition:transform 150ms;margin-top:-3px}
+.pg-combo.is-open .pg-combo-input .pg-combo-chev{transform:rotate(-135deg);margin-top:3px}
+.pg-combo-panel{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-m);box-shadow:var(--sh-3);max-height:300px;overflow-y:auto;z-index:30;display:none;padding:4px}
+.pg-combo.is-open .pg-combo-panel{display:block}
+.pg-combo-option{padding:8px 10px;font-size:13px;color:var(--text-1);border-radius:var(--r-s);cursor:pointer;display:flex;align-items:center;gap:8px}
+.pg-combo-option:hover,.pg-combo-option.is-active{background:var(--orange-tint-2)}
+.pg-combo-option.is-selected{background:var(--orange-tint);color:var(--orange)}
+.pg-combo-option .swatch-mini{width:10px;height:10px;border-radius:2px;flex-shrink:0;border:1px solid rgba(0,0,0,.08)}
+.pg-combo-empty{padding:10px;font-size:12px;color:var(--text-3);font-style:italic;text-align:center}
+.pg-primary{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--text-3)}
+.pg-primary .pg-dot{width:16px;height:16px;border-radius:4px;border:1px solid rgba(0,0,0,.08)}
+
+/* preview shell */
+.pv-wrap{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.pv-tabs{display:inline-flex;padding:3px;background:var(--canvas);border:1px solid var(--border);border-radius:var(--r-m);align-self:flex-start}
+.pv-tab{font-size:12px;font-weight:500;color:var(--text-3);padding:6px 14px;border-radius:5px;cursor:pointer;transition:all 120ms;display:inline-flex;align-items:center;gap:6px;border:none;background:none;font-family:inherit}
+.pv-tab:hover{color:var(--text-1)}
+.pv-tab.is-on{background:var(--surface);color:var(--text-1);box-shadow:var(--sh-1)}
+.pv-tab svg{flex-shrink:0}
+.pv-stage{background:linear-gradient(180deg,var(--canvas) 0%,var(--surface) 100%);border:1px solid var(--border);border-radius:var(--r-xl);padding:36px;display:flex;align-items:center;justify-content:center;height:620px;overflow:hidden}
+.pv-pane{display:none;width:100%;height:100%}
+.pv-pane.is-on{display:flex;justify-content:center;align-items:center}
+/* mobile phone mockup */
+.pv-phone{width:360px;height:800px;border-radius:36px;overflow:hidden;background:#fff;box-shadow:0 20px 50px rgba(13,21,38,.18),0 0 0 10px #0D1526,0 0 0 11px rgba(255,255,255,.4);position:relative;font-size:12px;transform:scale(.64);transform-origin:center;display:flex;flex-direction:column}
+.pv-phone-statusbar{display:flex;justify-content:space-between;align-items:center;padding:14px 26px 8px;background:var(--pv-brand-dark);color:#fff;font-size:13px;font-weight:600}
+.pv-phone-statusbar .sb-icons{display:inline-flex;gap:6px;align-items:center}
+.pv-phone-urlbar-wrap{padding:6px 16px 14px;background:var(--pv-brand-dark)}
+.pv-phone-urlbar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border-radius:10px;padding:9px 14px;font-size:13px;color:#fff;justify-content:space-between}
+.pv-phone-urlbar .url-l{display:flex;gap:8px;align-items:center}
+/* desktop browser mockup */
+.pv-desktop{width:100%;max-width:880px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 20px 50px rgba(13,21,38,.16);border:1px solid var(--border)}
+.pv-desktop-chrome{background:#0D1526;padding:9px 14px;display:flex;align-items:center;gap:12px}
+.pv-desktop-chrome .dots{display:flex;gap:6px}
+.pv-desktop-chrome .dot{width:11px;height:11px;border-radius:50%}
+.pv-desktop-chrome .dot.r{background:#FF5F57}
+.pv-desktop-chrome .dot.y{background:#FEBC2E}
+.pv-desktop-chrome .dot.g{background:#28C840}
+.pv-desktop-chrome .tab{background:#1F2937;padding:5px 12px;border-radius:6px;font-size:11px;color:#fff;display:inline-flex;align-items:center;gap:6px}
+.pv-desktop-chrome .url{flex:1;background:#1F2937;padding:5px 12px;border-radius:6px;font-size:11px;color:rgba(255,255,255,.75);text-align:center}
+/* desktop recurring screen */
+.pv-rp{font-family:var(--f);background:linear-gradient(180deg,#fff 0%,var(--pv-fill-light) 170%);height:100%;color:var(--text-1);display:flex;flex-direction:column}
+.pv-rp *{box-sizing:border-box}
+.pv-rp-bar{height:46px;margin:0 48px;flex-shrink:0;background:var(--pv-brand-dark);border-radius:0 0 14px 14px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;color:#fff}
+.pv-rp-brand{display:flex;align-items:center;gap:8px}
+.pv-rp-brand img{height:18px;width:auto;display:block}
+.pv-rp-brand .wm{font-size:13px;font-weight:600;letter-spacing:.02em}
+.pv-rp-right{display:flex;align-items:center;gap:10px}
+.pv-rp-chip{display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 10px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:8px;font-size:11.5px;font-weight:600;color:#fff}
+.pv-rp-chip svg.mc{display:block;flex-shrink:0}
+.pv-rp-avatar{width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--text-2)}
+.pv-rp-avatar svg{width:15px;height:15px}
+.pv-rp-body{margin:14px 48px;flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;background:#fff;border-radius:20px;box-shadow:0 1px 3px rgba(13,21,38,.06),0 12px 36px rgba(13,21,38,.05);padding:22px 26px}
+.pv-rp-h1{font-size:18px;font-weight:600;letter-spacing:-.02em;margin:0 0 3px}
+.pv-rp-sub{font-size:12px;color:var(--text-2);margin:0 0 16px}
+.pv-rp-sechead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.pv-rp-sectitle{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:-.01em}
+.pv-rp-badge{display:grid;place-items:center;min-width:18px;height:18px;padding:0 6px;background:var(--pv-fill);color:#fff;border-radius:999px;font-size:10.5px;font-weight:600}
+.pv-rp-viewall{height:30px;padding:0 12px;background:#fff;border:1px solid var(--border-strong);border-radius:6px;font-size:12px;font-weight:600;color:var(--text-1);cursor:default}
+.pv-rp-cards{display:flex;gap:12px;margin-bottom:18px}
+.pv-rp-card{flex:0 0 auto;width:290px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px 14px}
+.pv-rp-card.is-active{flex:0 0 auto;width:290px;background:var(--pv-fill-light);border:none;padding:4px}
+.pv-rp-card.is-active .pv-rp-inner{background:#fff;border:1.5px solid var(--pv-border);border-radius:9px;padding:11px 13px;height:100%}
+.pv-rp-ctop{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.pv-rp-cname{font-size:12.5px;font-weight:600;line-height:1.3}
+.pv-rp-camt{font-size:12.5px;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pv-rp-cmeta{font-size:11px;color:var(--text-2);margin-top:4px}
+.pv-rp-cmeta .sep{color:var(--border-strong);margin:0 5px}
+.pv-rp-cmeta .pend{color:#D81E5B;font-weight:500}
+.pv-rp-cmeta .up{color:#2563EB;font-weight:500}
+.pv-rp-cact{display:flex;gap:8px;margin-top:11px}
+.pv-rp-btn{height:30px;padding:0 12px;border-radius:6px;font-size:11.5px;font-weight:600;font-family:inherit;display:inline-flex;align-items:center;gap:6px;cursor:default;border:none}
+.pv-rp-btn.primary{background:var(--pv-fill);color:#fff}
+.pv-rp-btn.ghost{background:#fff;color:var(--text-1);border:1px solid var(--border-strong)}
+.pv-rp-btn svg{width:12px;height:12px}
+.pv-rp-seg{display:inline-flex;background:var(--canvas);border:1px solid var(--border);border-radius:8px;padding:2px}
+.pv-rp-seg button{height:26px;padding:0 13px;border:none;background:none;border-radius:6px;font-size:11.5px;font-weight:600;color:var(--text-3);font-family:inherit;cursor:default}
+.pv-rp-seg button.on{background:#fff;color:var(--text-1);box-shadow:0 1px 2px rgba(13,21,38,.1)}
+.pv-rp-table-wrap{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.pv-rp-table{width:100%;border-collapse:collapse;font-size:12px}
+.pv-rp-table thead{background:var(--surface-2)}
+.pv-rp-table th{padding:9px 18px;text-align:left;font-size:10.5px;font-weight:600;color:var(--text-2);border-bottom:1px solid var(--border);white-space:nowrap}
+.pv-rp-table th.r{text-align:right}
+.pv-rp-table td{padding:10px 18px;border-bottom:1px solid var(--border);font-weight:500;white-space:nowrap}
+.pv-rp-table td.muted{color:var(--text-2);font-weight:400}
+.pv-rp-table td.r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.pv-rp-table tr:last-child td{border-bottom:none}
+/* mobile recurring screen */
+.pv-mrp{display:flex;flex-direction:column;flex:1;background:#fff}
+.pv-mrp *{box-sizing:border-box}
+.pv-mrp-bankbar{padding:11px 18px;background:var(--pv-brand-dark);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pv-mrp-bankbar .brand img{height:22px;width:auto;display:block}
+.pv-mrp-bankbar .brand .wm{color:#fff;font-size:15px;font-weight:600;letter-spacing:.01em}
+.pv-mrp-bankbar .right{display:flex;align-items:center;gap:9px}
+.pv-mrp-chip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 9px;background:rgba(255,255,255,.1);border:1.5px solid var(--pv-fill);border-radius:8px;font-size:12px;font-weight:600;color:#fff}
+.pv-mrp-chip svg.mc{display:block;flex-shrink:0}
+.pv-mrp-avatar{width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--text-2);flex-shrink:0}
+.pv-mrp-avatar svg{width:15px;height:15px}
+.pv-mrp-body{flex:1;padding:18px 20px 0;display:flex;flex-direction:column}
+.pv-mrp-h1{font-size:21px;font-weight:600;letter-spacing:-.02em;margin:0 0 4px}
+.pv-mrp-sub{font-size:13px;color:var(--text-2);margin:0 0 22px}
+.pv-mrp-sechead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.pv-mrp-sectitle{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:600;letter-spacing:-.01em}
+.pv-mrp-badge{display:grid;place-items:center;min-width:20px;height:20px;padding:0 6px;background:var(--pv-fill);color:#fff;border-radius:999px;font-size:11px;font-weight:600}
+.pv-mrp-viewall{background:none;border:none;font-family:inherit;font-size:13px;font-weight:600;color:var(--pv-text);cursor:default;padding:0}
+.pv-mrp-carousel{display:flex;gap:12px;overflow:hidden;margin-bottom:12px}
+.pv-mrp-card{flex:0 0 90%;background:#fff;border:1px solid var(--border);border-radius:14px;padding:15px 16px}
+.pv-mrp-card.is-active{flex:0 0 90%;background:var(--pv-fill-light);border:none;padding:5px}
+.pv-mrp-card.is-active .pv-mrp-inner{background:#fff;border:1.5px solid var(--pv-border);border-radius:11px;padding:14px 15px;height:100%}
+.pv-mrp-ctop{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.pv-mrp-cname{font-size:14px;font-weight:600;line-height:1.3}
+.pv-mrp-camt{font-size:14px;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pv-mrp-cmeta{font-size:12px;color:var(--text-2);margin-top:6px}
+.pv-mrp-cmeta .sep{color:var(--border-strong);margin:0 6px}
+.pv-mrp-cmeta .pend{color:#D81E5B;font-weight:500}
+.pv-mrp-cact{display:flex;gap:9px;margin-top:15px}
+.pv-mrp-btn{flex:1;height:40px;border-radius:7px;font-size:13px;font-weight:600;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:7px;cursor:default;border:none}
+.pv-mrp-btn.primary{background:var(--pv-fill);color:#fff}
+.pv-mrp-btn.ghost{background:#fff;color:var(--text-1);border:1px solid var(--border-strong)}
+.pv-mrp-btn svg{width:14px;height:14px}
+.pv-mrp-dots{display:flex;justify-content:center;gap:6px;margin-bottom:26px}
+.pv-mrp-dots .d{width:6px;height:6px;border-radius:50%;background:var(--border-strong)}
+.pv-mrp-dots .d.on{background:var(--pv-fill);width:7px;height:7px}
+.pv-mrp-seg{display:inline-flex;background:var(--canvas);border:1px solid var(--border);border-radius:9px;padding:3px}
+.pv-mrp-seg button{height:28px;padding:0 14px;border:none;background:none;border-radius:6px;font-size:12px;font-weight:600;color:var(--text-3);font-family:inherit;cursor:default}
+.pv-mrp-seg button.on{background:#fff;color:var(--text-1);box-shadow:0 1px 2px rgba(13,21,38,.1)}
+.pv-mrp-list{background:#fff;border:1px solid var(--border);border-bottom:none;border-radius:16px 16px 0 0;overflow:hidden}
+.pv-mrp-mrow{padding:15px 17px;border-bottom:1px solid var(--border)}
+.pv-mrp-mtop{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.pv-mrp-mname{font-size:13.5px;font-weight:600;letter-spacing:-.01em}
+.pv-mrp-mamt{font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pv-mrp-msub{font-size:11.5px;color:var(--text-3);margin-top:5px}
+
+/* Impact list */
+ul.clean{list-style:none;padding:0;margin:24px 0 0}
+ul.clean li{padding:16px 0 16px 30px;border-bottom:1px solid var(--border);position:relative;color:var(--text-2);font-size:15px;line-height:1.5}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{content:"→";position:absolute;left:0;color:var(--orange);font-weight:700}
+ul.clean li strong{color:var(--text-1);font-weight:600}
+
+/* Reflection quote */
+.reflect{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:0 var(--r-xl) var(--r-xl) 0;padding:28px 32px;margin-top:28px;box-shadow:var(--sh-1)}
+.reflect p{font-size:18px;line-height:1.55;color:var(--text-1);font-weight:500}
+
+footer{border-top:1px solid var(--border);padding:40px 0;color:var(--text-3);font-size:13px;background:var(--surface)}
+footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+/* ============================================================
+   PORTED FROM whitelabel-handoff.html — playground styles
+   ============================================================ */
+/* ===== Lightbox (from whitelabel-handoff) ===== */
+.lightbox{position:fixed;inset:0;background:rgba(13,21,38,.82);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:32px;cursor:zoom-out}
+.lightbox.is-open{display:flex}
+.lightbox img{max-width:94vw;max-height:92vh;border-radius:var(--r-l);box-shadow:0 30px 60px rgba(0,0,0,.4)}
+/* Click-to-zoom affordance on screenshots */
+[data-shot]{position:relative;cursor:zoom-in}
+.zoom-hint{position:absolute;top:10px;right:10px;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#fff;background:rgba(13,21,38,.62);backdrop-filter:blur(4px);padding:5px 10px;border-radius:999px;pointer-events:none;opacity:0;transform:translateY(-2px);transition:opacity 160ms,transform 160ms;z-index:3}
+[data-shot]:hover .zoom-hint{opacity:1;transform:none}
+.zoom-hint svg{width:12px;height:12px}
+
+
+</style>
+<link rel="stylesheet" href="../styles/casestudy-dark.css"/>
+</head>
+<body data-auto-reveal>
+<style>
+.pf-bridge{position:sticky;top:0;z-index:50;background:rgba(11,11,12,.72);-webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.pf-bridge .pf-bridge-inner{display:flex;align-items:center;justify-content:space-between;height:48px}
+.pf-bridge-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text-1);letter-spacing:-.01em}
+.pf-bridge-link svg{width:15px;height:15px;stroke:var(--orange)}
+.pf-bridge-link:hover{color:var(--orange)}
+.pf-bridge-ctx{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+</style>
+<nav class="pf-bridge" aria-label="Portfolio">
+  <div class="shell pf-bridge-inner">
+    <a class="pf-bridge-link" href="../" aria-label="Back to Mridhul Aswin portfolio home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Mridhul Aswin
+    </a>
+    <span class="pf-bridge-ctx">Selected work · SIHUB</span>
+  </div>
+</nav>
+
+<div class="bg-deco"></div>
+
+<div class="chrome">
+  <div class="shell chrome-inner">
+    <div class="brand">
+      <span class="brand-logo">S</span>
+      SIHUB
+      <span class="brand-sub">Case Study</span>
+    </div>
+    <nav class="chrome-nav">
+      <a href="#problem">Problem</a>
+      <a href="#process">Process</a>
+      <a href="#solution">Solution</a>
+      <a href="#system">System</a>
+      <a href="#impact">Impact</a>
+      <a href="#future">SiHub+</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="shell narrow">
+    <span class="eyebrow"><span class="dot"></span> SIHUB · Standing Instruction Hub</span>
+    <h1 data-split-words>Every card subscription, in one place.</h1>
+    <p class="lead">A ground-up revamp of <strong>SIHUB</strong> — BillDesk's platform that lets cardholders see, modify, and cancel <strong>every recurring payment</strong> set on their card from a single dashboard, across <strong>50+ banks</strong>.</p>
+    <div class="meta-bar">
+      <div class="meta-cell"><div class="mk">My role</div><div class="mv">UX / UI Designer</div></div>
+      <div class="meta-cell"><div class="mk">Timeline</div><div class="mv">1 month</div></div>
+      <div class="meta-cell"><div class="mk">Platform</div><div class="mv">Web · Mobile &amp; Desktop</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- 01 OVERVIEW -->
+<section id="overview">
+  <div class="shell narrow">
+    <div class="section-head">
+      <span class="sec-num">01 — Overview</span>
+      <h2>What is SIHUB?</h2>
+    </div>
+    <p class="para">SIHUB — the <b>Standing Instruction Hub</b> — is BillDesk's platform for managing recurring card payments. Standing instructions (SIs) are the e-mandates that let merchants — subscriptions, utilities, insurance, SIPs — automatically debit a customer's card on a schedule.</p>
+    <p class="para">Built on the RBI e-mandate framework and rolled out with Visa, SIHUB gives cardholders a single, secure dashboard to <b>view every mandate set on their card, modify its amount or end date, and cancel it</b> — with max-amount limits and OTP authentication baked in. Because BillDesk powers payments for <b>50+ partner banks</b>, the same product is delivered under each bank's brand.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">1</div><div class="l">Place for all your card mandates</div></div>
+      <div class="stat"><div class="n">50<span class="u">+</span></div><div class="l">Banks running SIHUB</div></div>
+      <div class="stat"><div class="n">RBI</div><div class="l">Compliant e-mandate framework</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 PROBLEM -->
+<section id="problem">
+  <div class="shell narrow">
+    <div class="section-head">
+      <span class="sec-num">02 — The Problem</span>
+      <h2>A product built for control — that users couldn't control.</h2>
+      <p class="lead">SIHUB's entire promise is letting people stop unwanted recurring charges. In practice, the experience was so confusing and broken that users couldn't act on the one thing they came to do.</p>
+    </div>
+    <p class="para">Cardholders arrived to cancel a subscription and hit a wall: a dense table of <b>cryptic IDs and unrecognisable merchant names</b>, with no way to tell what was even charging them. The one button that mattered — Cancel — was buried in a row, and frequently led nowhere.</p>
+    <p class="para">The fallout showed up in the open: users reporting they <b>paid the ₹2 card-verification fee and were then locked out</b>, login failing on repeat, cancellations that wouldn't go through, and money <b>still being debited for things they'd tried to stop</b>. A platform meant to give control had quietly eroded trust instead.</p>
+    <div class="step-callout">
+      <div class="step-callout-ico">?</div>
+      <div>
+        <h4>The core question</h4>
+        <p>How might we make stopping an unwanted charge genuinely effortless — so any cardholder can see exactly what's debiting their card and cancel it in a tap, with trust at every step?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 GOALS -->
+<section id="goals">
+  <div class="shell narrow">
+    <div class="section-head">
+      <span class="sec-num">03 — Goals</span>
+      <h2>What the revamp had to achieve.</h2>
+    </div>
+    <div class="cards-grid">
+      <div class="pcard goal"><span class="tag">Goal 01</span><h4>Give users control</h4><p>Make seeing, editing, and cancelling any card mandate effortless — all from one place.</p></div>
+      <div class="pcard goal"><span class="tag">Goal 02</span><h4>Reduce friction</h4><p>Cut the onboarding and management effort so users complete actions instead of abandoning.</p></div>
+      <div class="pcard goal"><span class="tag">Goal 03</span><h4>Modernise information design</h4><p>Replace dense tables with a scannable, mobile-first, action-oriented interface.</p></div>
+      <div class="pcard goal"><span class="tag">Goal 04</span><h4>Feel native to every bank</h4><p>Restore continuity and scale it — one themeable system across 50+ banks, no bespoke rebuilds.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PROCESS -->
+<section id="process">
+  <div class="shell narrow">
+    <div class="section-head">
+      <span class="sec-num">04 — Process</span>
+      <h2>How we approached it.</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-step"><div class="tl-dot"></div><div class="tl-line"></div><div class="tl-num">01</div><h4>Audit</h4><p>Mapped the legacy flow end-to-end and pinpointed where continuity broke.</p></div>
+      <div class="tl-step"><div class="tl-dot"></div><div class="tl-line"></div><div class="tl-num">02</div><h4>Define</h4><p>Framed the drop-off problem and set goals around continuity &amp; friction.</p></div>
+      <div class="tl-step"><div class="tl-dot"></div><div class="tl-line"></div><div class="tl-num">03</div><h4>Design</h4><p>Rebuilt onboarding, dashboard, and mandate actions mobile-first.</p></div>
+      <div class="tl-step"><div class="tl-dot"></div><div class="tl-line"></div><div class="tl-num">04</div><h4>Systemise</h4><p>Turned the UI into a themeable token-driven design system.</p></div>
+      <div class="tl-step"><div class="tl-dot"></div><div class="tl-line"></div><div class="tl-num">05</div><h4>Handoff</h4><p>Shipped per-bank theming as a clean developer artifact.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 BEFORE -->
+<section id="before">
+  <div class="shell narrow">
+    <div class="section-head">
+      <span class="sec-num">05 — The Audit</span>
+      <h2>The legacy flow.</h2>
+      <p class="lead">A bank-branded header sat on top of a dated enterprise portal — with a third visual language appearing mid-flow.</p>
+    </div>
+    <figure>
+      <div class="frame">
+        <img src="assets/before/current-flow.png" alt="Legacy SIHUB flow" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <div class="placeholder" style="display:none;">Drop the legacy flow board here<code>assets/before/current-flow.png</code></div>
+      </div>
+      <figcaption>Current flow — onboarding, OTP authentication, and e-mandate management.</figcaption>
+    </figure>
+    <figure>
+      <div class="frame">
+        <img src="assets/before/legacy-table.png" alt="Legacy e-mandates table" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <div class="placeholder" style="display:none;">Drop the legacy e-mandates table here<code>assets/before/legacy-table.png</code></div>
+      </div>
+      <figcaption>The e-mandates table — cryptic SiHub IDs, unrecognisable merchant names, mixed currencies, and a buried Cancel button.</figcaption>
+    </figure>
+    <div class="cards-grid">
+      <div class="pcard"><span class="tag">Comprehension</span><h4>You couldn't tell what was charging you</h4><p>Cryptic IDs (<code>XjX1NlEzqs</code>) and raw merchant strings, no logos — users couldn't identify their own subscriptions, let alone decide what to cancel.</p></div>
+      <div class="pcard"><span class="tag">Dead-end actions</span><h4>Cancel led nowhere</h4><p>The one action that mattered was a tiny button in a dense row — and frequently failed to open or complete.</p></div>
+      <div class="pcard"><span class="tag">Access</span><h4>Locked out after paying ₹2</h4><p>Users reported login loops and being unable to get in after the card-verification fee — blocked before they could even start.</p></div>
+      <div class="pcard"><span class="tag">Trust</span><h4>Backend feel, no continuity</h4><p>Mixed currencies, absurd end dates, raw IDs, and an off-brand portal handed off mid-flow — it read like an internal tool, not your bank.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 SOLUTION -->
+<section id="solution">
+  <div class="shell narrow">
+    <div class="section-head">
+      <span class="sec-num">06 — The Solution</span>
+      <h2>The revamp.</h2>
+      <p class="lead">A mobile-first, card-based product with one consistent system end-to-end — clearer actions, calmer hierarchy, and confirmations that explain consequences.</p>
+    </div>
+
+    <h3>The turning point: from cryptic table to clear control</h3>
+    <p class="para">The same data, reimagined. Where users once saw unreadable IDs and a buried button, they now see a recognisable subscription list — logos, statuses, and one-tap actions.</p>
+    <div class="ba-grid">
+      <div class="ba-col before">
+        <div class="ba-label"><span class="bdot"></span> Before · Desktop</div>
+        <div class="ba-frame">
+          <img src="assets/before/legacy-table.png" alt="Legacy e-mandates table" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="ph" style="display:none;">Legacy e-mandates table<code>assets/before/legacy-table.png</code></div>
+        </div>
+        <p class="ba-cap">Cryptic IDs, raw merchant strings, mixed currencies, a buried Cancel — and no real mobile view.</p>
+      </div>
+      <div class="ba-col after">
+        <div class="ba-label"><span class="bdot"></span> After · Desktop &amp; mobile</div>
+        <div class="ba-frame" data-shot="assets/after/dweb-dashboard.png">
+          <img src="assets/after/dweb-dashboard.png" alt="Revamped SIHUB desktop dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="ph" style="display:none;">Revamped desktop dashboard<code>assets/after/dweb-dashboard.png</code></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+        <div class="ba-frame phone" style="margin-top:12px" data-shot="assets/after/mandates-list.png">
+          <img src="assets/after/mandates-list.png" alt="Revamped mandates list on mobile" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="ph" style="display:none;">Revamped mandates list<code>assets/after/mandates-list.png</code></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+        <p class="ba-cap">The same data on both surfaces — merchant logos, clear status badges, filter tabs, one-tap actions.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:48px">Every mandate, fully transparent</h3>
+    <p class="para">Tapping a subscription opens everything a user needs to decide — renewal dates, amount and frequency, full transaction history with paid/failed states — and the two actions that matter, <b>Cancel</b> and <b>Modify</b>, front and centre.</p>
+    <div class="ba-grid">
+      <div class="ba-col after">
+        <div class="ba-label"><span class="bdot"></span> Mandate detail</div>
+        <div class="ba-frame phone">
+          <img src="assets/after/mandate-detail.png" alt="Mandate detail screen" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="ph" style="display:none;">Mandate detail screen<code>assets/after/mandate-detail.png</code></div>
+        </div>
+        <p class="ba-cap">Renewal, amount, frequency, transaction history — Cancel &amp; Modify in reach.</p>
+      </div>
+      <div class="ba-col after">
+        <div class="ba-label"><span class="bdot"></span> Full flow · Mobile</div>
+        <div class="ba-frame" data-shot="assets/after/revamp-mobile.png">
+          <img src="assets/after/revamp-mobile.png" alt="Revamped SIHUB mobile flow" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="ph" style="display:none;">Revamp mobile board<code>assets/after/revamp-mobile.png</code></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+        <p class="ba-cap">Onboarding → dashboard → manage → confirm, end to end. Click to see the full board.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:48px">The same control center on desktop</h3>
+    <p class="para">On larger screens the dashboard opens up — upcoming invoices as a carousel, a clean mandates table with real merchant names, and per-card switching. The legacy table done right: spacious, legible, and human-readable.</p>
+    <figure>
+      <div class="frame" data-shot="assets/after/dweb-dashboard.png">
+        <img src="assets/after/dweb-dashboard.png" alt="Revamped SIHUB desktop dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <div class="placeholder" style="display:none;">Drop the desktop dashboard here<code>assets/after/dweb-dashboard.png</code></div>
+        <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+      </div>
+      <figcaption>Desktop dashboard — "View and control recurring payments", with upcoming invoices and the active-mandates table.</figcaption>
+    </figure>
+    <figure>
+      <div class="frame" data-shot="assets/after/dweb-cards.png">
+        <img src="assets/after/dweb-cards.png" alt="Manage cards panel on desktop" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <div class="placeholder" style="display:none;">Drop the manage-cards panel here<code>assets/after/dweb-cards.png</code></div>
+        <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+      </div>
+      <figcaption>Multi-card management — every mandate organised by the card it's linked to.</figcaption>
+    </figure>
+
+    <h3 style="margin-top:48px">Key design decisions</h3>
+    <div style="margin-top:8px">
+      <div class="decision"><div class="d-num">01</div><div><h4>A single control center for every mandate</h4><p class="d-rationale">The dashboard leads with upcoming invoices and all active mandates in one card-based view, with Active / Inactive tabs and inline approve / opt-out. <b>Why it matters:</b> this is the whole point of SIHUB — users see everything debiting their card and act on it without hunting across merchant sites.</p></div></div>
+      <div class="decision"><div class="d-num">02</div><div><h4>Card-based layout over dense data tables</h4><p class="d-rationale">Replaced the wide e-mandates table with scannable cards that surface amount, frequency, and next charge. <b>Why it matters:</b> it works on mobile and puts the next action in reach instead of burying it in a row.</p></div></div>
+      <div class="decision"><div class="d-num">03</div><div><h4>Confirmations that explain consequences</h4><p class="d-rationale">Cancel, edit, and opt-out use bottom sheets that state the outcome ("stops future deductions") with clear success states, backed by OTP and max-amount limits. <b>Why it matters:</b> control only feels safe when users understand exactly what an action does.</p></div></div>
+      <div class="decision"><div class="d-num">04</div><div><h4>One consistent, bank-native system</h4><p class="d-rationale">A single component system runs from onboarding to confirmation and is themed per bank. <b>Why it matters:</b> it removes the "handed off to a stranger" feeling that broke trust — and scales to every partner bank.</p></div></div>
+    </div>
+
+    <h3 style="margin-top:40px">Before → After at a glance</h3>
+    <table class="compare">
+      <thead><tr><th>Before</th><th class="after">After</th></tr></thead>
+      <tbody>
+        <tr><td class="before">Bank header on a dated portal; off-brand body</td><td class="after">One consistent component system, themeable per bank</td></tr>
+        <tr><td class="before">A third visual language on OTP / auth screens</td><td class="after">Unbroken visual continuity from start to finish</td></tr>
+        <tr><td class="before">Dense, wide tables — not responsive</td><td class="after">Card-based dashboard with Active / Inactive tabs</td></tr>
+        <tr><td class="before">Long friction signup, single-field code</td><td class="after">Streamlined steps, clear OTP entry, big primary actions</td></tr>
+        <tr><td class="before">Backend feel: raw IDs, timeout warnings</td><td class="after">Consumer feel: "Welcome back", clear success states</td></tr>
+        <tr><td class="before">Edit / Cancel only</td><td class="after">Approve, opt-out, edit amount &amp; frequency, multi-card</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 07 SYSTEM -->
+<section id="system">
+  <div class="shell narrow">
+    <div class="section-head">
+      <span class="sec-num">07 — Scaling It</span>
+      <h2>One control center, 50+ banks: bank themes.</h2>
+      <p class="lead">SIHUB has to feel native inside every partner bank. Rather than rebuild the experience 50+ times, the redesigned UI was made themeable — so the same control center wears each bank's identity.</p>
+    </div>
+
+    <h3>Generated from a brand colour</h3>
+    <p class="para">A bank theme starts from one input: the bank's <b>primary HEX</b> — its action colour (CTAs, primary buttons, focus rings). A deterministic engine expands it into <b>20 UI tokens</b> — eight tints mixed toward white, two shades mixed toward black — that drive every fill, border, icon, text and illustration colour in the product.</p>
+    <div class="ladder-wrap">
+      <div class="ladder-head">
+        <div class="lh-sw" id="lh-sw"></div>
+        <div class="lh-meta">
+          <div class="lh-role">Primary</div>
+          <div class="lh-hex" id="lh-hex">#004C8F</div>
+        </div>
+      </div>
+      <div class="ladder" id="ladder"></div>
+      <div class="ladder-note">8 tints (→ white) + 2 shades (→ black), generated live from the selected bank's primary using the exact production algorithm.</div>
+    </div>
+
+    <h3 style="margin-top:48px">See it on a real recurring-payments screen</h3>
+    <p class="para">Pick a bank. The recurring-payments screen below re-skins itself from that bank's generated tokens — the same tokens dev receives. Buttons, badges and focus rings come from the <b>primary</b>; the top bar comes from the <b>accent</b> (or a dark shade of the primary when there's no accent).</p>
+    <div class="pg-bar">
+      <div class="pg-combo" id="pg-combo">
+        <div class="pg-combo-input" id="pg-combo-input">
+          <input type="text" id="pg-combo-search" placeholder="Search bank…" autocomplete="off">
+          <span class="pg-combo-chev"></span>
+        </div>
+        <div class="pg-combo-panel" id="pg-combo-panel"></div>
+      </div>
+      <span class="pg-primary"><span class="pg-dot" id="pg-dot"></span><span id="pg-primary-name" style="font-family:var(--mono);color:var(--text-1);font-weight:500"></span></span>
+    </div>
+    <div class="pv-wrap" id="pv-wrap">
+      <div class="pv-tabs" role="tablist">
+        <button class="pv-tab is-on" data-pv-tab="mobile" type="button"><svg width="11" height="13" viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="1" width="8" height="12" rx="1.5"/><circle cx="6" cy="11" r=".5" fill="currentColor"/></svg> Mobile</button>
+        <button class="pv-tab" data-pv-tab="desktop" type="button"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="2" width="12" height="9" rx="1"/><path d="M5 13h4M7 11v2"/></svg> Desktop</button>
+      </div>
+      <div class="pv-stage">
+        <div class="pv-pane is-on" data-pv-pane="mobile" id="pv-pane-mobile"></div>
+        <div class="pv-pane" data-pv-pane="desktop" id="pv-pane-desktop"></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:48px">When the brand has two colours: primary + accent</h3>
+    <p class="para">Banks rarely use one colour. Many run a <b>different colour in the layout</b> than the one on their buttons — a navy top bar with an orange CTA, say. So the engine takes an optional <b>second input: an accent HEX</b>. The split keeps both honest: <b>action surfaces always derive from the primary</b>, while the <b>brand-coupled tokens</b> — top status bars (<code>layout-brand</code>), illustration fills (<code>illustration-normal-c1</code>), micro-illustration accents — derive from the accent. One colour drives <em>what you tap</em>; the other drives <em>what the bank looks like</em>.</p>
+    <div class="cards-grid">
+      <div class="pcard"><span class="tag">Primary → action</span><h4>What you tap</h4><p><code>fill-action</code>, <code>fill-action-pressed</code>, <code>text-action</code>, <code>border-brand-focus-ring</code> — every interactive surface. Always the primary, never the accent.</p></div>
+      <div class="pcard"><span class="tag">Accent → brand</span><h4>What the bank looks like</h4><p><code>layout-brand</code> (dark top bars), <code>layout-brand-light</code>, <code>microIllustration-accent</code>, <code>illustration-normal-c1</code> — the layout and artwork. Falls back to a shade of the primary when no accent is given.</p></div>
+    </div>
+    <div class="step-callout">
+      <div class="step-callout-ico">✦</div>
+      <div>
+        <h4>Worked example — Federal Bank</h4>
+        <p>Primary <code>#FF9C00</code> (orange CTA) + accent <code>#0048B8</code> (navy wordmark &amp; layout). Buttons come out orange; the top bar and illustration come out navy. Without the accent split, the whole theme would have gone orange — and stopped looking like Federal Bank.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:48px">An AI skill does the heavy lifting</h3>
+    <p class="para">The whole procedure is packaged as a <b>Claude Code skill</b>. Hand it a bank's primary colour, logo, and reference screenshots, and the agent runs the pipeline end to end — no manual recolouring.</p>
+    <div class="pipeline">
+      <div class="pipe-node"><div class="pipe-label">Input</div><h4>One primary + logo</h4><p>The bank's HEX, logo SVG, and brand references.</p></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node accent"><div class="pipe-label">AI skill</div><h4>Generate tokens</h4><p>Primary → 20 deterministic tokens, byte-identical to spec.</p></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node"><div class="pipe-label">Auto-rebrand</div><h4>Assets</h4><p>Illustrations recoloured, white logo mark for dark surfaces.</p></div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-node"><div class="pipe-label">Handoff</div><h4>Per-bank package</h4><p>A clean <code>.txt</code> token file + themed assets for devs.</p></div>
+    </div>
+    <div class="step-callout">
+      <div class="step-callout-ico">✦</div>
+      <div>
+        <h4>From hours to one command</h4>
+        <p>What used to be slow, error-prone manual recolouring per bank is now a single run — and because the math is deterministic, every bank comes out exactly to spec. That's what makes 50+ themes maintainable.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:48px">Customised to each bank's needs</h3>
+    <p class="para">The skill handles the mechanical 90%. Design judgment goes into the exceptions — the parts a bank's brand or product team needs handled by hand.</p>
+    <div class="cards-grid">
+      <div class="pcard ok"><span class="tag">Logo handling</span><h4>Dark-surface marks</h4><p>When a bank gives no dark logo, the engine generates a white knockout mark so it stays legible on the dark brand bar.</p></div>
+      <div class="pcard ok"><span class="tag">Illustrations</span><h4>Brand-coupled recolour</h4><p>Five brand-linked colours in each illustration are re-mixed against the bank's accent (or primary) at fixed ratios — so artwork matches without redrawing.</p></div>
+      <div class="pcard ok"><span class="tag">Accessibility</span><h4>Contrast safeguards</h4><p>When a brand colour fails contrast on white or dark, the theme is adjusted so text and actions stay readable.</p></div>
+      <div class="pcard ok"><span class="tag">Bespoke needs</span><h4>Bank-specific screens</h4><p>Some partners need a custom flow or screen beyond the standard set — built on the same system, themed to match.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 IMPACT -->
+<section id="impact">
+  <div class="shell narrow">
+    <div class="section-head">
+      <span class="sec-num">08 — Impact</span>
+      <h2>What design moved.</h2>
+    </div>
+    <ul class="clean">
+      <li><strong>Control, consolidated</strong> — every card mandate is now visible and manageable from one dashboard.</li>
+      <li><strong>Friction removed</strong> — streamlined onboarding and a card-based view that works on mobile.</li>
+      <li><strong>Trust restored</strong> — a bank-native, consistent experience replaced the off-brand handoff that drove drop-off.</li>
+      <li><strong>Scale unlocked</strong> — one themeable system across 50+ banks instead of per-bank rebuilds.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 09 FUTURE SCOPE -->
+<section id="future">
+  <div class="shell narrow">
+    <div class="section-head">
+      <span class="sec-num">09 — Future Scope</span>
+      <h2>SiHub<span style="color:var(--orange)">+</span> — every mandate, every channel.</h2>
+      <p class="lead">SIHUB solved card mandates. SiHub+ extends that same control beyond cards — to <b>UPI autopay</b> and <b>eNACH</b> — so a single hub manages every standing instruction a user has, whatever the payment method.</p>
+    </div>
+    <div class="cards-grid three">
+      <div class="pcard ok"><span class="tag">Channel</span><h4>Card</h4><p>The recurring card mandates SIHUB already manages today.</p></div>
+      <div class="pcard ok"><span class="tag">Channel</span><h4>UPI autopay</h4><p>Recurring UPI mandates, brought into the same control center.</p></div>
+      <div class="pcard ok"><span class="tag">Channel</span><h4>eNACH</h4><p>Bank-account standing instructions, unified alongside the rest.</p></div>
+    </div>
+    <div class="ba-grid" style="align-items:start">
+      <div class="ba-col after">
+        <div class="ba-label"><span class="bdot"></span> Web</div>
+        <div class="ba-frame" data-shot="assets/future/sihubplus-desktop.png">
+          <img src="assets/future/sihubplus-desktop.png" alt="SiHub+ desktop mandate overview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="placeholder" style="display:none;">SiHub+ desktop here<code>assets/future/sihubplus-desktop.png</code></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+        <p class="ba-cap">A "Mandate Overview" with Card / UPI autopay / eNACH tabs, so every standing instruction lives in one hub regardless of channel.</p>
+      </div>
+      <div class="ba-col after">
+        <div class="ba-label"><span class="bdot"></span> Mobile</div>
+        <div class="ba-frame phone" data-shot="assets/future/sihubplus-mobile.png">
+          <img src="assets/future/sihubplus-mobile.png" alt="SiHub+ mobile" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="ph" style="display:none;">SiHub+ mobile<code>assets/future/sihubplus-mobile.png</code></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+        <p class="ba-cap">On mobile, Card / UPI / eNACH tabs sit at the top — same control center, every payment method.</p>
+      </div>
+    </div>
+    <div style="margin-top:20px">
+      <p class="para" style="margin-top:0">Today a user's recurring payments are split across cards, UPI, and bank-account NACH — each with its own portal. SiHub+ folds all three into a single hub.</p>
+      <p class="para">It's the natural extension of the same insight that drove the revamp: <b>real control means seeing everything in one place</b> — now across every channel, not just cards.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 REFLECTION -->
+<section id="reflection">
+  <div class="shell narrow">
+    <div class="section-head">
+      <span class="sec-num">10 — Reflection</span>
+      <h2>What I'd take forward.</h2>
+    </div>
+    <div class="reflect">
+      <p>SIHUB's value is control — but control only works if users can find it and trust it. The win wasn't a prettier screen; it was turning a scattered, off-brand portal into one clear control center that feels native to every bank it lives in.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Lightbox overlay (full-screen zoom target) -->
+<div class="lightbox" id="lightbox" role="dialog" aria-hidden="true"><img id="lightbox-img" alt=""></div>
+
+<!-- Lightbox: click any [data-shot] element to open a full-screen zoom -->
+<script>
+document.addEventListener('click', e => {
+  const shot = e.target.closest('[data-shot]');
+  if (shot) {
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lightbox-img').src = shot.dataset.shot;
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+  }
+  if (e.target.id === 'lightbox' || e.target.id === 'lightbox-img') {
+    const lb = document.getElementById('lightbox');
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.getElementById('lightbox-img').src = '';
+  }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const lb = document.getElementById('lightbox');
+    if (lb.classList.contains('is-open')) {
+      lb.classList.remove('is-open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.getElementById('lightbox-img').src = '';
+    }
+  }
+});
+</script>
+
+
+<script>
+(function(){
+  /* ---- Token engine — mirrors whitelabel-handoff.html / palette-generator.html ---- */
+  var WHITE={r:255,g:255,b:255}, BLACK={r:0,g:0,b:0};
+  var TINTS=[0.91,0.46,0.31,0.10,0.06,0.05,0.03,0.01];
+  var SHADES=[0.91,0.30];
+  function toHex(n){return n.toString(16).padStart(2,'0');}
+  function rgbToHex(c){return '#'+toHex(c.r)+toHex(c.g)+toHex(c.b);}
+  function hexToRgb(hex){var m=/^#([0-9A-Fa-f]{6})$/.exec(hex||'');if(!m)return null;return{r:parseInt(m[1].slice(0,2),16),g:parseInt(m[1].slice(2,4),16),b:parseInt(m[1].slice(4,6),16)};}
+  function mix(fg,o,bg){return{r:Math.round(fg.r*o+bg.r*(1-o)),g:Math.round(fg.g*o+bg.g*(1-o)),b:Math.round(fg.b*o+bg.b*(1-o))};}
+  function tokensForPrimary(primaryHex, accentHex){
+    var p=hexToRgb(primaryHex);
+    var tints=TINTS.map(function(o){return rgbToHex(mix(p,o,WHITE));});
+    var shades=SHADES.map(function(o){return rgbToHex(mix(p,o,BLACK));});
+    var primary=primaryHex.toLowerCase();
+    var a=hexToRgb(accentHex||primaryHex);
+    var aTints=TINTS.map(function(o){return rgbToHex(mix(a,o,WHITE));});
+    var aShades=SHADES.map(function(o){return rgbToHex(mix(a,o,BLACK));});
+    var accent=(accentHex||primaryHex).toLowerCase();
+    return {
+      'border-action':primary,'border-action-focused':tints[2],'border-brand-focus-ring':tints[3],
+      'fill-action':primary,'fill-action-pressed':shades[0],'fill-action-light':tints[4],
+      'text-action':primary,
+      'layout-brand': accentHex ? accent : aShades[1],
+      'layout-brand-light':aTints[2]
+    };
+  }
+
+  /* ---- A few banks (exact values from the whitelabel doc) ---- */
+  var BANKS=[
+    {id:'hdfc',         name:'HDFC Bank',      primary:'#004C8F'},
+    {id:'federal-bank', name:'Federal Bank',   primary:'#FF9C00', accent:'#0048B8'},
+    {id:'icici',        name:'ICICI Bank',     primary:'#EF6F1F'},
+    {id:'yes-bank',     name:'Yes Bank',       primary:'#ED1F47', accent:'#002EDA'},
+    {id:'kotak',        name:'Kotak Mahindra', primary:'#ED1C24'},
+    {id:'bank-of-baroda', name:'Bank of Baroda', primary:'#162B75', accent:'#F15A29'}
+  ];
+
+  var $=function(id){return document.getElementById(id);};
+
+  /* ---- Token ladder ---- */
+  function renderLadder(primary){
+    var lad=$('ladder'); if(!lad)return;
+    var p=hexToRgb(primary);
+    $('lh-sw').style.background=primary;
+    $('lh-hex').textContent=primary.toUpperCase();
+    var cells=[{role:'Primary',hex:primary.toUpperCase()}];
+    TINTS.forEach(function(o,i){cells.push({role:'Tint '+i,hex:rgbToHex(mix(p,o,WHITE))});});
+    SHADES.forEach(function(o,i){cells.push({role:'Shade '+i,hex:rgbToHex(mix(p,o,BLACK))});});
+    lad.innerHTML=cells.map(function(c){
+      return '<div class="lc"><div class="sw" style="background:'+c.hex+'"></div><div class="mt"><div class="role">'+c.role+'</div><div class="hx">'+c.hex.toUpperCase()+'</div></div></div>';
+    }).join('');
+  }
+
+  /* ---- Shared screen chrome ---- */
+  var mcChip='<svg class="mc" width="24" height="19" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="20" height="16" rx="4" fill="white"/><path d="M12.1634 4.06909H7.83691V11.9311H12.1634V4.06909Z" fill="#FF5F00"/><path d="M8.1116 7.99999C8.11092 7.24283 8.28059 6.49543 8.60778 5.81437C8.93497 5.13332 9.4111 4.53647 10.0001 4.069C9.2707 3.48923 8.39469 3.12868 7.47221 3.02856C6.54973 2.92844 5.618 3.09278 4.78352 3.50282C3.94904 3.91285 3.24548 4.55203 2.75325 5.34729C2.26103 6.14255 2 7.06181 2 7.99999C2 8.93818 2.26103 9.85743 2.75325 10.6527C3.24548 11.448 3.94904 12.0871 4.78352 12.4972C5.618 12.9072 6.54973 13.0715 7.47221 12.9714C8.39469 12.8713 9.2707 12.5108 10.0001 11.931C9.41111 11.4635 8.93498 10.8667 8.60779 10.1856C8.2806 9.50455 8.11092 8.75716 8.1116 7.99999Z" fill="#EB001B"/><path d="M18 7.99999C18 8.93816 17.739 9.85742 17.2468 10.6527C16.7546 11.4479 16.0511 12.0871 15.2166 12.4972C14.3821 12.9072 13.4504 13.0715 12.528 12.9714C11.6055 12.8713 10.7295 12.5108 10.0001 11.931C10.5886 11.463 11.0644 10.8661 11.3915 10.1851C11.7186 9.5042 11.8886 8.75704 11.8886 7.99999C11.8886 7.24295 11.7186 6.49578 11.3915 5.81484C11.0644 5.13389 10.5886 4.53694 10.0001 4.069C10.7295 3.48923 11.6055 3.12867 12.528 3.02856C13.4504 2.92844 14.3821 3.09279 15.2166 3.50283C16.0511 3.91287 16.7546 4.55205 17.2468 5.34731C17.739 6.14257 18 7.06182 18 7.99999Z" fill="#F79E1B"/></svg>';
+  var avatar='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg>';
+  var chev='<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4l3 3 3-3"/></svg>';
+  var phoneChrome=''
+    +'<div class="pv-phone-statusbar"><span>3:30</span><span class="sb-icons">'
+    +'<svg width="13" height="9" viewBox="0 0 14 10" fill="none"><path d="M1 9V7M4 9V5M7 9V3M10 9V1M13 9V0" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg>'
+    +'<svg width="13" height="9" viewBox="0 0 14 10" fill="none"><path d="M1 4c2-2 5-3 6-3s4 1 6 3" stroke="#fff" stroke-width="1.1" stroke-linecap="round"/><path d="M3 6c1-1 3-2 4-2s3 1 4 2" stroke="#fff" stroke-width="1.1" stroke-linecap="round"/><circle cx="7" cy="8.5" r=".8" fill="#fff"/></svg>'
+    +'<svg width="18" height="9" viewBox="0 0 20 10" fill="none"><rect x="1" y="1" width="15" height="8" rx="2" stroke="#fff" stroke-width="1"/><rect x="2.5" y="2.5" width="12" height="5" rx="1" fill="#fff"/><rect x="17" y="3.5" width="1.5" height="3" rx=".5" fill="#fff"/></svg>'
+    +'</span></div>'
+    +'<div class="pv-phone-urlbar-wrap"><div class="pv-phone-urlbar"><span class="url-l">'
+    +'<svg width="9" height="9" viewBox="0 0 10 10" fill="none" stroke="#fff" stroke-width="1.2"><rect x="2" y="4.5" width="6" height="4" rx=".7"/><path d="M3.5 4.5V3a1.5 1.5 0 013 0v1.5"/></svg> https://Sihub.com/</span>'
+    +'<svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="1.2"><path d="M6 1v7M3 4l3-3 3 3M2 11h8"/></svg></div></div>';
+  var dtChrome='<div class="pv-desktop-chrome"><span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span><span class="tab">BillDeskTest payment ×</span><span class="url">🔒 https://uat.billdesk.com/sdk/#</span></div>';
+
+  /* ---- Desktop recurring screen ---- */
+  function desktopRecurring(bank){
+    var wm='<span class="wm">'+bank.name+'</span>';
+    return ''
+    +'<div class="pv-desktop">'+dtChrome
+    +'<div class="pv-rp">'
+      +'<div class="pv-rp-bar"><div class="pv-rp-brand">'+wm+'</div>'
+        +'<div class="pv-rp-right"><span class="pv-rp-chip">'+mcChip+' Debit card xx 9944 '+chev+'</span>'
+        +'<span class="pv-rp-avatar">'+avatar+'</span></div></div>'
+      +'<div class="pv-rp-body">'
+        +'<h1 class="pv-rp-h1">Welcome back, John Doe</h1><p class="pv-rp-sub">View and control recurring payments</p>'
+        +'<div class="pv-rp-sechead"><span class="pv-rp-sectitle">Upcoming invoices <span class="pv-rp-badge">5</span></span><button class="pv-rp-viewall">View all</button></div>'
+        +'<div class="pv-rp-cards">'
+          +'<div class="pv-rp-card is-active"><div class="pv-rp-inner">'
+            +'<div class="pv-rp-ctop"><span class="pv-rp-cname">Jio subscription</span><span class="pv-rp-camt">₹15,800</span></div>'
+            +'<div class="pv-rp-cmeta">Due on 11 Dec 2025 <span class="sep">|</span> <span class="pend">Approval pending</span></div>'
+            +'<div class="pv-rp-cact"><button class="pv-rp-btn primary"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"/></svg>Approve</button>'
+            +'<button class="pv-rp-btn ghost"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l8 8M10 2l-8 8"/></svg>Opt out</button></div>'
+          +'</div></div>'
+          +'<div class="pv-rp-card"><div class="pv-rp-ctop"><span class="pv-rp-cname">Hotstar- Movies &amp; Live Cricket</span><span class="pv-rp-camt">₹499</span></div>'
+          +'<div class="pv-rp-cmeta">Due on 20 Dec 2025 <span class="sep">|</span> <span class="up">Upcoming</span></div></div>'
+        +'</div>'
+        +'<div class="pv-rp-sechead"><span class="pv-rp-sectitle">Mandates</span><div class="pv-rp-seg"><button class="on">Active</button><button>Inactive</button></div></div>'
+        +'<div class="pv-rp-table-wrap"><table class="pv-rp-table">'
+          +'<thead><tr><th>Merchant Name</th><th>End date</th><th>Frequency</th><th>Amount type</th><th class="r">Max amount</th></tr></thead>'
+          +'<tbody>'
+            +'<tr><td>Jio subscription</td><td class="muted">25 Jul 2026</td><td class="muted">Monthly</td><td class="muted">Fixed</td><td class="r">₹15,800</td></tr>'
+            +'<tr><td>Hotstar- Movies &amp; Live Cricket</td><td class="muted">25 Jul 2026</td><td class="muted">Monthly</td><td class="muted">Variable</td><td class="r">₹499</td></tr>'
+            +'<tr><td>Netflix- Movies</td><td class="muted">25 Jul 2026</td><td class="muted">Monthly</td><td class="muted">Fixed</td><td class="r">₹99</td></tr>'
+            +'<tr><td>Spotify Premium</td><td class="muted">25 Jul 2026</td><td class="muted">Monthly</td><td class="muted">Fixed</td><td class="r">₹119</td></tr>'
+          +'</tbody></table></div>'
+      +'</div></div></div>';
+  }
+
+  /* ---- Mobile recurring screen ---- */
+  function mobileRecurring(bank){
+    var wm='<span class="wm">'+bank.name+'</span>';
+    return ''
+    +'<div class="pv-phone">'+phoneChrome
+    +'<div class="pv-mrp">'
+      +'<div class="pv-mrp-bankbar"><span class="brand">'+wm+'</span>'
+        +'<span class="right"><span class="pv-mrp-chip">'+mcChip+' 9944 '+chev+'</span>'
+        +'<span class="pv-mrp-avatar">'+avatar+'</span></span></div>'
+      +'<div class="pv-mrp-body">'
+        +'<h1 class="pv-mrp-h1">Welcome back, John Doe</h1><p class="pv-mrp-sub">View and control recurring payments</p>'
+        +'<div class="pv-mrp-sechead"><span class="pv-mrp-sectitle">Upcoming invoices <span class="pv-mrp-badge">5</span></span><button class="pv-mrp-viewall">View all</button></div>'
+        +'<div class="pv-mrp-carousel">'
+          +'<div class="pv-mrp-card is-active"><div class="pv-mrp-inner">'
+            +'<div class="pv-mrp-ctop"><span class="pv-mrp-cname">Jio subscription</span><span class="pv-mrp-camt">₹15,800</span></div>'
+            +'<div class="pv-mrp-cmeta">Due on 11 Dec 2025 <span class="sep">|</span> <span class="pend">Approval pending</span></div>'
+            +'<div class="pv-mrp-cact"><button class="pv-mrp-btn primary"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-7"/></svg>Approve</button>'
+            +'<button class="pv-mrp-btn ghost"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l8 8M10 2l-8 8"/></svg>Opt out</button></div>'
+          +'</div></div>'
+          +'<div class="pv-mrp-card"><div class="pv-mrp-ctop"><span class="pv-mrp-cname">Hotstar- Movies &amp; Live Cricket</span><span class="pv-mrp-camt">₹499</span></div>'
+          +'<div class="pv-mrp-cmeta">Due on 20 Dec 2025 <span class="sep">|</span> <span class="pend">Approval pending</span></div></div>'
+        +'</div>'
+        +'<div class="pv-mrp-dots"><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span></div>'
+        +'<div class="pv-mrp-sechead"><span class="pv-mrp-sectitle">Mandates</span><div class="pv-mrp-seg"><button class="on">Active</button><button>Inactive</button></div></div>'
+        +'<div class="pv-mrp-list">'
+          +'<div class="pv-mrp-mrow"><div class="pv-mrp-mtop"><span class="pv-mrp-mname">Jio subscription</span><span class="pv-mrp-mamt">₹15,800</span></div><div class="pv-mrp-msub">Ends on 25 Jul 2026 · Monthly</div></div>'
+          +'<div class="pv-mrp-mrow"><div class="pv-mrp-mtop"><span class="pv-mrp-mname">Hotstar- Movies &amp; Live Cricket</span><span class="pv-mrp-mamt">₹499</span></div><div class="pv-mrp-msub">Ends on 02 Mar 2026 · Monthly</div></div>'
+          +'<div class="pv-mrp-mrow"><div class="pv-mrp-mtop"><span class="pv-mrp-mname">Netflix- Movies</span><span class="pv-mrp-mamt">₹99</span></div><div class="pv-mrp-msub">Ends on 02 Mar 2026 · Monthly</div></div>'
+          +'<div class="pv-mrp-mrow"><div class="pv-mrp-mtop"><span class="pv-mrp-mname">Google One</span><span class="pv-mrp-mamt">₹185</span></div><div class="pv-mrp-msub">Ends on 25 Jul 2026 · Monthly</div></div>'
+          +'<div class="pv-mrp-mrow"><div class="pv-mrp-mtop"><span class="pv-mrp-mname">Spotify Premium</span><span class="pv-mrp-mamt">₹119</span></div><div class="pv-mrp-msub">Ends on 02 Mar 2026 · Monthly</div></div>'
+        +'</div>'
+      +'</div></div></div>';
+  }
+
+  /* ---- Apply a bank: tokens -> CSS vars + mount screens + ladder ---- */
+  var $wrap=$('pv-wrap');
+  function applyBank(id){
+    var bank=BANKS.filter(function(b){return b.id===id;})[0]; if(!bank)return;
+    var t=tokensForPrimary(bank.primary, bank.accent);
+    $wrap.style.cssText='--pv-fill:'+t['fill-action']+';--pv-fill-light:'+t['fill-action-light']+';--pv-fill-pressed:'+t['fill-action-pressed']
+      +';--pv-text:'+t['text-action']+';--pv-brand-dark:'+t['layout-brand']+';--pv-border:'+t['border-action']
+      +';--pv-border-focused:'+t['border-action-focused']+';--pv-focus-ring:'+t['border-brand-focus-ring']+';';
+    $('pv-pane-mobile').innerHTML=mobileRecurring(bank);
+    $('pv-pane-desktop').innerHTML=desktopRecurring(bank);
+    $('pg-dot').style.background=bank.primary;
+    $('pg-primary-name').textContent=bank.primary.toUpperCase()+(bank.accent?'  ·  '+bank.accent.toUpperCase():'');
+    $('pg-combo-search').value=bank.name;
+    renderLadder(bank.primary);
+    pgSelectedId=bank.id;
+  }
+
+  /* ---- Combobox ---- */
+  var combo=$('pg-combo'), comboInput=$('pg-combo-input'), comboSearch=$('pg-combo-search'), comboPanel=$('pg-combo-panel');
+  var pgSelectedId=null;
+  function renderOptions(filter){
+    var q=(filter||'').trim().toLowerCase();
+    var matches=BANKS.filter(function(b){return !q||b.name.toLowerCase().indexOf(q)>=0;});
+    if(!matches.length){comboPanel.innerHTML='<div class="pg-combo-empty">No matches</div>';return;}
+    comboPanel.innerHTML=matches.map(function(b){
+      return '<div class="pg-combo-option'+(b.id===pgSelectedId?' is-selected':'')+'" data-bank-id="'+b.id+'"><span class="swatch-mini" style="background:'+b.primary+'"></span><span>'+b.name+'</span></div>';
+    }).join('');
+  }
+  function openCombo(){combo.classList.add('is-open');comboSearch.value='';renderOptions();comboSearch.focus();}
+  function closeCombo(){combo.classList.remove('is-open');var s=BANKS.filter(function(b){return b.id===pgSelectedId;})[0];if(s)comboSearch.value=s.name;}
+  comboInput.addEventListener('click',function(){combo.classList.contains('is-open')?closeCombo():openCombo();});
+  comboSearch.addEventListener('input',function(e){if(!combo.classList.contains('is-open'))combo.classList.add('is-open');renderOptions(e.target.value);});
+  comboPanel.addEventListener('click',function(e){var o=e.target.closest('[data-bank-id]');if(!o)return;applyBank(o.dataset.bankId);closeCombo();});
+  document.addEventListener('click',function(e){if(!combo.contains(e.target))closeCombo();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&combo.classList.contains('is-open'))closeCombo();});
+
+  /* ---- Mobile / Desktop tab toggle ---- */
+  Array.prototype.forEach.call(document.querySelectorAll('.pv-tab'),function(tab){
+    tab.addEventListener('click',function(){
+      var which=tab.dataset.pvTab;
+      Array.prototype.forEach.call(document.querySelectorAll('.pv-tab'),function(t){t.classList.toggle('is-on',t===tab);});
+      Array.prototype.forEach.call(document.querySelectorAll('.pv-pane'),function(p){p.classList.toggle('is-on',p.dataset.pvPane===which);});
+    });
+  });
+
+  /* ---- Initial state ---- */
+  applyBank('hdfc');
+
+})();
+</script>
+
+<footer>
+  <div class="shell">
+    <span>SIHUB Revamp — Case Study</span>
+    <span>BillDesk · Design</span>
+  </div>
+</footer>
+
+<script src="../scripts/reveal.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+</body>
+</html>

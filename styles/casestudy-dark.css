@@ -51,7 +51,10 @@ body{ background:var(--canvas); }
 .frame,
 .ba-frame,
 .phone-screen,
-.fcard-thumb{
+.fcard-thumb,
+.pv-stage,
+.pv-phone,
+.pv-desktop{
   --canvas:#F7F8FA;
   --surface:#FFFFFF;
   --surface-2:#FAFBFC;
@@ -60,6 +63,9 @@ body{ background:var(--canvas); }
   --text-3:#8A97AC;
   --border:#E2E8F0;
   --border-strong:#CBD5E0;
+  /* re-establish dark text so mockup descendants that inherit `color`
+     from <body> (rather than referencing var(--text-1)) render dark-on-light */
+  color:var(--text-1);
 }
 
 /* give the light frames a clean lift off the dark canvas */
@@ -81,6 +87,18 @@ body{ background:var(--canvas); }
 
 /* code chips: keep legible on dark */
 code{ color:var(--text-2); }
+
+/* Some case studies (e.g. SIHUB) ship their own sticky section-nav (.chrome)
+   with a hardcoded light gradient. Darken it and offset it below the 48px
+   portfolio bridge bar so the two sticky bars stack instead of overlapping. */
+.chrome{
+  background:linear-gradient(180deg, rgba(22,22,25,.92) 0%, rgba(11,11,12,.82) 100%);
+  border-bottom-color:var(--border);
+  top:48px;
+}
+.chrome .brand,
+.chrome .brand-sub{ color:var(--text-1); }
+.chrome .brand-sub{ color:var(--text-3); }
 
 /* ============================================================
    Entrance + scroll reveal (driven by scripts/reveal.js)

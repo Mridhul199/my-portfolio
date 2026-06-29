@@ -10,14 +10,19 @@ build step — plain HTML/CSS, image assets only.
 index.html              Home — dark shell (hero · work · about · contact)
 styles/
   shell.css             Home design system (dark)
-  casestudy-dark.css    Dark override layer shared by both case studies
-netbanking-2/           Case study — Netbanking 2.0 admin portal (dark)
-wallet/                 Case study — BillDesk Wallet Solution (dark)
+  casestudy-dark.css    Dark override layer shared by all case studies
+scripts/reveal.js       Shared entrance/scroll-reveal motion (all pages)
+netbanking-2/           Case study — Netbanking 2.0 admin portal
+wallet/                 Case study — BillDesk Wallet Solution
+billpay-sso/            Case study — BillPay SSO portal refresh + DLS illustrations
+ondc-flight-booking/    Case study — ONDC flight booking (bank buyer app, BillDesk as TSP)
+sihub/                  Case study — SIHUB Standing Instruction Hub (recurring mandates)
 assets/                 favicon, og-image, headshot, resume.pdf
 .nojekyll               disables Jekyll on GitHub Pages
 ```
 
-Each case study is a single HTML file (inline CSS, own assets) plus the shared
+All five case studies are dark-themed (product screenshots kept in light frames).
+Each is a single HTML file (inline CSS, own assets) plus the shared
 `styles/casestudy-dark.css` dark layer, and carries a slim "← Mridhul Aswin"
 bridge bar back to the home page.
 
