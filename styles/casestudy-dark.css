@@ -1,0 +1,110 @@
+/* ============================================================
+   Case-study dark theme
+   Linked AFTER each case study's inline <style>, so these rules
+   win by source order. Strategy: flip the shared design-system
+   tokens to dark, then RE-ASSERT the original light tokens inside
+   screenshot frames only — so product screenshots keep sitting in
+   light frames on the dark page ("artwork matted on dark").
+
+   The case studies are token-driven, so flipping :root converts
+   all narrative chrome (hero, sections, cards, meta bars, tables,
+   timelines, modals, footer) automatically. The dead pv- and bd-
+   mockup CSS is never rendered, so it is left untouched.
+   ============================================================ */
+
+:root{
+  /* surfaces */
+  --canvas:#0B0B0C;
+  --surface:#161619;
+  --surface-2:#1E1E22;
+
+  /* text */
+  --text-1:#EDEDEC;
+  --text-2:#A6A6AD;
+  --text-3:#74747B;
+
+  /* borders */
+  --border:rgba(255,255,255,.10);
+  --border-strong:rgba(255,255,255,.20);
+
+  /* accent tints — translucent so they read on dark */
+  --orange-tint:rgba(242,101,34,.16);
+  --orange-tint-2:rgba(242,101,34,.09);
+  --success-tint:rgba(10,143,92,.18);
+  --warning-tint:rgba(217,119,6,.18);
+  --error-tint:rgba(192,57,43,.20);
+
+  /* elevation — real depth on dark + a faint light hairline for definition */
+  --sh-1:0 1px 2px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.04);
+  --sh-2:0 10px 28px rgba(0,0,0,.50),0 0 0 1px rgba(255,255,255,.05);
+  --sh-3:0 18px 44px rgba(0,0,0,.60),0 0 0 1px rgba(255,255,255,.06);
+}
+
+/* slightly warm the page edges so it isn't a flat void */
+body{ background:var(--canvas); }
+
+/* ---- Light islands: screenshots stay framed in light ----
+   Re-declaring the light token values on these containers makes
+   them (and their descendants) resolve back to the light system,
+   so the frame surface, border and any fallback placeholder render
+   light while the surrounding page stays dark. */
+.frame,
+.ba-frame,
+.phone-screen,
+.fcard-thumb{
+  --canvas:#F7F8FA;
+  --surface:#FFFFFF;
+  --surface-2:#FAFBFC;
+  --text-1:#0D1526;
+  --text-2:#4A5568;
+  --text-3:#8A97AC;
+  --border:#E2E8F0;
+  --border-strong:#CBD5E0;
+}
+
+/* give the light frames a clean lift off the dark canvas */
+.frame,
+.ba-frame{
+  box-shadow:0 12px 30px rgba(0,0,0,.45);
+}
+
+/* swatch / token-ladder hairlines were black-on-light; make them
+   visible on dark without affecting the swatch fills themselves */
+.lc,
+.ladder-head .lh-sw,
+.token-table .tok-swatch,
+.tok-swatch,
+.swatch-mini,
+.pg-dot{
+  border-color:rgba(255,255,255,.22);
+}
+
+/* code chips: keep legible on dark */
+code{ color:var(--text-2); }
+
+/* ============================================================
+   Entrance + scroll reveal (driven by scripts/reveal.js)
+   Case studies opt in via <body data-auto-reveal>; section-level
+   blocks fade up as they enter, the hero headline reveals word by
+   word. Only active when JS is on; reduced-motion disables it.
+   ============================================================ */
+.js body[data-auto-reveal] :is(main > section, main > header){
+  transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+}
+.js body[data-auto-reveal] :is(main > section, main > header):not(.is-in){
+  opacity:0;
+  transform:translateY(22px);
+}
+
+/* word-by-word hero headline */
+.js [data-split-words]:not([data-split]){visibility:hidden}
+.js [data-split-words] .w{display:inline-block;overflow:hidden;vertical-align:top;padding:.02em 0 .14em;margin-bottom:-.14em}
+.js [data-split-words] .w>span{display:inline-block;transform:translateY(110%);transition:transform .9s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--wi,0) * 45ms + 100ms)}
+.js [data-split-words].is-in .w>span{transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  .js body[data-auto-reveal] :is(main > section, main > header),
+  .js body[data-auto-reveal] :is(main > section, main > header):not(.is-in){opacity:1;transform:none;transition:none}
+  .js [data-split-words]:not([data-split]){visibility:visible}
+  .js [data-split-words] .w>span{transform:none;transition:none}
+}
