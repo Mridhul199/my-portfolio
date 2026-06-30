@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mridhul199.github.io/my-portfolio/sitemap.xml

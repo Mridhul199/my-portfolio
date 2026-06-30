@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Mridhul Aswin — Résumé · Product Designer, Fintech</title>
+<meta name="description" content="Résumé of Mridhul Aswin — UX / product designer in fintech and payments. Netbanking rails, wallet SDKs, bill-pay, ONDC commerce, and recurring mandates, shipped across banks."/>
+<meta name="author" content="Mridhul Aswin"/>
+<link rel="canonical" href="https://mridhul199.github.io/my-portfolio/resume/"/>
+<meta property="og:type" content="profile"/>
+<meta property="og:url" content="https://mridhul199.github.io/my-portfolio/resume/"/>
+<meta property="og:title" content="Mridhul Aswin — Résumé"/>
+<meta property="og:description" content="UX / product designer in fintech and payments. Netbanking rails, wallet SDKs, bill-pay, ONDC, and recurring mandates."/>
+<meta property="og:image" content="https://mridhul199.github.io/my-portfolio/assets/og/resume.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"/>
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32"/>
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0B0C; --surface:#161619; --text-1:#EDEDEC; --text-2:#A6A6AD; --text-3:#74747B;
+  --border:rgba(255,255,255,.10); --border-2:rgba(255,255,255,.16); --accent:#F26522;
+  --f:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; --display:'Manrope',var(--f);
+  --mono:'JetBrains Mono',ui-monospace,monospace; --maxw:840px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text-1);font-family:var(--f);font-size:15px;
+  line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.shell{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+/* bridge */
+.bridge{position:sticky;top:0;z-index:50;background:rgba(11,11,12,.72);
+  -webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);
+  border-bottom:1px solid var(--border)}
+.bridge-in{display:flex;align-items:center;justify-content:space-between;height:52px}
+.bridge a.back{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text-1)}
+.bridge a.back:hover{color:var(--accent);text-decoration:none}
+.bridge a.back svg{width:15px;height:15px;stroke:var(--accent)}
+.print-btn{font:inherit;font-size:12.5px;font-weight:500;color:var(--text-1);background:transparent;
+  border:1px solid var(--border-2);border-radius:999px;padding:8px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.print-btn:hover{border-color:var(--text-2)}
+.print-btn svg{width:14px;height:14px;stroke:currentColor;fill:none}
+
+/* header */
+.r-head{padding:54px 0 30px;border-bottom:1px solid var(--border)}
+.r-head h1{font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,44px);
+  letter-spacing:-.03em;margin:0;line-height:1.05}
+.r-head .role{font-size:16px;color:var(--text-2);margin-top:8px}
+.r-head .role b{color:var(--accent);font-weight:600}
+.contacts{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:18px;font-size:13px;font-family:var(--mono);color:var(--text-2)}
+.contacts a{color:var(--text-2)}
+.contacts a:hover{color:var(--text-1)}
+.ph{border-bottom:1px dashed var(--accent);color:var(--text-1)}
+
+section.r{padding:30px 0;border-bottom:1px solid var(--border)}
+section.r:last-of-type{border-bottom:none}
+.r-label{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);margin:0 0 16px}
+.lead{font-size:16px;line-height:1.65;color:var(--text-2);max-width:68ch;margin:0}
+
+.job{margin-bottom:6px}
+.job-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.job-head h3{font-family:var(--display);font-size:18px;font-weight:700;letter-spacing:-.01em;margin:0;color:var(--text-1)}
+.job-head .when{font-family:var(--mono);font-size:12.5px;color:var(--text-3);white-space:nowrap}
+.job .co{font-size:14px;color:var(--text-2);margin:2px 0 12px}
+ul.bul{list-style:none;margin:0;padding:0}
+ul.bul li{position:relative;padding:6px 0 6px 22px;color:var(--text-2);font-size:14.5px;line-height:1.55}
+ul.bul li::before{content:"";position:absolute;left:2px;top:13px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+ul.bul li b{color:var(--text-1);font-weight:600}
+ul.bul li a{font-weight:500}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media(max-width:640px){.grid2{grid-template-columns:1fr;gap:20px}}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.tags span{font-size:12.5px;color:var(--text-2);border:1px solid var(--border-2);padding:6px 12px;border-radius:999px}
+.kv .k{font-size:13px;color:var(--text-1);font-weight:600}
+.kv .v{font-size:13.5px;color:var(--text-2);margin-top:2px}
+
+.foot{padding:26px 0 40px;font-size:12.5px;color:var(--text-3);font-family:var(--mono)}
+
+/* fade-in on load (respects reduced motion) */
+@media(prefers-reduced-motion:no-preference){
+  .r-head,section.r{opacity:0;transform:translateY(12px);animation:rise .6s cubic-bezier(.16,1,.3,1) forwards}
+  section.r:nth-of-type(1){animation-delay:.05s}
+  section.r:nth-of-type(2){animation-delay:.1s}
+  section.r:nth-of-type(3){animation-delay:.15s}
+  section.r:nth-of-type(4){animation-delay:.2s}
+  section.r:nth-of-type(5){animation-delay:.25s}
+  @keyframes rise{to{opacity:1;transform:none}}
+}
+
+/* PRINT — clean light résumé for Save-as-PDF */
+@media print{
+  @page{margin:14mm}
+  body{background:#fff;color:#111;font-size:11pt;line-height:1.4}
+  .bridge,.print-btn,.foot{display:none!important}
+  a{color:#111;text-decoration:none}
+  .shell{max-width:none;padding:0}
+  .r-head{padding:0 0 12px;border-color:#ddd}
+  .r-head h1{font-size:24pt}
+  .r-head .role b,.r-label{color:#111}
+  .contacts,.contacts a{color:#333}
+  section.r{padding:12px 0;border-color:#eee;opacity:1;transform:none;animation:none}
+  .lead,.job .co,ul.bul li,.tags span,.kv .v{color:#222}
+  .tags span{border-color:#ccc}
+  ul.bul li::before{background:#111}
+  .ph{border-color:#999}
+}
+</style>
+</head>
+<body>
+
+<nav class="bridge" aria-label="Portfolio">
+  <div class="shell bridge-in">
+    <a class="back" href="../" aria-label="Back to Mridhul Aswin portfolio home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Mridhul Aswin
+    </a>
+    <button class="print-btn" onclick="window.print()">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>
+      Save as PDF
+    </button>
+  </div>
+</nav>
+
+<main class="shell">
+
+  <header class="r-head">
+    <h1>Mridhul Aswin</h1>
+    <div class="role"><b>Product Designer</b> · UX / UI · Fintech &amp; Payments</div>
+    <div class="contacts">
+      <a href="mailto:hello@example.com" class="ph">hello@example.com</a>
+      <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="ph">linkedin.com/in/placeholder</a>
+      <span class="ph">Location</span>
+      <a href="https://mridhul199.github.io/my-portfolio/">mridhul199.github.io/my-portfolio</a>
+    </div>
+  </header>
+
+  <section class="r">
+    <p class="r-label">Summary</p>
+    <p class="lead">UX / product designer focused on the core of fintech — netbanking rails, stored-value
+    wallets, bill-pay, ONDC commerce, and recurring mandates. I take products from 0&rarr;1 through to
+    production, design the operator tooling behind them, and build whitelabel systems that re-skin
+    cleanly across banks and partners. I also contribute to design systems and illustration.</p>
+  </section>
+
+  <section class="r">
+    <p class="r-label">Experience</p>
+    <div class="job">
+      <div class="job-head">
+        <h3>BillDesk — Product Designer (UX / UI)</h3>
+        <span class="when ph">Start – Present</span>
+      </div>
+      <div class="co">Payments infrastructure · netbanking, wallets, bill-pay, ONDC, recurring mandates</div>
+      <ul class="bul">
+        <li><b><a href="../netbanking-2/">Netbanking 2.0 — Admin Portal.</a></b> Designed the operator console for NPCI's interoperable netbanking rail: dashboard, user access management, maker-checker refund reporting, merchant configuration, and a token-driven whitelabel system. Two banks live in production.</li>
+        <li><b><a href="../wallet/">BillDesk Wallet Solution.</a></b> A stored-value wallet shipped as an embeddable SDK plus an operator admin portal — top-up, one-tap pay, and reconciliation. Whitelabelled for Mumbai Metro ticketing and a FedEx prepay-&amp;-ship flow.</li>
+        <li><b><a href="../billpay-sso/">BillPay SSO — Portal Refresh.</a></b> Led a UI/UX refresh of the whitelabelled bill-pay portal used across 30–50 partner banks, and contributed a set of micro-illustrations to the BillDesk design system.</li>
+        <li><b><a href="../ondc-flight-booking/">ONDC Flight Booking.</a></b> Designed an in-app flight-booking buyer flow (search → seat → pay) for banks joining ONDC, with BillDesk as the Technology Service Provider — wireframes through whitelabelled visual design.</li>
+        <li><b><a href="../sihub/">SIHUB — Standing Instruction Hub.</a></b> Redesigned the recurring-mandate experience so cardholders can see, modify, and cancel every recurring payment from one dashboard, across 50+ banks — web and mobile.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="r">
+    <p class="r-label">Selected projects</p>
+    <ul class="bul">
+      <li><a href="../netbanking-2/">Netbanking 2.0 — Admin Portal</a> &nbsp;·&nbsp; <a href="../wallet/">BillDesk Wallet Solution</a> &nbsp;·&nbsp; <a href="../billpay-sso/">BillPay SSO</a> &nbsp;·&nbsp; <a href="../ondc-flight-booking/">ONDC Flight Booking</a> &nbsp;·&nbsp; <a href="../sihub/">SIHUB</a></li>
+    </ul>
+  </section>
+
+  <section class="r">
+    <div class="grid2">
+      <div>
+        <p class="r-label">Skills</p>
+        <div class="tags">
+          <span>Product design</span><span>UX</span><span>UI design</span><span>Design systems</span>
+          <span>Whitelabel theming</span><span>Wireframing → visual design</span><span>Interaction design</span>
+          <span>Illustration</span><span>0&rarr;1</span>
+        </div>
+      </div>
+      <div>
+        <p class="r-label">Tools</p>
+        <div class="tags">
+          <span>Figma</span><span class="ph">add your tools</span>
+        </div>
+        <div class="kv" style="margin-top:22px">
+          <p class="r-label" style="margin-bottom:8px">Education</p>
+          <div class="k ph">Degree, Institution</div>
+          <div class="v ph">Year</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="shell foot">Dashed items are placeholders — replace before sharing widely.</div>
+
+</body>
+</html>
