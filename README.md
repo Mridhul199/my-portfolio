@@ -13,10 +13,10 @@ styles/
   casestudy-dark.css    Dark override layer shared by all case studies
 scripts/reveal.js       Shared entrance/scroll-reveal motion (all pages)
 netbanking-2/           Case study — Netbanking 2.0 admin portal
-wallet/                 Case study — BillDesk Wallet Solution
-billpay-sso/            Case study — BillPay SSO portal refresh + DLS illustrations
-ondc-flight-booking/    Case study — ONDC flight booking (bank buyer app, BillDesk as TSP)
-sihub/                  Case study — SIHUB Standing Instruction Hub (recurring mandates)
+wallet/                 Case study — Wallet Solution (SDK + admin portal)
+billpay-sso/            Case study — Bill-Pay SSO portal refresh + DLS illustrations
+ondc-flight-booking/    Case study — ONDC flight booking (bank buyer app, a payments fintech as TSP)
+sihub/                  Case study — Standing Instruction Hub (recurring mandates)
 assets/                 favicon, og-image, headshot, resume.pdf
 .nojekyll               disables Jekyll on GitHub Pages
 ```

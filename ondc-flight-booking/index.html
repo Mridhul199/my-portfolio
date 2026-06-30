@@ -4,31 +4,31 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <script>document.documentElement.classList.add('js')</script>
-<title>ONDC Flight Booking — Bank buyer app, BillDesk as TSP · Case Study</title>
-<meta name="description" content="An in-app flight-booking buyer flow built into a bank's own app, with BillDesk acting as the ONDC Technology Service Provider. From wireframe to visual design. Case study by Mridhul Aswin."/>
+<title>ONDC Flight Booking — Bank buyer app, the payments fintech as TSP · Case Study</title>
+<meta name="description" content="An in-app flight-booking buyer flow built into a bank's own app, with the payments fintech acting as the ONDC Technology Service Provider. From wireframe to visual design. Case study by Mridhul Aswin."/>
 <meta name="author" content="Mridhul Aswin"/>
 <link rel="canonical" href="https://mridhul199.github.io/my-portfolio/ondc-flight-booking/"/>
 <meta property="og:type" content="article"/>
 <meta property="og:url" content="https://mridhul199.github.io/my-portfolio/ondc-flight-booking/"/>
 <meta property="og:title" content="ONDC Flight Booking · Mridhul Aswin"/>
-<meta property="og:description" content="An in-app flight-booking buyer flow built into a bank's own app, with BillDesk acting as the ONDC Technology Service Provider. From wireframe to visual design. Case study by Mridhul Aswin."/>
+<meta property="og:description" content="An in-app flight-booking buyer flow built into a bank's own app, with the payments fintech acting as the ONDC Technology Service Provider. From wireframe to visual design. Case study by Mridhul Aswin."/>
 <meta property="og:image" content="https://mridhul199.github.io/my-portfolio/assets/og/ondc-flight-booking.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="ONDC Flight Booking · Mridhul Aswin"/>
-<meta name="twitter:description" content="An in-app flight-booking buyer flow built into a bank's own app, with BillDesk acting as the ONDC Technology Service Provider. From wireframe to visual design. Case study by Mridhul Aswin."/>
+<meta name="twitter:description" content="An in-app flight-booking buyer flow built into a bank's own app, with the payments fintech acting as the ONDC Technology Service Provider. From wireframe to visual design. Case study by Mridhul Aswin."/>
 <meta name="twitter:image" content="https://mridhul199.github.io/my-portfolio/assets/og/ondc-flight-booking.png"/>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"/>
 <link rel="icon" href="../assets/favicon-32.png" sizes="32x32"/>
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"ONDC Flight Booking · Mridhul Aswin","description":"An in-app flight-booking buyer flow built into a bank's own app, with BillDesk acting as the ONDC Technology Service Provider. From wireframe to visual design. Case study by Mridhul Aswin.","author":{"@type":"Person","name":"Mridhul Aswin"},"url":"https://mridhul199.github.io/my-portfolio/ondc-flight-booking/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"ONDC Flight Booking · Mridhul Aswin","description":"An in-app flight-booking buyer flow built into a bank's own app, with the payments fintech acting as the ONDC Technology Service Provider. From wireframe to visual design. Case study by Mridhul Aswin.","author":{"@type":"Person","name":"Mridhul Aswin"},"url":"https://mridhul199.github.io/my-portfolio/ondc-flight-booking/"}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* project-overview — base design system
-   Extracted from the SIHUB overview doc. Paste inside a <style> tag in the new doc's <head>.
+   Extracted from the Standing Instruction Hub overview doc. Paste inside a <style> tag in the new doc's <head>.
    Palette: neutral surfaces + one accent (--orange). Swap --orange to re-skin. */
 
 :root{
@@ -310,7 +310,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-desktop-chrome .url{flex:1;background:#1F2937;padding:5px 12px;border-radius:6px;font-size:11px;color:rgba(255,255,255,.75);text-align:center}
 .pv-desktop-body{display:grid;grid-template-columns:38fr 62fr;min-height:540px}
 
-/* ===== Bandhan Bank — custom Add Biller portal (out-of-scope screen) ===== */
+/* ===== Partner Bank — custom Add Biller portal (out-of-scope screen) ===== */
 .bd-portal{display:grid;grid-template-columns:200px 1fr;min-height:540px;background:#fff;font-family:var(--f)}
 .bd-portal *{box-sizing:border-box}
 .bd-side{border-right:1px solid var(--border);padding:14px 12px;display:flex;flex-direction:column;gap:14px;background:#fff}
@@ -364,7 +364,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-subpane{display:none;width:100%}
 .pv-subpane.is-on{display:flex;align-items:center;justify-content:center;width:100%}
 
-/* ===== Bandhan Bank — MWeb Recharges screen (out-of-scope, mobile only) ===== */
+/* ===== Partner Bank — MWeb Recharges screen (out-of-scope, mobile only) ===== */
 .bd-mweb{background:#fff;font-family:var(--f);display:flex;flex-direction:column;width:100%;height:100%}
 .bd-mweb-statusbar{padding:14px 26px 8px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:var(--text-1);background:#fff}
 .bd-mweb-statusbar .sb-icons{display:inline-flex;gap:6px;align-items:center;color:var(--text-1)}
@@ -412,63 +412,63 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .bd-mweb-pagination .pg-nav button,.bd-mweb-pagination .pg-nav .pg-num{width:32px;height:32px;border:1px solid var(--border);border-radius:6px;background:#fff;display:grid;place-items:center;font:inherit;font-size:12px;color:var(--text-1);cursor:default}
 .bd-mweb-pagination .pg-nav .pg-num{background:#fff;border-color:var(--text-1);font-weight:600}
 
-/* ===== Bandhan-specific skin overrides (per BBPS RIB style guide 2026) ===== */
-.bandhan-skin{--bandhan-bg:#CBE6E9;--bandhan-stroke:#3399E8}
-.bandhan-skin .pv-phone,
-.bandhan-skin .pv-desktop,
-.bandhan-skin .bd-mweb,
-.bandhan-skin .bd-portal,
-.bandhan-skin .pv-phone-content,
-.bandhan-skin .pv-phone-illu,
-.bandhan-skin .bd-mweb-content,
-.bandhan-skin .pv-desktop-body,
-.bandhan-skin .pv-desktop-left,
-.bandhan-skin .pv-desktop-right,
-.bandhan-skin .bd-body,
-.bandhan-skin .bd-main,
-.bandhan-skin .pv-cta,
-.bandhan-skin .pv-foot,
-.bandhan-skin .pv-input,
-.bandhan-skin .pv-field label,
-.bandhan-skin .pv-phone-content h4,
-.bandhan-skin .pv-desktop-left h4,
-.bandhan-skin .pv-desktop-left .pv-sub,
-.bandhan-skin .bd-mweb-content h2,
-.bandhan-skin .bd-mweb-content .mw-sub,
-.bandhan-skin .bd-mweb-btn,
-.bandhan-skin .bd-mweb-list-head,
-.bandhan-skin .bd-mweb-row,
-.bandhan-skin .bd-h1,
-.bandhan-skin .bd-h1-sub,
-.bandhan-skin .bd-side-nav a,
-.bandhan-skin .bd-cats a,
-.bandhan-skin .bd-card,
-.bandhan-skin .bd-cards-head h3{font-family:'Manrope',var(--f)}
+/* ===== Partner-specific skin overrides (per BBPS RIB style guide 2026) ===== */
+.partner-skin{--partner-bg:#CBE6E9;--partner-stroke:#3399E8}
+.partner-skin .pv-phone,
+.partner-skin .pv-desktop,
+.partner-skin .bd-mweb,
+.partner-skin .bd-portal,
+.partner-skin .pv-phone-content,
+.partner-skin .pv-phone-illu,
+.partner-skin .bd-mweb-content,
+.partner-skin .pv-desktop-body,
+.partner-skin .pv-desktop-left,
+.partner-skin .pv-desktop-right,
+.partner-skin .bd-body,
+.partner-skin .bd-main,
+.partner-skin .pv-cta,
+.partner-skin .pv-foot,
+.partner-skin .pv-input,
+.partner-skin .pv-field label,
+.partner-skin .pv-phone-content h4,
+.partner-skin .pv-desktop-left h4,
+.partner-skin .pv-desktop-left .pv-sub,
+.partner-skin .bd-mweb-content h2,
+.partner-skin .bd-mweb-content .mw-sub,
+.partner-skin .bd-mweb-btn,
+.partner-skin .bd-mweb-list-head,
+.partner-skin .bd-mweb-row,
+.partner-skin .bd-h1,
+.partner-skin .bd-h1-sub,
+.partner-skin .bd-side-nav a,
+.partner-skin .bd-cats a,
+.partner-skin .bd-card,
+.partner-skin .bd-cards-head h3{font-family:'Manrope',var(--f)}
 
 /* Screen body backgrounds → teal */
-.bandhan-skin .pv-phone-content{background:var(--bandhan-bg)}
-.bandhan-skin .bd-mweb-content{background:var(--bandhan-bg)}
-.bandhan-skin .bd-mweb-head{background:var(--bandhan-bg)}
-.bandhan-skin .bd-mweb-list,
-.bandhan-skin .bd-mweb-pagination .pg-show,
-.bandhan-skin .bd-mweb-pagination .pg-nav button,
-.bandhan-skin .bd-mweb-pagination .pg-nav .pg-num,
-.bandhan-skin .bd-mweb .mw-search{background:#fff}
-.bandhan-skin .pv-desktop-right{background:var(--bandhan-bg)}
-.bandhan-skin .bd-main{background:var(--bandhan-bg)}
-.bandhan-skin .bd-main-head{background:#fff}
-.bandhan-skin .bd-cats,
-.bandhan-skin .bd-card{background:#fff}
+.partner-skin .pv-phone-content{background:var(--partner-bg)}
+.partner-skin .bd-mweb-content{background:var(--partner-bg)}
+.partner-skin .bd-mweb-head{background:var(--partner-bg)}
+.partner-skin .bd-mweb-list,
+.partner-skin .bd-mweb-pagination .pg-show,
+.partner-skin .bd-mweb-pagination .pg-nav button,
+.partner-skin .bd-mweb-pagination .pg-nav .pg-num,
+.partner-skin .bd-mweb .mw-search{background:#fff}
+.partner-skin .pv-desktop-right{background:var(--partner-bg)}
+.partner-skin .bd-main{background:var(--partner-bg)}
+.partner-skin .bd-main-head{background:#fff}
+.partner-skin .bd-cats,
+.partner-skin .bd-card{background:#fff}
 /* Selected card stroke per spec — #3399E8 instead of token */
-.bandhan-skin .bd-card.is-selected{border:2px solid var(--bandhan-stroke);box-shadow:none;padding:11px 10px}
+.partner-skin .bd-card.is-selected{border:2px solid var(--partner-stroke);box-shadow:none;padding:11px 10px}
 
 /* CTA stays bank primary (#00488B → already var(--pv-fill)) — no change needed */
 
 /* Manrope letter-spacing per spec (negative on headers) */
-.bandhan-skin .pv-phone-content h4,
-.bandhan-skin .pv-desktop-left h4,
-.bandhan-skin .bd-mweb-content h2,
-.bandhan-skin .bd-h1{letter-spacing:-.02em;font-weight:800}
+.partner-skin .pv-phone-content h4,
+.partner-skin .pv-desktop-left h4,
+.partner-skin .bd-mweb-content h2,
+.partner-skin .bd-h1{letter-spacing:-.02em;font-weight:800}
 
 .pv-desktop-left{padding:32px 40px 40px;display:flex;flex-direction:column}
 .pv-desktop-logo{margin-bottom:120px}
@@ -818,16 +818,16 @@ body.fmodal-open{overflow:hidden}
   <header class="hero">
     <div class="shell hero-grid">
       <div class="hero-copy">
-        <span class="eyebrow"><span class="dot"></span> ONDC flight booking · bank buyer app, BillDesk as TSP</span>
+        <span class="eyebrow"><span class="dot"></span> ONDC flight booking · bank buyer app, the payments fintech as TSP</span>
         <h1 data-split-words>Flight booking, built into the bank's own app.</h1>
         <p class="lead">A bank can sell flights to its customers without building a travel stack — by joining
-        <strong>ONDC</strong> as a buyer app with <strong>BillDesk as its Technology Service Provider</strong>.
+        <strong>ONDC</strong> as a buyer app with <strong>the payments fintech as its Technology Service Provider</strong>.
         We designed the full flow, from search to seat to pay, that plugs into ONDC's open travel network. To
         prove it whitelabels to any partner, we themed the entire booking journey into a real bank's identity
-        (HDFC) — same flow, the bank's brand.</p>
+        (a private bank) — same flow, the bank's brand.</p>
         <div class="meta-bar" style="grid-template-columns:repeat(3,1fr)">
           <div class="meta-cell"><div class="mk">Role</div><div class="mv">UX / Product design</div></div>
-          <div class="meta-cell"><div class="mk">BillDesk as</div><div class="mv">ONDC TSP · buyer-app build</div></div>
+          <div class="meta-cell"><div class="mk">the payments fintech as</div><div class="mv">ONDC TSP · buyer-app build</div></div>
           <div class="meta-cell"><div class="mk">Stage</div><div class="mv">Wireframe → visual design</div></div>
         </div>
       </div>
@@ -841,7 +841,7 @@ body.fmodal-open{overflow:hidden}
           </div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <span class="hero-art-cap">The flight results screen in the BillDesk design system — a fare-aware date strip, rich filters, and an always-visible total.</span>
+        <span class="hero-art-cap">The flight results screen in the the payments fintech design system — a fare-aware date strip, rich filters, and an always-visible total.</span>
       </div>
     </div>
   </header>
@@ -858,7 +858,7 @@ body.fmodal-open{overflow:hidden}
       </div>
       <div class="cards-grid three">
         <div class="pcard"><span class="tag">Customer</span><h4>Book in the bank app</h4><p>Search, pick a seat, and pay for a flight inside the app they already trust — no third-party redirect.</p></div>
-        <div class="pcard"><span class="tag">Bank</span><h4>A new service, no travel stack</h4><p>The bank becomes an ONDC buyer app and offers flights as a value-added service, with BillDesk supplying the tech.</p></div>
+        <div class="pcard"><span class="tag">Bank</span><h4>A new service, no travel stack</h4><p>The bank becomes an ONDC buyer app and offers flights as a value-added service, with the payments fintech supplying the tech.</p></div>
         <div class="pcard"><span class="tag">Network</span><h4>Powered by ONDC</h4><p>Open travel supply — many airline sellers reachable through one network, not one-by-one tie-ups.</p></div>
       </div>
     </div>
@@ -877,20 +877,20 @@ body.fmodal-open{overflow:hidden}
         supply the software. Travel is one of its newer categories.</p>
       </div>
       <div class="pipeline">
-        <div class="pipe-node accent"><div class="pipe-label">Bank — buyer app</div><p>The customer searches and books here. BillDesk builds it as the bank's TSP.</p></div>
+        <div class="pipe-node accent"><div class="pipe-label">Bank — buyer app</div><p>The customer searches and books here. A payments fintech builds it as the bank's TSP.</p></div>
         <div class="pipe-arrow">→</div>
         <div class="pipe-node"><div class="pipe-label">ONDC gateway</div><p>Broadcasts the search across the network and matches buyer to sellers.</p></div>
         <div class="pipe-arrow">→</div>
         <div class="pipe-node"><div class="pipe-label">Seller apps</div><p>Airlines &amp; travel sellers return fares, seats, and rules.</p></div>
         <div class="pipe-arrow">→</div>
-        <div class="pipe-node accent"><div class="pipe-label">Booked &amp; paid</div><p>Confirmed back in the bank app; BillDesk PG settles the money.</p></div>
+        <div class="pipe-node accent"><div class="pipe-label">Booked &amp; paid</div><p>Confirmed back in the bank app; the payments fintech PG settles the money.</p></div>
       </div>
       <div class="step-callout">
         <div class="step-callout-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg></div>
         <div>
-          <h4>BillDesk is the bank's Technology Service Provider</h4>
+          <h4>the payments fintech is the bank's Technology Service Provider</h4>
           <p>The TSP model lets enterprises with a big customer base — banks, fintechs, telcos — join ONDC as
-          a buyer app without in-house commerce tech. The bank owns the customer and the brand; BillDesk
+          a buyer app without in-house commerce tech. The bank owns the customer and the brand; the payments fintech
           supplies the buyer-app software, the booking UX, and the payment rail. <strong>This work was
           designed and delivered with ONDC.</strong></p>
         </div>
@@ -927,7 +927,7 @@ body.fmodal-open{overflow:hidden}
       <div class="cards-grid three">
         <div class="pcard ok"><span class="tag">Tap supply</span><h4>Ride ONDC's open network</h4><p>Pull fares and seats from many sellers through one network instead of building integrations.</p></div>
         <div class="pcard ok"><span class="tag">Complete the journey</span><h4>Search → seat → pay, end to end</h4><p>A full, stateful booking flow with fares, travellers, seats, add-ons, and cancellation rules.</p></div>
-        <div class="pcard ok"><span class="tag">Wear the brand</span><h4>Themeable for the bank</h4><p>One flow that re-skins from the bank's identity to the BillDesk design system.</p></div>
+        <div class="pcard ok"><span class="tag">Wear the brand</span><h4>Themeable for the bank</h4><p>One flow that re-skins from the bank's identity to the the payments fintech design system.</p></div>
       </div>
     </div>
   </section>
@@ -939,11 +939,11 @@ body.fmodal-open{overflow:hidden}
         <span class="unit-kicker"><span class="uk-num">05</span> Process</span>
         <h2 class="unit-title">Wireframe → visual design — and a whitelabel proof</h2>
         <p class="unit-desc">The flow was shaped first as wireframes <strong>themed into a real bank's
-        identity — HDFC</strong> — to prove a point: as a TSP build, the same booking journey can wear any
-        partner bank's brand. Those wireframes were then elevated into the BillDesk design system. The
+        identity — a private bank</strong> — to prove a point: as a TSP build, the same booking journey can wear any
+        partner bank's brand. Those wireframes were then elevated into the the payments fintech design system. The
         before/after pairs below carry both threads at once — the surface lifting from wireframe to VD, and
-        the brand shifting from a bank's identity to the BillDesk base.</p>
-        <div class="unit-chips"><span>HDFC-themed wireframes</span><span>Whitelabel proof</span><span>BillDesk DLS visual design</span><span>Same flow, any brand</span></div>
+        the brand shifting from a bank's identity to the the payments fintech base.</p>
+        <div class="unit-chips"><span>a private bank-themed wireframes</span><span>Whitelabel proof</span><span>the payments fintech DLS visual design</span><span>Same flow, any brand</span></div>
       </div>
     </div>
   </section>
@@ -964,7 +964,7 @@ body.fmodal-open{overflow:hidden}
         <div class="ba-col">
           <div class="ba-label"><span class="bdot"></span> Wireframe — in the bank's app</div>
           <div class="ba-frame" data-shot="assets/search/search-wf-destination.png">
-            <img src="assets/search/search-wf-destination.png" alt="Search wireframe inside the HDFC bank app shell — airport picker, persona discount chips"
+            <img src="assets/search/search-wf-destination.png" alt="Search wireframe inside the a private bank bank app shell — airport picker, persona discount chips"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="ph" style="display:none;">assets/search/search-wf-destination.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
@@ -972,7 +972,7 @@ body.fmodal-open{overflow:hidden}
           <p class="ba-cap">The wireframe sits in the bank's chrome — and already introduces persona fare chips (Student, Armed Forces, Senior Citizen, Doctors).</p>
         </div>
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Visual design — BillDesk DLS</div>
+          <div class="ba-label"><span class="bdot"></span> Visual design — the payments fintech DLS</div>
           <div class="ba-frame" data-shot="assets/search/search-vd-oneway.png">
             <img src="assets/search/search-vd-oneway.png" alt="Search visual design — One Way tab, From/To, departure, travellers, Search"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
@@ -1038,7 +1038,7 @@ body.fmodal-open{overflow:hidden}
           <p class="ba-cap">The wireframe nails the information: filter rail, fare-by-day tabs, and dense flight rows in the bank's frame.</p>
         </div>
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Visual design — BillDesk DLS</div>
+          <div class="ba-label"><span class="bdot"></span> Visual design — the payments fintech DLS</div>
           <div class="ba-frame" data-shot="assets/results/results-vd.png">
             <img src="assets/results/results-vd.png" alt="Flight results visual design — date/fare strip, filters, flight list, sticky total with savings"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
@@ -1074,7 +1074,7 @@ body.fmodal-open{overflow:hidden}
           <p class="ba-cap">The wireframe already carries the cancellation-and-date-change band and a coupons block in the bank frame.</p>
         </div>
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Visual design — BillDesk DLS</div>
+          <div class="ba-label"><span class="bdot"></span> Visual design — the payments fintech DLS</div>
           <div class="ba-frame" data-shot="assets/review/review-vd-traveler.png">
             <img src="assets/review/review-vd-traveler.png" alt="Review visual design — itinerary, refund-on-cancellation gradient timeline, traveller form, fare summary"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
@@ -1109,7 +1109,7 @@ body.fmodal-open{overflow:hidden}
           <p class="ba-cap">The wireframe maps the seat grid, the class-based pricing, an urgency nudge, and a seller upsell (SpiceMax).</p>
         </div>
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Visual design — BillDesk DLS</div>
+          <div class="ba-label"><span class="bdot"></span> Visual design — the payments fintech DLS</div>
           <div class="ba-frame" data-shot="assets/addons/addons-vd-seats.png">
             <img src="assets/addons/addons-vd-seats.png" alt="Seats visual design — fuselage seat map, class legend with prices, per-traveller assignment, live fare"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
@@ -1137,7 +1137,7 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">Step 05 · Payment</span>
         <h2>Close it on the bank's own rail.</h2>
-        <p class="lead">The journey ends where BillDesk is strongest — the payment gateway. Saved options,
+        <p class="lead">The journey ends where the payments fintech is strongest — the payment gateway. Saved options,
         UPI, card, netbanking, wallets, EMI; bank-card instant discounts surfaced inline; coupons applied
         against the same fare summary that's followed the customer the whole way.</p>
       </div>
@@ -1148,7 +1148,7 @@ body.fmodal-open{overflow:hidden}
           <div class="placeholder" style="display:none;">Drop the payment screen at<code>assets/payment/payment-wf.png</code></div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <figcaption>The BillDesk payment gateway closes the booking — every method, an instant-discount nudge for the bank's own card, and coupons on the running fare.</figcaption>
+        <figcaption>The the payments fintech payment gateway closes the booking — every method, an instant-discount nudge for the bank's own card, and coupons on the running fare.</figcaption>
       </figure>
     </div>
   </section>
@@ -1200,9 +1200,9 @@ body.fmodal-open{overflow:hidden}
         <div class="d-num">05</div>
         <div>
           <h4>One flow, any bank's skin</h4>
-          <p class="d-rationale">Because this is a TSP build, the flow has to be the bank's, not BillDesk's.
-          Theming the whole journey into HDFC's identity was a deliberate proof of whitelabel capability —
-          the same booking logic re-skins from a partner bank's brand to the BillDesk base with no change to
+          <p class="d-rationale">Because this is a TSP build, the flow has to be the bank's, not a payments fintech's.
+          Theming the whole journey into a private bank's identity was a deliberate proof of whitelabel capability —
+          the same booking logic re-skins from a partner bank's brand to the the payments fintech base with no change to
           the flow. That's the pitch to the next bank.</p>
         </div>
       </div>
@@ -1238,8 +1238,8 @@ body.fmodal-open{overflow:hidden}
       </div>
       <ul class="clean">
         <li><strong>A complete booking flow</strong> — search, results, review, seats &amp; meals, and payment, designed as one journey.</li>
-        <li><strong>Bank as ONDC buyer app, BillDesk as TSP</strong> — the bank offers flights with no travel stack of its own.</li>
-        <li><strong>Whitelabel proven</strong> — the journey themed into HDFC's identity to show it wears any bank's brand, then lifted from wireframe into the BillDesk design system.</li>
+        <li><strong>Bank as ONDC buyer app, the payments fintech as TSP</strong> — the bank offers flights with no travel stack of its own.</li>
+        <li><strong>Whitelabel proven</strong> — the journey themed into a private bank's identity to show it wears any bank's brand, then lifted from wireframe into the the payments fintech design system.</li>
         <li><strong>Delivered with ONDC</strong> — the experience plugs into the open travel network and its seller supply.</li>
       </ul>
     </div>
@@ -1277,7 +1277,7 @@ body.fmodal-open{overflow:hidden}
 
 <footer>
   <div class="shell chrome-inner">
-    <span>ONDC Flight Booking — Bank buyer app, BillDesk as TSP · Case study</span>
+    <span>ONDC Flight Booking — Bank buyer app, the payments fintech as TSP · Case study</span>
     <span>Built with the project-overview skill</span>
   </div>
 </footer>
