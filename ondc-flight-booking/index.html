@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <script>document.documentElement.classList.add('js')</script>
-<title>ONDC Flight Booking — Bank buyer app, the payments fintech as TSP · Case Study</title>
+<title>ONDC Flight Booking · Bank buyer app, the payments fintech as TSP · Case Study</title>
 <meta name="description" content="An in-app flight-booking buyer flow built into a bank's own app, with the payments fintech acting as the ONDC Technology Service Provider. From wireframe to visual design. Case study by Mridhul Aswin."/>
 <meta name="author" content="Mridhul Aswin"/>
 <link rel="canonical" href="https://mridhul199.github.io/my-portfolio/ondc-flight-booking/"/>
@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* project-overview — base design system
+/* project-overview: base design system
    Extracted from the Standing Instruction Hub overview doc. Paste inside a <style> tag in the new doc's <head>.
    Palette: neutral surfaces + one accent (--orange). Swap --orange to re-skin. */
 
@@ -168,8 +168,8 @@ figcaption{font-size:12px;color:var(--text-3);margin-top:12px;text-align:center}
   .compare,.compare tbody,.compare tr,.compare td{display:block;width:100%}
   .compare thead{display:none}
   .compare td{border:none;border-bottom:1px solid var(--border)}
-  .compare td.before::before{content:"Before — ";font-weight:600;color:var(--error)}
-  .compare td.after::before{content:"After — ";font-weight:600;color:var(--orange)}
+  .compare td.before::before{content:"Before · ";font-weight:600;color:var(--error)}
+  .compare td.after::before{content:"After · ";font-weight:600;color:var(--orange)}
 }
 
 /* Before/After two-up */
@@ -236,7 +236,7 @@ footer{border-top:1px solid var(--border);padding:40px 0;color:var(--text-3);fon
 footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
 /* ============================================================
-   PORTED FROM whitelabel-handoff.html — playground styles
+   PORTED FROM whitelabel-handoff.html, playground styles
    ============================================================ */
 /* ===== Lightbox (from whitelabel-handoff) ===== */
 .lightbox{position:fixed;inset:0;background:rgba(13,21,38,.82);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:32px;cursor:zoom-out}
@@ -310,7 +310,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-desktop-chrome .url{flex:1;background:#1F2937;padding:5px 12px;border-radius:6px;font-size:11px;color:rgba(255,255,255,.75);text-align:center}
 .pv-desktop-body{display:grid;grid-template-columns:38fr 62fr;min-height:540px}
 
-/* ===== Partner Bank — custom Add Biller portal (out-of-scope screen) ===== */
+/* ===== Partner Bank: custom Add Biller portal (out-of-scope screen) ===== */
 .bd-portal{display:grid;grid-template-columns:200px 1fr;min-height:540px;background:#fff;font-family:var(--f)}
 .bd-portal *{box-sizing:border-box}
 .bd-side{border-right:1px solid var(--border);padding:14px 12px;display:flex;flex-direction:column;gap:14px;background:#fff}
@@ -352,7 +352,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .bd-card .bd-card-title{font-size:11.5px;color:var(--text-1);font-weight:600;line-height:1.3}
 .bd-card.is-selected{border:1.5px solid var(--pv-fill);box-shadow:0 0 0 3px var(--pv-focus-ring);padding:11.5px 10.5px}
 
-/* ===== Preview tabs row — main + sub on the same row, visual hierarchy ===== */
+/* ===== Preview tabs row: main + sub on the same row, visual hierarchy ===== */
 .pv-tabs-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .pv-subtabs-row{display:inline-flex;align-items:center;gap:8px;padding-left:20px;border-left:1px solid var(--border)}
 .pv-subtabs-row .pv-subtabs-label{font-size:10px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em}
@@ -364,7 +364,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-subpane{display:none;width:100%}
 .pv-subpane.is-on{display:flex;align-items:center;justify-content:center;width:100%}
 
-/* ===== Partner Bank — MWeb Recharges screen (out-of-scope, mobile only) ===== */
+/* ===== Partner Bank: MWeb Recharges screen (out-of-scope, mobile only) ===== */
 .bd-mweb{background:#fff;font-family:var(--f);display:flex;flex-direction:column;width:100%;height:100%}
 .bd-mweb-statusbar{padding:14px 26px 8px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:var(--text-1);background:#fff}
 .bd-mweb-statusbar .sb-icons{display:inline-flex;gap:6px;align-items:center;color:var(--text-1)}
@@ -459,10 +459,10 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .partner-skin .bd-main-head{background:#fff}
 .partner-skin .bd-cats,
 .partner-skin .bd-card{background:#fff}
-/* Selected card stroke per spec — #3399E8 instead of token */
+/* Selected card stroke per spec, #3399E8 instead of token */
 .partner-skin .bd-card.is-selected{border:2px solid var(--partner-stroke);box-shadow:none;padding:11px 10px}
 
-/* CTA stays bank primary (#00488B → already var(--pv-fill)) — no change needed */
+/* CTA stays bank primary (#00488B → already var(--pv-fill)); no change needed */
 
 /* Manrope letter-spacing per spec (negative on headers) */
 .partner-skin .pv-phone-content h4,
@@ -729,7 +729,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pg-stage{padding:32px;background:linear-gradient(180deg,var(--canvas),var(--surface));display:grid;grid-template-columns:1.1fr 1fr;gap:24px}
 @media(max-width:900px){.pg-stage{grid-template-columns:1fr}}
 
-/* Unit divider band — marks the start of each major unit */
+/* Unit divider band: marks the start of each major unit */
 .unit-divider{margin:96px 0 8px;padding:40px 0 28px;border-top:1px solid var(--border)}
 .unit-divider:first-of-type{margin-top:64px}
 .unit-kicker{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)}
@@ -820,11 +820,11 @@ body.fmodal-open{overflow:hidden}
       <div class="hero-copy">
         <span class="eyebrow"><span class="dot"></span> ONDC flight booking · bank buyer app, the payments fintech as TSP</span>
         <h1 data-split-words>Flight booking, built into the bank's own app.</h1>
-        <p class="lead">A bank can sell flights to its customers without building a travel stack — by joining
+        <p class="lead">A bank can sell flights to its customers without building a travel stack: by joining
         <strong>ONDC</strong> as a buyer app with <strong>the payments fintech as its Technology Service Provider</strong>.
         We designed the full flow, from search to seat to pay, that plugs into ONDC's open travel network. To
         prove it whitelabels to any partner, we themed the entire booking journey into a real bank's identity
-        (a private bank) — same flow, the bank's brand.</p>
+        (a private bank). Same flow, the bank's brand.</p>
         <div class="meta-bar" style="grid-template-columns:repeat(3,1fr)">
           <div class="meta-cell"><div class="mk">Role</div><div class="mv">UX / Product design</div></div>
           <div class="meta-cell"><div class="mk">the payments fintech as</div><div class="mv">ONDC TSP · buyer-app build</div></div>
@@ -835,13 +835,13 @@ body.fmodal-open{overflow:hidden}
         <div class="browser-mock" data-shot="assets/results/results-vd.png">
           <div class="browser-bar"><span class="bdot r"></span><span class="bdot y"></span><span class="bdot g"></span><span class="browser-url">flights · bank app</span></div>
           <div class="browser-screen">
-            <img src="assets/results/results-vd.png" alt="Flight search results — fare-aware date strip, filters, flight list, sticky total"
+            <img src="assets/results/results-vd.png" alt="Flight search results · fare-aware date strip, filters, flight list, sticky total"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="hero-art-ph">assets/results/results-vd.png</div>
           </div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <span class="hero-art-cap">The flight results screen in the payments fintech design system — a fare-aware date strip, rich filters, and an always-visible total.</span>
+        <span class="hero-art-cap">The flight results screen in the payments fintech design system: a fare-aware date strip, rich filters, and an always-visible total.</span>
       </div>
     </div>
   </header>
@@ -850,16 +850,16 @@ body.fmodal-open{overflow:hidden}
   <section id="overview">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">01 — Overview</span>
+        <span class="sec-num">01 · Overview</span>
         <h2>A flight store inside the bank.</h2>
         <p class="lead">The customer opens their bank app and books a flight without ever leaving it. The bank
-        gets a new, high-engagement service. Neither of them touches an airline integration — that's what
+        gets a new, high-engagement service. Neither of them touches an airline integration. That's what
         ONDC and the TSP model make possible.</p>
       </div>
       <div class="cards-grid three">
-        <div class="pcard"><span class="tag">Customer</span><h4>Book in the bank app</h4><p>Search, pick a seat, and pay for a flight inside the app they already trust — no third-party redirect.</p></div>
+        <div class="pcard"><span class="tag">Customer</span><h4>Book in the bank app</h4><p>Search, pick a seat, and pay for a flight inside the app they already trust (no third-party redirect).</p></div>
         <div class="pcard"><span class="tag">Bank</span><h4>A new service, no travel stack</h4><p>The bank becomes an ONDC buyer app and offers flights as a value-added service, with the payments fintech supplying the tech.</p></div>
-        <div class="pcard"><span class="tag">Network</span><h4>Powered by ONDC</h4><p>Open travel supply — many airline sellers reachable through one network, not one-by-one tie-ups.</p></div>
+        <div class="pcard"><span class="tag">Network</span><h4>Powered by ONDC</h4><p>Open travel supply: many airline sellers reachable through one network, not one-by-one tie-ups.</p></div>
       </div>
     </div>
   </section>
@@ -868,16 +868,16 @@ body.fmodal-open{overflow:hidden}
   <section id="ondc">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">02 — ONDC &amp; where we sit</span>
+        <span class="sec-num">02 · ONDC &amp; where we sit</span>
         <h2>An open network, and a role in it.</h2>
         <p class="lead"><strong>ONDC</strong> (Open Network for Digital Commerce) is a government-of-India
-        initiative — not an app, but a set of open protocols that let any buyer app transact with any seller
+        initiative, not an app, but a set of open protocols that let any buyer app transact with any seller
         app, across categories. It defines four roles: <em>Buyer</em> and <em>Seller</em> network
         participants, a <em>Gateway</em> that matches them, and <em>Technology Service Providers</em> who
         supply the software. Travel is one of its newer categories.</p>
       </div>
       <div class="pipeline">
-        <div class="pipe-node accent"><div class="pipe-label">Bank — buyer app</div><p>The customer searches and books here. A payments fintech builds it as the bank's TSP.</p></div>
+        <div class="pipe-node accent"><div class="pipe-label">Bank · buyer app</div><p>The customer searches and books here. A payments fintech builds it as the bank's TSP.</p></div>
         <div class="pipe-arrow">→</div>
         <div class="pipe-node"><div class="pipe-label">ONDC gateway</div><p>Broadcasts the search across the network and matches buyer to sellers.</p></div>
         <div class="pipe-arrow">→</div>
@@ -889,7 +889,7 @@ body.fmodal-open{overflow:hidden}
         <div class="step-callout-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg></div>
         <div>
           <h4>the payments fintech is the bank's Technology Service Provider</h4>
-          <p>The TSP model lets enterprises with a big customer base — banks, fintechs, telcos — join ONDC as
+          <p>The TSP model lets enterprises with a big customer base (banks, fintechs, telcos) join ONDC as
           a buyer app without in-house commerce tech. The bank owns the customer and the brand; the payments fintech
           supplies the buyer-app software, the booking UX, and the payment rail. <strong>This work was
           designed and delivered with ONDC.</strong></p>
@@ -902,17 +902,17 @@ body.fmodal-open{overflow:hidden}
   <section id="problem">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">03 — The problem</span>
-        <h2>Travel is a great service to offer — and a hard one to build.</h2>
+        <span class="sec-num">03 · The problem</span>
+        <h2>Travel is a great service to offer, and a hard one to build.</h2>
         <p class="lead">Flights are high-intent, high-frequency, and keep customers inside the app. But a bank
-        can't reasonably build airline integrations, fare engines, seat maps, and cancellation rules — and
+        can't reasonably build airline integrations, fare engines, seat maps, and cancellation rules. And
         even with ONDC opening the supply, the network gives you a protocol, not a product.</p>
       </div>
       <ul class="clean">
-        <li><strong>No travel stack</strong> — banks have no airline tie-ups, fare search, or seat/meal inventory.</li>
-        <li><strong>Booking is a long, stateful flow</strong> — search, fare rules, travellers, seats, add-ons, payment, cancellation — each with edge cases.</li>
-        <li><strong>ONDC is a protocol, not a UI</strong> — the network returns data; someone still has to design the experience that makes it bookable.</li>
-        <li><strong>It has to feel like the bank</strong> — as a TSP build, the flow must wear the bank's identity, not a vendor's.</li>
+        <li><strong>No travel stack</strong>: banks have no airline tie-ups, fare search, or seat/meal inventory.</li>
+        <li><strong>Booking is a long, stateful flow</strong>: search, fare rules, travellers, seats, add-ons, payment, cancellation, each with edge cases.</li>
+        <li><strong>ONDC is a protocol, not a UI</strong>: the network returns data; someone still has to design the experience that makes it bookable.</li>
+        <li><strong>It has to feel like the bank</strong>: as a TSP build, the flow must wear the bank's identity, not a vendor's.</li>
       </ul>
     </div>
   </section>
@@ -921,7 +921,7 @@ body.fmodal-open{overflow:hidden}
   <section id="goals">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">04 — Goals</span>
+        <span class="sec-num">04 · Goals</span>
         <h2>What the booking flow had to do.</h2>
       </div>
       <div class="cards-grid three">
@@ -932,16 +932,16 @@ body.fmodal-open{overflow:hidden}
     </div>
   </section>
 
-  <!-- ============ PROCESS — WIREFRAME → VD ============ -->
+  <!-- ============ PROCESS: WIREFRAME → VD ============ -->
   <section id="process">
     <div class="shell narrow">
       <div class="unit-divider" style="margin-top:64px">
         <span class="unit-kicker"><span class="uk-num">05</span> Process</span>
-        <h2 class="unit-title">Wireframe → visual design — and a whitelabel proof</h2>
+        <h2 class="unit-title">Wireframe → visual design, and a whitelabel proof</h2>
         <p class="unit-desc">The flow was shaped first as wireframes <strong>themed into a real bank's
-        identity — a private bank</strong> — to prove a point: as a TSP build, the same booking journey can wear any
+        identity (a private bank)</strong>, to prove a point: as a TSP build, the same booking journey can wear any
         partner bank's brand. Those wireframes were then elevated into the payments fintech design system. The
-        before/after pairs below carry both threads at once — the surface lifting from wireframe to VD, and
+        before/after pairs below carry both threads at once: the surface lifting from wireframe to VD, and
         the brand shifting from a bank's identity to the payments fintech base.</p>
         <div class="unit-chips"><span>a private bank-themed wireframes</span><span>Whitelabel proof</span><span>the payments fintech DLS visual design</span><span>Same flow, any brand</span></div>
       </div>
@@ -962,41 +962,41 @@ body.fmodal-open{overflow:hidden}
       </div>
       <div class="ba-grid" style="align-items:start">
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Wireframe — in the bank's app</div>
+          <div class="ba-label"><span class="bdot"></span> Wireframe · in the bank's app</div>
           <div class="ba-frame" data-shot="assets/search/search-wf-destination.png">
-            <img src="assets/search/search-wf-destination.png" alt="Search wireframe inside the a private bank bank app shell — airport picker, persona discount chips"
+            <img src="assets/search/search-wf-destination.png" alt="Search wireframe inside the a private bank bank app shell · airport picker, persona discount chips"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="ph" style="display:none;">assets/search/search-wf-destination.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">The wireframe sits in the bank's chrome — and already introduces persona fare chips (Student, Armed Forces, Senior Citizen, Doctors).</p>
+          <p class="ba-cap">The wireframe sits in the bank's chrome. It already introduces persona fare chips (Student, Armed Forces, Senior Citizen, Doctors).</p>
         </div>
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Visual design — the payments fintech DLS</div>
+          <div class="ba-label"><span class="bdot"></span> Visual design · the payments fintech DLS</div>
           <div class="ba-frame" data-shot="assets/search/search-vd-oneway.png">
-            <img src="assets/search/search-vd-oneway.png" alt="Search visual design — One Way tab, From/To, departure, travellers, Search"
+            <img src="assets/search/search-vd-oneway.png" alt="Search visual design · One Way tab, From/To, departure, travellers, Search"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="ph" style="display:none;">assets/search/search-vd-oneway.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">The visual design lifts it into a single, calm search bar against a world-map hero — the four inputs as one connected control.</p>
+          <p class="ba-cap">The visual design lifts it into a single, calm search bar against a world-map hero: the four inputs as one connected control.</p>
         </div>
       </div>
       <div class="ba-grid" style="align-items:start">
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Airport pick — recent &amp; popular</div>
+          <div class="ba-label"><span class="bdot"></span> Airport pick · recent &amp; popular</div>
           <div class="ba-frame" data-shot="assets/search/search-vd-destination.png">
             <img src="assets/search/search-vd-destination.png" alt="Destination selection with recent searches and popular destinations"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="ph" style="display:none;">assets/search/search-vd-destination.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">Airport search leads with recent and popular routes — most trips are picked, not typed.</p>
+          <p class="ba-cap">Airport search leads with recent and popular routes. Most trips are picked, not typed.</p>
         </div>
         <div class="ba-col">
           <div class="ba-label"><span class="bdot"></span> Travellers &amp; cabin class</div>
           <div class="ba-frame" data-shot="assets/search/search-vd-travelers.png">
-            <img src="assets/search/search-vd-travelers.png" alt="Traveller selection — adults, children, infants, cabin class"
+            <img src="assets/search/search-vd-travelers.png" alt="Traveller selection · adults, children, infants, cabin class"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="ph" style="display:none;">assets/search/search-vd-travelers.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
@@ -1006,12 +1006,12 @@ body.fmodal-open{overflow:hidden}
       </div>
       <figure>
         <div class="frame" data-shot="assets/search/search-vd-date.png">
-          <img src="assets/search/search-vd-date.png" alt="Date picker — dual-month calendar built to carry fares"
+          <img src="assets/search/search-vd-date.png" alt="Date picker · dual-month calendar built to carry fares"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="placeholder" style="display:none;">Drop the date picker at<code>assets/search/search-vd-date.png</code></div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <figcaption>A dual-month calendar — the foundation for fare-aware date discovery that pays off on the results screen.</figcaption>
+        <figcaption>A dual-month calendar: the foundation for fare-aware date discovery that pays off on the results screen.</figcaption>
       </figure>
     </div>
   </section>
@@ -1028,9 +1028,9 @@ body.fmodal-open{overflow:hidden}
       </div>
       <div class="ba-grid" style="align-items:start">
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Wireframe — in the bank's app</div>
+          <div class="ba-label"><span class="bdot"></span> Wireframe · in the bank's app</div>
           <div class="ba-frame" data-shot="assets/results/results-wf.png">
-            <img src="assets/results/results-wf.png" alt="Flight listing wireframe in the bank app — filters, fare tabs, flight rows"
+            <img src="assets/results/results-wf.png" alt="Flight listing wireframe in the bank app · filters, fare tabs, flight rows"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="ph" style="display:none;">assets/results/results-wf.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
@@ -1038,14 +1038,14 @@ body.fmodal-open{overflow:hidden}
           <p class="ba-cap">The wireframe nails the information: filter rail, fare-by-day tabs, and dense flight rows in the bank's frame.</p>
         </div>
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Visual design — the payments fintech DLS</div>
+          <div class="ba-label"><span class="bdot"></span> Visual design · the payments fintech DLS</div>
           <div class="ba-frame" data-shot="assets/results/results-vd.png">
-            <img src="assets/results/results-vd.png" alt="Flight results visual design — date/fare strip, filters, flight list, sticky total with savings"
+            <img src="assets/results/results-vd.png" alt="Flight results visual design · date/fare strip, filters, flight list, sticky total with savings"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="ph" style="display:none;">assets/results/results-vd.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">The VD gives the fare strip real weight — cheapest day in green — and pins a savings-aware total to the bottom.</p>
+          <p class="ba-cap">The VD gives the fare strip real weight (cheapest day in green) and pins a savings-aware total to the bottom.</p>
         </div>
       </div>
     </div>
@@ -1058,15 +1058,15 @@ body.fmodal-open{overflow:hidden}
         <span class="sec-num">Step 03 · Review &amp; traveller details</span>
         <h2>The fare rules, before the form.</h2>
         <p class="lead">Once a flight is chosen, the review step confirms the itinerary, then does something
-        most booking flows bury: it shows the <strong>cancellation refund as a timeline</strong> — how much
-        you get back, and how that shrinks as departure nears. Then the traveller form, contact, and GST,
+        most booking flows bury: it shows the <strong>cancellation refund as a timeline</strong> (how much
+        you get back, and how that shrinks as departure nears). Then the traveller form, contact, and GST,
         with a live fare summary alongside.</p>
       </div>
       <div class="ba-grid" style="align-items:start">
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Wireframe — in the bank's app</div>
+          <div class="ba-label"><span class="bdot"></span> Wireframe · in the bank's app</div>
           <div class="ba-frame" data-shot="assets/review/review-wf-booking.png">
-            <img src="assets/review/review-wf-booking.png" alt="Complete-booking wireframe — itinerary, cancellation policy, fare summary, coupons"
+            <img src="assets/review/review-wf-booking.png" alt="Complete-booking wireframe · itinerary, cancellation policy, fare summary, coupons"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="ph" style="display:none;">assets/review/review-wf-booking.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
@@ -1074,14 +1074,14 @@ body.fmodal-open{overflow:hidden}
           <p class="ba-cap">The wireframe already carries the cancellation-and-date-change band and a coupons block in the bank frame.</p>
         </div>
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Visual design — the payments fintech DLS</div>
+          <div class="ba-label"><span class="bdot"></span> Visual design · the payments fintech DLS</div>
           <div class="ba-frame" data-shot="assets/review/review-vd-traveler.png">
-            <img src="assets/review/review-vd-traveler.png" alt="Review visual design — itinerary, refund-on-cancellation gradient timeline, traveller form, fare summary"
+            <img src="assets/review/review-vd-traveler.png" alt="Review visual design · itinerary, refund-on-cancellation gradient timeline, traveller form, fare summary"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="ph" style="display:none;">assets/review/review-vd-traveler.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">The VD turns the refund policy into a green→red gradient timeline — the fine print becomes a single glance.</p>
+          <p class="ba-cap">The VD turns the refund policy into a green→red gradient timeline: the fine print becomes a single glance.</p>
         </div>
       </div>
     </div>
@@ -1094,14 +1094,14 @@ body.fmodal-open{overflow:hidden}
         <span class="sec-num">Step 04 · Seats &amp; meals</span>
         <h2>Pick the seat, see the price.</h2>
         <p class="lead">Add-ons are their own step: a seat map colour-coded by class and price (Free, Premium,
-        Standard, XL), per-traveller assignment, and a Meals tab — with the fare summary updating live as
+        Standard, XL), per-traveller assignment, and a Meals tab, with the fare summary updating live as
         seats are chosen. Upsells (extra legroom, priority boarding) ride the same map.</p>
       </div>
       <div class="ba-grid" style="align-items:start">
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Wireframe — in the bank's app</div>
+          <div class="ba-label"><span class="bdot"></span> Wireframe · in the bank's app</div>
           <div class="ba-frame" data-shot="assets/addons/addons-wf-seatmeal.png">
-            <img src="assets/addons/addons-wf-seatmeal.png" alt="Seat & meal wireframe — seat map, SpiceMax upsell, urgency banner, fare summary"
+            <img src="assets/addons/addons-wf-seatmeal.png" alt="Seat & meal wireframe · seat map, SpiceMax upsell, urgency banner, fare summary"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="ph" style="display:none;">assets/addons/addons-wf-seatmeal.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
@@ -1109,9 +1109,9 @@ body.fmodal-open{overflow:hidden}
           <p class="ba-cap">The wireframe maps the seat grid, the class-based pricing, an urgency nudge, and a seller upsell (SpiceMax).</p>
         </div>
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Visual design — the payments fintech DLS</div>
+          <div class="ba-label"><span class="bdot"></span> Visual design · the payments fintech DLS</div>
           <div class="ba-frame" data-shot="assets/addons/addons-vd-seats.png">
-            <img src="assets/addons/addons-vd-seats.png" alt="Seats visual design — fuselage seat map, class legend with prices, per-traveller assignment, live fare"
+            <img src="assets/addons/addons-vd-seats.png" alt="Seats visual design · fuselage seat map, class legend with prices, per-traveller assignment, live fare"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="ph" style="display:none;">assets/addons/addons-vd-seats.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
@@ -1121,12 +1121,12 @@ body.fmodal-open{overflow:hidden}
       </div>
       <figure>
         <div class="frame" data-shot="assets/addons/addons-vd-seatmap.png">
-          <img src="assets/addons/addons-vd-seatmap.png" alt="Seat-map states — available, selected with traveller, and assigned"
+          <img src="assets/addons/addons-vd-seatmap.png" alt="Seat-map states · available, selected with traveller, and assigned"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="placeholder" style="display:none;">Drop the seat-map states at<code>assets/addons/addons-vd-seatmap.png</code></div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <figcaption>The seat component across states — open, selecting (traveller attached), and assigned — the interaction the seat step is built around.</figcaption>
+        <figcaption>The seat component across states: open, selecting (traveller attached), and assigned. This is the interaction the seat step is built around.</figcaption>
       </figure>
     </div>
   </section>
@@ -1137,18 +1137,18 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">Step 05 · Payment</span>
         <h2>Close it on the bank's own rail.</h2>
-        <p class="lead">The journey ends where the payments fintech is strongest — the payment gateway. Saved options,
+        <p class="lead">The journey ends where the payments fintech is strongest: the payment gateway. Saved options,
         UPI, card, netbanking, wallets, EMI; bank-card instant discounts surfaced inline; coupons applied
         against the same fare summary that's followed the customer the whole way.</p>
       </div>
       <figure>
         <div class="frame" data-shot="assets/payment/payment-wf.png">
-          <img src="assets/payment/payment-wf.png" alt="Payment wireframe — payment-method rail, card form, instant discount, fare summary, coupons"
+          <img src="assets/payment/payment-wf.png" alt="Payment wireframe · payment-method rail, card form, instant discount, fare summary, coupons"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="placeholder" style="display:none;">Drop the payment screen at<code>assets/payment/payment-wf.png</code></div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <figcaption>The payments fintech payment gateway closes the booking — every method, an instant-discount nudge for the bank's own card, and coupons on the running fare.</figcaption>
+        <figcaption>The payments fintech payment gateway closes the booking: every method, an instant-discount nudge for the bank's own card, and coupons on the running fare.</figcaption>
       </figure>
     </div>
   </section>
@@ -1174,7 +1174,7 @@ body.fmodal-open{overflow:hidden}
         <div>
           <h4>Cancellation as a timeline, not fine print</h4>
           <p class="d-rationale">Refund rules are where booking trust is won or lost. Rendering them as a
-          green→red gradient — how much comes back, and when it drops — turns a buried policy into a glance,
+          green→red gradient (how much comes back, and when it drops) turns a buried policy into a glance,
           before the customer commits.</p>
         </div>
       </div>
@@ -1182,7 +1182,7 @@ body.fmodal-open{overflow:hidden}
         <div class="d-num">03</div>
         <div>
           <h4>The fare summary never leaves</h4>
-          <p class="d-rationale">A sticky total with strikethrough savings follows every step — results,
+          <p class="d-rationale">A sticky total with strikethrough savings follows every step: results,
           review, seats, payment. The price you'll pay is always one glance away, so add-ons never feel like
           a trap.</p>
         </div>
@@ -1191,7 +1191,7 @@ body.fmodal-open{overflow:hidden}
         <div class="d-num">04</div>
         <div>
           <h4>Persona fares, surfaced early</h4>
-          <p class="d-rationale">ONDC's open supply means many seller offers — Student, Armed Forces, Senior
+          <p class="d-rationale">ONDC's open supply means many seller offers: Student, Armed Forces, Senior
           Citizen, Doctors. Putting those fare chips on the search screen makes the network's breadth a
           benefit the customer sees up front.</p>
         </div>
@@ -1201,7 +1201,7 @@ body.fmodal-open{overflow:hidden}
         <div>
           <h4>One flow, any bank's skin</h4>
           <p class="d-rationale">Because this is a TSP build, the flow has to be the bank's, not a payments fintech's.
-          Theming the whole journey into a private bank's identity was a deliberate proof of whitelabel capability —
+          Theming the whole journey into a private bank's identity was a deliberate proof of whitelabel capability:
           the same booking logic re-skins from a partner bank's brand to the payments fintech base with no change to
           the flow. That's the pitch to the next bank.</p>
         </div>
@@ -1213,14 +1213,14 @@ body.fmodal-open{overflow:hidden}
   <section id="scaling">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">07 — Scaling it</span>
-        <h2>One buyer app, many banks — and beyond flights.</h2>
+        <span class="sec-num">07 · Scaling it</span>
+        <h2>One buyer app, many banks, and beyond flights.</h2>
         <p class="lead">The TSP-plus-ONDC model is the leverage. The booking experience is built once and
         themed per bank; the supply comes from the network, not from integrations. The same pattern extends
-        to any bank that wants to become a buyer app — and, because ONDC is multi-category, beyond travel.</p>
+        to any bank that wants to become a buyer app. And because ONDC is multi-category, it reaches beyond travel too.</p>
       </div>
       <div class="cards-grid three">
-        <div class="pcard"><span class="tag">Per bank</span><h4>Re-skin, don't rebuild</h4><p>Theme the same flow to each partner bank's identity — the wireframe-to-VD shift proves the seam.</p></div>
+        <div class="pcard"><span class="tag">Per bank</span><h4>Re-skin, don't rebuild</h4><p>Theme the same flow to each partner bank's identity: the wireframe-to-VD shift proves the seam.</p></div>
         <div class="pcard"><span class="tag">Per network</span><h4>Supply from ONDC</h4><p>New sellers on the network appear without new integrations on our side.</p></div>
         <div class="pcard"><span class="tag">Per category</span><h4>Beyond flights</h4><p>The same buyer-app role applies to other ONDC categories as they mature.</p></div>
       </div>
@@ -1231,16 +1231,16 @@ body.fmodal-open{overflow:hidden}
   <section id="impact">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">08 — Impact</span>
+        <span class="sec-num">08 · Impact</span>
         <h2>What was delivered.</h2>
-        <p class="lead">An end-to-end flight-booking experience for a bank buyer app on ONDC — designed from
+        <p class="lead">An end-to-end flight-booking experience for a bank buyer app on ONDC, designed from
         wireframe through visual design, built as the bank's Technology Service Provider, with ONDC.</p>
       </div>
       <ul class="clean">
-        <li><strong>A complete booking flow</strong> — search, results, review, seats &amp; meals, and payment, designed as one journey.</li>
-        <li><strong>Bank as ONDC buyer app, the payments fintech as TSP</strong> — the bank offers flights with no travel stack of its own.</li>
-        <li><strong>Whitelabel proven</strong> — the journey themed into a private bank's identity to show it wears any bank's brand, then lifted from wireframe into the payments fintech design system.</li>
-        <li><strong>Delivered with ONDC</strong> — the experience plugs into the open travel network and its seller supply.</li>
+        <li><strong>A complete booking flow</strong>: search, results, review, seats &amp; meals, and payment, designed as one journey.</li>
+        <li><strong>Bank as ONDC buyer app, the payments fintech as TSP</strong>: the bank offers flights with no travel stack of its own.</li>
+        <li><strong>Whitelabel proven</strong>: the journey themed into a private bank's identity to show it wears any bank's brand, then lifted from wireframe into the payments fintech design system.</li>
+        <li><strong>Delivered with ONDC</strong>: the experience plugs into the open travel network and its seller supply.</li>
       </ul>
     </div>
   </section>
@@ -1249,12 +1249,12 @@ body.fmodal-open{overflow:hidden}
   <section id="future">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">09 — Future scope</span>
+        <span class="sec-num">09 · Future scope</span>
         <h2>Where it goes next.</h2>
       </div>
       <div class="cards-grid three">
         <div class="pcard"><span class="tag">Trips</span><h4>Round-trip &amp; multi-city</h4><p>Carry the same fare-aware, sticky-total model into return and multi-leg journeys.</p></div>
-        <div class="pcard"><span class="tag">Manage</span><h4>Post-booking</h4><p>Web check-in, cancellation, and rebooking — using the refund timeline already designed.</p></div>
+        <div class="pcard"><span class="tag">Manage</span><h4>Post-booking</h4><p>Web check-in, cancellation, and rebooking (using the refund timeline already designed).</p></div>
         <div class="pcard"><span class="tag">Categories</span><h4>More of ONDC</h4><p>Hotels and the rest of travel as the network's categories open up.</p></div>
       </div>
     </div>
@@ -1264,11 +1264,11 @@ body.fmodal-open{overflow:hidden}
   <section id="reflection">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">10 — Reflection</span>
+        <span class="sec-num">10 · Reflection</span>
         <h2>One honest learning.</h2>
         <p class="lead">An open network solves supply, not experience. ONDC made the flights reachable, but
         none of it is bookable until someone designs the fare discovery, the seat map, the cancellation
-        clarity, and the running total. The TSP's real job isn't the protocol — it's turning a protocol into
+        clarity, and the running total. The TSP's real job isn't the protocol: it's turning a protocol into
         something a person can confidently buy a flight on.</p>
       </div>
     </div>
@@ -1277,7 +1277,7 @@ body.fmodal-open{overflow:hidden}
 
 <footer>
   <div class="shell chrome-inner">
-    <span>ONDC Flight Booking — Bank buyer app, the payments fintech as TSP · Case study</span>
+    <span>ONDC Flight Booking · Bank buyer app, the payments fintech as TSP · Case study</span>
     <span>Built with the project-overview skill</span>
   </div>
 </footer>

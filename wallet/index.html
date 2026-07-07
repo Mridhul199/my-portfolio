@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <script>document.documentElement.classList.add('js')</script>
-<title>Wallet Solution — SDK + Admin Portal · Case Study</title>
+<title>Wallet Solution · SDK + Admin Portal · Case Study</title>
 <meta name="description" content="A stored-value wallet shipped as an embeddable SDK plus an operator admin portal, themed for a metro operator and a logistics partner. Fund once, pay instantly. UX / product design case study by Mridhul Aswin."/>
 <meta name="author" content="Mridhul Aswin"/>
 <link rel="canonical" href="https://mridhul199.github.io/my-portfolio/wallet/"/>
@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* project-overview — base design system
+/* project-overview: base design system
    Extracted from the Standing Instruction Hub overview doc. Paste inside a <style> tag in the new doc's <head>.
    Palette: neutral surfaces + one accent (--orange). Swap --orange to re-skin. */
 
@@ -172,8 +172,8 @@ figcaption{font-size:12px;color:var(--text-3);margin-top:12px;text-align:center}
   .compare,.compare tbody,.compare tr,.compare td{display:block;width:100%}
   .compare thead{display:none}
   .compare td{border:none;border-bottom:1px solid var(--border)}
-  .compare td.before::before{content:"Before — ";font-weight:600;color:var(--error)}
-  .compare td.after::before{content:"After — ";font-weight:600;color:var(--orange)}
+  .compare td.before::before{content:"Before: ";font-weight:600;color:var(--error)}
+  .compare td.after::before{content:"After: ";font-weight:600;color:var(--orange)}
 }
 
 /* Before/After two-up */
@@ -240,7 +240,7 @@ footer{border-top:1px solid var(--border);padding:40px 0;color:var(--text-3);fon
 footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
 /* ============================================================
-   PORTED FROM whitelabel-handoff.html — playground styles
+   PORTED FROM whitelabel-handoff.html: playground styles
    ============================================================ */
 /* ===== Lightbox (from whitelabel-handoff) ===== */
 .lightbox{position:fixed;inset:0;background:rgba(13,21,38,.82);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:32px;cursor:zoom-out}
@@ -314,7 +314,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-desktop-chrome .url{flex:1;background:#1F2937;padding:5px 12px;border-radius:6px;font-size:11px;color:rgba(255,255,255,.75);text-align:center}
 .pv-desktop-body{display:grid;grid-template-columns:38fr 62fr;min-height:540px}
 
-/* ===== Partner Bank — custom Add Biller portal (out-of-scope screen) ===== */
+/* ===== Partner Bank: custom Add Biller portal (out-of-scope screen) ===== */
 .bd-portal{display:grid;grid-template-columns:200px 1fr;min-height:540px;background:#fff;font-family:var(--f)}
 .bd-portal *{box-sizing:border-box}
 .bd-side{border-right:1px solid var(--border);padding:14px 12px;display:flex;flex-direction:column;gap:14px;background:#fff}
@@ -356,7 +356,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .bd-card .bd-card-title{font-size:11.5px;color:var(--text-1);font-weight:600;line-height:1.3}
 .bd-card.is-selected{border:1.5px solid var(--pv-fill);box-shadow:0 0 0 3px var(--pv-focus-ring);padding:11.5px 10.5px}
 
-/* ===== Preview tabs row — main + sub on the same row, visual hierarchy ===== */
+/* ===== Preview tabs row: main + sub on the same row, visual hierarchy ===== */
 .pv-tabs-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .pv-subtabs-row{display:inline-flex;align-items:center;gap:8px;padding-left:20px;border-left:1px solid var(--border)}
 .pv-subtabs-row .pv-subtabs-label{font-size:10px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em}
@@ -368,7 +368,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-subpane{display:none;width:100%}
 .pv-subpane.is-on{display:flex;align-items:center;justify-content:center;width:100%}
 
-/* ===== Partner Bank — MWeb Recharges screen (out-of-scope, mobile only) ===== */
+/* ===== Partner Bank: MWeb Recharges screen (out-of-scope, mobile only) ===== */
 .bd-mweb{background:#fff;font-family:var(--f);display:flex;flex-direction:column;width:100%;height:100%}
 .bd-mweb-statusbar{padding:14px 26px 8px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:var(--text-1);background:#fff}
 .bd-mweb-statusbar .sb-icons{display:inline-flex;gap:6px;align-items:center;color:var(--text-1)}
@@ -463,10 +463,10 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .partner-skin .bd-main-head{background:#fff}
 .partner-skin .bd-cats,
 .partner-skin .bd-card{background:#fff}
-/* Selected card stroke per spec — #3399E8 instead of token */
+/* Selected card stroke per spec (#3399E8 instead of token) */
 .partner-skin .bd-card.is-selected{border:2px solid var(--partner-stroke);box-shadow:none;padding:11px 10px}
 
-/* CTA stays bank primary (#00488B → already var(--pv-fill)) — no change needed */
+/* CTA stays bank primary (#00488B, already var(--pv-fill)); no change needed */
 
 /* Manrope letter-spacing per spec (negative on headers) */
 .partner-skin .pv-phone-content h4,
@@ -733,7 +733,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pg-stage{padding:32px;background:linear-gradient(180deg,var(--canvas),var(--surface));display:grid;grid-template-columns:1.1fr 1fr;gap:24px}
 @media(max-width:900px){.pg-stage{grid-template-columns:1fr}}
 
-/* Unit divider band — marks the start of each major unit */
+/* Unit divider band: marks the start of each major unit */
 .unit-divider{margin:96px 0 8px;padding:40px 0 28px;border-top:1px solid var(--border)}
 .unit-divider:first-of-type{margin-top:64px}
 .unit-kicker{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)}
@@ -808,7 +808,7 @@ body.fmodal-open{overflow:hidden}
       <div class="hero-copy">
         <span class="eyebrow"><span class="dot"></span> Stored-value wallet · SDK + admin portal</span>
         <h1 data-split-words>A prepaid wallet you can drop into any product.</h1>
-        <p class="lead"><strong>Wallet Solution</strong> is a stored-value wallet shipped as two parts —
+        <p class="lead"><strong>Wallet Solution</strong> is a stored-value wallet shipped as two parts:
         an <strong>embeddable SDK</strong> that re-skins to any host brand, and an <strong>admin portal</strong>
         that runs the program behind it. Fund once, pay instantly. It went live themed for a metro operator
         ticketing and a a logistics partner prepay-&amp;-ship flow.</p>
@@ -822,13 +822,13 @@ body.fmodal-open{overflow:hidden}
         <div class="phone-mock" data-shot="assets/sdk/transit-wallet-funded.png">
           <span class="phone-notch"></span>
           <div class="phone-screen">
-            <img src="assets/sdk/transit-wallet-funded.png" alt="The wallet SDK embedded in a metro operator ticket booking — balance and transaction history"
+            <img src="assets/sdk/transit-wallet-funded.png" alt="The wallet SDK embedded in a metro operator ticket booking, showing balance and transaction history"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="hero-art-ph">assets/sdk/transit-wallet-funded.png</div>
           </div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <span class="hero-art-cap">The SDK, embedded in a metro operator ticketing — a wallet that lives inside the host product and pays in one tap.</span>
+        <span class="hero-art-cap">The SDK, embedded in a metro operator ticketing: a wallet that lives inside the host product and pays in one tap.</span>
       </div>
     </div>
   </header>
@@ -837,16 +837,16 @@ body.fmodal-open{overflow:hidden}
   <section id="overview">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">01 — Overview</span>
+        <span class="sec-num">01 · Overview</span>
         <h2>One wallet, two halves.</h2>
         <p class="lead">A merchant wants its customers to keep money on file and pay in one tap. The Wallet
         Solution delivers that as a drop-in SDK on the consumer side, an operator portal on the business side,
         and a theming layer that makes the same wallet wear any brand.</p>
       </div>
       <div class="cards-grid three">
-        <div class="pcard"><span class="tag">Consumer</span><h4>The wallet SDK</h4><p>An embeddable wallet — balance, top-up, transaction history, and pay — that loads inside the host app, mobile web or desktop.</p></div>
-        <div class="pcard"><span class="tag">Operator</span><h4>The admin portal</h4><p>The back office that runs the program — onboard merchants, watch spend, remit funds, and reconcile.</p></div>
-        <div class="pcard"><span class="tag">Brand</span><h4>Whitelabel</h4><p>The same SDK re-skinned to the host's identity — shipped as a metro operator and a logistics partner, "Powered by the payments fintech."</p></div>
+        <div class="pcard"><span class="tag">Consumer</span><h4>The wallet SDK</h4><p>An embeddable wallet, loading inside the host app on mobile web or desktop, that handles balance, top-up, transaction history, and pay.</p></div>
+        <div class="pcard"><span class="tag">Operator</span><h4>The admin portal</h4><p>The back office that runs the program: onboard merchants, watch spend, remit funds, and reconcile.</p></div>
+        <div class="pcard"><span class="tag">Brand</span><h4>Whitelabel</h4><p>The same SDK re-skinned to the host's identity, shipped as a metro operator and a logistics partner, "Powered by the payments fintech."</p></div>
       </div>
     </div>
   </section>
@@ -855,17 +855,17 @@ body.fmodal-open{overflow:hidden}
   <section id="problem">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">02 — The problem</span>
+        <span class="sec-num">02 · The problem</span>
         <h2>Paying fresh, every single time.</h2>
-        <p class="lead">For high-frequency, low-value payments — a daily metro ride, a stream of shipments —
-        running a full payment every time is friction. The customer re-authenticates each tap; the merchant
+        <p class="lead">Think high-frequency, low-value payments: a daily metro ride, a stream of shipments.
+        Running a full payment every time is friction. The customer re-authenticates each tap; the merchant
         can't hold a balance, run prepaid pricing, or reward loyalty.</p>
       </div>
       <ul class="clean">
-        <li><strong>Re-auth on every transaction</strong> — bank redirect or card entry for even a ₹25 ride.</li>
-        <li><strong>No stored value</strong> — nothing to pay <em>from</em> instantly; every payment starts at zero.</li>
-        <li><strong>Merchants can't run prepaid</strong> — no balance means no top-up offers, no float, no loyalty.</li>
-        <li><strong>Spend &amp; settlement opaque</strong> — wallet activity and merchant payouts tracked outside any one system.</li>
+        <li><strong>Re-auth on every transaction:</strong> bank redirect or card entry for even a ₹25 ride.</li>
+        <li><strong>No stored value:</strong> nothing to pay <em>from</em> instantly; every payment starts at zero.</li>
+        <li><strong>Merchants can't run prepaid:</strong> no balance means no top-up offers, no float, no loyalty.</li>
+        <li><strong>Spend &amp; settlement opaque:</strong> wallet activity and merchant payouts tracked outside any one system.</li>
       </ul>
     </div>
   </section>
@@ -874,24 +874,24 @@ body.fmodal-open{overflow:hidden}
   <section id="goals">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">03 — Goals</span>
+        <span class="sec-num">03 · Goals</span>
         <h2>What the wallet had to do.</h2>
       </div>
       <div class="cards-grid three">
         <div class="pcard ok"><span class="tag">Store</span><h4>Fund once, pay many</h4><p>A balance the customer tops up, then spends in one tap with no re-auth.</p></div>
-        <div class="pcard ok"><span class="tag">Embed</span><h4>Drop into any product</h4><p>One SDK that loads inside the host app and wears its brand — mobile web or desktop.</p></div>
+        <div class="pcard ok"><span class="tag">Embed</span><h4>Drop into any product</h4><p>One SDK that loads inside the host app and wears its brand, on mobile web or desktop.</p></div>
         <div class="pcard ok"><span class="tag">Operate</span><h4>Run the program</h4><p>An admin portal to onboard merchants, watch spend, remit, and reconcile.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ============ UNIT 01 — THE WALLET SDK ============ -->
+  <!-- ============ UNIT 01 · THE WALLET SDK ============ -->
   <section id="unit-sdk">
     <div class="shell narrow">
       <div class="unit-divider">
         <span class="unit-kicker"><span class="uk-num">01</span> Unit</span>
         <h2 class="unit-title">The Wallet SDK</h2>
-        <p class="unit-desc">The consumer side — an embedded wallet that lives inside the host product.
+        <p class="unit-desc">The consumer side: an embedded wallet that lives inside the host product.
         This unit covers the wallet screen, the frictionless top-up, the one-tap pay that issues a metro
         QR ticket, and how the same SDK renders on mobile web and desktop.</p>
         <div class="unit-chips"><span>Wallet &amp; history</span><span>Top-up</span><span>One-tap pay</span><span>Mobile + desktop</span></div>
@@ -905,23 +905,23 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">SDK · The wallet</span>
         <h2>Balance first, history below.</h2>
-        <p class="lead">The wallet opens to one number — what's available — and a single primary action,
+        <p class="lead">The wallet opens to one number (what's available) and a single primary action,
         Add funds. Below it, every credit and debit in a filterable history (All / Credits / Debits), so the
         same screen answers "how much do I have?" and "where did it go?". Here it is empty and funded.</p>
       </div>
       <div class="ba-grid" style="align-items:start">
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Low balance — prompt to fund</div>
+          <div class="ba-label"><span class="bdot"></span> Low balance · prompt to fund</div>
           <div class="ba-frame phone" data-shot="assets/sdk/transit-wallet-low.png">
             <img src="assets/sdk/transit-wallet-low.png" alt="metro wallet with a low ₹23.23 balance and transaction history"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
             <div class="ph" style="display:none;">assets/sdk/transit-wallet-low.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">A near-empty balance after a run of metro rides — Add funds sits right on the balance card.</p>
+          <p class="ba-cap">A near-empty balance after a run of metro rides, with Add funds sitting right on the balance card.</p>
         </div>
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Funded — credit lands on top</div>
+          <div class="ba-label"><span class="bdot"></span> Funded · credit lands on top</div>
           <div class="ba-frame phone" data-shot="assets/sdk/transit-wallet-funded.png">
             <img src="assets/sdk/transit-wallet-funded.png" alt="metro wallet topped up to ₹523.23, fund-credited entry at the top of history"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
@@ -955,7 +955,7 @@ body.fmodal-open{overflow:hidden}
       </div>
       <div class="ba-grid" style="align-items:start">
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> The sheet — chips, zero typed</div>
+          <div class="ba-label"><span class="bdot"></span> The sheet · chips, zero typed</div>
           <div class="ba-frame phone" data-shot="assets/sdk/transit-addfunds-sheet.png">
             <img src="assets/sdk/transit-addfunds-sheet.png" alt="Add funds bottom-sheet with quick-amount chips, amount at zero"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
@@ -965,7 +965,7 @@ body.fmodal-open{overflow:hidden}
           <p class="ba-cap">A bottom-sheet keeps the wallet in view behind it; chips do the work so most users never open a keypad.</p>
         </div>
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Amount set — one action left</div>
+          <div class="ba-label"><span class="bdot"></span> Amount set · one action left</div>
           <div class="ba-frame phone" data-shot="assets/sdk/transit-addfunds-amount.png">
             <img src="assets/sdk/transit-addfunds-amount.png" alt="Add funds with ₹500 entered, Continue button active"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
@@ -984,19 +984,19 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">SDK · Pay</span>
         <h2>The payoff: pay once, get the ticket.</h2>
-        <p class="lead">With a funded balance, buying a ride is instant — no redirect, no re-auth. The wallet
+        <p class="lead">With a funded balance, buying a ride is instant: no redirect, no re-auth. The wallet
         debits and the booking resolves straight to a QR ticket: booking number, route, and a code to scan at
         metro entry and exit. The stored value is what makes the whole trip a single tap.</p>
       </div>
       <figure>
         <div class="frame phone" data-shot="assets/sdk/transit-qr-ticket.png" style="display:flex;justify-content:center;background:linear-gradient(180deg,var(--canvas),var(--surface));padding:24px">
-          <img src="assets/sdk/transit-qr-ticket.png" alt="metro QR ticket — booking number, MIDC-Andheri to Bandra Colony, scan at entry and exit"
+          <img src="assets/sdk/transit-qr-ticket.png" alt="metro QR ticket showing booking number, MIDC-Andheri to Bandra Colony, scan at entry and exit"
                style="max-width:360px;width:100%"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="placeholder" style="display:none;">Drop the QR ticket at<code>assets/sdk/transit-qr-ticket.png</code></div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <figcaption>One tap turns wallet balance into a scannable metro ticket — origin, destination, and a QR for the gates.</figcaption>
+        <figcaption>One tap turns wallet balance into a scannable metro ticket, with origin, destination, and a QR for the gates.</figcaption>
       </figure>
     </div>
   </section>
@@ -1013,7 +1013,7 @@ body.fmodal-open{overflow:hidden}
         <div>
           <h4>Balance and one action, above everything</h4>
           <p class="d-rationale">The wallet's job is to answer one question and offer one move. Balance is the
-          headline; Add funds is the only primary button. History is the support act, not the lead — so the
+          headline; Add funds is the only primary button. History is the support act, not the lead, so the
           screen never feels like an account page.</p>
         </div>
       </div>
@@ -1022,7 +1022,7 @@ body.fmodal-open{overflow:hidden}
         <div>
           <h4>Chips before keypads</h4>
           <p class="d-rationale">Most top-ups are round numbers. Quick-amount chips (+100…+2000) cover the
-          common case in one tap and only fall back to a keypad for custom values — the difference between a
+          common case in one tap and only fall back to a keypad for custom values. That's the difference between a
           two-tap top-up and a typed form.</p>
         </div>
       </div>
@@ -1031,7 +1031,7 @@ body.fmodal-open{overflow:hidden}
         <div>
           <h4>Sheet over page, so context stays</h4>
           <p class="d-rationale">Top-up is a bottom-sheet, not a route change. The wallet stays visible behind
-          the scrim, so funding feels like a quick aside rather than leaving and coming back — and the SDK
+          the scrim, so funding feels like a quick aside rather than leaving and coming back. And the SDK
           never has to own navigation in the host app.</p>
         </div>
       </div>
@@ -1044,30 +1044,30 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">SDK · One SDK, two form factors</span>
         <h2>Same wallet, rendered for the desktop.</h2>
-        <p class="lead">The SDK isn't mobile-only. The identical wallet — balance card, Add funds, the
-        All/Credits/Debits history with search — reflows into a desktop layout when it's embedded in a
+        <p class="lead">The SDK isn't mobile-only. The identical wallet (balance card, Add funds, the
+        All/Credits/Debits history with search) reflows into a desktop layout when it's embedded in a
         web app, with richer rows (ref ID, time, method, transaction ID) the wider canvas can afford.</p>
       </div>
       <figure>
         <div class="frame" data-shot="assets/sdk/sdk-desktop-wallet.png">
-          <img src="assets/sdk/sdk-desktop-wallet.png" alt="Wallet SDK in a desktop browser — balance card and detailed transaction table"
+          <img src="assets/sdk/sdk-desktop-wallet.png" alt="Wallet SDK in a desktop browser, showing balance card and detailed transaction table"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="placeholder" style="display:none;">Drop the desktop SDK shot at<code>assets/sdk/sdk-desktop-wallet.png</code></div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <figcaption>The same wallet on desktop — the transaction list grows into a table with ref IDs, method, and timestamps; balance and Add funds stay the anchor.</figcaption>
+        <figcaption>The same wallet on desktop: the transaction list grows into a table with ref IDs, method, and timestamps; balance and Add funds stay the anchor.</figcaption>
       </figure>
     </div>
   </section>
 
-  <!-- ============ UNIT 02 — WHITELABEL (LOGISTICS PARTNER) ============ -->
+  <!-- ============ UNIT 02 · WHITELABEL (LOGISTICS PARTNER) ============ -->
   <section id="unit-whitelabel">
     <div class="shell narrow">
       <div class="unit-divider">
         <span class="unit-kicker"><span class="uk-num">02</span> Unit</span>
-        <h2 class="unit-title">Whitelabel — same SDK, a logistics partner's brand</h2>
+        <h2 class="unit-title">Whitelabel: same SDK, a logistics partner's brand</h2>
         <p class="unit-desc">The proof the wallet is a product, not a one-off: the identical SDK re-skinned
-        for a logistics partner's prepay-&amp;-ship flow — metro's orange becomes a logistics partner's purple, and the top-up gets a
+        for a logistics partner's prepay-&amp;-ship flow. Metro's orange becomes a logistics partner's purple, and the top-up gets a
         context the metro never needed: a live shipment quote.</p>
         <div class="unit-chips"><span>Host-brand theme</span><span>Quote-aware top-up</span><span>2× upsell</span><span>Branded sign-up</span></div>
       </div>
@@ -1081,17 +1081,17 @@ body.fmodal-open{overflow:hidden}
         <span class="sec-num">Whitelabel · The same wallet, re-skinned</span>
         <h2>Orange to purple, nothing else moved.</h2>
         <p class="lead">This is the metro wallet wearing a logistics partner. Same balance card, same All/Credits/Debits
-        history, same Add funds — the layout and components are untouched; only the brand layer (purple chrome,
+        history, same Add funds: the layout and components are untouched; only the brand layer (purple chrome,
         a logistics partner nav) changes. That's the whitelabel promise in one screen.</p>
       </div>
       <figure>
         <div class="frame" data-shot="assets/whitelabel/logistics-wallet.png">
-          <img src="assets/whitelabel/logistics-wallet.png" alt="The wallet SDK themed for a logistics partner — purple chrome, balance and transaction history"
+          <img src="assets/whitelabel/logistics-wallet.png" alt="The wallet SDK themed for a logistics partner, with purple chrome, balance and transaction history"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="placeholder" style="display:none;">Drop the a logistics partner wallet at<code>assets/whitelabel/logistics-wallet.png</code></div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <figcaption>The a logistics partner-themed wallet — Book shipment / My shipments / Wallet in a logistics partner purple, the same wallet engine underneath.</figcaption>
+        <figcaption>The a logistics partner-themed wallet: Book shipment / My shipments / Wallet in a logistics partner purple, the same wallet engine underneath.</figcaption>
       </figure>
     </div>
   </section>
@@ -1102,7 +1102,7 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">Whitelabel · Context-aware top-up</span>
         <h2>Top-up that knows the shipment.</h2>
-        <p class="lead">a logistics partner top-up isn't generic — it opens beside the shipment rate estimate, so the
+        <p class="lead">a logistics partner top-up isn't generic. It opens beside the shipment rate estimate, so the
         customer sees the total they need to cover. An upsell nudges them past it: fund more than 2× the quote
         and earn a discount on the next international shipment. Same top-up engine, a money-moment that fits
         the host.</p>
@@ -1116,7 +1116,7 @@ body.fmodal-open{overflow:hidden}
             <div class="ph" style="display:none;">assets/whitelabel/logistics-addfunds-quote.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">The shipment rate estimate sits right above the amount — the customer funds against a number they can see.</p>
+          <p class="ba-cap">The shipment rate estimate sits right above the amount, so the customer funds against a number they can see.</p>
         </div>
         <div class="ba-col">
           <div class="ba-label"><span class="bdot"></span> Cross 2× → earn a discount</div>
@@ -1126,7 +1126,7 @@ body.fmodal-open{overflow:hidden}
             <div class="ph" style="display:none;">assets/whitelabel/logistics-addfunds-2x.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">Funding past 2× the quote unlocks a next-shipment discount — stored value turned into a reason to load more.</p>
+          <p class="ba-cap">Funding past 2× the quote unlocks a next-shipment discount: stored value turned into a reason to load more.</p>
         </div>
       </div>
     </div>
@@ -1138,29 +1138,29 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">Whitelabel · Onboarding in the host's skin</span>
         <h2>Sign-up belongs to the brand, too.</h2>
-        <p class="lead">The theming reaches the front door. a logistics partner's "Prepay &amp; Ship" sign-up — the entry to
-        the prepaid wallet — is fully a logistics partner: its purple, its imagery, its offer (60% off, prepay now). The
+        <p class="lead">The theming reaches the front door. a logistics partner's "Prepay &amp; Ship" sign-up, the entry to
+        the prepaid wallet, is fully a logistics partner: its purple, its imagery, its offer (60% off, prepay now). The
         wallet stays a the payments fintech product underneath; the customer only ever sees a logistics partner.</p>
       </div>
       <figure>
         <div class="frame" data-shot="assets/whitelabel/logistics-signup.png">
-          <img src="assets/whitelabel/logistics-signup.png" alt="a logistics partner Prepay & Ship sign-up — branded form and hero imagery"
+          <img src="assets/whitelabel/logistics-signup.png" alt="a logistics partner Prepay & Ship sign-up, showing branded form and hero imagery"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="placeholder" style="display:none;">Drop the a logistics partner sign-up at<code>assets/whitelabel/logistics-signup.png</code></div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <figcaption>Prepay &amp; Ship onboarding, end-to-end a logistics partner — the offer and identity are the host's; the wallet behind it is shared.</figcaption>
+        <figcaption>Prepay &amp; Ship onboarding, end-to-end a logistics partner: the offer and identity are the host's; the wallet behind it is shared.</figcaption>
       </figure>
     </div>
   </section>
 
-  <!-- ============ UNIT 03 — THE ADMIN PORTAL ============ -->
+  <!-- ============ UNIT 03 · THE ADMIN PORTAL ============ -->
   <section id="unit-admin">
     <div class="shell narrow">
       <div class="unit-divider">
         <span class="unit-kicker"><span class="uk-num">03</span> Unit</span>
         <h2 class="unit-title">The Admin Portal</h2>
-        <p class="unit-desc">The operator side — the payments fintech-branded back office that runs the wallet
+        <p class="unit-desc">The operator side: the payments fintech-branded back office that runs the wallet
         program. This unit covers the money dashboard, merchant onboarding, the spend ledger, and fund
         remittance with reconciliation.</p>
         <div class="unit-chips"><span>Money dashboard</span><span>Merchant onboarding</span><span>Spend ledger</span><span>Remittance &amp; recon</span></div>
@@ -1176,17 +1176,17 @@ body.fmodal-open{overflow:hidden}
         <h2>The money, in and out, at a glance.</h2>
         <p class="lead">The operator lands on the balance sheet of the program: total inward and outward,
         funds receivable and payable, what's reconciled versus unreconciled, the bank account, and customer
-        holdings — the float customers are carrying in their wallets. One screen says whether the program is
+        holdings (the float customers are carrying in their wallets). One screen says whether the program is
         balanced.</p>
       </div>
       <figure>
         <div class="frame" data-shot="assets/admin/admin-dashboard.png">
-          <img src="assets/admin/admin-dashboard.png" alt="Wallet admin dashboard — inward/outward, receivable/payable, reconciled/unreconciled, customer holdings"
+          <img src="assets/admin/admin-dashboard.png" alt="Wallet admin dashboard showing inward/outward, receivable/payable, reconciled/unreconciled, customer holdings"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="placeholder" style="display:none;">Drop the dashboard at<code>assets/admin/admin-dashboard.png</code></div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <figcaption>Inward vs outward, receivable vs payable, reconciled vs unreconciled, plus customer holdings — the program's books on one screen.</figcaption>
+        <figcaption>Inward vs outward, receivable vs payable, reconciled vs unreconciled, plus customer holdings: the program's books on one screen.</figcaption>
       </figure>
     </div>
   </section>
@@ -1197,19 +1197,19 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">Admin · Merchants</span>
         <h2>Onboard who gets paid.</h2>
-        <p class="lead">Every party customers can pay — and their sub-merchants — is registered here. Adding
+        <p class="lead">Every party customers can pay, and their sub-merchants, is registered here. Adding
         one is a short modal: name, ID, contact, and the bank details (IFSC, account) funds settle to, with an
         option to generate an empty reconciliation file. The registry is the spine the spend ledger and
         remittance both hang off.</p>
       </div>
       <figure>
         <div class="frame" data-shot="assets/admin/admin-merchants-add.png">
-          <img src="assets/admin/admin-merchants-add.png" alt="Merchants list with Add Merchant modal — name, ID, contact, IFSC, account number"
+          <img src="assets/admin/admin-merchants-add.png" alt="Merchants list with Add Merchant modal showing name, ID, contact, IFSC, account number"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="placeholder" style="display:none;">Drop the merchants screen at<code>assets/admin/admin-merchants-add.png</code></div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <figcaption>Add Merchant captures identity plus settlement bank details and a recon-file option up front — so payouts and reconciliation work the moment a merchant is live.</figcaption>
+        <figcaption>Add Merchant captures identity plus settlement bank details and a recon-file option up front, so payouts and reconciliation work the moment a merchant is live.</figcaption>
       </figure>
     </div>
   </section>
@@ -1220,18 +1220,18 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">Admin · Payments</span>
         <h2>Every rupee customers spent.</h2>
-        <p class="lead">The Payments ledger under Outward lists all wallet spend to merchants — merchant ID,
-        transaction ID, time, status (success / pending / failed), amount, charge — with search and filter.
+        <p class="lead">The Payments ledger under Outward lists all wallet spend to merchants: merchant ID,
+        transaction ID, time, status (success / pending / failed), amount, charge, with search and filter.
         It's the operator's answer to "did that payment go through, and to whom?"</p>
       </div>
       <figure>
         <div class="frame" data-shot="assets/admin/admin-payments.png">
-          <img src="assets/admin/admin-payments.png" alt="Payments ledger — wallet spend transactions to merchants with status and amounts"
+          <img src="assets/admin/admin-payments.png" alt="Payments ledger showing wallet spend transactions to merchants with status and amounts"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="placeholder" style="display:none;">Drop the payments ledger at<code>assets/admin/admin-payments.png</code></div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <figcaption>The spend ledger — transaction-level visibility with status, amount, and charge per merchant payment, searchable and filterable.</figcaption>
+        <figcaption>The spend ledger: transaction-level visibility with status, amount, and charge per merchant payment, searchable and filterable.</figcaption>
       </figure>
     </div>
   </section>
@@ -1241,10 +1241,10 @@ body.fmodal-open{overflow:hidden}
     <div class="shell narrow">
       <div class="section-head">
         <span class="sec-num">Admin · Fund remittance &amp; reconciliation</span>
-        <h2>Settle the merchants — with the steps built in.</h2>
+        <h2>Settle the merchants, with the steps built in.</h2>
         <p class="lead">Remittance is the payout side: settlement files the operator downloads, processes,
         and confirms with a UTR. Because it's the highest-stakes job in the portal, the flow ships with an
-        in-product "How to do remittance?" guide — a four-step walkthrough right where the work happens, so a
+        in-product "How to do remittance?" guide, a four-step walkthrough right where the work happens, so a
         new operator never has to leave to learn it.</p>
       </div>
       <figure>
@@ -1263,7 +1263,7 @@ body.fmodal-open{overflow:hidden}
   <section id="scaling">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">07 — Scaling it</span>
+        <span class="sec-num">07 · Scaling it</span>
         <h2>One SDK, any merchant.</h2>
         <p class="lead">The whole point is that none of this is transit- or a logistics partner-specific. The wallet engine,
         the top-up, the pay, and the admin portal are constant; the brand is a theme layer and "Powered by
@@ -1275,7 +1275,7 @@ body.fmodal-open{overflow:hidden}
           <h4>The closed loop generalizes</h4>
           <p>Fund a balance → spend it in one tap → operator settles the merchant. metro turns that into
           tickets at the gate; a logistics partner into prepaid shipping with a 2× upsell. Any high-frequency,
-          low-friction merchant — transit, logistics, canteens, campuses — drops into the same loop without
+          low-friction merchant (transit, logistics, canteens, campuses) drops into the same loop without
           new wallet code.</p>
         </div>
       </div>
@@ -1286,16 +1286,16 @@ body.fmodal-open{overflow:hidden}
   <section id="impact">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">08 — Impact</span>
+        <span class="sec-num">08 · Impact</span>
         <h2>What shipped.</h2>
         <p class="lead">The wallet went live as two real whitelabels off one codebase, with the operator
         portal running the program behind them.</p>
       </div>
       <ul class="clean">
-        <li><strong>Two live whitelabels from one SDK</strong> — a metro operator ticketing and a logistics partner prepay-&amp;-ship, re-skinned, not rebuilt.</li>
-        <li><strong>Mobile web and desktop from the same SDK</strong> — the wallet reflows to its host surface.</li>
-        <li><strong>Program operated end-to-end</strong> — merchant onboarding, spend visibility, remittance, and reconciliation in one admin portal.</li>
-        <li><strong>One-tap spend on stored value</strong> — funded balance pays instantly, no per-transaction re-auth.</li>
+        <li><strong>Two live whitelabels from one SDK:</strong> a metro operator ticketing and a logistics partner prepay-&amp;-ship, re-skinned, not rebuilt.</li>
+        <li><strong>Mobile web and desktop from the same SDK:</strong> the wallet reflows to its host surface.</li>
+        <li><strong>Program operated end-to-end:</strong> merchant onboarding, spend visibility, remittance, and reconciliation in one admin portal.</li>
+        <li><strong>One-tap spend on stored value:</strong> funded balance pays instantly, no per-transaction re-auth.</li>
       </ul>
     </div>
   </section>
@@ -1304,7 +1304,7 @@ body.fmodal-open{overflow:hidden}
   <section id="future">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">09 — Future scope</span>
+        <span class="sec-num">09 · Future scope</span>
         <h2>Where the wallet goes next.</h2>
       </div>
       <div class="cards-grid three">
@@ -1319,10 +1319,10 @@ body.fmodal-open{overflow:hidden}
   <section id="reflection">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">10 — Reflection</span>
+        <span class="sec-num">10 · Reflection</span>
         <h2>One honest learning.</h2>
         <p class="lead">The wallet screen was the easy part; the top-up was where the product lived. Most of
-        the design effort went into making funding feel like nothing — chips over keypads, a sheet over a
+        the design effort went into making funding feel like nothing: chips over keypads, a sheet over a
         page, and, on a logistics partner, anchoring the amount to a number the customer already had in mind. Get the
         money-in moment frictionless and the rest of the wallet takes care of itself.</p>
       </div>
@@ -1332,7 +1332,7 @@ body.fmodal-open{overflow:hidden}
 
 <footer>
   <div class="shell chrome-inner">
-    <span>Wallet Solution — SDK + Admin Portal · Case study</span>
+    <span>Wallet Solution · SDK + Admin Portal · Case study</span>
     <span>Built with the project-overview skill</span>
   </div>
 </footer>
