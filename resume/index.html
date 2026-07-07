@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Mridhul Aswin — Résumé · Product Designer, Fintech</title>
-<meta name="description" content="Résumé of Mridhul Aswin — UX / product designer in fintech and payments. Netbanking rails, wallet SDKs, bill-pay, ONDC commerce, and recurring mandates, shipped across banks."/>
+<title>Mridhul Aswin · Résumé · Product Designer, Fintech</title>
+<meta name="description" content="Résumé of Mridhul Aswin, UX / product designer in fintech and payments. Netbanking rails, wallet SDKs, bill-pay, ONDC commerce, and recurring mandates, shipped across banks."/>
 <meta name="author" content="Mridhul Aswin"/>
 <link rel="canonical" href="https://mridhul199.github.io/my-portfolio/resume/"/>
 <meta property="og:type" content="profile"/>
 <meta property="og:url" content="https://mridhul199.github.io/my-portfolio/resume/"/>
-<meta property="og:title" content="Mridhul Aswin — Résumé"/>
+<meta property="og:title" content="Mridhul Aswin · Résumé"/>
 <meta property="og:description" content="UX / product designer in fintech and payments. Netbanking rails, wallet SDKs, bill-pay, ONDC, and recurring mandates."/>
 <meta property="og:image" content="https://mridhul199.github.io/my-portfolio/assets/og/resume.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
@@ -56,7 +56,6 @@ a:hover{text-decoration:underline}
 .contacts{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:18px;font-size:13px;font-family:var(--mono);color:var(--text-2)}
 .contacts a{color:var(--text-2)}
 .contacts a:hover{color:var(--text-1)}
-.ph{border-bottom:1px dashed var(--accent);color:var(--text-1)}
 
 section.r{padding:30px 0;border-bottom:1px solid var(--border)}
 section.r:last-of-type{border-bottom:none}
@@ -82,8 +81,6 @@ ul.bul li a{font-weight:500}
 .kv .k{font-size:13px;color:var(--text-1);font-weight:600}
 .kv .v{font-size:13.5px;color:var(--text-2);margin-top:2px}
 
-.foot{padding:26px 0 40px;font-size:12.5px;color:var(--text-3);font-family:var(--mono)}
-
 /* fade-in on load (respects reduced motion) */
 @media(prefers-reduced-motion:no-preference){
   .r-head,section.r{opacity:0;transform:translateY(12px);animation:rise .6s cubic-bezier(.16,1,.3,1) forwards}
@@ -95,11 +92,14 @@ ul.bul li a{font-weight:500}
   @keyframes rise{to{opacity:1;transform:none}}
 }
 
-/* PRINT — clean light résumé for Save-as-PDF */
+/* screen/print text swaps: same info, ATS-plain wording in the PDF */
+.prt{display:none}
+
+/* PRINT: clean light résumé for Save-as-PDF, structured for ATS parsing */
 @media print{
   @page{margin:14mm}
   body{background:#fff;color:#111;font-size:11pt;line-height:1.4}
-  .bridge,.print-btn,.foot{display:none!important}
+  .bridge,.print-btn{display:none!important}
   a{color:#111;text-decoration:none}
   .shell{max-width:none;padding:0}
   .r-head{padding:0 0 12px;border-color:#ddd}
@@ -110,7 +110,13 @@ ul.bul li a{font-weight:500}
   .lead,.job .co,ul.bul li,.tags span,.kv .v{color:#222}
   .tags span{border-color:#ccc}
   ul.bul li::before{background:#111}
-  .ph{border-color:#999}
+  /* force single-column: multi-column layouts scramble ATS reading order */
+  .grid2{display:block!important}
+  .grid2>div{margin-top:14px}
+  .grid2>div:first-child{margin-top:0}
+  /* swap decorative arrows for plain-text equivalents */
+  .scr{display:none}
+  .prt{display:inline}
 }
 </style>
 </head>
@@ -135,17 +141,18 @@ ul.bul li a{font-weight:500}
     <h1>Mridhul Aswin</h1>
     <div class="role"><b>Product Designer</b> · UX / UI · Fintech &amp; Payments</div>
     <div class="contacts">
-      <a href="mailto:hello@example.com" class="ph">hello@example.com</a>
-      <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="ph">linkedin.com/in/placeholder</a>
-      <span class="ph">Location</span>
+      <a href="tel:+919167575167">+91 91675 75167</a>
+      <a href="mailto:mridhulaswin92@gmail.com">mridhulaswin92@gmail.com</a>
+      <a href="https://www.linkedin.com/in/mridhul-aswin-6637202bb/?skipRedirect=true" target="_blank" rel="noopener">linkedin.com/in/mridhul-aswin-6637202bb</a>
+      <span>Ernakulam, Kerala, India</span>
       <a href="https://mridhul199.github.io/my-portfolio/">mridhul199.github.io/my-portfolio</a>
     </div>
   </header>
 
   <section class="r">
     <p class="r-label">Summary</p>
-    <p class="lead">UX / product designer focused on the core of fintech — netbanking rails, stored-value
-    wallets, bill-pay, ONDC commerce, and recurring mandates. I take products from 0&rarr;1 through to
+    <p class="lead">UX / product designer focused on the core of fintech: netbanking rails, stored-value
+    wallets, bill-pay, ONDC commerce, and recurring mandates. I take products from concept through to
     production, design the operator tooling behind them, and build whitelabel systems that re-skin
     cleanly across banks and partners. I also contribute to design systems and illustration.</p>
   </section>
@@ -154,16 +161,16 @@ ul.bul li a{font-weight:500}
     <p class="r-label">Experience</p>
     <div class="job">
       <div class="job-head">
-        <h3>A payments fintech — Product Designer (UX / UI)</h3>
-        <span class="when ph">Start – Present</span>
+        <h3>Hatio Innovations Pvt Ltd · Product Designer (UX / UI)</h3>
+        <span class="when">2024 – Present</span>
       </div>
       <div class="co">Payments infrastructure · netbanking, wallets, bill-pay, ONDC, recurring mandates</div>
       <ul class="bul">
-        <li><b><a href="../netbanking-2/">Netbanking 2.0 — Admin Portal.</a></b> Designed the operator console for NPCI's interoperable netbanking rail: dashboard, user access management, maker-checker refund reporting, merchant configuration, and a token-driven whitelabel system. Two banks live in production.</li>
-        <li><b><a href="../wallet/">Wallet Solution.</a></b> A stored-value wallet shipped as an embeddable SDK plus an operator admin portal — top-up, one-tap pay, and reconciliation. Whitelabelled for a metro operator ticketing and a a logistics partner prepay-&amp;-ship flow.</li>
+        <li><b><a href="../netbanking-2/">Netbanking 2.0 · Admin Portal.</a></b> Designed the operator console for NPCI's interoperable netbanking rail: dashboard, user access management, maker-checker refund reporting, merchant configuration, and a token-driven whitelabel system. Two banks live in production.</li>
+        <li><b><a href="../wallet/">Wallet Solution.</a></b> A stored-value wallet shipped as an embeddable SDK plus an operator admin portal: top-up, one-tap pay, and reconciliation. Whitelabelled for a metro operator ticketing and a a logistics partner prepay-&amp;-ship flow.</li>
         <li><b><a href="../billpay-sso/">Bill-Pay Portal Refresh.</a></b> Led a UI/UX refresh of the whitelabelled bill-pay portal used across 30–50 partner banks, and contributed a set of micro-illustrations to the payments fintech design system.</li>
-        <li><b><a href="../ondc-flight-booking/">ONDC Flight Booking.</a></b> Designed an in-app flight-booking buyer flow (search → seat → pay) for banks joining ONDC, with the payments fintech as the Technology Service Provider — wireframes through whitelabelled visual design.</li>
-        <li><b><a href="../sihub/">Standing Instruction Hub.</a></b> Redesigned the recurring-mandate experience so cardholders can see, modify, and cancel every recurring payment from one dashboard, across 50+ banks — web and mobile.</li>
+        <li><b><a href="../ondc-flight-booking/">ONDC Flight Booking.</a></b> Designed an in-app flight-booking buyer flow (search<span class="scr"> → </span><span class="prt">, </span>seat<span class="scr"> → </span><span class="prt">, </span>pay) for banks joining ONDC, with the payments fintech as the Technology Service Provider (wireframes through whitelabelled visual design).</li>
+        <li><b><a href="../sihub/">Standing Instruction Hub.</a></b> Redesigned the recurring-mandate experience so cardholders can see, modify, and cancel every recurring payment from one dashboard, across 50+ banks, web and mobile.</li>
       </ul>
     </div>
   </section>
@@ -171,7 +178,7 @@ ul.bul li a{font-weight:500}
   <section class="r">
     <p class="r-label">Selected projects</p>
     <ul class="bul">
-      <li><a href="../netbanking-2/">Netbanking 2.0 — Admin Portal</a> &nbsp;·&nbsp; <a href="../wallet/">Wallet Solution</a> &nbsp;·&nbsp; <a href="../billpay-sso/">Bill-Pay SSO</a> &nbsp;·&nbsp; <a href="../ondc-flight-booking/">ONDC Flight Booking</a> &nbsp;·&nbsp; <a href="../sihub/">Standing Instruction Hub</a></li>
+      <li><a href="../netbanking-2/">Netbanking 2.0 · Admin Portal</a> &nbsp;·&nbsp; <a href="../wallet/">Wallet Solution</a> &nbsp;·&nbsp; <a href="../billpay-sso/">Bill-Pay SSO</a> &nbsp;·&nbsp; <a href="../ondc-flight-booking/">ONDC Flight Booking</a> &nbsp;·&nbsp; <a href="../sihub/">Standing Instruction Hub</a></li>
     </ul>
   </section>
 
@@ -181,27 +188,25 @@ ul.bul li a{font-weight:500}
         <p class="r-label">Skills</p>
         <div class="tags">
           <span>Product design</span><span>UX</span><span>UI design</span><span>Design systems</span>
-          <span>Whitelabel theming</span><span>Wireframing → visual design</span><span>Interaction design</span>
-          <span>Illustration</span><span>0&rarr;1</span>
+          <span>Whitelabel theming</span><span>Wireframing</span><span>Visual design</span><span>Interaction design</span>
+          <span>Illustration</span><span>Stakeholder collaboration</span><span>AI-assisted design</span>
         </div>
       </div>
       <div>
         <p class="r-label">Tools</p>
         <div class="tags">
-          <span>Figma</span><span class="ph">add your tools</span>
+          <span>Figma</span><span>FigJam</span><span>Claude Code</span><span>Adobe Creative Suite</span>
         </div>
         <div class="kv" style="margin-top:22px">
           <p class="r-label" style="margin-bottom:8px">Education</p>
-          <div class="k ph">Degree, Institution</div>
-          <div class="v ph">Year</div>
+          <div class="k">Bachelor of Mass Media, Mumbai University</div>
+          <div class="v">2015</div>
         </div>
       </div>
     </div>
   </section>
 
 </main>
-
-<div class="shell foot">Dashed items are placeholders — replace before sharing widely.</div>
 
 </body>
 </html>
