@@ -903,8 +903,9 @@ body.fmodal-open{overflow:hidden}
 .pf-bridge-link:hover{color:var(--orange)}
 .pf-bridge-ctx{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
 </style>
+<link rel="stylesheet" href="../styles/casestudy-dark.css"/>
 </head>
-<body>
+<body data-auto-reveal>
 <nav class="pf-bridge" aria-label="Portfolio">
   <div class="shell pf-bridge-inner">
     <a class="pf-bridge-link" href="../" aria-label="Back to Mridhul Aswin portfolio home">
@@ -922,7 +923,7 @@ body.fmodal-open{overflow:hidden}
     <div class="shell hero-grid">
       <div class="hero-copy">
         <span class="eyebrow"><span class="dot"></span> AI + automation · the bank-theming skill</span>
-        <h1>One brand colour in. A themed bank out.</h1>
+        <h1 data-split-words>One brand colour in. A themed bank out.</h1>
         <p class="lead">The payments fintech whitelabels its payment portal to every partner bank, and each bank needs
         <strong>20 design-system colour tokens</strong>, its logos placed correctly, and illustrations
         recoloured, all wired into a handoff doc. We turned that from slow, error-prone handwork into a
@@ -1442,5 +1443,6 @@ body.fmodal-open{overflow:hidden}
   });
 })();
 </script>
+<script src="../scripts/reveal.js" defer onerror="document.documentElement.classList.remove('js')"></script>
 </body>
 </html>

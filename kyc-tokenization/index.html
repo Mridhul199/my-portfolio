@@ -179,8 +179,9 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 [data-shot]:hover .zoom-hint{opacity:1;transform:none}
 .zoom-hint svg{width:12px;height:12px}
 </style>
+<link rel="stylesheet" href="../styles/casestudy-dark.css"/>
 </head>
-<body>
+<body data-auto-reveal>
 <nav class="pf-bridge" aria-label="Portfolio">
   <div class="shell pf-bridge-inner">
     <a class="pf-bridge-link" href="../" aria-label="Back to Mridhul Aswin portfolio home">
@@ -207,7 +208,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
       <div class="hero-grid">
         <div>
           <span class="eyebrow"><span class="dot"></span> Concept · Digital identity</span>
-          <h1>Verify once. Reuse the token everywhere.</h1>
+          <h1 data-split-words>Verify once. Reuse the token everywhere.</h1>
           <p class="lead">TrustKYC turns a one-time KYC verification into a reusable, consent-gated identity token. Merchants request access to a "template" of documents instead of collecting them again.</p>
           <div class="meta-bar">
             <div class="meta-cell"><div class="mk">My role</div><div class="mv">Sole designer, concept exploration</div></div>
@@ -388,5 +389,6 @@ document.addEventListener('keydown', e => {
   }
 });
 </script>
+<script src="../scripts/reveal.js" defer onerror="document.documentElement.classList.remove('js')"></script>
 </body>
 </html>
