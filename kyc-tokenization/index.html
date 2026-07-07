@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<script>document.documentElement.classList.add('js')</script>
+<title>KYC Tokenization · Reusable identity token concept · Case Study</title>
+<meta name="description" content="TrustKYC: a concept for turning a one-time KYC verification into a reusable, consent-gated identity token, so merchants request access to a document template instead of collecting it again. Case study by Mridhul Aswin."/>
+<meta name="author" content="Mridhul Aswin"/>
+<link rel="canonical" href="https://mridhul199.github.io/my-portfolio/kyc-tokenization/"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://mridhul199.github.io/my-portfolio/kyc-tokenization/"/>
+<meta property="og:title" content="KYC Tokenization · Mridhul Aswin"/>
+<meta property="og:description" content="TrustKYC: a concept for turning a one-time KYC verification into a reusable, consent-gated identity token, so merchants request access to a document template instead of collecting it again. Case study by Mridhul Aswin."/>
+<meta property="og:image" content="https://mridhul199.github.io/my-portfolio/assets/og/kyc-tokenization.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="KYC Tokenization · Mridhul Aswin"/>
+<meta name="twitter:description" content="TrustKYC: a concept for turning a one-time KYC verification into a reusable, consent-gated identity token, so merchants request access to a document template instead of collecting it again. Case study by Mridhul Aswin."/>
+<meta name="twitter:image" content="https://mridhul199.github.io/my-portfolio/assets/og/kyc-tokenization.png"/>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"/>
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32"/>
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"KYC Tokenization · Mridhul Aswin","description":"TrustKYC: a concept for turning a one-time KYC verification into a reusable, consent-gated identity token, so merchants request access to a document template instead of collecting it again. Case study by Mridhul Aswin.","author":{"@type":"Person","name":"Mridhul Aswin"},"url":"https://mridhul199.github.io/my-portfolio/kyc-tokenization/"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#F26522; --orange-hover:#D9541A; --orange-tint:#FEF0E8; --orange-tint-2:#FFF7F1;
+  --text-1:#0D1526; --text-2:#4A5568; --text-3:#8A97AC;
+  --canvas:#F7F8FA; --surface:#FFFFFF; --surface-2:#FAFBFC;
+  --border:#E2E8F0; --border-strong:#CBD5E0;
+  --success:#0A8F5C; --warning:#D97706; --error:#C0392B;
+  --success-tint:#E6F4EE; --warning-tint:#FEF3E2; --error-tint:#FBE9E7;
+  --f:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --r-s:4px; --r-m:6px; --r-l:8px; --r-xl:12px; --r-2xl:16px; --r-pill:999px;
+  --sh-1:0 1px 2px rgba(13,21,38,.04),0 0 0 1px rgba(13,21,38,.04);
+  --sh-2:0 4px 12px rgba(13,21,38,.06),0 0 0 1px rgba(13,21,38,.05);
+  --sh-3:0 12px 32px rgba(13,21,38,.08),0 0 0 1px rgba(13,21,38,.06);
+  --container:1200px; --gutter:32px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;scroll-behavior:smooth}
+body{font-family:var(--f);font-size:16px;line-height:1.55;color:var(--text-1);background:var(--canvas);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--orange);text-decoration:none}
+img,svg{display:block;max-width:100%}
+code{font-family:var(--mono);font-size:.85em;background:var(--canvas);padding:2px 5px;border-radius:var(--r-s);border:1px solid var(--border)}
+
+.shell{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+.shell.narrow{max-width:920px}
+
+.pf-bridge{position:sticky;top:0;z-index:50;background:rgba(11,11,12,.72);-webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.pf-bridge .pf-bridge-inner{display:flex;align-items:center;justify-content:space-between;height:48px}
+.pf-bridge-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text-1);letter-spacing:-.01em}
+.pf-bridge-link svg{width:15px;height:15px;stroke:var(--orange)}
+.pf-bridge-link:hover{color:var(--orange)}
+.pf-bridge-ctx{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+
+.chrome{background:linear-gradient(180deg,#FFFCFA 0%,#FFFFFF 100%);border-bottom:1px solid var(--border);position:sticky;top:48px;z-index:49;backdrop-filter:saturate(180%) blur(12px)}
+.chrome-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:600;font-size:15px;letter-spacing:-.01em}
+.brand-logo{width:26px;height:26px;border-radius:7px;background:var(--orange);display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px;font-family:'Manrope',var(--f)}
+.brand-sub{color:var(--text-3);font-weight:400;font-size:13px;border-left:1px solid var(--border);padding-left:12px;margin-left:4px}
+.chrome-nav{display:flex;gap:4px}
+.chrome-nav a{font-size:12px;font-weight:500;color:var(--text-3);padding:6px 12px;border-radius:var(--r-m);transition:all 120ms}
+.chrome-nav a:hover{background:var(--orange-tint-2);color:var(--text-1)}
+@media(max-width:760px){.chrome-nav{display:none}}
+
+.bg-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg-deco::before,.bg-deco::after{content:"";position:absolute;border-radius:50%;filter:blur(40px)}
+.bg-deco::before{width:600px;height:600px;top:-200px;left:-200px;background:radial-gradient(circle,rgba(242,101,34,.05),transparent 60%)}
+.bg-deco::after{width:800px;height:800px;bottom:-300px;right:-300px;background:radial-gradient(circle,rgba(242,101,34,.04),transparent 60%)}
+main{position:relative;z-index:1}
+
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);padding:6px 10px;background:var(--orange-tint);border-radius:var(--r-pill)}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--orange)}
+h1,h2,h3,h4,h5{margin:0;letter-spacing:-.02em;font-weight:600;color:var(--text-1)}
+h1{font-size:54px;line-height:1.05;letter-spacing:-.03em}
+h2{font-size:32px;line-height:1.15;letter-spacing:-.025em}
+h3{font-size:20px;line-height:1.3}
+h4{font-size:16px;line-height:1.35}
+.lead{font-size:18px;line-height:1.6;color:var(--text-2);max-width:65ch}
+.lead.body{color:var(--text-2);font-size:17px}
+p{margin:0;color:var(--text-2)}
+p.para{font-size:16px;line-height:1.7;color:var(--text-2);max-width:68ch;margin-top:18px}
+p.para + p.para{margin-top:16px}
+.muted{color:var(--text-3)}
+
+section{padding:72px 0;position:relative;border-top:1px solid var(--border)}
+.section-head{margin-bottom:36px;max-width:760px}
+.section-head h2{margin-top:12px}
+.section-head .lead{margin-top:16px}
+.sec-num{font-family:var(--mono);font-size:12px;color:var(--orange);font-weight:500;letter-spacing:.06em}
+
+.hero{padding:56px 0 8px}
+.hero h1{max-width:20ch;margin-top:20px}
+.hero .lead{margin-top:22px;font-size:20px;max-width:56ch}
+.hero .lead strong{color:var(--text-1);font-weight:600}
+
+.hero-grid{display:grid;grid-template-columns:1fr 360px;gap:32px;align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.hero-visual{position:relative;display:flex;justify-content:center;align-self:end;margin-bottom:-8px}
+.hero-visual img{width:100%;max-width:400px;filter:drop-shadow(0 30px 50px rgba(13,21,38,.16))}
+@media(max-width:900px){.hero-visual{margin-top:8px;margin-bottom:0;max-width:280px;margin-left:auto;margin-right:auto}.hero-visual img{max-width:280px}}
+
+.meta-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;margin-top:48px}
+@media(max-width:760px){.meta-bar{grid-template-columns:1fr 1fr}}
+.meta-cell{background:var(--surface);padding:18px 20px}
+.meta-cell .mk{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:6px}
+.meta-cell .mv{font-size:14px;font-weight:500;color:var(--text-1);line-height:1.4}
+
+.step-callout{background:linear-gradient(180deg,var(--orange-tint-2) 0%,var(--surface) 60%);border:1px solid var(--orange-tint);border-radius:var(--r-xl);padding:24px;display:grid;grid-template-columns:40px 1fr;gap:16px;align-items:start;margin-top:28px}
+.step-callout-ico{width:40px;height:40px;border-radius:10px;background:var(--orange-tint);color:var(--orange);display:grid;place-items:center;font-size:20px;font-weight:700}
+.step-callout h4{font-size:15px;margin:0 0 8px;color:var(--text-1)}
+.step-callout p{font-size:14px;line-height:1.6;color:var(--text-2);margin:0}
+
+figure{margin:32px 0 0}
+.frame{border:1px solid var(--border);border-radius:var(--r-2xl);background:var(--surface);overflow:hidden;box-shadow:var(--sh-2)}
+.frame img{display:block;width:100%;height:auto}
+.placeholder{aspect-ratio:16/6;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:var(--text-3);background:repeating-linear-gradient(45deg,var(--surface) 0 12px,var(--surface-2) 12px 24px);font-size:13px;text-align:center;padding:24px}
+.placeholder code{font-family:var(--mono);font-size:12px}
+figcaption{font-size:12px;color:var(--text-3);margin-top:12px;text-align:center}
+
+/* Filmstrip: wide multi-screen exports (whole flow in one PNG). Fixed height, horizontal scroll. */
+.frame.filmstrip{overflow-x:auto;background:linear-gradient(180deg,#1b1f27 0%,#11141a 100%)}
+.frame.filmstrip img{width:auto;height:460px;max-width:none}
+.frame.filmstrip::-webkit-scrollbar{height:8px}
+.frame.filmstrip::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:4px}
+@media(max-width:760px){.frame.filmstrip img{height:300px}}
+
+.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+.cards-grid.three{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.cards-grid,.cards-grid.three{grid-template-columns:1fr}}
+.pcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:20px 22px;box-shadow:var(--sh-1)}
+.pcard .tag{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--error)}
+.pcard.ok .tag{color:var(--orange)}
+.pcard.goal .tag{color:var(--text-3)}
+.pcard h4{font-size:15px;margin:8px 0 6px}
+.pcard p{font-size:13px;line-height:1.6;color:var(--text-2)}
+
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:28px;position:relative}
+@media(max-width:760px){.timeline{grid-template-columns:1fr;gap:10px}}
+.tl-step{position:relative;padding:0 14px}
+.tl-step .tl-dot{width:14px;height:14px;border-radius:50%;background:var(--surface);border:2px solid var(--orange);position:relative;z-index:2}
+.tl-step .tl-line{position:absolute;top:6px;left:50%;right:-50%;height:2px;background:var(--border);z-index:1}
+.tl-step:last-child .tl-line{display:none}
+@media(max-width:760px){.tl-step .tl-line{display:none}}
+.tl-step .tl-num{font-family:var(--mono);font-size:10px;color:var(--text-3);margin-top:14px}
+.tl-step h4{font-size:14px;margin:4px 0 6px}
+.tl-step p{font-size:12px;line-height:1.55;color:var(--text-2)}
+
+.decision{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:24px 0;border-bottom:1px solid var(--border);align-items:start}
+.decision:last-child{border-bottom:none}
+.decision .d-num{font-family:'Manrope',var(--f);font-size:28px;font-weight:800;color:var(--orange-tint);letter-spacing:-.03em;line-height:1;width:48px}
+.decision h4{font-size:17px;margin-bottom:6px}
+.decision .d-rationale{font-size:14px;line-height:1.65;color:var(--text-2);margin-top:8px}
+.decision .d-rationale b{color:var(--text-1);font-weight:600}
+
+ul.clean{list-style:none;padding:0;margin:24px 0 0}
+ul.clean li{padding:16px 0 16px 30px;border-bottom:1px solid var(--border);position:relative;color:var(--text-2);font-size:15px;line-height:1.5}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{content:"→";position:absolute;left:0;color:var(--orange);font-weight:700}
+ul.clean li strong{color:var(--text-1);font-weight:600}
+
+.reflect{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:0 var(--r-xl) var(--r-xl) 0;padding:28px 32px;margin-top:28px;box-shadow:var(--sh-1)}
+.reflect p{font-size:18px;line-height:1.55;color:var(--text-1);font-weight:500}
+
+footer{border-top:1px solid var(--border);padding:40px 0;color:var(--text-3);font-size:13px;background:var(--surface)}
+footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+.lightbox{position:fixed;inset:0;background:rgba(13,21,38,.82);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:32px;cursor:zoom-out}
+.lightbox.is-open{display:flex}
+.lightbox img{max-width:94vw;max-height:92vh;border-radius:var(--r-l);box-shadow:0 30px 60px rgba(0,0,0,.4)}
+[data-shot]{position:relative;cursor:zoom-in}
+.zoom-hint{position:absolute;top:10px;right:10px;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#fff;background:rgba(13,21,38,.62);backdrop-filter:blur(4px);padding:5px 10px;border-radius:999px;pointer-events:none;opacity:0;transform:translateY(-2px);transition:opacity 160ms,transform 160ms;z-index:3}
+[data-shot]:hover .zoom-hint{opacity:1;transform:none}
+.zoom-hint svg{width:12px;height:12px}
+</style>
+</head>
+<body>
+<nav class="pf-bridge" aria-label="Portfolio">
+  <div class="shell pf-bridge-inner">
+    <a class="pf-bridge-link" href="../" aria-label="Back to Mridhul Aswin portfolio home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Mridhul Aswin
+    </a>
+    <span class="pf-bridge-ctx">Selected work · KYC Tokenization</span>
+  </div>
+</nav>
+<div class="bg-deco"></div>
+
+<div class="chrome">
+  <div class="shell chrome-inner">
+    <div class="brand"><span class="brand-logo">KT</span> KYC Tokenization <span class="brand-sub">Case Study</span></div>
+    <nav class="chrome-nav">
+      <a href="#problem">Problem</a><a href="#process">Process</a><a href="#solution">Solution</a><a href="#impact">Impact</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <header class="hero">
+    <div class="shell">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Concept · Digital identity</span>
+          <h1>Verify once. Reuse the token everywhere.</h1>
+          <p class="lead">TrustKYC turns a one-time KYC verification into a reusable, consent-gated identity token. Merchants request access to a "template" of documents instead of collecting them again.</p>
+          <div class="meta-bar">
+            <div class="meta-cell"><div class="mk">My role</div><div class="mv">Sole designer, concept exploration</div></div>
+            <div class="meta-cell"><div class="mk">Timeline</div><div class="mv">2-week concept sprint</div></div>
+            <div class="meta-cell"><div class="mk">Platform</div><div class="mv">Mobile · iOS &amp; Android</div></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="assets/hero/hero-device-binding.png" alt="TrustKYC app open on a phone in hand, showing the device-binding security step"
+               onerror="this.style.display='none';" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="overview">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">01 · Overview</span>
+        <h2>One verification, a reusable token.</h2>
+        <p class="lead"><strong style="color:var(--text-1)">TrustKYC</strong> is a digital document vault: it verifies a user once and issues a reusable, consent-gated identity token. I designed it end to end: onboarding, verification, and the merchant consent flow that lets other services request access to that token instead of collecting documents themselves.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="problem">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">02 · The Problem</span>
+        <h2>Every new service means redoing KYC from scratch.</h2>
+        <p class="lead">A user who's already KYC-verified with one bank still has to re-upload the same Aadhaar, PAN, and address proof for the next insurer, lender, or wallet. Each service re-collects and re-stores the same sensitive documents, with no way for the user to control what's shared or with whom.</p>
+      </div>
+      <div class="cards-grid">
+        <div class="pcard"><span class="tag">Friction</span><h4>Repeated verification</h4><p>Document upload, OTP, and manual review happen again for every new merchant relationship, even when the user was verified days earlier elsewhere.</p></div>
+        <div class="pcard"><span class="tag">Exposure</span><h4>No consent boundary</h4><p>Once documents are shared, the user has no visibility into what a merchant holds or for how long. Sharing is all-or-nothing, not scoped.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="goals">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">03 · Goals</span>
+        <h2>What the token needed to do.</h2>
+      </div>
+      <div class="cards-grid three">
+        <div class="pcard ok"><span class="tag">Goal</span><h4>Verify once</h4><p>Onboarding should feel like a one-time setup cost, not a recurring tax on every new service.</p></div>
+        <div class="pcard ok"><span class="tag">Goal</span><h4>Consent, not documents</h4><p>Merchants request access to a named bundle of data. The user sees and approves exactly what's shared, every time.</p></div>
+        <div class="pcard ok"><span class="tag">Goal</span><h4>Reusable beyond KYC</h4><p>The same verified identity should carry into other use cases, not stay siloed to one app or integration.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">04 · Process</span>
+        <h2>From friction map to a testable model.</h2>
+        <p class="lead">A short, focused sprint: map where re-KYC friction actually bites, design the token/consent model, then prototype the onboarding and merchant flows against it.</p>
+      </div>
+      <div class="timeline" style="grid-template-columns:repeat(3,1fr)">
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-line"></div><div class="tl-num">01</div><h4>Map the friction</h4><p>Where re-verification actually happens, and what it costs the user.</p></div>
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-line"></div><div class="tl-num">02</div><h4>Design the token model</h4><p>What a "template" is, who can request it, and what consent looks like.</p></div>
+        <div class="tl-step"><div class="tl-dot"></div><div class="tl-num">03</div><h4>Prototype onboarding + consent</h4><p>TrustKYC verification flow and the merchant request/approve screens.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="solution">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">05 · The Solution</span>
+        <h2>Verify once, in TrustKYC.</h2>
+        <p class="lead">Mobile OTP, Aadhaar verification, and a progress state that's honest about the wait. Then a quick-login and device-binding step, so the token, once issued, doesn't need re-verifying on every open.</p>
+      </div>
+      <figure>
+        <div class="frame filmstrip" data-shot="assets/kyc-onboarding/onboarding-flow.png">
+          <img src="assets/kyc-onboarding/onboarding-flow.png" alt="TrustKYC onboarding flow: get started, create account, verify mobile OTP, verify Aadhaar, verification progress, quick login, device binding, home"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="placeholder" style="display:none;">TrustKYC onboarding flow<code>assets/kyc-onboarding/onboarding-flow.png</code></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+        <figcaption>Get started → mobile OTP → Aadhaar verification → progress → quick login → device binding. Verification happens once; everything after reuses the same session.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">06 · The Solution</span>
+        <h2>Consent, not documents.</h2>
+        <p class="lead">When a merchant (an insurer, in this case) needs KYC data, they don't get the user's documents. They request access to a named <strong style="color:var(--text-1)">template</strong>: a defined bundle of documents for a defined purpose. The user sees exactly what's being asked for and approves or declines it directly.</p>
+      </div>
+      <figure>
+        <div class="frame filmstrip" data-shot="assets/merchant-consent/consent-flow.png">
+          <img src="assets/merchant-consent/consent-flow.png" alt="Merchant consent flow: insurer app requests access to a KYC template, user reviews documents included, approves with PIN"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="placeholder" style="display:none;">Merchant consent flow<code>assets/merchant-consent/consent-flow.png</code></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+        <figcaption>LIC requests "Template 1." The user sees every document in it before approving with a PIN, and no raw documents change hands until then.</figcaption>
+      </figure>
+
+      <div class="decision">
+        <div class="d-num">01</div>
+        <div><h4>The template model over raw document sharing</h4><p class="d-rationale">Instead of merchants pulling a document list, they request a named, pre-defined bundle. <b>Why it matters:</b> the user reviews one clear request ("Template 1: 5 documents") instead of a permissions checklist. Honestly, that single consent screen took more iteration than the entire onboarding flow: naming and scoping the bundle so it reads as trustworthy in one glance turned out to be the hard part.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="impact">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">07 · Impact</span>
+        <h2>Presented as a direction, not a shipped product.</h2>
+        <p class="lead">This is concept-stage work, presented internally to stakeholders rather than built and released. Its value was in making the token/consent model concrete enough to react to.</p>
+      </div>
+      <ul class="clean">
+        <li><strong>Made the abstract concrete.</strong> "Reusable KYC" is easy to say and hard to picture. Walking stakeholders through an actual consent screen made the idea legible in a way a slide couldn't.</li>
+        <li><strong>Surfaced the real design problem early.</strong> The internal discussion converged quickly on consent and template scoping as the crux of the idea, not onboarding, which is what most KYC conversations default to.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="future">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">08 · Future Scope</span>
+        <h2>Open, for now.</h2>
+        <p class="lead">There's no defined next phase yet. This stays a concept until there's a specific integration to design for. The open question worth returning to: how the template model scales past a handful of merchants without turning into a permissions system nobody reads.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="reflection">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">09 · Reflection</span>
+        <h2>The hard part wasn't verification. It was consent.</h2>
+      </div>
+      <div class="reflect">
+        <p>Onboarding (OTP, Aadhaar, biometric setup) is a well-worn pattern. The genuinely hard design problem was the merchant consent screen: naming a bundle of documents so a user trusts it in one glance, without turning it into a checklist nobody reads. If I did this again, I'd start there, not with onboarding.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="shell">
+    <span>KYC Tokenization · Concept case study</span>
+    <span class="muted">TrustKYC</span>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-hidden="true"><img id="lightbox-img" alt=""></div>
+<script>
+document.addEventListener('click', e => {
+  const shot = e.target.closest('[data-shot]');
+  if (shot) {
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lightbox-img').src = shot.dataset.shot;
+    lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false');
+  }
+  if (e.target.id === 'lightbox' || e.target.id === 'lightbox-img') {
+    const lb = document.getElementById('lightbox');
+    lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true');
+    document.getElementById('lightbox-img').src = '';
+  }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const lb = document.getElementById('lightbox');
+    if (lb.classList.contains('is-open')) {
+      lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true');
+      document.getElementById('lightbox-img').src = '';
+    }
+  }
+});
+</script>
+</body>
+</html>
