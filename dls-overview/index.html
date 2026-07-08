@@ -227,15 +227,15 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
   <section id="process">
     <div class="shell narrow">
       <div class="section-head">
-        <h2>Building a component, consistently</h2>
-        <span class="sec-tag">How each page gets pulled</span>
+        <h2>How a component gets built</h2>
+        <span class="sec-tag">Inside the design system</span>
       </div>
-      <p class="lead">Every component goes through the same three passes before it counts as "done," so the
-      catalog stays trustworthy instead of turning into a pile of screenshots.</p>
+      <p class="lead">Every component in the system is built the same way, so a Button and a Card behave like
+      they came from the same family instead of two different designers' habits.</p>
       <div class="cards-grid">
-        <div class="pcard"><span class="tag">Pull</span><h4>Export from Dev Mode, not a screenshot</h4><p>Native Figma Dev Mode export keeps real spacing, type, and colour values intact, instead of a flattened image that loses the underlying tokens.</p></div>
-        <div class="pcard"><span class="tag">Audit</span><h4>Check for every state and size</h4><p>Before a component is marked pulled, its page is checked against the states, sizes, and variants the design system actually defines, not just the ones visible at a glance.</p></div>
-        <div class="pcard"><span class="tag">Document</span><h4>Describe intent, not just pixels</h4><p>Each entry gets a short description of what the component is for and when to use it, so the catalog reads as reference material, not just a gallery.</p></div>
+        <div class="pcard"><span class="tag">Foundation</span><h4>Start from tokens, not values</h4><p>Colour, spacing, radius, and type all come from the same shared token set. A component never hand-picks a one-off value when a token already exists for it.</p></div>
+        <div class="pcard"><span class="tag">Coverage</span><h4>Every state, every size, by default</h4><p>Default, hover, focus, disabled, and error states ship with the component from day one, along with its full size scale, instead of being added later per product team as they're needed.</p></div>
+        <div class="pcard"><span class="tag">Composition</span><h4>Built from smaller shared parts</h4><p>Heavier components like Cards and Chips are assembled from the same primitives (icons, avatars, buttons) rather than redrawn from scratch, so a fix to a primitive fixes every component built on it.</p></div>
       </div>
     </div>
   </section>
@@ -244,33 +244,33 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
     <div class="shell narrow">
       <div class="section-head">
         <h2>What keeps it consistent</h2>
-        <span class="sec-tag">Decisions behind the catalog</span>
+        <span class="sec-tag">Decisions behind the system</span>
       </div>
       <div class="decision">
         <div class="d-num">01</div>
         <div>
-          <h4>Representative exports over exhaustive variant grids</h4>
-          <p class="d-rationale">A component like Buttons can have 300+ variants once size, state, and hierarchy combine. Capturing every single one isn't the point of a working catalog; <b>one clean export plus a link back to the live Figma file</b> stays accurate and doesn't rot the moment a variant changes.</p>
+          <h4>One token set backs every surface</h4>
+          <p class="d-rationale">A button's corner radius and a card's corner radius come from the same radius scale, not values picked separately for each component. <b>When the scale changes, every component that references it updates together</b>, so nothing quietly drifts out of alignment.</p>
         </div>
       </div>
       <div class="decision">
         <div class="d-num">02</div>
         <div>
-          <h4>One component gets the deep-dive first</h4>
-          <p class="d-rationale">Rather than shallow-pulling all ~54 pages at once, a single component is worked all the way through, problem, system, dev handoff, before the same process is repeated at scale. <b>Proving the workflow on one component</b> is cheaper than discovering it doesn't hold up after pulling fifty.</p>
+          <h4>Names describe role, not appearance</h4>
+          <p class="d-rationale">Variants are named for what they do, primary, secondary, destructive, rather than what they currently look like, orange button, grey button. <b>A name that describes appearance breaks the moment the colour changes</b>; a name that describes role doesn't.</p>
         </div>
       </div>
       <div class="decision">
         <div class="d-num">03</div>
         <div>
-          <h4>Consistency lives in tokens, not memory</h4>
-          <p class="d-rationale">Every screenshot in this catalog traces back to the same design-system token set. <b>When a token changes, the source of truth updates once</b> instead of someone having to hunt down every component that used it and eyeball whether it still matches.</p>
+          <h4>Accessibility is built in, not bolted on</h4>
+          <p class="d-rationale">Focus rings, colour contrast, and minimum hit-target sizing live in the base component definition. <b>No product team has to remember to add them</b>, because there's no version of the component that ships without them.</p>
         </div>
       </div>
       <ul class="clean">
-        <li><strong>Re-pulled on change, not on a schedule.</strong> A page gets re-exported when its Figma source changes, not on a fixed cadence, so the catalog never claims to be more current than it is.</li>
-        <li><strong>Names match the source exactly.</strong> Every component's name and description mirror its actual Figma layer and page name, so there's no drift between what's documented and what's really in the file.</li>
-        <li><strong>Gaps are logged, not hidden.</strong> Components not yet pulled are listed as queued rather than left out, so the catalog stays honest about what it does and doesn't cover yet.</li>
+        <li><strong>Specs live with the component, not in a separate doc.</strong> Sizing, spacing, and state rules sit on the same Figma page as the component itself, so the spec can't drift out of sync with what's actually shipped.</li>
+        <li><strong>New states start at the definition, never at the usage.</strong> A new state or variant is added to the component and its tokens first, then rolled out to the products using it, never patched in ad hoc on one screen.</li>
+        <li><strong>Deprecated patterns are marked, not deleted.</strong> Older variants stay visible and flagged instead of disappearing outright, so existing screens that still reference them don't silently break.</li>
       </ul>
     </div>
   </section>
