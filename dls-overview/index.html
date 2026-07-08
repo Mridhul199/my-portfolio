@@ -106,9 +106,29 @@ ul.clean li{padding:16px 0 16px 30px;border-bottom:1px solid var(--border);posit
 ul.clean li:last-child{border-bottom:none}
 ul.clean li::before{content:"→";position:absolute;left:0;color:var(--orange);font-weight:700}
 ul.clean li strong{color:var(--text-1);font-weight:600}
-.lightbox{position:fixed;inset:0;background:rgba(13,21,38,.82);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:32px;cursor:zoom-out}
+.lightbox{position:fixed;inset:0;background:rgba(13,21,38,.82);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:32px}
 .lightbox.is-open{display:flex}
-.lightbox img{max-width:94vw;max-height:92vh;border-radius:var(--r-l);box-shadow:0 30px 60px rgba(0,0,0,.4)}
+.lightbox img{max-width:94vw;max-height:92vh;border-radius:var(--r-l);box-shadow:0 30px 60px rgba(0,0,0,.4);pointer-events:none}
+
+/* shared close button for lightbox + carousel */
+.modal-close{position:fixed;top:24px;right:24px;z-index:110;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(13,21,38,.6);color:#fff;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.modal-close:hover{background:rgba(13,21,38,.85)}
+
+/* icon carousel */
+.carousel-modal{position:fixed;inset:0;background:rgba(13,21,38,.88);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:32px 88px}
+.carousel-modal.is-open{display:flex}
+.carousel-stage{display:flex;flex-direction:column;align-items:center;gap:16px;max-width:100%}
+.carousel-stage img{max-width:100%;max-height:74vh;border-radius:var(--r-l);box-shadow:0 30px 60px rgba(0,0,0,.4);background:var(--surface);pointer-events:none}
+.carousel-caption{color:rgba(255,255,255,.75);font-size:13px;text-align:center;max-width:60ch;margin:0}
+.carousel-nav{position:fixed;top:50%;transform:translateY(-50%);z-index:110;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(13,21,38,.6);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.carousel-nav:hover{background:rgba(13,21,38,.85)}
+.carousel-nav.prev{left:24px}
+.carousel-nav.next{right:24px}
+.carousel-dots{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:110}
+.carousel-dots .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer}
+.carousel-dots .dot.on{background:#fff}
+.carousel-placeholder{width:min(70vw,640px);aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--text-3);background:var(--surface-2);border:1px dashed var(--border-strong);border-radius:var(--r-l);font-size:13px;text-align:center;padding:24px}
+.carousel-placeholder code{font-family:var(--mono);font-size:12px}
 footer{border-top:1px solid var(--border);padding:32px 0;color:var(--text-3);font-size:13px;background:var(--surface)}
 footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 </style>
@@ -211,7 +231,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
           </div>
         </div>
 
-        <div class="card" data-shot="">
+        <div class="card" data-carousel="icons">
           <div class="thumb icon-grid">
             <div class="icon-tile"><svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.5556 3.5465C12.519 3.53835 12.481 3.53835 12.4444 3.5465L4.23925 5.37215C4.12193 5.39825 4.03846 5.50244 4.03846 5.62277V7.87977C4.03846 8.02156 4.15326 8.1365 4.29487 8.1365H20.7051C20.8467 8.1365 20.9615 8.02156 20.9615 7.87977V5.62277C20.9615 5.50244 20.8781 5.39825 20.7608 5.37215L12.5556 3.5465ZM12.1106 2.04279C12.3671 1.98574 12.6329 1.98574 12.8894 2.04279L21.0945 3.86844C21.9157 4.05116 22.5 4.78046 22.5 5.62277V7.87977C22.5 8.87229 21.6964 9.67689 20.7051 9.67689H20.4487V16.3519H20.7051C21.6964 16.3519 22.5 17.1565 22.5 18.149V20.2029C22.5 21.1954 21.6964 22 20.7051 22H4.29487C3.30359 22 2.5 21.1954 2.5 20.2029V18.149C2.5 17.1565 3.30359 16.3519 4.29487 16.3519H4.55128V9.67689H4.29487C3.30359 9.67689 2.5 8.87229 2.5 7.87977V5.62277C2.5 4.78046 3.08429 4.05116 3.90551 3.86844L12.1106 2.04279ZM19.6807 17.8923C19.6803 17.8923 19.6799 17.8923 19.6795 17.8923C19.6791 17.8923 19.6787 17.8923 19.6783 17.8923H15.0653L15.0641 17.8923L15.0629 17.8923H9.93713L9.9359 17.8923L9.93468 17.8923H4.29487C4.15326 17.8923 4.03846 18.0072 4.03846 18.149V20.2029C4.03846 20.3447 4.15326 20.4596 4.29487 20.4596H20.7051C20.8467 20.4596 20.9615 20.3447 20.9615 20.2029V18.149C20.9615 18.0072 20.8467 17.8923 20.7051 17.8923H19.6807ZM18.9103 16.3519V9.67689H15.8333V16.3519H18.9103ZM10.7051 9.67689H14.2949V16.3519H10.7051V9.67689ZM9.16667 16.3519V9.67689H6.08974V16.3519H9.16667Z" fill="#3B475B"/></svg></div>
             <div class="icon-tile"><svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2.80396" y="6.06241" width="18.3922" height="12.3808" rx="2.25" stroke="#3B475B" stroke-width="1.5"/><line x1="2.81323" y1="10.3382" x2="21.2135" y2="10.3382" stroke="#3B475B" stroke-width="1.5"/><path d="M6.57141 13.9713L11.051 13.9713" stroke="#3B475B" stroke-width="1.5" stroke-linecap="round"/></svg></div>
@@ -236,7 +256,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
           </div>
           <div class="meta">
             <h4>Icons</h4>
-            <p class="desc">General action icons, file-type marks, and payment-network icons (Visa, Mastercard, RuPay, UPI). Partner-bank and platform logos live in a separate, access-controlled set and aren't shown here.</p>
+            <p class="desc">General action icons, file-type marks, and payment-network icons (Visa, Mastercard, RuPay, UPI). Click through for the full set and construction guidelines. Partner-bank and platform logos live in a separate, access-controlled set and aren't shown here.</p>
           </div>
         </div>
 
@@ -244,41 +264,6 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
         <div class="pending-card">More components queued: Tabs, Tables, Search, Modal, Dropdown, and others still to pull</div>
 
       </div>
-    </div>
-  </section>
-
-  <section id="icon-construction">
-    <div class="shell narrow">
-      <div class="section-head">
-        <h2>How icons stay consistent</h2>
-      </div>
-      <p class="lead">Icons are the easiest part of a design system to let drift: one designer's line weight creeps up, another's corner radius rounds off differently, and within a few dozen icons nothing quite matches. A small set of fixed rules keeps that from happening.</p>
-      <div class="decision">
-        <div class="d-num">01</div>
-        <div>
-          <h4>Every icon sits on the same grid</h4>
-          <p class="d-rationale">Each icon is drawn inside a fixed-size frame with a consistent inner safe area, not sketched freehand at whatever size looks right. A 20px icon and a 40px icon built on the same grid read at the same visual weight when placed side by side, instead of one looking heavier or more cramped than the other.</p>
-        </div>
-      </div>
-      <div class="decision">
-        <div class="d-num">02</div>
-        <div>
-          <h4>One stroke weight, one corner radius, across the whole set</h4>
-          <p class="d-rationale">Line icons share a single stroke thickness and a single corner radius throughout, rather than each icon picking its own. That's what lets icons pulled from completely different parts of the product sit next to each other and still read as one family, not two icon sets stitched together.</p>
-        </div>
-      </div>
-      <div class="decision">
-        <div class="d-num">03</div>
-        <div>
-          <h4>Pairing and scaling follow a fixed rule, not a per-screen judgement call</h4>
-          <p class="d-rationale">How an icon aligns next to a label, and which sizes it's allowed to appear at, is decided once at the system level. A designer placing an icon next to text isn't deciding the spacing or the size from scratch each time; they're applying a rule that's already been made.</p>
-        </div>
-      </div>
-      <ul class="clean">
-        <li><strong>Icons pair with text at a fixed size and alignment,</strong> not stretched, squeezed, or nudged into place per screen.</li>
-        <li><strong>A small fixed size scale covers every use case,</strong> so an icon is never freely resized to fit a gap.</li>
-        <li><strong>Mismatched weight or an off-grid icon gets caught in review,</strong> not shipped and fixed later.</li>
-      </ul>
     </div>
   </section>
 
@@ -359,28 +344,96 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
   </div>
 </footer>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-hidden="true"><img id="lightbox-img" alt=""></div>
+<div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+  <img id="lightbox-img" alt=""/>
+  <button class="modal-close" id="lightbox-close" aria-label="Close">&times;</button>
+</div>
+
+<div class="carousel-modal" id="icon-carousel" role="dialog" aria-hidden="true" aria-label="Icon gallery">
+  <button class="modal-close" id="carousel-close" aria-label="Close">&times;</button>
+  <button class="carousel-nav prev" id="carousel-prev" aria-label="Previous image">&lsaquo;</button>
+  <div class="carousel-stage">
+    <img id="carousel-img" alt="" style="display:none"/>
+    <div class="carousel-placeholder" id="carousel-placeholder" style="display:none">
+      Image not added yet<code id="carousel-placeholder-path"></code>
+    </div>
+    <p class="carousel-caption" id="carousel-caption"></p>
+  </div>
+  <button class="carousel-nav next" id="carousel-next" aria-label="Next image">&rsaquo;</button>
+  <div class="carousel-dots" id="carousel-dots"></div>
+</div>
+
 <script>
-document.addEventListener('click', e => {
-  const shot = e.target.closest('[data-shot]');
-  if (shot) {
-    const lb = document.getElementById('lightbox');
-    document.getElementById('lightbox-img').src = shot.dataset.shot;
+(function(){
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightbox-img');
+  function openLightbox(src){
+    lbImg.src = src;
     lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false');
   }
-  if (e.target.id === 'lightbox' || e.target.id === 'lightbox-img') {
-    const lb = document.getElementById('lightbox');
+  function closeLightbox(){
     lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true');
-    document.getElementById('lightbox-img').src = '';
+    lbImg.src = '';
   }
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    const lb = document.getElementById('lightbox');
-    lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true');
-    document.getElementById('lightbox-img').src = '';
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+
+  var iconSlides = [
+    {src:'assets/icons/icons-general.png', caption:'General action icons used across the product.'},
+    {src:'assets/icons/icons-labeled.png', caption:'Labeled icons: settlement, refunds, chargebacks, account and user management.'},
+    {src:'assets/icons/icons-rte.png', caption:'Rich text editor toolbar icons.'},
+    {src:'assets/icons/construction-guidelines.png', caption:'Construction rules: grid & keyline, padding, stroke weight, spacing, corner radius.'},
+    {src:'assets/icons/usage-guidelines.png', caption:'Usage rules: icon pairing, font pairing, and scaling.'}
+  ];
+  var carousel = document.getElementById('icon-carousel');
+  var carImg = document.getElementById('carousel-img');
+  var carPh = document.getElementById('carousel-placeholder');
+  var carPhPath = document.getElementById('carousel-placeholder-path');
+  var carCaption = document.getElementById('carousel-caption');
+  var carDots = document.getElementById('carousel-dots');
+  var carIndex = 0;
+
+  function renderCarousel(){
+    var slide = iconSlides[carIndex];
+    carImg.style.display = 'none';
+    carPh.style.display = 'none';
+    carImg.onerror = function(){ carImg.style.display = 'none'; carPh.style.display = 'flex'; carPhPath.textContent = slide.src; };
+    carImg.onload = function(){ carImg.style.display = 'block'; carPh.style.display = 'none'; };
+    carImg.src = slide.src;
+    carCaption.textContent = slide.caption;
+    carDots.innerHTML = iconSlides.map(function(_, i){ return '<span class="dot'+(i===carIndex?' on':'')+'" data-i="'+i+'"></span>'; }).join('');
   }
-});
+  function openCarousel(){
+    carIndex = 0; renderCarousel();
+    carousel.classList.add('is-open'); carousel.setAttribute('aria-hidden', 'false');
+  }
+  function closeCarousel(){
+    carousel.classList.remove('is-open'); carousel.setAttribute('aria-hidden', 'true');
+  }
+  function prevSlide(){ carIndex = (carIndex - 1 + iconSlides.length) % iconSlides.length; renderCarousel(); }
+  function nextSlide(){ carIndex = (carIndex + 1) % iconSlides.length; renderCarousel(); }
+
+  document.getElementById('carousel-close').addEventListener('click', closeCarousel);
+  document.getElementById('carousel-prev').addEventListener('click', prevSlide);
+  document.getElementById('carousel-next').addEventListener('click', nextSlide);
+  carDots.addEventListener('click', function(e){
+    var dot = e.target.closest('.dot');
+    if (dot) { carIndex = parseInt(dot.dataset.i, 10); renderCarousel(); }
+  });
+
+  document.addEventListener('click', function(e){
+    if (e.target.closest('[data-carousel]')) { openCarousel(); return; }
+    var shot = e.target.closest('[data-shot]');
+    if (shot && shot.dataset.shot) { openLightbox(shot.dataset.shot); }
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') { closeLightbox(); closeCarousel(); }
+    if (carousel.classList.contains('is-open')) {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+    }
+  });
+})();
 </script>
 <script src="../scripts/reveal.js" defer onerror="document.documentElement.classList.remove('js')"></script>
 </body>
