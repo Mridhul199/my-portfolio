@@ -247,6 +247,41 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
     </div>
   </section>
 
+  <section id="icon-construction">
+    <div class="shell narrow">
+      <div class="section-head">
+        <h2>How icons stay consistent</h2>
+      </div>
+      <p class="lead">Icons are the easiest part of a design system to let drift: one designer's line weight creeps up, another's corner radius rounds off differently, and within a few dozen icons nothing quite matches. A small set of fixed rules keeps that from happening.</p>
+      <div class="decision">
+        <div class="d-num">01</div>
+        <div>
+          <h4>Every icon sits on the same grid</h4>
+          <p class="d-rationale">Each icon is drawn inside a fixed-size frame with a consistent inner safe area, not sketched freehand at whatever size looks right. A 20px icon and a 40px icon built on the same grid read at the same visual weight when placed side by side, instead of one looking heavier or more cramped than the other.</p>
+        </div>
+      </div>
+      <div class="decision">
+        <div class="d-num">02</div>
+        <div>
+          <h4>One stroke weight, one corner radius, across the whole set</h4>
+          <p class="d-rationale">Line icons share a single stroke thickness and a single corner radius throughout, rather than each icon picking its own. That's what lets icons pulled from completely different parts of the product sit next to each other and still read as one family, not two icon sets stitched together.</p>
+        </div>
+      </div>
+      <div class="decision">
+        <div class="d-num">03</div>
+        <div>
+          <h4>Pairing and scaling follow a fixed rule, not a per-screen judgement call</h4>
+          <p class="d-rationale">How an icon aligns next to a label, and which sizes it's allowed to appear at, is decided once at the system level. A designer placing an icon next to text isn't deciding the spacing or the size from scratch each time; they're applying a rule that's already been made.</p>
+        </div>
+      </div>
+      <ul class="clean">
+        <li><strong>Icons pair with text at a fixed size and alignment,</strong> not stretched, squeezed, or nudged into place per screen.</li>
+        <li><strong>A small fixed size scale covers every use case,</strong> so an icon is never freely resized to fit a gap.</li>
+        <li><strong>Mismatched weight or an off-grid icon gets caught in review,</strong> not shipped and fixed later.</li>
+      </ul>
+    </div>
+  </section>
+
   <section id="process">
     <div class="shell narrow">
       <div class="section-head">
