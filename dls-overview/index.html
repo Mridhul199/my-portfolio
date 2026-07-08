@@ -89,6 +89,23 @@ section{padding:48px 0;border-top:1px solid var(--border)}
 .card h4{font-size:14px;font-weight:600;margin:0}
 .card p.desc{font-size:12px;color:var(--text-2);margin-top:8px;line-height:1.5}
 .pending-card{border:1px dashed var(--border-strong);border-radius:var(--r-xl);background:var(--surface-2);display:flex;align-items:center;justify-content:center;min-height:120px;color:var(--text-3);font-size:13px;text-align:center;padding:16px}
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+@media(max-width:760px){.cards-grid{grid-template-columns:1fr}}
+.pcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:20px 22px;box-shadow:var(--sh-1)}
+.pcard .tag{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--orange)}
+.pcard h4{font-size:15px;margin:8px 0 6px}
+.pcard p{font-size:13px;line-height:1.6;color:var(--text-2)}
+.decision{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:24px 0;border-bottom:1px solid var(--border);align-items:start}
+.decision:last-child{border-bottom:none}
+.decision .d-num{font-family:'Manrope',var(--f);font-size:28px;font-weight:800;color:var(--orange-tint);letter-spacing:-.03em;line-height:1;width:48px}
+.decision h4{font-size:17px;margin-bottom:6px}
+.decision .d-rationale{font-size:14px;line-height:1.65;color:var(--text-2);margin-top:8px}
+.decision .d-rationale b{color:var(--text-1);font-weight:600}
+ul.clean{list-style:none;padding:0;margin:24px 0 0}
+ul.clean li{padding:16px 0 16px 30px;border-bottom:1px solid var(--border);position:relative;color:var(--text-2);font-size:15px;line-height:1.5}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{content:"→";position:absolute;left:0;color:var(--orange);font-weight:700}
+ul.clean li strong{color:var(--text-1);font-weight:600}
 .lightbox{position:fixed;inset:0;background:rgba(13,21,38,.82);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:32px;cursor:zoom-out}
 .lightbox.is-open{display:flex}
 .lightbox img{max-width:94vw;max-height:92vh;border-radius:var(--r-l);box-shadow:0 30px 60px rgba(0,0,0,.4)}
@@ -204,6 +221,57 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
         <div class="pending-card">~45 more components queued: Tabs, Tables, Search, Modal, Dropdown, and the rest of the file</div>
 
       </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="shell narrow">
+      <div class="section-head">
+        <h2>Building a component, consistently</h2>
+        <span class="sec-tag">How each page gets pulled</span>
+      </div>
+      <p class="lead">Every component goes through the same three passes before it counts as "done," so the
+      catalog stays trustworthy instead of turning into a pile of screenshots.</p>
+      <div class="cards-grid">
+        <div class="pcard"><span class="tag">Pull</span><h4>Export from Dev Mode, not a screenshot</h4><p>Native Figma Dev Mode export keeps real spacing, type, and colour values intact, instead of a flattened image that loses the underlying tokens.</p></div>
+        <div class="pcard"><span class="tag">Audit</span><h4>Check for every state and size</h4><p>Before a component is marked pulled, its page is checked against the states, sizes, and variants the design system actually defines, not just the ones visible at a glance.</p></div>
+        <div class="pcard"><span class="tag">Document</span><h4>Describe intent, not just pixels</h4><p>Each entry gets a short description of what the component is for and when to use it, so the catalog reads as reference material, not just a gallery.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="consistency">
+    <div class="shell narrow">
+      <div class="section-head">
+        <h2>What keeps it consistent</h2>
+        <span class="sec-tag">Decisions behind the catalog</span>
+      </div>
+      <div class="decision">
+        <div class="d-num">01</div>
+        <div>
+          <h4>Representative exports over exhaustive variant grids</h4>
+          <p class="d-rationale">A component like Buttons can have 300+ variants once size, state, and hierarchy combine. Capturing every single one isn't the point of a working catalog; <b>one clean export plus a link back to the live Figma file</b> stays accurate and doesn't rot the moment a variant changes.</p>
+        </div>
+      </div>
+      <div class="decision">
+        <div class="d-num">02</div>
+        <div>
+          <h4>One component gets the deep-dive first</h4>
+          <p class="d-rationale">Rather than shallow-pulling all ~54 pages at once, a single component is worked all the way through, problem, system, dev handoff, before the same process is repeated at scale. <b>Proving the workflow on one component</b> is cheaper than discovering it doesn't hold up after pulling fifty.</p>
+        </div>
+      </div>
+      <div class="decision">
+        <div class="d-num">03</div>
+        <div>
+          <h4>Consistency lives in tokens, not memory</h4>
+          <p class="d-rationale">Every screenshot in this catalog traces back to the same design-system token set. <b>When a token changes, the source of truth updates once</b> instead of someone having to hunt down every component that used it and eyeball whether it still matches.</p>
+        </div>
+      </div>
+      <ul class="clean">
+        <li><strong>Re-pulled on change, not on a schedule.</strong> A page gets re-exported when its Figma source changes, not on a fixed cadence, so the catalog never claims to be more current than it is.</li>
+        <li><strong>Names match the source exactly.</strong> Every component's name and description mirror its actual Figma layer and page name, so there's no drift between what's documented and what's really in the file.</li>
+        <li><strong>Gaps are logged, not hidden.</strong> Components not yet pulled are listed as queued rather than left out, so the catalog stays honest about what it does and doesn't cover yet.</li>
+      </ul>
     </div>
   </section>
 </main>
