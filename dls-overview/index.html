@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<script>document.documentElement.classList.add('js')</script>
+<title>DLS Component Catalog · Auditing a design system from Figma · Case Study</title>
+<meta name="description" content="A working, in-progress catalog of the payments fintech's design language system, pulled component by component from the live Figma file: screenshots, specs, and interaction notes. Case study by Mridhul Aswin."/>
+<meta name="author" content="Mridhul Aswin"/>
+<link rel="canonical" href="https://mridhul199.github.io/my-portfolio/dls-overview/"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://mridhul199.github.io/my-portfolio/dls-overview/"/>
+<meta property="og:title" content="DLS Component Catalog · Mridhul Aswin"/>
+<meta property="og:description" content="A working, in-progress catalog of the payments fintech's design language system, pulled component by component from the live Figma file: screenshots, specs, and interaction notes. Case study by Mridhul Aswin."/>
+<meta property="og:image" content="https://mridhul199.github.io/my-portfolio/assets/og/dls-overview.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="DLS Component Catalog · Mridhul Aswin"/>
+<meta name="twitter:description" content="A working, in-progress catalog of the payments fintech's design language system, pulled component by component from the live Figma file: screenshots, specs, and interaction notes. Case study by Mridhul Aswin."/>
+<meta name="twitter:image" content="https://mridhul199.github.io/my-portfolio/assets/og/dls-overview.png"/>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"/>
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32"/>
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"DLS Component Catalog · Mridhul Aswin","description":"A working, in-progress catalog of the payments fintech's design language system, pulled component by component from the live Figma file: screenshots, specs, and interaction notes. Case study by Mridhul Aswin.","author":{"@type":"Person","name":"Mridhul Aswin"},"url":"https://mridhul199.github.io/my-portfolio/dls-overview/"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#F26522; --orange-hover:#D9541A; --orange-tint:#FEF0E8; --orange-tint-2:#FFF7F1;
+  --text-1:#0D1526; --text-2:#4A5568; --text-3:#8A97AC;
+  --canvas:#F7F8FA; --surface:#FFFFFF; --surface-2:#FAFBFC;
+  --border:#E2E8F0; --border-strong:#CBD5E0;
+  --f:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --r-s:4px; --r-m:6px; --r-l:8px; --r-xl:12px; --r-2xl:16px; --r-pill:999px;
+  --sh-1:0 1px 2px rgba(13,21,38,.04),0 0 0 1px rgba(13,21,38,.04);
+  --sh-2:0 4px 12px rgba(13,21,38,.06),0 0 0 1px rgba(13,21,38,.05);
+  --container:1200px; --gutter:32px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;scroll-behavior:smooth}
+body{font-family:var(--f);font-size:16px;line-height:1.55;color:var(--text-1);background:var(--canvas);-webkit-font-smoothing:antialiased}
+a{color:var(--orange);text-decoration:none}
+img,svg{display:block;max-width:100%}
+.shell{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+.shell.narrow{max-width:920px}
+
+.pf-bridge{position:sticky;top:0;z-index:50;background:rgba(11,11,12,.72);-webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.pf-bridge .pf-bridge-inner{display:flex;align-items:center;justify-content:space-between;height:48px}
+.pf-bridge-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text-1);letter-spacing:-.01em}
+.pf-bridge-link svg{width:15px;height:15px;stroke:var(--orange)}
+.pf-bridge-link:hover{color:var(--orange)}
+.pf-bridge-ctx{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+
+.chrome{background:linear-gradient(180deg,#FFFCFA 0%,#FFFFFF 100%);border-bottom:1px solid var(--border);position:sticky;top:48px;z-index:49;backdrop-filter:saturate(180%) blur(12px)}
+.chrome-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:600;font-size:15px;letter-spacing:-.01em}
+.brand-logo{width:26px;height:26px;border-radius:7px;background:var(--orange);display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px;font-family:'Manrope',var(--f)}
+.brand-sub{color:var(--text-3);font-weight:400;font-size:13px;border-left:1px solid var(--border);padding-left:12px;margin-left:4px}
+main{position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);padding:6px 10px;background:var(--orange-tint);border-radius:var(--r-pill)}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--orange)}
+h1,h2,h3,h4{margin:0;letter-spacing:-.02em;font-weight:600;color:var(--text-1)}
+h1{font-size:48px;line-height:1.08}
+h2{font-size:28px;line-height:1.15}
+h3{font-size:17px}
+.lead{font-size:18px;line-height:1.6;color:var(--text-2);max-width:65ch}
+p{margin:0;color:var(--text-2)}
+.hero{padding:72px 0 48px}
+.hero h1{max-width:20ch;margin-top:20px}
+.hero .lead{margin-top:18px;max-width:60ch}
+.progress-strip{display:flex;align-items:center;gap:10px;margin-top:32px;font-size:13px;color:var(--text-3)}
+.progress-bar{flex:1;max-width:280px;height:6px;background:var(--border);border-radius:99px;overflow:hidden}
+.progress-fill{height:100%;background:var(--orange);border-radius:99px}
+section{padding:48px 0;border-top:1px solid var(--border)}
+.section-head{margin-bottom:28px;display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.section-head h2{display:flex;align-items:center;gap:10px}
+.sec-tag{font-family:var(--mono);font-size:11px;color:var(--orange);background:var(--orange-tint);padding:3px 8px;border-radius:6px;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-1);display:flex;flex-direction:column;cursor:zoom-in;position:relative}
+.card .thumb{background:var(--surface-2);border-bottom:1px solid var(--border);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card .thumb img{width:100%;height:100%;object-fit:contain}
+.card .thumb .ph{color:var(--text-3);font-size:12px;text-align:center;padding:16px}
+.card .meta{padding:14px 16px}
+.card h4{font-size:14px;font-weight:600;margin:0}
+.card p.desc{font-size:12px;color:var(--text-2);margin-top:8px;line-height:1.5}
+.pending-card{border:1px dashed var(--border-strong);border-radius:var(--r-xl);background:var(--surface-2);display:flex;align-items:center;justify-content:center;min-height:120px;color:var(--text-3);font-size:13px;text-align:center;padding:16px}
+.lightbox{position:fixed;inset:0;background:rgba(13,21,38,.82);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:32px;cursor:zoom-out}
+.lightbox.is-open{display:flex}
+.lightbox img{max-width:94vw;max-height:92vh;border-radius:var(--r-l);box-shadow:0 30px 60px rgba(0,0,0,.4)}
+footer{border-top:1px solid var(--border);padding:32px 0;color:var(--text-3);font-size:13px;background:var(--surface)}
+footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+</style>
+<link rel="stylesheet" href="../styles/casestudy-dark.css"/>
+</head>
+<body data-auto-reveal>
+<nav class="pf-bridge" aria-label="Portfolio">
+  <div class="shell pf-bridge-inner">
+    <a class="pf-bridge-link" href="../" aria-label="Back to Mridhul Aswin portfolio home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Mridhul Aswin
+    </a>
+    <span class="pf-bridge-ctx">Selected work · DLS Component Catalog</span>
+  </div>
+</nav>
+
+<div class="chrome">
+  <div class="shell chrome-inner">
+    <div class="brand"><span class="brand-logo">D</span> DLS <span class="brand-sub">Component Catalog</span></div>
+  </div>
+</div>
+
+<main>
+  <header class="hero">
+    <div class="shell narrow">
+      <span class="eyebrow"><span class="dot"></span> DLS 2025 components · pulled from Figma</span>
+      <h1 data-split-words>Every component in the system, in one place.</h1>
+      <p class="lead">A working catalog of the payments fintech's design language system component library, pulled directly from the live Figma file, one page at a time. Screenshots and specs, not the full 300+ variant grid.</p>
+      <div class="progress-strip">
+        <span>8 of ~54 pages pulled</span>
+        <div class="progress-bar"><div class="progress-fill" style="width:15%"></div></div>
+        <span>in progress</span>
+      </div>
+    </div>
+  </header>
+
+  <section id="catalog">
+    <div class="shell narrow">
+      <div class="section-head">
+        <h2>Component catalog</h2>
+        <span class="sec-tag">Pulled from Figma so far</span>
+      </div>
+      <div class="grid">
+
+        <div class="card" data-shot="assets/buttons/button-variant-grid.png">
+          <div class="thumb"><img src="assets/buttons/button-variant-grid.png" alt="Buttons component" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none">button-variant-grid.png</div></div>
+          <div class="meta">
+            <h4>Buttons</h4>
+            <p class="desc">The core action control: size, layout (icon/label), hierarchy, state, and destructive variants, covering every button a product surface needs.</p>
+          </div>
+        </div>
+
+        <div class="card" data-shot="assets/accordion/accordion-overview.png">
+          <div class="thumb"><img src="assets/accordion/accordion-overview.png" alt="Accordion component" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none">accordion-overview.png</div></div>
+          <div class="meta">
+            <h4>Accordion</h4>
+            <p class="desc">An accordion is a graphical control element that allows you to expand and collapse sections of content: a list of headers, each tied to a section that expands or collapses on click.</p>
+          </div>
+        </div>
+
+        <div class="card" data-shot="assets/avatar/avatar-overview.png">
+          <div class="thumb"><img src="assets/avatar/avatar-overview.png" alt="Avatar component" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none">avatar-overview.png</div></div>
+          <div class="meta">
+            <h4>Avatar</h4>
+            <p class="desc">The default profile avatar mark: the same page also holds a broader set of men's and women's avatar illustrations for richer, identity-specific placements.</p>
+          </div>
+        </div>
+
+        <div class="card" data-shot="assets/breadcrumbs/breadcrumbs-overview.png">
+          <div class="thumb"><img src="assets/breadcrumbs/breadcrumbs-overview.png" alt="Breadcrumbs component" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none">breadcrumbs-overview.png</div></div>
+          <div class="meta">
+            <h4>Breadcrumbs</h4>
+            <p class="desc">Path-style navigation trail component, shown here with its collapsed "..." state for deep paths.</p>
+          </div>
+        </div>
+
+        <div class="card" data-shot="assets/cards/cards-overview.png">
+          <div class="thumb"><img src="assets/cards/cards-overview.png" alt="Cards component" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none">cards-overview.png</div></div>
+          <div class="meta">
+            <h4>Cards</h4>
+            <p class="desc">Container components for grouping related content: this page defines three variant sets covering padding, image, and icon treatments.</p>
+          </div>
+        </div>
+
+        <div class="card" data-shot="assets/charts/charts-overview.png">
+          <div class="thumb"><img src="assets/charts/charts-overview.png" alt="Charts component" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none">charts-overview.png</div></div>
+          <div class="meta">
+            <h4>Charts</h4>
+            <p class="desc">A full data-visualization set: bar, line, gauge, funnel, heatmap, bubble, doughnut, and tree map charts, each with small/medium/large sizing.</p>
+          </div>
+        </div>
+
+        <div class="card" data-shot="assets/chips/chips-overview.png">
+          <div class="thumb"><img src="assets/chips/chips-overview.png" alt="Chips component" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none">chips-overview.png</div></div>
+          <div class="meta">
+            <h4>Chips</h4>
+            <p class="desc">Compact, tappable tags for filters and status labels: this page also holds a filter-chips variant and a live "try me" interaction demo.</p>
+          </div>
+        </div>
+
+        <div class="card" data-shot="assets/date-range/date-range-overview.png">
+          <div class="thumb"><img src="assets/date-range/date-range-overview.png" alt="Date Picker component" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="ph" style="display:none">date-range-overview.png</div></div>
+          <div class="meta">
+            <h4>Date range</h4>
+            <p class="desc">Calendar-based date selection, covering both single-date and range picks with preset shortcuts (last 7 days, this month, etc).</p>
+          </div>
+        </div>
+
+        <div class="pending-card">Bento: page exists but is empty in Figma (nothing to pull)</div>
+        <div class="pending-card">~45 more components queued: Tabs, Tables, Search, Modal, Dropdown, and the rest of the file</div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="shell">
+    <span>DLS Component Catalog</span>
+    <span>Work in progress: updated as more pages are pulled</span>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-hidden="true"><img id="lightbox-img" alt=""></div>
+<script>
+document.addEventListener('click', e => {
+  const shot = e.target.closest('[data-shot]');
+  if (shot) {
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lightbox-img').src = shot.dataset.shot;
+    lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false');
+  }
+  if (e.target.id === 'lightbox' || e.target.id === 'lightbox-img') {
+    const lb = document.getElementById('lightbox');
+    lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true');
+    document.getElementById('lightbox-img').src = '';
+  }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const lb = document.getElementById('lightbox');
+    lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true');
+    document.getElementById('lightbox-img').src = '';
+  }
+});
+</script>
+<script src="../scripts/reveal.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+</body>
+</html>
