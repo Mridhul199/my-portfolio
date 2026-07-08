@@ -24,7 +24,7 @@
   --bg:#0B0B0C; --surface:#161619; --text-1:#EDEDEC; --text-2:#A6A6AD; --text-3:#74747B;
   --border:rgba(255,255,255,.10); --border-2:rgba(255,255,255,.16); --accent:#F26522;
   --f:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; --display:'Manrope',var(--f);
-  --mono:'JetBrains Mono',ui-monospace,monospace; --maxw:840px;
+  --mono:'JetBrains Mono',ui-monospace,monospace; --maxw:760px;
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -48,38 +48,36 @@ a:hover{text-decoration:underline}
 .print-btn svg{width:14px;height:14px;stroke:currentColor;fill:none}
 
 /* header */
-.r-head{padding:54px 0 30px;border-bottom:1px solid var(--border)}
-.r-head h1{font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,44px);
-  letter-spacing:-.03em;margin:0;line-height:1.05}
-.r-head .role{font-size:16px;color:var(--text-2);margin-top:8px}
-.r-head .role b{color:var(--accent);font-weight:600}
-.contacts{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:18px;font-size:13px;font-family:var(--mono);color:var(--text-2)}
-.contacts a{color:var(--text-2)}
+.r-head{padding:44px 0 24px;border-bottom:1px solid var(--border)}
+.r-head h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,5vw,40px);
+  letter-spacing:-.03em;margin:0;line-height:1.05;color:var(--accent)}
+.r-head .role{font-size:15.5px;color:var(--text-2);margin-top:6px}
+.contacts{margin-top:14px;font-size:13px;font-family:var(--mono);color:var(--text-3)}
+.contacts a{color:var(--text-3)}
 .contacts a:hover{color:var(--text-1)}
+.contacts .sep{margin:0 7px;color:var(--text-3)}
 
-section.r{padding:30px 0;border-bottom:1px solid var(--border)}
+section.r{padding:22px 0;border-bottom:1px solid var(--border)}
 section.r:last-of-type{border-bottom:none}
 .r-label{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--accent);margin:0 0 16px}
-.lead{font-size:16px;line-height:1.65;color:var(--text-2);max-width:68ch;margin:0}
+  text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+.lead{font-size:15px;line-height:1.6;color:var(--text-2);max-width:68ch;margin:0}
 
-.job{margin-bottom:6px}
-.job-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.job-head h3{font-family:var(--display);font-size:18px;font-weight:700;letter-spacing:-.01em;margin:0;color:var(--text-1)}
-.job-head .when{font-family:var(--mono);font-size:12.5px;color:var(--text-3);white-space:nowrap}
-.job .co{font-size:14px;color:var(--text-2);margin:2px 0 12px}
+.job-co-line{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.job-co-name{font-family:var(--display);font-size:16.5px;font-weight:700;letter-spacing:-.01em;color:var(--text-1)}
+.job-co-line .when{font-family:var(--mono);font-size:12.5px;color:var(--text-3);white-space:nowrap}
+.job-blurb{font-size:13.5px;font-style:italic;color:var(--text-2);margin:2px 0 10px}
+.job-title{font-size:14.5px;font-weight:600;color:var(--text-1);margin:0 0 10px}
+
 ul.bul{list-style:none;margin:0;padding:0}
-ul.bul li{position:relative;padding:6px 0 6px 22px;color:var(--text-2);font-size:14.5px;line-height:1.55}
-ul.bul li::before{content:"";position:absolute;left:2px;top:13px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+ul.bul li{position:relative;padding:5px 0 5px 20px;color:var(--text-2);font-size:14px;line-height:1.5}
+ul.bul li::before{content:"";position:absolute;left:2px;top:12px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
 ul.bul li b{color:var(--text-1);font-weight:600}
 ul.bul li a{font-weight:500}
 
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
-@media(max-width:640px){.grid2{grid-template-columns:1fr;gap:20px}}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.tags span{font-size:12.5px;color:var(--text-2);border:1px solid var(--border-2);padding:6px 12px;border-radius:999px}
-.kv .k{font-size:13px;color:var(--text-1);font-weight:600}
-.kv .v{font-size:13.5px;color:var(--text-2);margin-top:2px}
+.skill-line{font-size:14px;line-height:1.6;color:var(--text-2);margin:0 0 8px}
+.skill-line:last-child{margin-bottom:0}
+.skill-line b{color:var(--text-1);font-weight:600}
 
 /* fade-in on load (respects reduced motion) */
 @media(prefers-reduced-motion:no-preference){
@@ -88,35 +86,24 @@ ul.bul li a{font-weight:500}
   section.r:nth-of-type(2){animation-delay:.1s}
   section.r:nth-of-type(3){animation-delay:.15s}
   section.r:nth-of-type(4){animation-delay:.2s}
-  section.r:nth-of-type(5){animation-delay:.25s}
   @keyframes rise{to{opacity:1;transform:none}}
 }
 
-/* screen/print text swaps: same info, ATS-plain wording in the PDF */
-.prt{display:none}
-
-/* PRINT: clean light résumé for Save-as-PDF, structured for ATS parsing */
+/* PRINT: clean light résumé for Save-as-PDF, structured for ATS parsing, 1 page */
 @media print{
-  @page{margin:14mm}
-  body{background:#fff;color:#111;font-size:11pt;line-height:1.4}
+  @page{margin:12mm 14mm}
+  body{background:#fff;color:#111;font-size:10.5pt;line-height:1.35}
   .bridge,.print-btn{display:none!important}
   a{color:#111;text-decoration:none}
   .shell{max-width:none;padding:0}
-  .r-head{padding:0 0 12px;border-color:#ddd}
-  .r-head h1{font-size:24pt}
-  .r-head .role b,.r-label{color:#111}
-  .contacts,.contacts a{color:#333}
-  section.r{padding:12px 0;border-color:#eee;opacity:1;transform:none;animation:none}
-  .lead,.job .co,ul.bul li,.tags span,.kv .v{color:#222}
-  .tags span{border-color:#ccc}
+  .r-head{padding:0 0 10px;border-color:#ddd}
+  .r-head h1{font-size:22pt;color:#111}
+  .r-label{color:#111}
+  .contacts,.contacts a,.contacts .sep{color:#333}
+  section.r{padding:9px 0;border-color:#eee;opacity:1;transform:none;animation:none}
+  .lead,.job-blurb,ul.bul li,.skill-line{color:#222}
+  .job-co-name,.job-title,ul.bul li b,.skill-line b{color:#111}
   ul.bul li::before{background:#111}
-  /* force single-column: multi-column layouts scramble ATS reading order */
-  .grid2{display:block!important}
-  .grid2>div{margin-top:14px}
-  .grid2>div:first-child{margin-top:0}
-  /* swap decorative arrows for plain-text equivalents */
-  .scr{display:none}
-  .prt{display:inline}
 }
 </style>
 </head>
@@ -139,74 +126,50 @@ ul.bul li a{font-weight:500}
 
   <header class="r-head">
     <h1>Mridhul Aswin</h1>
-    <div class="role"><b>Product Designer</b> · UX / UI · Fintech &amp; Payments</div>
+    <div class="role">Product Designer · UX / UI · Fintech &amp; Payments</div>
     <div class="contacts">
-      <a href="tel:+919167575167">+91 91675 75167</a>
-      <a href="mailto:mridhulaswin92@gmail.com">mridhulaswin92@gmail.com</a>
-      <a href="https://www.linkedin.com/in/mridhul-aswin-6637202bb/?skipRedirect=true" target="_blank" rel="noopener">linkedin.com/in/mridhul-aswin-6637202bb</a>
-      <span>Ernakulam, Kerala, India</span>
-      <a href="https://mridhul199.github.io/my-portfolio/">mridhul199.github.io/my-portfolio</a>
+      <span>Ernakulam, Kerala, India</span><span class="sep">·</span><a href="tel:+919167575167">+91 91675 75167</a><span class="sep">·</span><a href="mailto:mridhulaswin92@gmail.com">mridhulaswin92@gmail.com</a><span class="sep">·</span><a href="https://www.linkedin.com/in/mridhul-aswin-6637202bb/?skipRedirect=true" target="_blank" rel="noopener">linkedin.com/in/mridhul-aswin-6637202bb</a><span class="sep">·</span><a href="https://mridhul199.github.io/my-portfolio/">mridhul199.github.io/my-portfolio</a>
     </div>
   </header>
 
   <section class="r">
     <p class="r-label">Summary</p>
-    <p class="lead">UX / product designer focused on the core of fintech: netbanking rails, stored-value
-    wallets, bill-pay, ONDC commerce, and recurring mandates. I take products from concept through to
-    production, design the operator tooling behind them, and build whitelabel systems that re-skin
-    cleanly across banks and partners. I also contribute to design systems and illustration.</p>
+    <p class="lead">UX / product designer in fintech: netbanking rails, wallets, bill-pay, ONDC, and recurring mandates, taken from concept to production and whitelabelled across banks.</p>
   </section>
 
   <section class="r">
-    <p class="r-label">Experience</p>
-    <div class="job">
-      <div class="job-head">
-        <h3>Hatio Innovations Pvt Ltd · Product Designer (UX / UI)</h3>
-        <span class="when">2024 – Present</span>
-      </div>
-      <div class="co">Payments infrastructure · netbanking, wallets, bill-pay, ONDC, recurring mandates</div>
-      <ul class="bul">
-        <li><b><a href="../netbanking-2/">Netbanking 2.0 · Admin Portal.</a></b> Designed the operator console for NPCI's interoperable netbanking rail: dashboard, user access management, maker-checker refund reporting, merchant configuration, and a token-driven whitelabel system. Two banks live in production.</li>
-        <li><b><a href="../wallet/">Wallet Solution.</a></b> A stored-value wallet shipped as an embeddable SDK plus an operator admin portal: top-up, one-tap pay, and reconciliation. Whitelabelled for a metro operator ticketing and a logistics partner prepay-&amp;-ship flow.</li>
-        <li><b><a href="../billpay-sso/">Bill-Pay Portal Refresh.</a></b> Led a UI/UX refresh of the whitelabelled bill-pay portal used across 30–50 partner banks, and contributed a set of micro-illustrations to the payments fintech design system.</li>
-        <li><b><a href="../ondc-flight-booking/">ONDC Flight Booking.</a></b> Designed an in-app flight-booking buyer flow (search<span class="scr"> → </span><span class="prt">, </span>seat<span class="scr"> → </span><span class="prt">, </span>pay) for banks joining ONDC, with the payments fintech as the Technology Service Provider (wireframes through whitelabelled visual design).</li>
-        <li><b><a href="../sihub/">Standing Instruction Hub.</a></b> Redesigned the recurring-mandate experience so cardholders can see, modify, and cancel every recurring payment from one dashboard, across 50+ banks, web and mobile.</li>
-        <li><b><a href="../bank-theme-automation/">Bank Theming, Automated.</a></b> Built a Claude Code skill + Python pipeline that turns one brand HEX into a fully themed partner bank: 20 design-system colour tokens, correctly placed logos, and a recoloured illustration, wired into the whitelabel handoff doc. 29 banks themed this way.</li>
-        <li><b><a href="../kyc-tokenization/">KYC Tokenization.</a></b> Concept design for TrustKYC, a reusable identity token: verify once, then let merchants request access to a consent-gated document template instead of re-collecting KYC.</li>
-        <li><b><a href="../dls-overview/">DLS Component Catalog.</a></b> Ongoing audit of the payments fintech's design language system, pulled component-by-component from Figma into a self-contained reference catalog.</li>
-      </ul>
+    <p class="r-label">Work Experience</p>
+    <div class="job-co-line">
+      <span class="job-co-name">Hatio Innovations Pvt Ltd, Ernakulam, Kerala, India</span>
+      <span class="when">2024 – Present</span>
     </div>
-  </section>
-
-  <section class="r">
-    <p class="r-label">Selected projects</p>
+    <div class="job-blurb">Design consultancy staffed on a payments fintech's product and platform teams</div>
+    <div class="job-title">Product Designer (UX / UI)</div>
     <ul class="bul">
-      <li><a href="../netbanking-2/">Netbanking 2.0 · Admin Portal</a> &nbsp;·&nbsp; <a href="../wallet/">Wallet Solution</a> &nbsp;·&nbsp; <a href="../billpay-sso/">Bill-Pay SSO</a> &nbsp;·&nbsp; <a href="../ondc-flight-booking/">ONDC Flight Booking</a> &nbsp;·&nbsp; <a href="../sihub/">Standing Instruction Hub</a> &nbsp;·&nbsp; <a href="../bank-theme-automation/">Bank Theming, Automated</a> &nbsp;·&nbsp; <a href="../kyc-tokenization/">KYC Tokenization</a> &nbsp;·&nbsp; <a href="../dls-overview/">DLS Component Catalog</a></li>
+      <li><b><a href="../netbanking-2/">Netbanking 2.0 · Admin Portal.</a></b> Designed the operator console for NPCI's interoperable netbanking rail; 2 banks live in production.</li>
+      <li><b><a href="../wallet/">Wallet Solution.</a></b> Shipped a stored-value wallet SDK plus admin portal, whitelabelled for a metro operator and a logistics partner.</li>
+      <li><b><a href="../billpay-sso/">Bill-Pay Portal Refresh.</a></b> Refreshed the bill-pay SSO portal live across 30–50 partner banks; contributed DLS micro-illustrations.</li>
+      <li><b><a href="../ondc-flight-booking/">ONDC Flight Booking.</a></b> Designed an in-app flight-booking buyer flow for banks joining ONDC as buyer apps.</li>
+      <li><b><a href="../sihub/">Standing Instruction Hub.</a></b> Redesigned recurring-mandate management into one dashboard, live across 50+ banks.</li>
+      <li><b><a href="../bank-theme-automation/">Bank Theming, Automated.</a></b> Built a Claude Code + Python pipeline turning one brand HEX into a themed bank; 29 banks themed so far.</li>
+      <li><b><a href="../kyc-tokenization/">KYC Tokenization.</a></b> Concept design for a reusable, consent-gated identity token (TrustKYC).</li>
+      <li><b><a href="../dls-overview/">DLS Component Catalog.</a></b> Ongoing component-by-component design system audit, pulled from Figma into a reference catalog.</li>
     </ul>
   </section>
 
   <section class="r">
-    <div class="grid2">
-      <div>
-        <p class="r-label">Skills</p>
-        <div class="tags">
-          <span>Product design</span><span>UX</span><span>UI design</span><span>Design systems</span>
-          <span>Whitelabel theming</span><span>Wireframing</span><span>Visual design</span><span>Interaction design</span>
-          <span>Illustration</span><span>Stakeholder collaboration</span><span>AI-assisted design</span>
-        </div>
-      </div>
-      <div>
-        <p class="r-label">Tools</p>
-        <div class="tags">
-          <span>Figma</span><span>FigJam</span><span>Claude Code</span><span>Adobe Creative Suite</span>
-        </div>
-        <div class="kv" style="margin-top:22px">
-          <p class="r-label" style="margin-bottom:8px">Education</p>
-          <div class="k">Bachelor of Mass Media, Mumbai University</div>
-          <div class="v">2015</div>
-        </div>
-      </div>
+    <p class="r-label">Education</p>
+    <div class="job-co-line">
+      <span class="job-co-name">Mumbai University</span>
+      <span class="when">2015</span>
     </div>
+    <div class="job-blurb" style="margin-bottom:0">Bachelor of Mass Media</div>
+  </section>
+
+  <section class="r">
+    <p class="r-label">Skills</p>
+    <p class="skill-line"><b>Skills:</b> Product design, UX, UI design, Design systems, Whitelabel theming, Wireframing, Visual design, Interaction design, Illustration, Stakeholder collaboration, AI-assisted design</p>
+    <p class="skill-line"><b>Tools:</b> Figma, FigJam, Claude Code, Adobe Creative Suite</p>
   </section>
 
 </main>
