@@ -4,25 +4,25 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <script>document.documentElement.classList.add('js')</script>
-<title>Netbanking 2.0 · Admin Portal · Case Study</title>
-<meta name="description" content="The admin portal that turns manual, spreadsheet-driven bank operations into a single automated console for Netbanking 2.0, NPCI's interoperable netbanking rail. UX / product design case study by Mridhul Aswin: two banks live in production."/>
+<title>Admin & Dashboard Designs · Case Study</title>
+<meta name="description" content="The admin portal that turns manual, spreadsheet-driven operations into a single automated console for an interoperable admin rail. UX / product design case study by Mridhul Aswin: two clients live in production."/>
 <meta name="author" content="Mridhul Aswin"/>
-<link rel="canonical" href="https://mridhul199.github.io/my-portfolio/netbanking-2/"/>
+<link rel="canonical" href="https://mridhul199.github.io/my-portfolio/admin-dashboard/"/>
 <meta property="og:type" content="article"/>
-<meta property="og:url" content="https://mridhul199.github.io/my-portfolio/netbanking-2/"/>
-<meta property="og:title" content="Netbanking 2.0 · Admin Portal · Mridhul Aswin"/>
-<meta property="og:description" content="The admin portal that turns manual, spreadsheet-driven bank operations into a single automated console for Netbanking 2.0, NPCI's interoperable netbanking rail. UX / product design case study by Mridhul Aswin. Two banks live in production."/>
-<meta property="og:image" content="https://mridhul199.github.io/my-portfolio/assets/og/netbanking-2.png"/>
+<meta property="og:url" content="https://mridhul199.github.io/my-portfolio/admin-dashboard/"/>
+<meta property="og:title" content="Admin & Dashboard Designs · Mridhul Aswin"/>
+<meta property="og:description" content="The admin portal that turns manual, spreadsheet-driven operations into a single automated console for an interoperable admin rail. UX / product design case study by Mridhul Aswin. Two clients live in production."/>
+<meta property="og:image" content="https://mridhul199.github.io/my-portfolio/assets/og/admin-dashboard.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Netbanking 2.0 · Admin Portal · Mridhul Aswin"/>
-<meta name="twitter:description" content="The admin portal that turns manual, spreadsheet-driven bank operations into a single automated console for Netbanking 2.0, NPCI's interoperable netbanking rail. UX / product design case study by Mridhul Aswin, with two banks live in production."/>
-<meta name="twitter:image" content="https://mridhul199.github.io/my-portfolio/assets/og/netbanking-2.png"/>
+<meta name="twitter:title" content="Admin & Dashboard Designs · Mridhul Aswin"/>
+<meta name="twitter:description" content="The admin portal that turns manual, spreadsheet-driven operations into a single automated console for an interoperable admin rail. UX / product design case study by Mridhul Aswin, with two clients live in production."/>
+<meta name="twitter:image" content="https://mridhul199.github.io/my-portfolio/assets/og/admin-dashboard.png"/>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"/>
 <link rel="icon" href="../assets/favicon-32.png" sizes="32x32"/>
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Netbanking 2.0 · Admin Portal · Mridhul Aswin","description":"The admin portal that turns manual, spreadsheet-driven bank operations into a single automated console for Netbanking 2.0, NPCI's interoperable netbanking rail. UX / product design case study by Mridhul Aswin (two banks live in production).","author":{"@type":"Person","name":"Mridhul Aswin"},"url":"https://mridhul199.github.io/my-portfolio/netbanking-2/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Admin & Dashboard Designs · Mridhul Aswin","description":"The admin portal that turns manual, spreadsheet-driven operations into a single automated console for an interoperable admin rail. UX / product design case study by Mridhul Aswin (two clients live in production).","author":{"@type":"Person","name":"Mridhul Aswin"},"url":"https://mridhul199.github.io/my-portfolio/admin-dashboard/"}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -197,7 +197,7 @@ figcaption{font-size:12px;color:var(--text-3);margin-top:12px;text-align:center}
 .decision .d-rationale{font-size:14px;line-height:1.65;color:var(--text-2);margin-top:8px}
 .decision .d-rationale b{color:var(--text-1);font-weight:600}
 
-/* Pipeline (bank themes) */
+/* Pipeline (partner themes) */
 .pipeline{display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr 24px 1fr;gap:0;align-items:stretch;margin-top:28px}
 @media(max-width:760px){.pipeline{grid-template-columns:1fr;gap:10px}.pipe-arrow{display:none}}
 .pipe-node{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:18px 20px;box-shadow:var(--sh-1)}
@@ -278,8 +278,8 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-phone-urlbar-wrap{padding:6px 16px 14px;background:var(--pv-brand-dark)}
 .pv-phone-urlbar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border-radius:10px;padding:9px 14px;font-size:13px;color:#fff;justify-content:space-between}
 .pv-phone-urlbar .url-l{display:flex;gap:8px;align-items:center}
-.pv-phone-bankbar{padding:12px 22px;background:var(--pv-brand-dark);display:flex;align-items:center;min-height:46px}
-.pv-phone-bankbar img{height:26px;width:auto;display:block}
+.pv-phone-brandbar{padding:12px 22px;background:var(--pv-brand-dark);display:flex;align-items:center;min-height:46px}
+.pv-phone-brandbar img{height:26px;width:auto;display:block}
 .pv-phone-illu{background:#fff;display:block;line-height:0}
 .pv-phone-illu img{width:100%;height:auto;display:block}
 .pv-phone-content{padding:14px 24px 24px;display:flex;flex-direction:column}
@@ -310,7 +310,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-desktop-chrome .url{flex:1;background:#1F2937;padding:5px 12px;border-radius:6px;font-size:11px;color:rgba(255,255,255,.75);text-align:center}
 .pv-desktop-body{display:grid;grid-template-columns:38fr 62fr;min-height:540px}
 
-/* ===== Partner Bank: custom Add Biller portal (out-of-scope screen) ===== */
+/* ===== Partner-specific: custom Add Biller portal (out-of-scope screen) ===== */
 .bd-portal{display:grid;grid-template-columns:200px 1fr;min-height:540px;background:#fff;font-family:var(--f)}
 .bd-portal *{box-sizing:border-box}
 .bd-side{border-right:1px solid var(--border);padding:14px 12px;display:flex;flex-direction:column;gap:14px;background:#fff}
@@ -364,7 +364,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-subpane{display:none;width:100%}
 .pv-subpane.is-on{display:flex;align-items:center;justify-content:center;width:100%}
 
-/* ===== Partner Bank: MWeb Recharges screen (out-of-scope, mobile only) ===== */
+/* ===== Partner-specific: MWeb Recharges screen (out-of-scope, mobile only) ===== */
 .bd-mweb{background:#fff;font-family:var(--f);display:flex;flex-direction:column;width:100%;height:100%}
 .bd-mweb-statusbar{padding:14px 26px 8px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:var(--text-1);background:#fff}
 .bd-mweb-statusbar .sb-icons{display:inline-flex;gap:6px;align-items:center;color:var(--text-1)}
@@ -462,7 +462,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 /* Selected card stroke per spec (#3399E8 instead of token) */
 .partner-skin .bd-card.is-selected{border:2px solid var(--partner-stroke);box-shadow:none;padding:11px 10px}
 
-/* CTA stays bank primary (#00488B → already var(--pv-fill)); no change needed */
+/* CTA stays partner primary (#00488B → already var(--pv-fill)); no change needed */
 
 /* Manrope letter-spacing per spec (negative on headers) */
 .partner-skin .pv-phone-content h4,
@@ -508,7 +508,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-screen-count .dot.on{background:var(--pv-fill)}
 .pv-screen-count .lbl{font-size:11px;font-weight:500;color:var(--text-3)}
 
-/* ===== Desktop recurring-payments screen (themable for every bank) ===== */
+/* ===== Desktop recurring-payments screen (themable for every partner) ===== */
 .pv-rp{font-family:var(--f);background:linear-gradient(180deg,#fff 0%,var(--pv-fill-light) 170%);height:100%;color:var(--text-1);display:flex;flex-direction:column}
 .pv-rp *{box-sizing:border-box}
 .pv-rp-bar{height:46px;margin:0 48px;flex-shrink:0;background:var(--pv-brand-dark);border-radius:0 0 14px 14px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;color:#fff}
@@ -555,13 +555,13 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-rp-table td.muted{color:var(--text-2);font-weight:400}
 .pv-rp-table td.r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
 .pv-rp-table tr:last-child td{border-bottom:none}
-/* ===== Mobile recurring-payments screen (themable for every bank) ===== */
+/* ===== Mobile recurring-payments screen (themable for every partner) ===== */
 .pv-mrp{display:flex;flex-direction:column;flex:1;background:#fff}
 .pv-mrp *{box-sizing:border-box}
-.pv-mrp-bankbar{padding:11px 18px;background:var(--pv-brand-dark);display:flex;align-items:center;justify-content:space-between;gap:10px}
-.pv-mrp-bankbar .brand img{height:22px;width:auto;display:block}
-.pv-mrp-bankbar .brand .wm{color:#fff;font-size:15px;font-weight:600;letter-spacing:.01em}
-.pv-mrp-bankbar .right{display:flex;align-items:center;gap:9px}
+.pv-mrp-brandbar{padding:11px 18px;background:var(--pv-brand-dark);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pv-mrp-brandbar .brand img{height:22px;width:auto;display:block}
+.pv-mrp-brandbar .brand .wm{color:#fff;font-size:15px;font-weight:600;letter-spacing:.01em}
+.pv-mrp-brandbar .right{display:flex;align-items:center;gap:9px}
 .pv-mrp-chip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 9px;background:rgba(255,255,255,.1);border:1.5px solid var(--pv-fill);border-radius:8px;font-size:12px;font-weight:600;color:#fff}
 .pv-mrp-chip svg.mc{display:block;flex-shrink:0}
 .pv-mrp-avatar{width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--text-2);flex-shrink:0}
@@ -600,7 +600,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-mrp-mname{font-size:13.5px;font-weight:600;letter-spacing:-.01em}
 .pv-mrp-mamt{font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
 .pv-mrp-msub{font-size:11.5px;color:var(--text-3);margin-top:5px}
-/* ===== Desktop payment-gateway screen (themable for every bank) ===== */
+/* ===== Desktop payment-gateway screen (themable for every partner) ===== */
 .pv-pg{font-family:var(--f);background:#F4F5F7;height:540px;display:flex;flex-direction:column;color:var(--text-1);padding:0 64px;gap:0;overflow:hidden}
 .pv-pg *{box-sizing:border-box}
 .pv-pg-bar{flex-shrink:0;background:var(--pv-brand-dark);border-radius:0 0 16px 16px;display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
@@ -631,7 +631,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-pg-search{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:7px;padding:7px 11px;margin-bottom:2px;flex-shrink:0}
 .pv-pg-search svg{width:13px;height:13px;color:var(--text-3);flex-shrink:0}
 .pv-pg-search .ph{font-size:11px;color:var(--text-3)}
-.pv-pg-banks{flex:1;min-height:0;overflow:hidden}
+.pv-pg-list{flex:1;min-height:0;overflow:hidden}
 .pv-pg-brow2{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px dashed var(--border)}
 .pv-pg-brow2:last-child{border-bottom:none}
 .pv-pg-blogo{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center}
@@ -649,7 +649,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-pg-stotal .amt{font-variant-numeric:tabular-nums}
 .pv-pg-bdmark{display:flex;justify-content:center;margin-top:14px}
 .pv-pg-bdmark img{height:16px;width:auto}
-/* ===== Mobile payment-gateway screen (themable for every bank) ===== */
+/* ===== Mobile payment-gateway screen (themable for every partner) ===== */
 .pv-mpg{display:flex;flex-direction:column;flex:1;background:#fff}
 .pv-mpg *{box-sizing:border-box}
 .pv-mpg-header{background:var(--pv-brand-dark);border-radius:0 0 18px 18px;padding:13px 16px 16px;color:#fff;flex-shrink:0}
@@ -689,9 +689,9 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-mpg-radio.on{border-color:var(--pv-fill)}
 .pv-mpg-radio.on::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--pv-fill)}
 .pv-mpg-pay{margin:6px 14px 10px;height:46px;width:calc(100% - 28px);background:var(--pv-fill);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:15px;font-weight:600;cursor:default}
-.pv-mpg-allbanks{display:flex;align-items:center;justify-content:space-between;padding:14px 14px;border-top:1px dashed var(--border)}
-.pv-mpg-allbanks .l{display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:500;color:var(--text-1)}
-.pv-mpg-allbanks .l svg{width:17px;height:17px;color:var(--text-2)}
+.pv-mpg-alllist{display:flex;align-items:center;justify-content:space-between;padding:14px 14px;border-top:1px dashed var(--border)}
+.pv-mpg-alllist .l{display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:500;color:var(--text-1)}
+.pv-mpg-alllist .l svg{width:17px;height:17px;color:var(--text-2)}
 
 /* Token table */
 .token-table{width:100%;border-collapse:collapse;font-size:12px}
@@ -792,7 +792,7 @@ body.fmodal-open{overflow:hidden}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Mridhul Aswin
     </a>
-    <span class="pf-bridge-ctx">Selected work · Netbanking 2.0</span>
+    <span class="pf-bridge-ctx">Selected work · Admin & Dashboard Designs</span>
   </div>
 </nav>
 <div class="bg-deco"></div>
@@ -802,23 +802,23 @@ body.fmodal-open{overflow:hidden}
   <header class="hero">
     <div class="shell hero-grid">
       <div class="hero-copy">
-        <span class="eyebrow"><span class="dot"></span> Back-office portal for the Netbanking 2.0 rail</span>
-        <h1 data-split-words>An admin portal that turns manual bank ops into a single, automated console.</h1>
-        <p class="lead"><strong>Netbanking 2.0</strong> is a new interoperable netbanking rail from NPCI
-        Bharat BillPay (NBBL). Banks connect once instead of per-gateway, and customers pay straight from
-        their bank app, UPI-style. This is the admin portal that operates that rail, replacing the manual,
+        <span class="eyebrow"><span class="dot"></span> Back-office portal for the interoperable admin rail</span>
+        <h1 data-split-words>An admin portal that turns manual back-office ops into a single, automated console.</h1>
+        <p class="lead"><strong>The rail</strong> is a new interoperable payment network. Financial institutions
+        connect once instead of per-gateway, and customers pay straight from their own app, UPI-style. This is
+        the admin portal that operates that rail, replacing the manual,
         spreadsheet-driven back office it launched on.</p>
         <div class="meta-bar" style="grid-template-columns:repeat(3,1fr)">
           <div class="meta-cell"><div class="mk">Role</div><div class="mv">UX / Product design</div></div>
           <div class="meta-cell"><div class="mk">Platform</div><div class="mv">Web · desktop admin</div></div>
-          <div class="meta-cell"><div class="mk">Status</div><div class="mv">2 banks live in production</div></div>
+          <div class="meta-cell"><div class="mk">Status</div><div class="mv">2 clients live in production</div></div>
         </div>
       </div>
       <div class="hero-art">
-        <img src="assets/hero/checkout-netbanking-2.png" alt="Netbanking 2.0 inside a the payments fintech checkout: customer chooses Bank app, QR, or website, settled over the NBBL switch"
+        <img src="assets/hero/checkout-admin-dashboard.png" alt="Admin & Dashboard Designs inside the payments fintech checkout: customer chooses their institution's app, QR, or website, settled over the interoperable switch"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-        <div class="hero-art-ph">Drop the checkout mockup at<code>assets/hero/checkout-netbanking-2.png</code></div>
-        <span class="hero-art-cap">The consumer side of the rail: Netbanking 2.0 inside a the payments fintech checkout. The portal is what operates everything behind it.</span>
+        <div class="hero-art-ph">Drop the checkout mockup at<code>assets/hero/checkout-admin-dashboard.png</code></div>
+        <span class="hero-art-cap">The consumer side of the rail: the interoperable payment option inside the payments fintech checkout. The portal is what operates everything behind it.</span>
       </div>
     </div>
   </header>
@@ -829,14 +829,14 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">The portal · Overview</span>
         <h2>One console to operate the rail.</h2>
-        <p class="lead">The portal is the operator-facing side of Netbanking 2.0, used by bank ops
+        <p class="lead">The portal is the operator-facing side of the rail, used by operations
         and platform teams, not end customers. It brings the day-to-day jobs of running the rail into a
-        single product: a performance dashboard, user management, bank-statement upload, and settlements.</p>
+        single product: a performance dashboard, user management, statement upload, and settlements.</p>
       </div>
       <div class="cards-grid three">
         <div class="pcard"><span class="tag">Insight</span><h4>Performance dashboard</h4><p>Business and operational health at a glance (the home screen of the portal).</p></div>
         <div class="pcard"><span class="tag">Control</span><h4>User management</h4><p>Provision, role, and manage operator access without raising tickets.</p></div>
-        <div class="pcard"><span class="tag">Data</span><h4>Statement upload</h4><p>Ingest bank statements through the portal instead of manual handoffs.</p></div>
+        <div class="pcard"><span class="tag">Data</span><h4>Statement upload</h4><p>Ingest statements through the portal instead of manual handoffs.</p></div>
         <div class="pcard"><span class="tag">Money</span><h4>Settlements</h4><p>Track and reconcile settlement, replacing spreadsheet reconciliation.</p></div>
       </div>
     </div>
@@ -848,13 +848,13 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">The portal · The problem</span>
         <h2>The rail was new. The operations were manual.</h2>
-        <p class="lead">There was no existing portal. Running Netbanking 2.0 meant stitching together
+        <p class="lead">There was no existing portal. Running the rail meant stitching together
         spreadsheets, manual file handoffs, and ticket-driven access: slow, error-prone, and impossible
-        to scale as more banks came on.</p>
+        to scale as more clients came on.</p>
       </div>
       <ul class="clean">
         <li><strong>Reconciliation by spreadsheet</strong>: settlement figures tracked and matched by hand.</li>
-        <li><strong>Manual statement handling</strong>: bank statements moved and processed outside any system.</li>
+        <li><strong>Manual statement handling</strong>: statements moved and processed outside any system.</li>
         <li><strong>Ticket-driven user access</strong>: onboarding and permissions handled ad hoc.</li>
         <li><strong>No single view of performance</strong>: business and operational health scattered across sources.</li>
       </ul>
@@ -871,7 +871,7 @@ body.fmodal-open{overflow:hidden}
       <div class="cards-grid three">
         <div class="pcard ok"><span class="tag">Automate</span><h4>Kill the manual work</h4><p>Replace spreadsheets and handoffs with flows inside one system.</p></div>
         <div class="pcard ok"><span class="tag">Surface</span><h4>Make performance legible</h4><p>One dashboard for business and operational health.</p></div>
-        <div class="pcard ok"><span class="tag">Scale</span><h4>Onboard banks repeatably</h4><p>A consistent operator experience as the rail grows bank by bank.</p></div>
+        <div class="pcard ok"><span class="tag">Scale</span><h4>Onboard clients repeatably</h4><p>A consistent operator experience as the rail grows client by client.</p></div>
       </div>
     </div>
   </section>
@@ -905,7 +905,7 @@ body.fmodal-open{overflow:hidden}
         <button class="fcard" data-open="maker-checker">
           <span class="fcard-thumb"><img src="assets/maker-checker/maker-checker-reports.png" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" /><span class="ph">assets/maker-checker/maker-checker-reports.png</span></span>
           <span class="fc-kicker"><span class="fc-num">03</span> Maker-Checker</span>
-          <h3>Bank Refund Reports.</h3>
+          <h3>Refund Reports.</h3>
           <p>A forward-only file lifecycle with an auditable, irreversible acknowledge step.</p>
           <div class="fc-chips"><span>File lifecycle</span><span>Bulk actions</span><span>State filter</span><span>Acknowledge</span></div>
           <span class="fc-go">Explore feature <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
@@ -919,11 +919,11 @@ body.fmodal-open{overflow:hidden}
           <span class="fc-go">Explore feature <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </button>
         <button class="fcard" data-open="whitelabel">
-          <span class="fcard-thumb"><img src="assets/whitelabel/whitelabel-bank-a-dashboard.png" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" /><span class="ph">assets/whitelabel/whitelabel-bank-a-dashboard.png</span></span>
+          <span class="fcard-thumb"><img src="assets/whitelabel/whitelabel-partner-a-dashboard.png" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" /><span class="ph">assets/whitelabel/whitelabel-partner-a-dashboard.png</span></span>
           <span class="fc-kicker"><span class="fc-num">05</span> Whitelabel</span>
-          <h3>One portal, every bank's brand.</h3>
-          <p>The whole portal re-skinned per bank from one token layer, shipped as the public-sector bank and the global bank.</p>
-          <div class="fc-chips"><span>Token theme</span><span>the public-sector bank</span><span>the global bank</span><span>One codebase</span></div>
+          <h3>One portal, every partner's brand.</h3>
+          <p>The whole portal re-skinned per partner from one token layer, shipped as Partner A and Partner B.</p>
+          <div class="fc-chips"><span>Token theme</span><span>Partner A</span><span>Partner B</span><span>One codebase</span></div>
           <span class="fc-go">Explore feature <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </button>
       </div>
@@ -963,7 +963,7 @@ body.fmodal-open{overflow:hidden}
       </div>
       <figure>
         <div class="frame" data-shot="assets/after/business-dashboard.png">
-          <img src="assets/after/business-dashboard.png" alt="Netbanking 2.0 business dashboard: full scroll"
+          <img src="assets/after/business-dashboard.png" alt="Admin & Dashboard Designs business dashboard: full scroll"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="placeholder" style="display:none;">Drop the dashboard screenshot at<code>assets/after/business-dashboard.png</code></div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
@@ -1112,7 +1112,7 @@ body.fmodal-open{overflow:hidden}
       <div class="unit-divider">
         <span class="unit-kicker"><span class="uk-num">02</span> Unit</span>
         <h2 class="unit-title">User Access Management</h2>
-        <p class="unit-desc">Who can do what, in a regulated multi-bank rail. UAM replaces ticket-driven,
+        <p class="unit-desc">Who can do what, in a regulated multi-client rail. UAM replaces ticket-driven,
         ad-hoc access with an invite-based flow (role presets and a granular permission matrix), so
         admins provision their own teams in minutes and see exactly what each role can do.</p>
         <div class="unit-chips"><span>Users &amp; lifecycle</span><span>Invite &amp; assign</span><span>Role presets</span><span>Permission matrix</span></div>
@@ -1126,7 +1126,7 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">UAM · Overview</span>
         <h2>Access that scales with the rail.</h2>
-        <p class="lead">As banks and aggregators onboard, each brings its own team. UAM lets an admin
+        <p class="lead">As partner organizations and aggregators onboard, each brings its own team. UAM lets an admin
         invite users and set exactly what they can do (starting from a role preset, then tuning a
         granular permission matrix), all from the portal, no support ticket required.</p>
       </div>
@@ -1145,8 +1145,8 @@ body.fmodal-open{overflow:hidden}
         <span class="sec-num">UAM · The problem</span>
         <h2>Access by inbox doesn't scale.</h2>
         <p class="lead">Before UAM, access lived in tickets: slow to grant, hard to revoke, with no
-        clear model for what a given person could actually do. In a payments rail onboarding bank
-        after bank, that doesn't scale.</p>
+        clear model for what a given person could actually do. In a payments rail onboarding one
+        enterprise after another, that doesn't scale.</p>
       </div>
       <ul class="clean">
         <li><strong>Ticket-driven onboarding</strong>: every new user waited on a manual request.</li>
@@ -1218,7 +1218,7 @@ body.fmodal-open{overflow:hidden}
             <div class="ph" style="display:none;">assets/after/uam-access-custom.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">Categories on the left (IBMB Operations, Bank Operations, Dashboard…), individual permissions with descriptions on the right.</p>
+          <p class="ba-cap">Categories on the left (IBMB Operations, Partner Operations, Dashboard…), individual permissions with descriptions on the right.</p>
         </div>
         <div class="ba-col">
           <div class="ba-label"><span class="bdot"></span> Preset · Read only</div>
@@ -1261,9 +1261,9 @@ body.fmodal-open{overflow:hidden}
     <div class="shell narrow">
       <div class="unit-divider">
         <span class="unit-kicker"><span class="uk-num">03</span> Unit</span>
-        <h2 class="unit-title">Maker-Checker · Bank Refund Reports</h2>
+        <h2 class="unit-title">Maker-Checker · Refund Reports</h2>
         <p class="unit-desc">Refunds move money, so no single person should push them through alone. This unit
-        turns the maker-checker control into a screen: one team generates refund report batches, the bank
+        turns the maker-checker control into a screen: one team generates refund report batches, the client
         downloads and verifies them, then <em>acknowledges</em> (a recorded, irreversible sign-off that
         replaces email-and-spreadsheet hand-offs with an auditable file lifecycle).</p>
         <div class="unit-chips"><span>File lifecycle</span><span>Bulk actions</span><span>State filter</span><span>Acknowledge &amp; audit</span></div>
@@ -1283,8 +1283,8 @@ body.fmodal-open{overflow:hidden}
         who still owes an action.</p>
       </div>
       <div class="cards-grid three">
-        <div class="pcard"><span class="tag">Maker</span><h4>Generate the batch</h4><p>Refund reports are produced as files, ready for the bank to pull and process.</p></div>
-        <div class="pcard"><span class="tag">Checker</span><h4>Download &amp; acknowledge</h4><p>The bank downloads, verifies against its own processing, then acknowledges receipt.</p></div>
+        <div class="pcard"><span class="tag">Maker</span><h4>Generate the batch</h4><p>Refund reports are produced as files, ready for the client to pull and process.</p></div>
+        <div class="pcard"><span class="tag">Checker</span><h4>Download &amp; acknowledge</h4><p>The client downloads, verifies against its own processing, then acknowledges receipt.</p></div>
         <div class="pcard"><span class="tag">Audit</span><h4>Recorded, irreversible</h4><p>Acknowledgement is logged and can't be undone (a clean trail for a money-moving step).</p></div>
       </div>
     </div>
@@ -1297,12 +1297,12 @@ body.fmodal-open{overflow:hidden}
         <span class="sec-num">Maker-Checker · The problem</span>
         <h2>Hand-offs over email don't prove anything.</h2>
         <p class="lead">Sharing refund files by email or shared drive leaves no reliable record of what
-        was sent, what was received, or what the bank confirmed. For a step that moves money, "I think
+        was sent, what was received, or what the client confirmed. For a step that moves money, "I think
         they got it" isn't good enough.</p>
       </div>
       <ul class="clean">
-        <li><strong>No shared status</strong>: sender and bank tracked progress in separate threads.</li>
-        <li><strong>No proof of receipt</strong>: nothing recorded that the bank actually confirmed a batch.</li>
+        <li><strong>No shared status</strong>: sender and client tracked progress in separate threads.</li>
+        <li><strong>No proof of receipt</strong>: nothing recorded that the client actually confirmed a batch.</li>
         <li><strong>Easy to double-process</strong>: without a locked "acknowledged" state, the same file could be actioned twice.</li>
       </ul>
     </div>
@@ -1314,14 +1314,14 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">Maker-Checker · The reports queue</span>
         <h2>One queue that carries state, not just files.</h2>
-        <p class="lead">Bank Refund Reports lists each generated batch with its File State, the time it was
+        <p class="lead">Refund Reports lists each generated batch with its File State, the time it was
         generated, and a processing Status. The File State column is the heart of the control: it makes
         the maker-checker handshake visible in a single glance, and per-row download keeps the common case
         one click away.</p>
       </div>
       <figure>
         <div class="frame" data-shot="assets/maker-checker/maker-checker-reports.png">
-          <img src="assets/maker-checker/maker-checker-reports.png" alt="Bank Refund Reports queue with File State and Status columns"
+          <img src="assets/maker-checker/maker-checker-reports.png" alt="Refund Reports queue with File State and Status columns"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="placeholder" style="display:none;">assets/maker-checker/maker-checker-reports.png</div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
@@ -1337,7 +1337,7 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">Maker-Checker · Working the queue</span>
         <h2>Act on many at once, and only on what's valid.</h2>
-        <p class="lead">Banks process refunds in batches, so the queue is built for bulk: select rows and a
+        <p class="lead">Clients process refunds in batches, so the queue is built for bulk: select rows and a
         context toolbar appears with download and acknowledge. The File State filter narrows the list to
         exactly one stage, and the toolbar guards itself: already-acknowledged files are disabled so a
         step can't be repeated.</p>
@@ -1452,7 +1452,7 @@ body.fmodal-open{overflow:hidden}
         <h2>Risk controls that live outside the product don't scale.</h2>
         <p class="lead">Without a configuration surface, limits and blocks mean code changes or manual
         watchlists: slow to apply, hard to audit, and impossible for a compliance team to own. As more
-        banks and merchants join the rail, that gap becomes the risk.</p>
+        enterprises and merchants join the rail, that gap becomes the risk.</p>
       </div>
       <ul class="clean">
         <li><strong>No self-serve limits</strong>: amount and transaction caps required engineering, not configuration.</li>
@@ -1615,12 +1615,12 @@ body.fmodal-open{overflow:hidden}
     <div class="shell narrow">
       <div class="unit-divider">
         <span class="unit-kicker"><span class="uk-num">05</span> Unit</span>
-        <h2 class="unit-title">Whitelabel · One portal, every bank's brand</h2>
-        <p class="unit-desc">The rail is interoperable, but each bank wants its operators working inside
-        <em>its</em> brand, not a generic console. Whitelabel re-skins the entire portal to a bank's
-        colours, logo, and theme from a single token layer, so the same product ships as the public-sector bank's portal and
-        the global bank's portal without forking the UI.</p>
-        <div class="unit-chips"><span>Token-driven theme</span><span>the public-sector bank · light/green</span><span>the global bank · dark/red</span><span>One codebase</span></div>
+        <h2 class="unit-title">Whitelabel · One portal, every partner's brand</h2>
+        <p class="unit-desc">The rail is interoperable, but each partner organization wants its operators working inside
+        <em>its</em> brand, not a generic console. Whitelabel re-skins the entire portal to a partner's
+        colours, logo, and theme from a single token layer, so the same product ships as Partner A's portal and
+        Partner B's portal without forking the UI.</p>
+        <div class="unit-chips"><span>Token-driven theme</span><span>Partner A · light/green</span><span>Partner B · dark/red</span><span>One codebase</span></div>
       </div>
     </div>
   </section>
@@ -1630,15 +1630,15 @@ body.fmodal-open{overflow:hidden}
     <div class="shell narrow">
       <div class="section-head">
         <span class="sec-num">Whitelabel · Overview</span>
-        <h2>Same product, the bank's identity.</h2>
-        <p class="lead">A bank's operators should feel they're in their own system. Whitelabel themes the
-        portal end-to-end (brand colour, logo, and supporting palette) driven by a per-bank token set, so
-        onboarding a new bank is a theme, not a rebuild.</p>
+        <h2>Same product, the partner's identity.</h2>
+        <p class="lead">A partner's operators should feel they're in their own system. Whitelabel themes the
+        portal end-to-end (brand colour, logo, and supporting palette) driven by a per-partner token set, so
+        onboarding a new partner is a theme, not a rebuild.</p>
       </div>
       <div class="cards-grid three">
-        <div class="pcard"><span class="tag">Brand</span><h4>Colour &amp; full theme</h4><p>Not just an accent swap: the public-sector bank ships as a light, green system; the global bank as a dark, red one, from the same screens.</p></div>
-        <div class="pcard"><span class="tag">Identity</span><h4>Logo &amp; illustrations</h4><p>The bank's mark, naming, and even the spot illustrations re-tint to the brand palette.</p></div>
-        <div class="pcard"><span class="tag">Scale</span><h4>One token layer</h4><p>A new bank is a token set, not a fork; the same UI re-themes instead of duplicating.</p></div>
+        <div class="pcard"><span class="tag">Brand</span><h4>Colour &amp; full theme</h4><p>Not just an accent swap: Partner A ships as a light, green system; Partner B as a dark, red one, from the same screens.</p></div>
+        <div class="pcard"><span class="tag">Identity</span><h4>Logo &amp; illustrations</h4><p>The partner's mark, naming, and even the spot illustrations re-tint to the brand palette.</p></div>
+        <div class="pcard"><span class="tag">Scale</span><h4>One token layer</h4><p>A new partner is a token set, not a fork; the same UI re-themes instead of duplicating.</p></div>
       </div>
     </div>
   </section>
@@ -1648,49 +1648,49 @@ body.fmodal-open{overflow:hidden}
     <div class="shell narrow">
       <div class="section-head">
         <span class="sec-num">Whitelabel · The problem</span>
-        <h2>A generic console doesn't feel like the bank's.</h2>
-        <p class="lead">A shared rail with one fixed look makes every bank's operators work in someone
-        else's product. Hard-coding each bank's brand instead would mean forking the UI per bank
+        <h2>A generic console doesn't feel like the partner's.</h2>
+        <p class="lead">A shared rail with one fixed look makes every partner's operators work in someone
+        else's product. Hard-coding each partner's brand instead would mean forking the UI per partner
         (a maintenance trap as the rail grows).</p>
       </div>
       <ul class="clean">
-        <li><strong>No brand ownership</strong>: banks want their operators inside their own identity, not a vendor's.</li>
-        <li><strong>Forking doesn't scale</strong>: a hand-built skin per bank multiplies the code to maintain.</li>
-        <li><strong>Drift across banks</strong>: without one theming layer, each bank's portal slowly diverges.</li>
+        <li><strong>No brand ownership</strong>: partner organizations want their operators inside their own identity, not a vendor's.</li>
+        <li><strong>Forking doesn't scale</strong>: a hand-built skin per partner multiplies the code to maintain.</li>
+        <li><strong>Drift across partners</strong>: without one theming layer, each partner's portal slowly diverges.</li>
       </ul>
     </div>
   </section>
 
-  <!-- WHITELABEL · TWO BANKS -->
-  <section id="whitelabel-two-banks">
+  <!-- WHITELABEL · TWO PARTNERS -->
+  <section id="whitelabel-two-partners">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">Whitelabel · Two banks, one portal</span>
+        <span class="sec-num">Whitelabel · Two partners, one portal</span>
         <h2>The same dashboard, in two identities.</h2>
-        <p class="lead">This is the proof: the same performance dashboard, rendered for two banks. the public-sector bank is a
-        light theme built on its green, with an orange accent; the global bank is a dark theme built on its red, with a
+        <p class="lead">This is the proof: the same performance dashboard, rendered for two partner organizations. Partner A is a
+        light theme built on its green, with an orange accent; Partner B is a dark theme built on its red, with a
         teal accent. The layout, components, and data are identical; only the token layer changes.</p>
       </div>
       <div class="ba-grid" style="align-items:start">
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> the public-sector bank · light · green</div>
-          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-bank-a-dashboard.png">
-            <img src="assets/whitelabel/whitelabel-bank-a-dashboard.png" alt="Dashboard themed for the public-sector bank: green sidebar, light theme"
+          <div class="ba-label"><span class="bdot"></span> Partner A · light · green</div>
+          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-partner-a-dashboard.png">
+            <img src="assets/whitelabel/whitelabel-partner-a-dashboard.png" alt="Dashboard themed for Partner A: green sidebar, light theme"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-bank-a-dashboard.png</div>
+            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-partner-a-dashboard.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">the public-sector bank's green sidebar and brand chrome; the QR funnel and failure-reason charts pick up the green ramp.</p>
+          <p class="ba-cap">Partner A's green sidebar and brand chrome; the QR funnel and failure-reason charts pick up the green ramp.</p>
         </div>
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> the global bank · dark · red</div>
-          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-bank-b-dashboard.png">
-            <img src="assets/whitelabel/whitelabel-bank-b-dashboard.png" alt="Dashboard themed for the global bank: dark sidebar, red accents"
+          <div class="ba-label"><span class="bdot"></span> Partner B · dark · red</div>
+          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-partner-b-dashboard.png">
+            <img src="assets/whitelabel/whitelabel-partner-b-dashboard.png" alt="Dashboard themed for Partner B: dark sidebar, red accents"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-bank-b-dashboard.png</div>
+            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-partner-b-dashboard.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">the global bank's dark sidebar and red mark; the same peak-time heatmap re-ramps to red without touching the layout.</p>
+          <p class="ba-cap">Partner B's dark sidebar and red mark; the same peak-time heatmap re-ramps to red without touching the layout.</p>
         </div>
       </div>
     </div>
@@ -1701,31 +1701,31 @@ body.fmodal-open{overflow:hidden}
     <div class="shell narrow">
       <div class="section-head">
         <span class="sec-num">Whitelabel · From the first screen</span>
-        <h2>It's the bank's product from sign-in.</h2>
-        <p class="lead">The brand lands before login. Each bank gets its own split-screen entry (the public-sector bank's
-        green hero and orange call-to-action, the global bank's black brand panel and red confirm), so an operator
+        <h2>It's the partner's product from sign-in.</h2>
+        <p class="lead">The brand lands before login. Each partner gets its own split-screen entry (Partner A's
+        green hero and orange call-to-action, Partner B's black brand panel and red confirm), so an operator
         never sees a generic vendor screen on the way in.</p>
       </div>
       <div class="ba-grid" style="align-items:start">
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> the public-sector bank sign-in</div>
-          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-bank-a-login.png">
-            <img src="assets/whitelabel/whitelabel-bank-a-login.png" alt="the public-sector bank-themed login screen"
+          <div class="ba-label"><span class="bdot"></span> Partner A sign-in</div>
+          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-partner-a-login.png">
+            <img src="assets/whitelabel/whitelabel-partner-a-login.png" alt="Partner A-themed login screen"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-bank-a-login.png</div>
+            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-partner-a-login.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">Green brand hero ("Streamline your NetBanking operations") with the public-sector bank's logo and an orange Login.</p>
+          <p class="ba-cap">Green brand hero ("Streamline your operations") with Partner A's logo and an orange Login.</p>
         </div>
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> the global bank sign-in</div>
-          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-bank-b-login.png">
-            <img src="assets/whitelabel/whitelabel-bank-b-login.png" alt="the global bank-themed login / set-password screen"
+          <div class="ba-label"><span class="bdot"></span> Partner B sign-in</div>
+          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-partner-b-login.png">
+            <img src="assets/whitelabel/whitelabel-partner-b-login.png" alt="Partner B-themed login / set-password screen"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-bank-b-login.png</div>
+            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-partner-b-login.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">Black brand panel with the global bank mark and "Netbanking Dashboard", and a red Confirm on the set-password step.</p>
+          <p class="ba-cap">Black brand panel with Partner B mark and "Admin Dashboard", and a red Confirm on the set-password step.</p>
         </div>
       </div>
     </div>
@@ -1738,47 +1738,47 @@ body.fmodal-open{overflow:hidden}
         <span class="sec-num">Whitelabel · Themed end to end</span>
         <h2>The theme reaches every flow, not just the chrome.</h2>
         <p class="lead">Whitelabeling that stops at the header is obvious to users. Here it runs all the way
-        down: into modals, tables, status states, and even the spot illustrations, in both banks' themes.</p>
+        down: into modals, tables, status states, and even the spot illustrations, in both partners' themes.</p>
       </div>
       <div class="ba-grid" style="align-items:start">
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> the public-sector bank · invite &amp; assign roles</div>
-          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-bank-a-invite.png">
-            <img src="assets/whitelabel/whitelabel-bank-a-invite.png" alt="the public-sector bank-themed invite-user modal with re-tinted illustration"
+          <div class="ba-label"><span class="bdot"></span> Partner A · invite &amp; assign roles</div>
+          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-partner-a-invite.png">
+            <img src="assets/whitelabel/whitelabel-partner-a-invite.png" alt="Partner A-themed invite-user modal with re-tinted illustration"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-bank-a-invite.png</div>
+            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-partner-a-invite.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">The UAM invite modal, themed for the public-sector bank: permission checkboxes and the "Invite Sent" illustration both adopt the brand palette.</p>
+          <p class="ba-cap">The UAM invite modal, themed for Partner A: permission checkboxes and the "Invite Sent" illustration both adopt the brand palette.</p>
         </div>
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> the global bank · settlement recon</div>
-          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-bank-b-settlement.png">
-            <img src="assets/whitelabel/whitelabel-bank-b-settlement.png" alt="the global bank-themed settlement recon upload screen, dark theme"
+          <div class="ba-label"><span class="bdot"></span> Partner B · settlement recon</div>
+          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-partner-b-settlement.png">
+            <img src="assets/whitelabel/whitelabel-partner-b-settlement.png" alt="Partner B-themed settlement recon upload screen, dark theme"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-bank-b-settlement.png</div>
+            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-partner-b-settlement.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">A full working screen (Settlement Recon upload with status pills and validation errors) in the global bank's dark theme.</p>
+          <p class="ba-cap">A full working screen (Settlement Recon upload with status pills and validation errors) in Partner B's dark theme.</p>
         </div>
       </div>
       <div class="ba-grid" style="align-items:start;margin-top:20px">
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> the public-sector bank · set password</div>
-          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-bank-a-password.png">
-            <img src="assets/whitelabel/whitelabel-bank-a-password.png" alt="the public-sector bank-themed set-password modal with re-tinted illustration"
+          <div class="ba-label"><span class="bdot"></span> Partner A · set password</div>
+          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-partner-a-password.png">
+            <img src="assets/whitelabel/whitelabel-partner-a-password.png" alt="Partner A-themed set-password modal with re-tinted illustration"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-bank-a-password.png</div>
+            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-partner-a-password.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
-          <p class="ba-cap">Password setup: the lock illustration and Confirm button follow the public-sector bank palette.</p>
+          <p class="ba-cap">Password setup: the lock illustration and Confirm button follow Partner A's palette.</p>
         </div>
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> the public-sector bank · 2FA</div>
-          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-bank-a-2fa.png">
-            <img src="assets/whitelabel/whitelabel-bank-a-2fa.png" alt="the public-sector bank-themed 2FA OTP verification modal"
+          <div class="ba-label"><span class="bdot"></span> Partner A · 2FA</div>
+          <div class="ba-frame" data-shot="assets/whitelabel/whitelabel-partner-a-2fa.png">
+            <img src="assets/whitelabel/whitelabel-partner-a-2fa.png" alt="Partner A-themed 2FA OTP verification modal"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-bank-a-2fa.png</div>
+            <div class="ph" style="display:none;">assets/whitelabel/whitelabel-partner-a-2fa.png</div>
             <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
           </div>
           <p class="ba-cap">Phone-number 2FA: OTP inputs and the phone illustration, re-tinted to match.</p>
@@ -1792,18 +1792,18 @@ body.fmodal-open{overflow:hidden}
     <div class="shell narrow">
       <div class="section-head">
         <span class="sec-num">Whitelabel · The system behind it</span>
-        <h2>A token set per bank, applied once.</h2>
-        <p class="lead">Each bank is defined as a small set of tokens (a primary, a secondary, and an
+        <h2>A token set per partner, applied once.</h2>
+        <p class="lead">Each partner is defined as a small set of tokens (a primary, a secondary, and an
         accent) plus its logo and theme mode. One partner's thinking: "illuminating the
         dark" with a bold red primary, black secondary, and a teal accent that everything else derives from.</p>
       </div>
       <div class="decision">
         <div class="d-num">01</div>
-        <div><h4>Tokens, not forks.</h4><p class="d-rationale">A bank is a primary + secondary + accent + logo + theme mode, read by the same components. <b>Why it matters:</b> onboarding a bank is a config file, so the codebase stays single and every bank inherits fixes and new features for free.</p></div>
+        <div><h4>Tokens, not forks.</h4><p class="d-rationale">A partner is a primary + secondary + accent + logo + theme mode, read by the same components. <b>Why it matters:</b> onboarding a partner is a config file, so the codebase stays single and every partner inherits fixes and new features for free.</p></div>
       </div>
       <div class="decision">
         <div class="d-num">02</div>
-        <div><h4>Theme mode, not just hue.</h4><p class="d-rationale">the public-sector bank runs light on green; the global bank runs dark on red (the same screens in opposite modes). <b>Why it matters:</b> whitelabel covers a bank's full identity, not a one-colour reskin, so each portal feels genuinely its own.</p></div>
+        <div><h4>Theme mode, not just hue.</h4><p class="d-rationale">Partner A runs light on green; Partner B runs dark on red (the same screens in opposite modes). <b>Why it matters:</b> whitelabel covers a partner's full identity, not a one-colour reskin, so each portal feels genuinely its own.</p></div>
       </div>
       <div class="decision">
         <div class="d-num">03</div>
@@ -1820,10 +1820,10 @@ body.fmodal-open{overflow:hidden}
     <div class="shell narrow">
       <div class="section-head">
         <span class="sec-num">The portal · Impact</span>
-        <h2>Live, and carrying real banks.</h2>
+        <h2>Live, and carrying real clients.</h2>
       </div>
       <ul class="clean">
-        <li><strong>2 banks live in production</strong>: operating on the portal today.</li>
+        <li><strong>2 clients live in production</strong>: operating on the portal today.</li>
         <li><strong>Manual work automated</strong>: reconciliation, statement handling, and access moved into the system.</li>
       </ul>
     </div>
@@ -1835,7 +1835,7 @@ body.fmodal-open{overflow:hidden}
       <div class="section-head">
         <span class="sec-num">The portal · What's next</span>
         <h2>Deeper insight as the base grows.</h2>
-        <p class="lead">The UI and analytics can go further. With more banks live and a larger user base,
+        <p class="lead">The UI and analytics can go further. With more clients live and a larger user base,
         the dashboard can earn richer insights and the flows can be refined against real usage.</p>
       </div>
     </div>
@@ -1844,7 +1844,7 @@ body.fmodal-open{overflow:hidden}
 
 <footer>
   <div class="shell chrome-inner">
-    <span>Netbanking 2.0 · Admin Portal · Case study</span>
+    <span>Admin & Dashboard Designs · Case study</span>
     <span>Built with the project-overview skill</span>
   </div>
 </footer>

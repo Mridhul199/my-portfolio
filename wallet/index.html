@@ -201,7 +201,7 @@ figcaption{font-size:12px;color:var(--text-3);margin-top:12px;text-align:center}
 .decision .d-rationale{font-size:14px;line-height:1.65;color:var(--text-2);margin-top:8px}
 .decision .d-rationale b{color:var(--text-1);font-weight:600}
 
-/* Pipeline (bank themes) */
+/* Pipeline (partner themes) */
 .pipeline{display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr 24px 1fr;gap:0;align-items:stretch;margin-top:28px}
 @media(max-width:760px){.pipeline{grid-template-columns:1fr;gap:10px}.pipe-arrow{display:none}}
 .pipe-node{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:18px 20px;box-shadow:var(--sh-1)}
@@ -282,8 +282,8 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-phone-urlbar-wrap{padding:6px 16px 14px;background:var(--pv-brand-dark)}
 .pv-phone-urlbar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border-radius:10px;padding:9px 14px;font-size:13px;color:#fff;justify-content:space-between}
 .pv-phone-urlbar .url-l{display:flex;gap:8px;align-items:center}
-.pv-phone-bankbar{padding:12px 22px;background:var(--pv-brand-dark);display:flex;align-items:center;min-height:46px}
-.pv-phone-bankbar img{height:26px;width:auto;display:block}
+.pv-phone-brandbar{padding:12px 22px;background:var(--pv-brand-dark);display:flex;align-items:center;min-height:46px}
+.pv-phone-brandbar img{height:26px;width:auto;display:block}
 .pv-phone-illu{background:#fff;display:block;line-height:0}
 .pv-phone-illu img{width:100%;height:auto;display:block}
 .pv-phone-content{padding:14px 24px 24px;display:flex;flex-direction:column}
@@ -314,7 +314,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-desktop-chrome .url{flex:1;background:#1F2937;padding:5px 12px;border-radius:6px;font-size:11px;color:rgba(255,255,255,.75);text-align:center}
 .pv-desktop-body{display:grid;grid-template-columns:38fr 62fr;min-height:540px}
 
-/* ===== Partner Bank: custom Add Biller portal (out-of-scope screen) ===== */
+/* ===== Partner: custom Add Biller portal (out-of-scope screen) ===== */
 .bd-portal{display:grid;grid-template-columns:200px 1fr;min-height:540px;background:#fff;font-family:var(--f)}
 .bd-portal *{box-sizing:border-box}
 .bd-side{border-right:1px solid var(--border);padding:14px 12px;display:flex;flex-direction:column;gap:14px;background:#fff}
@@ -368,7 +368,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-subpane{display:none;width:100%}
 .pv-subpane.is-on{display:flex;align-items:center;justify-content:center;width:100%}
 
-/* ===== Partner Bank: MWeb Recharges screen (out-of-scope, mobile only) ===== */
+/* ===== Partner: MWeb Recharges screen (out-of-scope, mobile only) ===== */
 .bd-mweb{background:#fff;font-family:var(--f);display:flex;flex-direction:column;width:100%;height:100%}
 .bd-mweb-statusbar{padding:14px 26px 8px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:var(--text-1);background:#fff}
 .bd-mweb-statusbar .sb-icons{display:inline-flex;gap:6px;align-items:center;color:var(--text-1)}
@@ -466,7 +466,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 /* Selected card stroke per spec (#3399E8 instead of token) */
 .partner-skin .bd-card.is-selected{border:2px solid var(--partner-stroke);box-shadow:none;padding:11px 10px}
 
-/* CTA stays bank primary (#00488B, already var(--pv-fill)); no change needed */
+/* CTA stays partner primary (#00488B, already var(--pv-fill)); no change needed */
 
 /* Manrope letter-spacing per spec (negative on headers) */
 .partner-skin .pv-phone-content h4,
@@ -512,7 +512,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-screen-count .dot.on{background:var(--pv-fill)}
 .pv-screen-count .lbl{font-size:11px;font-weight:500;color:var(--text-3)}
 
-/* ===== Desktop recurring-payments screen (themable for every bank) ===== */
+/* ===== Desktop recurring-payments screen (themable for every partner) ===== */
 .pv-rp{font-family:var(--f);background:linear-gradient(180deg,#fff 0%,var(--pv-fill-light) 170%);height:100%;color:var(--text-1);display:flex;flex-direction:column}
 .pv-rp *{box-sizing:border-box}
 .pv-rp-bar{height:46px;margin:0 48px;flex-shrink:0;background:var(--pv-brand-dark);border-radius:0 0 14px 14px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;color:#fff}
@@ -559,13 +559,13 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-rp-table td.muted{color:var(--text-2);font-weight:400}
 .pv-rp-table td.r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
 .pv-rp-table tr:last-child td{border-bottom:none}
-/* ===== Mobile recurring-payments screen (themable for every bank) ===== */
+/* ===== Mobile recurring-payments screen (themable for every partner) ===== */
 .pv-mrp{display:flex;flex-direction:column;flex:1;background:#fff}
 .pv-mrp *{box-sizing:border-box}
-.pv-mrp-bankbar{padding:11px 18px;background:var(--pv-brand-dark);display:flex;align-items:center;justify-content:space-between;gap:10px}
-.pv-mrp-bankbar .brand img{height:22px;width:auto;display:block}
-.pv-mrp-bankbar .brand .wm{color:#fff;font-size:15px;font-weight:600;letter-spacing:.01em}
-.pv-mrp-bankbar .right{display:flex;align-items:center;gap:9px}
+.pv-mrp-brandbar{padding:11px 18px;background:var(--pv-brand-dark);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pv-mrp-brandbar .brand img{height:22px;width:auto;display:block}
+.pv-mrp-brandbar .brand .wm{color:#fff;font-size:15px;font-weight:600;letter-spacing:.01em}
+.pv-mrp-brandbar .right{display:flex;align-items:center;gap:9px}
 .pv-mrp-chip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 9px;background:rgba(255,255,255,.1);border:1.5px solid var(--pv-fill);border-radius:8px;font-size:12px;font-weight:600;color:#fff}
 .pv-mrp-chip svg.mc{display:block;flex-shrink:0}
 .pv-mrp-avatar{width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--text-2);flex-shrink:0}
@@ -604,7 +604,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-mrp-mname{font-size:13.5px;font-weight:600;letter-spacing:-.01em}
 .pv-mrp-mamt{font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
 .pv-mrp-msub{font-size:11.5px;color:var(--text-3);margin-top:5px}
-/* ===== Desktop payment-gateway screen (themable for every bank) ===== */
+/* ===== Desktop payment-gateway screen (themable for every partner) ===== */
 .pv-pg{font-family:var(--f);background:#F4F5F7;height:540px;display:flex;flex-direction:column;color:var(--text-1);padding:0 64px;gap:0;overflow:hidden}
 .pv-pg *{box-sizing:border-box}
 .pv-pg-bar{flex-shrink:0;background:var(--pv-brand-dark);border-radius:0 0 16px 16px;display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
@@ -635,7 +635,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-pg-search{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:7px;padding:7px 11px;margin-bottom:2px;flex-shrink:0}
 .pv-pg-search svg{width:13px;height:13px;color:var(--text-3);flex-shrink:0}
 .pv-pg-search .ph{font-size:11px;color:var(--text-3)}
-.pv-pg-banks{flex:1;min-height:0;overflow:hidden}
+.pv-pg-orgs{flex:1;min-height:0;overflow:hidden}
 .pv-pg-brow2{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px dashed var(--border)}
 .pv-pg-brow2:last-child{border-bottom:none}
 .pv-pg-blogo{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center}
@@ -653,7 +653,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-pg-stotal .amt{font-variant-numeric:tabular-nums}
 .pv-pg-bdmark{display:flex;justify-content:center;margin-top:14px}
 .pv-pg-bdmark img{height:16px;width:auto}
-/* ===== Mobile payment-gateway screen (themable for every bank) ===== */
+/* ===== Mobile payment-gateway screen (themable for every partner) ===== */
 .pv-mpg{display:flex;flex-direction:column;flex:1;background:#fff}
 .pv-mpg *{box-sizing:border-box}
 .pv-mpg-header{background:var(--pv-brand-dark);border-radius:0 0 18px 18px;padding:13px 16px 16px;color:#fff;flex-shrink:0}
@@ -693,9 +693,9 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .pv-mpg-radio.on{border-color:var(--pv-fill)}
 .pv-mpg-radio.on::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--pv-fill)}
 .pv-mpg-pay{margin:6px 14px 10px;height:46px;width:calc(100% - 28px);background:var(--pv-fill);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:15px;font-weight:600;cursor:default}
-.pv-mpg-allbanks{display:flex;align-items:center;justify-content:space-between;padding:14px 14px;border-top:1px dashed var(--border)}
-.pv-mpg-allbanks .l{display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:500;color:var(--text-1)}
-.pv-mpg-allbanks .l svg{width:17px;height:17px;color:var(--text-2)}
+.pv-mpg-allorgs{display:flex;align-items:center;justify-content:space-between;padding:14px 14px;border-top:1px dashed var(--border)}
+.pv-mpg-allorgs .l{display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:500;color:var(--text-1)}
+.pv-mpg-allorgs .l svg{width:17px;height:17px;color:var(--text-2)}
 
 /* Token table */
 .token-table{width:100%;border-collapse:collapse;font-size:12px}
@@ -862,7 +862,7 @@ body.fmodal-open{overflow:hidden}
         can't hold a balance, run prepaid pricing, or reward loyalty.</p>
       </div>
       <ul class="clean">
-        <li><strong>Re-auth on every transaction:</strong> bank redirect or card entry for even a ₹25 ride.</li>
+        <li><strong>Re-auth on every transaction:</strong> a redirect or card entry for even a ₹25 ride.</li>
         <li><strong>No stored value:</strong> nothing to pay <em>from</em> instantly; every payment starts at zero.</li>
         <li><strong>Merchants can't run prepaid:</strong> no balance means no top-up offers, no float, no loyalty.</li>
         <li><strong>Spend &amp; settlement opaque:</strong> wallet activity and merchant payouts tracked outside any one system.</li>
@@ -1175,7 +1175,7 @@ body.fmodal-open{overflow:hidden}
         <span class="sec-num">Admin · Dashboard</span>
         <h2>The money, in and out, at a glance.</h2>
         <p class="lead">The operator lands on the balance sheet of the program: total inward and outward,
-        funds receivable and payable, what's reconciled versus unreconciled, the bank account, and customer
+        funds receivable and payable, what's reconciled versus unreconciled, the settlement account, and customer
         holdings (the float customers are carrying in their wallets). One screen says whether the program is
         balanced.</p>
       </div>
@@ -1198,7 +1198,7 @@ body.fmodal-open{overflow:hidden}
         <span class="sec-num">Admin · Merchants</span>
         <h2>Onboard who gets paid.</h2>
         <p class="lead">Every party customers can pay, and their sub-merchants, is registered here. Adding
-        one is a short modal: name, ID, contact, and the bank details (IFSC, account) funds settle to, with an
+        one is a short modal: name, ID, contact, and the settlement details (IFSC, account) funds settle to, with an
         option to generate an empty reconciliation file. The registry is the spine the spend ledger and
         remittance both hang off.</p>
       </div>
@@ -1209,7 +1209,7 @@ body.fmodal-open{overflow:hidden}
           <div class="placeholder" style="display:none;">Drop the merchants screen at<code>assets/admin/admin-merchants-add.png</code></div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
-        <figcaption>Add Merchant captures identity plus settlement bank details and a recon-file option up front, so payouts and reconciliation work the moment a merchant is live.</figcaption>
+        <figcaption>Add Merchant captures identity plus settlement details and a recon-file option up front, so payouts and reconciliation work the moment a merchant is live.</figcaption>
       </figure>
     </div>
   </section>
@@ -1310,7 +1310,7 @@ body.fmodal-open{overflow:hidden}
       <div class="cards-grid three">
         <div class="pcard"><span class="tag">Reload</span><h4>Auto-reload &amp; low-balance</h4><p>Top up automatically below a threshold, so a ride or shipment never fails for an empty wallet.</p></div>
         <div class="pcard"><span class="tag">Loyalty</span><h4>Rewards on stored value</h4><p>Generalize a logistics partner's 2× nudge into cashback and tiered rewards any host can switch on.</p></div>
-        <div class="pcard"><span class="tag">Refunds</span><h4>Refund to wallet</h4><p>Send reversals back to balance for instant re-spend instead of a slow bank refund.</p></div>
+        <div class="pcard"><span class="tag">Refunds</span><h4>Refund to wallet</h4><p>Send reversals back to balance for instant re-spend instead of a slow refund cycle.</p></div>
       </div>
     </div>
   </section>
