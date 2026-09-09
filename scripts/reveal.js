@@ -243,7 +243,17 @@
       try { next = buildLut(swirls[0]); } catch (e) { next = null; }
       if (!next) return;
       lut = next;
-      swirls.forEach(function (el) { el.style.strokeDasharray = lut.total; });
+      /* The table measures the path in SCREEN space, but stroke-dasharray
+         and stroke-dashoffset are user units. preserveAspectRatio="none"
+         scales x and y differently, so the two lengths are nowhere near
+         equal — feeding the screen length to dasharray made the pattern
+         longer than the path, and the stroke read as fully drawn about
+         halfway down. Dash in user units; use the table only for the
+         fraction. */
+      swirls.forEach(function (el) {
+        el.__pathLen = el.getTotalLength();
+        el.style.strokeDasharray = el.__pathLen;
+      });
     }
 
     /* Two boxes, two progresses. The centre line is normalised to the
@@ -336,9 +346,12 @@
         if (!(sv >= 0)) sv = 0; else if (sv > 1) sv = 1;
 
         var len = lenAtHeight(lut, sv);
-        if (len >= 0) {
+        if (len >= 0 && lut.total) {
+          var frac = len / lut.total;
+          if (frac < 0) frac = 0; else if (frac > 1) frac = 1;
           for (var s = 0; s < swirls.length; s++) {
-            swirls[s].style.strokeDashoffset = lut.total - len;
+            var L = swirls[s].__pathLen || swirls[s].getTotalLength();
+            swirls[s].style.strokeDashoffset = L * (1 - frac);
           }
         }
       }
@@ -769,7 +782,11 @@
       try { next = buildLut(paths[0]); } catch (e) { next = null; }
       if (!next) return;                       /* keep a stale table over none */
       lut = next;
-      paths.forEach(function (el) { el.style.strokeDasharray = lut.total; });
+      /* user units, not the table's screen-space run — see workRail */
+      paths.forEach(function (el) {
+        el.__pathLen = el.getTotalLength();
+        el.style.strokeDasharray = el.__pathLen;
+      });
     }
 
     function paint(sy) {
@@ -783,9 +800,12 @@
       if (!(sv >= 0)) sv = 0; else if (sv > 1) sv = 1;
 
       var len = lenAtHeight(lut, sv);
-      if (len >= 0) {
+      if (len >= 0 && lut.total) {
+        var frac = len / lut.total;
+        if (frac < 0) frac = 0; else if (frac > 1) frac = 1;
         for (var i = 0; i < paths.length; i++) {
-          paths[i].style.strokeDashoffset = lut.total - len;
+          var L = paths[i].__pathLen || paths[i].getTotalLength();
+          paths[i].style.strokeDashoffset = L * (1 - frac);
         }
       }
     }
