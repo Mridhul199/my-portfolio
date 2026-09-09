@@ -251,8 +251,20 @@ section{padding:var(--pad-y) 0}
    sweeps left, and so on. That is what ties a swell of the snake to
    each section instead of letting it wander independently.
    non-scaling-stroke means these widths are screen pixels. */
-.work-swirl .swirl-bloom{stroke-width:104;opacity:.14;filter:blur(44px)}
-.work-swirl .swirl-line{stroke-width:54;opacity:.32}
+/* One soft pass, no crisp stroke. The hard 54px line read as a band
+   drawn across the page; the glow keeps the gesture and lets the work
+   underneath stay the thing you look at. Tighter and a little stronger
+   than the old bloom, which was only ever a halo behind that line. */
+.work-swirl .swirl-glow{stroke-width:72;opacity:.22;filter:blur(28px)}
+
+/* non-scaling-stroke means these are screen pixels, so the glow has to
+   step down with the viewport or it stops being a gesture beside the
+   work and becomes a wash over it: 72px is 3.8% of a 1900px screen but
+   9.4% of a tablet. Three steps, matching the timeline's own layout
+   breakpoints. */
+@media(max-width:1024px){
+  .work-swirl .swirl-glow{stroke-width:52;opacity:.21;filter:blur(22px)}
+}
 
 .work-item{position:relative;display:flex;align-items:center;margin-bottom:var(--tl-gap)}
 .work-item:last-child{margin-bottom:0}
@@ -750,8 +762,7 @@ body,
      390px viewport against 1.7% on desktop — it lands as a band
      across the copy rather than a stroke beside it. Scaled to match
      and pulled back, since here it crosses the reading column. */
-  .work-swirl .swirl-bloom{stroke-width:44;opacity:.10;filter:blur(24px)}
-  .work-swirl .swirl-line{stroke-width:20;opacity:.20}
+  .work-swirl .swirl-glow{stroke-width:34;opacity:.20;filter:blur(15px)}
   .work-track,.work-progress{left:6px;transform:none}
   .work-dot{left:6px;top:28px;margin-left:-6px}
   .work-content,
