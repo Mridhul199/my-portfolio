@@ -25,7 +25,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Recurring Payments Hub · Mridhul Aswin","description":"Recurring Payments Hub, the Recurring Payments Hub: a ground-up redesign that lets cardholders see, modify, and cancel every recurring payment from one dashboard across 50+ partner organizations. Case study by Mridhul Aswin.","author":{"@type":"Person","name":"Mridhul Aswin"},"url":"https://mridhul199.github.io/my-portfolio/recurring-payments-hub/"}</script>
 <link rel="preload" href="../assets/fonts/switzer-800.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="../assets/fonts/switzer-500.woff2" as="font" type="font/woff2" crossorigin/>
-<link rel="stylesheet" href="../styles/type.css?v=34"/>
+<link rel="stylesheet" href="../styles/type.css?v=35"/>
 <style>
 :root{
   --orange:#F26522; --orange-hover:#D9541A; --orange-tint:#FEF0E8; --orange-tint-2:#FFF7F1;
@@ -385,7 +385,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 
 
 </style>
-<link rel="stylesheet" href="../styles/casestudy-bone.css?v=34"/>
+<link rel="stylesheet" href="../styles/casestudy-bone.css?v=35"/>
 </head>
 <body data-auto-reveal>
 <style>
@@ -432,7 +432,13 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
   </div>
 </div>
 
-<main>
+<main data-cs-swirl>
+  <svg class="cs-swirl" viewBox="0 0 1200 4800" fill="none"
+       preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path class="swirl-bloom" d="M600 0C600 150 980 150 980 300C980 600 220 600 220 900C220 1200 980 1200 980 1500C980 1800 220 1800 220 2100C220 2400 980 2400 980 2700C980 3000 220 3000 220 3300C220 3600 980 3600 980 3900C980 4200 220 4200 220 4500C220 4650 600 4650 600 4800"/>
+    <path class="swirl-line"  d="M600 0C600 150 980 150 980 300C980 600 220 600 220 900C220 1200 980 1200 980 1500C980 1800 220 1800 220 2100C220 2400 980 2400 980 2700C980 3000 220 3000 220 3300C220 3600 980 3600 980 3900C980 4200 220 4200 220 4500C220 4650 600 4650 600 4800"/>
+  </svg>
+
 
 <!-- HERO -->
 <header class="hero">
@@ -827,7 +833,7 @@ document.addEventListener('click', e => {
     const lb = document.getElementById('lightbox');
     lb.classList.remove('is-open');
     lb.setAttribute('aria-hidden', 'true');
-    document.getElementById('lightbox-img').src = '';
+    document.getElementById('lightbox-img').removeAttribute('src');
   }
 });
 document.addEventListener('keydown', e => {
@@ -836,7 +842,7 @@ document.addEventListener('keydown', e => {
     if (lb.classList.contains('is-open')) {
       lb.classList.remove('is-open');
       lb.setAttribute('aria-hidden', 'true');
-      document.getElementById('lightbox-img').src = '';
+      document.getElementById('lightbox-img').removeAttribute('src');
     }
   }
 });
@@ -1053,6 +1059,6 @@ document.addEventListener('keydown', e => {
 
 <script>document.querySelectorAll('.cs-yr').forEach(function(e){e.textContent=new Date().getFullYear()});</script>
 
-<script src="../scripts/reveal.js?v=34" defer onerror="document.documentElement.classList.remove('js')"></script>
+<script src="../scripts/reveal.js?v=35" defer onerror="document.documentElement.classList.remove('js')"></script>
 </body>
 </html>

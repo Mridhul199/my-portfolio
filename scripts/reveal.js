@@ -705,10 +705,128 @@
     update();
   }
 
+
+  /* ------------------------------------------------------------
+     Case-study swirl. Same gesture as the work rail's, without the
+     rail: a case study has no .work-item list to hang lobes off, so
+     the anchors are its own sections. workRail() returns early when
+     there is no [data-rail], which is why case studies needed their
+     own driver rather than a flag on that one.
+
+     Reuses buildLut/lenAtHeight so the head tracks the reader
+     identically on both — only the anchor set differs.
+     ------------------------------------------------------------ */
+  function csSwirl() {
+    var scope = document.querySelector('[data-cs-swirl]');
+    if (!scope) return;
+
+    var paths = [].slice.call(scope.querySelectorAll('.cs-swirl path'))
+      .filter(function (el) { return typeof el.getTotalLength === 'function'; });
+    if (!paths.length) return;
+
+    var anchors = [].slice.call(scope.querySelectorAll('main > section, main > header'));
+    if (anchors.length < 2) return;
+
+    var VB = 4800, XL = 220, XR = 980, XMID = 600;
+    var lut = null, topDoc = 0, boxH = 1;
+
+    function buildPath() {
+      var sr = scope.getBoundingClientRect();
+      var top = sr.top + window.pageYOffset, h = sr.height;
+      if (!h) return null;
+
+      var nodes = [[XMID, 0]], i, er, c, y;
+      for (i = 0; i < anchors.length; i++) {
+        er = anchors[i].getBoundingClientRect();
+        c = er.top + window.pageYOffset + er.height / 2 - top;
+        y = (c / h) * VB;
+        if (y < 1) y = 1; else if (y > VB - 1) y = VB - 1;
+        nodes.push([i % 2 === 0 ? XL : XR, y]);
+      }
+      nodes.push([XMID, VB]);
+
+      var d = 'M' + nodes[0][0] + ' ' + nodes[0][1], k, a0, b0, mid;
+      for (k = 1; k < nodes.length; k++) {
+        a0 = nodes[k - 1]; b0 = nodes[k];
+        if (b0[1] <= a0[1]) b0[1] = a0[1] + 1;      /* keep y monotonic */
+        mid = a0[1] + (b0[1] - a0[1]) / 2;
+        d += 'C' + a0[0] + ' ' + mid.toFixed(1) + ' ' + b0[0] + ' ' +
+             mid.toFixed(1) + ' ' + b0[0] + ' ' + b0[1].toFixed(1);
+      }
+      return d;
+    }
+
+    function measure() {
+      var sr = scope.getBoundingClientRect();
+      topDoc = sr.top + window.pageYOffset;
+      boxH = sr.height || 1;
+
+      var d = null;
+      try { d = buildPath(); } catch (e) { d = null; }
+      if (d) paths.forEach(function (el) { el.setAttribute('d', d); });
+
+      var next = null;
+      try { next = buildLut(paths[0]); } catch (e) { next = null; }
+      if (!next) return;                       /* keep a stale table over none */
+      lut = next;
+      paths.forEach(function (el) { el.style.strokeDasharray = lut.total; });
+    }
+
+    function paint(sy) {
+      if (!lut) return;
+      var v = (window.innerHeight * 0.5 - (topDoc - sy)) / boxH;
+      if (v < 0) v = 0; else if (v > 1) v = 1;
+
+      var base = 1 - v;
+      if (base < 0) base = 0; else if (base > 1) base = 1;
+      var sv = 1 - Math.pow(base, SWIRL_LEAD) + SWIRL_OFFSET;
+      if (!(sv >= 0)) sv = 0; else if (sv > 1) sv = 1;
+
+      var len = lenAtHeight(lut, sv);
+      if (len >= 0) {
+        for (var i = 0; i < paths.length; i++) {
+          paths[i].style.strokeDashoffset = lut.total - len;
+        }
+      }
+    }
+
+    measure();
+    paint(window.pageYOffset);
+
+    window.addEventListener('load', function () { measure(); paint(window.pageYOffset); });
+    if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === 'function') {
+      document.fonts.ready.then(function () { measure(); paint(window.pageYOffset); })['catch'](function () {});
+    }
+    if (typeof window.ResizeObserver === 'function') {
+      new window.ResizeObserver(function () { measure(); paint(window.pageYOffset); }).observe(scope);
+    }
+
+    /* same time-based lerp as the rail, so the head settles in the
+       same ~60ms regardless of refresh rate */
+    var target = window.pageYOffset, eased = target, raf = null, last = 0;
+    var smooth = !reduce && typeof window.requestAnimationFrame === 'function';
+
+    function frame(t) {
+      var dt = last ? Math.min((t - last) / 1000, 0.1) : 0.016;
+      last = t;
+      eased += (target - eased) * (1 - Math.pow(0.0001, dt));
+      paint(eased);
+      if (Math.abs(target - eased) > 0.5) raf = window.requestAnimationFrame(frame);
+      else { raf = null; last = 0; paint(target); }
+    }
+
+    window.addEventListener('scroll', function () {
+      target = window.pageYOffset;
+      if (!smooth) { paint(target); return; }
+      if (raf === null) { last = 0; raf = window.requestAnimationFrame(frame); }
+    }, { passive: true });
+  }
+
   function run() {
     try { splitWords(); } catch (e) {}
     navSentinel();
     try { workRail(); } catch (e) {}
+    try { csSwirl(); } catch (e) {}
     try { aboutMotion(); } catch (e) {}
     try { capScroll(); } catch (e) {}
     try { sectionTheme(); } catch (e) {}

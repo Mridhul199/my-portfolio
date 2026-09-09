@@ -239,3 +239,31 @@ code{color:var(--text-2);background:var(--surface-2);border-color:var(--border)}
   .js [data-reveal]:not(.is-in){opacity:1;transform:none;transition:none}
   .hover-link{transition:none}
 }
+
+/* ---- the swirl, on case studies -------------------------------
+   Same gesture as the work rail's curved line. The scope is <main>
+   itself rather than a wrapper div, so the SVG can be a first child
+   without restructuring nine pages of markup. */
+main{position:relative}
+main > section,
+main > header{position:relative;z-index:1}
+
+.cs-swirl{
+  position:absolute;left:50%;top:0;width:100vw;height:100%;
+  transform:translateX(-50%);
+  pointer-events:none;z-index:0;overflow:visible;
+}
+.cs-swirl path{
+  fill:none;stroke:var(--orange);
+  stroke-linecap:round;stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+/* screen pixels, thanks to non-scaling-stroke */
+.cs-swirl .swirl-bloom{stroke-width:104;opacity:.10;filter:blur(44px)}
+.cs-swirl .swirl-line{stroke-width:54;opacity:.16}
+
+/* Narrow viewports put the lobes mostly off-screen, where the stroke
+   reads as a stray band rather than a gesture — and the blur is the
+   most expensive thing on the page. */
+@media(max-width:900px){.cs-swirl{display:none}}
+@media(prefers-reduced-motion:reduce){.cs-swirl{display:none}}
