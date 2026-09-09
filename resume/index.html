@@ -18,7 +18,7 @@
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
 <link rel="preload" href="../assets/fonts/switzer-800.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="../assets/fonts/switzer-500.woff2" as="font" type="font/woff2" crossorigin/>
-<link rel="stylesheet" href="../styles/type.css"/>
+<link rel="stylesheet" href="../styles/type.css?v=34"/>
 <style>
 :root{
   --bg:#EAEBE5; --surface:#FFFFFF; --text-1:#000000; --text-2:#5A5C55; --text-3:#8A8C83;
@@ -92,10 +92,33 @@ ul.bul li a:hover{text-decoration-style:solid}
 }
 
 /* PRINT: clean light résumé for Save-as-PDF, structured for ATS parsing, 1 page */
+/* ---- shell parity: same nav links, hover sweep and close as the rest ---- */
+.bridge{background:rgba(234,235,229,.82);-webkit-backdrop-filter:saturate(180%) blur(14px);
+  backdrop-filter:saturate(180%) blur(14px)}
+.bridge-in{height:72px;gap:20px}
+.hover-link{display:inline;background-image:linear-gradient(currentColor,currentColor);
+  background-repeat:no-repeat;background-position:100% 100%;background-size:0 2px;padding-bottom:2px;
+  transition:background-size .3s ease-in-out,color .15s ease}
+.hover-link:hover,.hover-link:focus-visible{background-position:0 100%;background-size:100% 2px}
+.cs-nav-links{display:flex;gap:clamp(16px,2vw,28px);align-items:center;margin-left:auto;margin-right:20px}
+.cs-nav-links a{font-weight:700;font-size:14px;letter-spacing:-.01em;color:var(--text-1)}
+.cs-nav-links a.cta{color:var(--accent)}
+.cs-contact{background:var(--text-1);color:var(--bg);padding:clamp(64px,8vw,104px) 0;margin-top:56px}
+.cs-contact-row{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:32px;
+  max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.cs-contact h2{margin:0;max-width:12ch;color:var(--bg);font-weight:800;
+  font-size:clamp(32px,5.4vw,72px);line-height:.92;letter-spacing:-.03em}
+.cs-contact h2 a{color:var(--accent)}
+.cs-contact-links{display:flex;flex-direction:column;gap:12px}
+.cs-contact-links a{display:flex;align-items:baseline;gap:14px;color:var(--bg);font-size:14px}
+.cs-contact-links a .k{width:70px;flex:none;font-weight:700;font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--text-3)}
+@media(max-width:640px){.cs-contact-links a{flex-direction:column;gap:2px}.cs-contact-links a .k{width:auto}}
+
 @media print{
   @page{margin:12mm 14mm}
   body{background:#fff;color:#111;font-size:10.5pt;line-height:1.35}
-  .bridge,.print-btn{display:none!important}
+  .bridge,.print-btn,.cs-nav-links,.cs-contact{display:none!important}
   a{color:#111;text-decoration:none}
   ul.bul li a{text-decoration:underline;text-decoration-style:dotted;text-decoration-color:#111;text-underline-offset:3px}
   .shell{max-width:none;padding:0}
@@ -118,6 +141,11 @@ ul.bul li a:hover{text-decoration-style:solid}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Mridhul Aswin
     </a>
+    <nav class="cs-nav-links" aria-label="Primary">
+      <a class="hover-link" href="../about/">About</a>
+      <a class="hover-link" href="../work/">Work</a>
+      <a class="hover-link cta" href="#cs-contact">Contact</a>
+    </nav>
     <button class="print-btn" onclick="window.print()">
       <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>
       Save as PDF
@@ -146,7 +174,7 @@ ul.bul li a:hover{text-decoration-style:solid}
       <span class="job-co-name">Hatio Innovations Pvt Ltd, Ernakulam, Kerala, India</span>
       <span class="when">Dec 2023 – Present</span>
     </div>
-    <div class="job-title">Product Designer (UX / UI)</div>
+    <div class="job-title">UX Designer (Individual Contributor)</div>
     <ul class="bul">
       <li><b><a href="../admin-dashboard/">Admin &amp; Dashboard Designs.</a></b> Designed the operator console for an interoperable admin rail; 2 clients live in production.</li>
       <li><b><a href="../wallet/">Wallet Solution.</a></b> Shipped a stored-value wallet SDK plus admin portal, whitelabelled for a transit operator and a logistics partner.</li>
@@ -176,6 +204,18 @@ ul.bul li a:hover{text-decoration-style:solid}
   </section>
 
 </main>
+
+
+<section id="cs-contact" class="cs-contact" aria-labelledby="cs-contact-h">
+  <div class="cs-contact-row">
+    <h2 id="cs-contact-h">Let's <a class="hover-link" href="mailto:mridhulaswin92@gmail.com">work together</a> &rarr;</h2>
+    <div class="cs-contact-links">
+      <a href="mailto:mridhulaswin92@gmail.com"><span class="k">Email</span> <span class="hover-link">mridhulaswin92@gmail.com</span></a>
+      <a href="https://www.linkedin.com/in/mridhul-aswin-6637202bb/?skipRedirect=true" target="_blank" rel="noopener"><span class="k">LinkedIn</span> <span class="hover-link">/in/mridhul-aswin-6637202bb</span></a>
+      <a href="../work/"><span class="k">Work</span> <span class="hover-link">All nine projects</span></a>
+    </div>
+  </div>
+</section>
 
 </body>
 </html>
