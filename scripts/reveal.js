@@ -149,9 +149,38 @@
 
   /* How far ahead of the scroll the swirl runs. LEAD is the exponent
      on 1-(1-v)^n: 1 is level with the centre line, higher is faster.
-     OFFSET is a flat head start in section fractions. */
-  var SWIRL_LEAD = 1.45;
-  var SWIRL_OFFSET = 0.06;
+     OFFSET is a flat head start in section fractions.
+
+     Both sit at "level" now. At 1.45/0.06 the head ran so far ahead
+     that it was off-screen at five of six scroll positions — measured
+     1183-2170px below a 900px viewport — so the reader only ever saw
+     a stroke passing through, never an end being drawn. Level keeps
+     the head on the centre line, which is the part worth watching. */
+  var SWIRL_LEAD = 1;
+  var SWIRL_OFFSET = 0;
+
+
+  /* Progress of a box against the scroll it can actually receive.
+
+     The old measure was "where is the viewport centre inside the box",
+     which only reaches 1 when at least half a viewport of content sits
+     below the box. On /work/ there are 84px below it, so progress
+     stopped at 0.952 — the swirl finished at 65% and the centre line
+     at 96%, and neither ever completed. Anchoring the end on "box
+     bottom resting on the viewport bottom", clamped to the document's
+     real scroll range, means the last pixel of scroll always finishes
+     the stroke. */
+  function scopeProgress(topDoc, h, sy) {
+    var vh = window.innerHeight;
+    var maxSy = Math.max(0, docEl.scrollHeight - vh);
+    var start = topDoc - vh;
+    var end = topDoc + h - vh;
+    if (start < 0) start = 0;
+    if (end > maxSy) end = maxSy;
+    if (end <= start) return sy >= end ? 1 : 0;
+    var p = (sy - start) / (end - start);
+    return p < 0 ? 0 : p > 1 ? 1 : p;
+  }
 
   function lenAtHeight(lut, frac) {
     var y = lut.minY + lut.span * frac;
@@ -188,11 +217,12 @@
        whatever the section heights do. */
     var VB = 4800, XL = 220, XR = 980, XMID = 600;
 
+    /* The lobes belong to the timeline, so the items are the whole
+       anchor set. #about used to be prepended when the swirl spanned
+       About + Work; it now lives inside .work-list and starts where
+       the timeline starts. */
     function anchors() {
-      var a = [];
-      var about = document.querySelector('#about');
-      if (about) a.push(about);
-      return a.concat(items);
+      return items;
     }
 
     function buildPath() {
@@ -243,7 +273,17 @@
       try { next = buildLut(swirls[0]); } catch (e) { next = null; }
       if (!next) return;
       lut = next;
-      swirls.forEach(function (el) { el.style.strokeDasharray = lut.total; });
+      /* The table measures the path in SCREEN space, but stroke-dasharray
+         and stroke-dashoffset are user units. preserveAspectRatio="none"
+         scales x and y differently, so the two lengths are nowhere near
+         equal — feeding the screen length to dasharray made the pattern
+         longer than the path, and the stroke read as fully drawn about
+         halfway down. Dash in user units; use the table only for the
+         fraction. */
+      swirls.forEach(function (el) {
+        el.__pathLen = el.getTotalLength();
+        el.style.strokeDasharray = el.__pathLen;
+      });
     }
 
     /* Two boxes, two progresses. The centre line is normalised to the
@@ -266,10 +306,10 @@
       scopeTopDoc = sr.top + sy; scopeH = sr.height || 1;
     }
 
-    /* progress of a box against the viewport centre, at scroll `sy` */
+    /* delegates to the shared measure so the line, the dots and the
+       swirl all finish together */
     function boxProgress(topDoc, h, sy) {
-      var p = (window.innerHeight * 0.5 - (topDoc - sy)) / h;
-      return p < 0 ? 0 : p > 1 ? 1 : p;
+      return scopeProgress(topDoc, h, sy);
     }
 
     measureBoxes();
@@ -336,9 +376,12 @@
         if (!(sv >= 0)) sv = 0; else if (sv > 1) sv = 1;
 
         var len = lenAtHeight(lut, sv);
-        if (len >= 0) {
+        if (len >= 0 && lut.total) {
+          var frac = len / lut.total;
+          if (frac < 0) frac = 0; else if (frac > 1) frac = 1;
           for (var s = 0; s < swirls.length; s++) {
-            swirls[s].style.strokeDashoffset = lut.total - len;
+            var L = swirls[s].__pathLen || swirls[s].getTotalLength();
+            swirls[s].style.strokeDashoffset = L * (1 - frac);
           }
         }
       }
@@ -704,6 +747,7 @@
     window.addEventListener('resize', sched);
     update();
   }
+
 
   function run() {
     try { splitWords(); } catch (e) {}

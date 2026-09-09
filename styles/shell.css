@@ -222,18 +222,18 @@ section{padding:var(--pad-y) 0}
    list, so any mismatch between the list box and the SVG box
    shows up directly as drift. */
 .swirl-scope{position:relative}
-
-/* ---- swirl parked ----
-   Hidden for now; everything driving it is intact. Delete this one
-   rule to bring it back. display:none makes getScreenCTM() return
-   null, so buildLut bails and paint() skips the swirl branch — no
-   errors, and the centre line and dots are unaffected. */
-.work-swirl{display:none}
+/* The swirl sits at z-index 0 as the scope's first child; everything
+   that shares the scope is lifted one step so the stroke passes behind
+   the work mockups. .work-body was already at 2, which is why the text
+   looked right while the screenshots were being painted over. */
+.swirl-scope > section{position:relative;z-index:1}
+.work-item{z-index:1}
+.cap-card{position:relative;z-index:1}
 
 .work-swirl{
   position:absolute;left:50%;top:0;width:100vw;height:100%;
   transform:translateX(-50%);
-  pointer-events:none;z-index:1;overflow:visible;
+  pointer-events:none;z-index:0;overflow:visible;
 }
 /* preserveAspectRatio="none" on the element, not "slice" as theirs
    uses: their section is ~5 screens tall, this one is ~12, and slice

@@ -28,8 +28,8 @@
 
 <link rel="preload" href="../assets/fonts/switzer-800.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="../assets/fonts/switzer-500.woff2" as="font" type="font/woff2" crossorigin/>
-<link rel="stylesheet" href="../styles/type.css?v=33"/>
-<link rel="stylesheet" href="../styles/shell.css?v=33"/>
+<link rel="stylesheet" href="../styles/type.css?v=40"/>
+<link rel="stylesheet" href="../styles/shell.css?v=40"/>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -62,12 +62,7 @@
     </div>
   </section>
 
-  <div class="swirl-scope" data-swirl-scope>
-    <svg class="work-swirl" viewBox="0 0 1200 4800" fill="none"
-         preserveAspectRatio="none" aria-hidden="true" focusable="false">
-      <path class="swirl-bloom" d="M600 0C600 150 980 150 980 300C980 600 220 600 220 900C220 1200 980 1200 980 1500C980 1800 220 1800 220 2100C220 2400 980 2400 980 2700C980 3000 220 3000 220 3300C220 3600 980 3600 980 3900C980 4200 220 4200 220 4500C220 4650 600 4650 600 4800"/>
-      <path class="swirl-line"  d="M600 0C600 150 980 150 980 300C980 600 220 600 220 900C220 1200 980 1200 980 1500C980 1800 220 1800 220 2100C220 2400 980 2400 980 2700C980 3000 220 3000 220 3300C220 3600 980 3600 980 3900C980 4200 220 4200 220 4500C220 4650 600 4650 600 4800"/>
-    </svg>
+  <div class="swirl-scope">
 
   <section id="work" aria-labelledby="work-h" data-theme-dark>
     <div class="shell">
@@ -79,6 +74,11 @@
       <h2 class="work-head t-h3" id="work-h" data-reveal data-split-words>Every project, and what each one had to solve.</h2>
 
       <div class="work-list" data-rail>
+      <svg class="work-swirl" viewBox="0 0 1200 4800" fill="none"
+           preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path class="swirl-bloom" d="M600 0C600 150 980 150 980 300C980 600 220 600 220 900C220 1200 980 1200 980 1500C980 1800 220 1800 220 2100C220 2400 980 2400 980 2700C980 3000 220 3000 220 3300C220 3600 980 3600 980 3900C980 4200 220 4200 220 4500C220 4650 600 4650 600 4800"/>
+        <path class="swirl-line"  d="M600 0C600 150 980 150 980 300C980 600 220 600 220 900C220 1200 980 1200 980 1500C980 1800 220 1800 220 2100C220 2400 980 2400 980 2700C980 3000 220 3000 220 3300C220 3600 980 3600 980 3900C980 4200 220 4200 220 4500C220 4650 600 4650 600 4800"/>
+      </svg>
         <div class="work-track" aria-hidden="true"><div class="work-progress"></div></div>
 
         <div class="work-items">
@@ -280,21 +280,6 @@
               </a>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  </div>
-
-  <section id="contact" class="contact" aria-labelledby="contact-h">
-    <div class="shell">
-      <div class="contact-row">
-        <h2 class="t-h2" id="contact-h" data-reveal>Let's <a class="hover-link" href="mailto:mridhulaswin92@gmail.com">work together</a> &rarr;</h2>
-        <div class="contact-links" data-reveal style="--d:120ms">
-          <a href="mailto:mridhulaswin92@gmail.com"><span class="k">Email</span> <span class="hover-link">mridhulaswin92@gmail.com</span></a>
-          <a href="https://www.linkedin.com/in/mridhul-aswin-6637202bb/?skipRedirect=true" target="_blank" rel="noopener"><span class="k">LinkedIn</span> <span class="hover-link">/in/mridhul-aswin-6637202bb</span></a>
-          <a href="../resume/"><span class="k">Résumé</span> <span class="hover-link">View résumé</span></a>
-
           <!-- 09 Wealth -->
           <div class="work-item" data-reveal>
             <span class="work-dot" aria-hidden="true"></span>
@@ -319,6 +304,20 @@
       </div>
     </div>
   </section>
+  </div>
+
+  <section id="contact" class="contact" aria-labelledby="contact-h">
+    <div class="shell">
+      <div class="contact-row">
+        <h2 class="t-h2" id="contact-h" data-reveal>Let's <a class="hover-link" href="mailto:mridhulaswin92@gmail.com">work together</a> &rarr;</h2>
+        <div class="contact-links" data-reveal style="--d:120ms">
+          <a href="mailto:mridhulaswin92@gmail.com"><span class="k">Email</span> <span class="hover-link">mridhulaswin92@gmail.com</span></a>
+          <a href="https://www.linkedin.com/in/mridhul-aswin-6637202bb/?skipRedirect=true" target="_blank" rel="noopener"><span class="k">LinkedIn</span> <span class="hover-link">/in/mridhul-aswin-6637202bb</span></a>
+          <a href="../resume/"><span class="k">Résumé</span> <span class="hover-link">View résumé</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </main>
 
@@ -330,6 +329,6 @@
 </footer>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="../scripts/reveal.js?v=33" defer onerror="document.documentElement.classList.remove('js')"></script>
+<script src="../scripts/reveal.js?v=40" defer onerror="document.documentElement.classList.remove('js')"></script>
 </body>
 </html>

@@ -25,7 +25,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"KYC Tokenization · Mridhul Aswin","description":"TrustKYC: a concept for turning a one-time KYC verification into a reusable, consent-gated identity token, so merchants request access to a document template instead of collecting it again. Case study by Mridhul Aswin.","author":{"@type":"Person","name":"Mridhul Aswin"},"url":"https://mridhul199.github.io/my-portfolio/kyc-tokenization/"}</script>
 <link rel="preload" href="../assets/fonts/switzer-800.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="../assets/fonts/switzer-500.woff2" as="font" type="font/woff2" crossorigin/>
-<link rel="stylesheet" href="../styles/type.css"/>
+<link rel="stylesheet" href="../styles/type.css?v=40"/>
 <style>
 :root{
   --orange:#F26522; --orange-hover:#D9541A; --orange-tint:#FEF0E8; --orange-tint-2:#FFF7F1;
@@ -179,16 +179,22 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 [data-shot]:hover .zoom-hint{opacity:1;transform:none}
 .zoom-hint svg{width:12px;height:12px}
 </style>
-<link rel="stylesheet" href="../styles/casestudy-bone.css"/>
+<link rel="stylesheet" href="../styles/casestudy-bone.css?v=40"/>
 </head>
 <body data-auto-reveal>
-<nav class="pf-bridge" aria-label="Portfolio">
+<nav class="pf-bridge" data-nav aria-label="Portfolio">
   <div class="shell pf-bridge-inner">
     <a class="pf-bridge-link" href="../" aria-label="Back to Mridhul Aswin portfolio home">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Mridhul Aswin
     </a>
     <span class="pf-bridge-ctx">Selected work · KYC Tokenization</span>
+    <nav class="cs-nav-links" aria-label="Primary">
+      <a class="hover-link" href="../about/">About</a>
+      <a class="hover-link" href="../work/">Work</a>
+      <a class="hover-link" href="../resume/">Résumé</a>
+      <a class="hover-link cta" href="#cs-contact">Contact</a>
+    </nav>
   </div>
 </nav>
 <div class="bg-deco"></div>
@@ -203,6 +209,7 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 </div>
 
 <main>
+
   <header class="hero">
     <div class="shell">
       <div class="hero-grid">
@@ -357,13 +364,6 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
   </section>
 </main>
 
-<footer>
-  <div class="shell">
-    <span>KYC Tokenization · Concept case study</span>
-    <span class="muted">TrustKYC</span>
-  </div>
-</footer>
-
 <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true"><img id="lightbox-img" alt=""></div>
 <script>
 document.addEventListener('click', e => {
@@ -376,7 +376,7 @@ document.addEventListener('click', e => {
   if (e.target.id === 'lightbox' || e.target.id === 'lightbox-img') {
     const lb = document.getElementById('lightbox');
     lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true');
-    document.getElementById('lightbox-img').src = '';
+    document.getElementById('lightbox-img').removeAttribute('src');
   }
 });
 document.addEventListener('keydown', e => {
@@ -384,11 +384,34 @@ document.addEventListener('keydown', e => {
     const lb = document.getElementById('lightbox');
     if (lb.classList.contains('is-open')) {
       lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true');
-      document.getElementById('lightbox-img').src = '';
+      document.getElementById('lightbox-img').removeAttribute('src');
     }
   }
 });
 </script>
-<script src="../scripts/reveal.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+
+<section id="cs-contact" class="cs-contact" aria-labelledby="cs-contact-h">
+  <div class="shell">
+    <div class="cs-contact-row">
+      <h2 id="cs-contact-h" data-reveal>Let's <a class="hover-link" href="mailto:mridhulaswin92@gmail.com">work together</a> &rarr;</h2>
+      <div class="cs-contact-links" data-reveal style="--d:120ms">
+        <a href="mailto:mridhulaswin92@gmail.com"><span class="k">Email</span> <span class="hover-link">mridhulaswin92@gmail.com</span></a>
+        <a href="https://www.linkedin.com/in/mridhul-aswin-6637202bb/?skipRedirect=true" target="_blank" rel="noopener"><span class="k">LinkedIn</span> <span class="hover-link">/in/mridhul-aswin-6637202bb</span></a>
+        <a href="../work/"><span class="k">Work</span> <span class="hover-link">All nine projects</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="cs-foot">
+  <div class="shell cs-foot-inner">
+    <span class="b">Mridhul Aswin<i>.</i></span>
+    <span>Product designer, fintech · <span class="cs-yr">2026</span></span>
+  </div>
+</footer>
+
+<script>document.querySelectorAll('.cs-yr').forEach(function(e){e.textContent=new Date().getFullYear()});</script>
+
+<script src="../scripts/reveal.js?v=40" defer onerror="document.documentElement.classList.remove('js')"></script>
 </body>
 </html>
