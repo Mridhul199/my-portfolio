@@ -251,8 +251,20 @@ section{padding:var(--pad-y) 0}
    sweeps left, and so on. That is what ties a swell of the snake to
    each section instead of letting it wander independently.
    non-scaling-stroke means these widths are screen pixels. */
-.work-swirl .swirl-bloom{stroke-width:104;opacity:.14;filter:blur(44px)}
-.work-swirl .swirl-line{stroke-width:54;opacity:.32}
+/* One soft pass, no crisp stroke. The hard 54px line read as a band
+   drawn across the page; the glow keeps the gesture and lets the work
+   underneath stay the thing you look at. Tighter and a little stronger
+   than the old bloom, which was only ever a halo behind that line. */
+.work-swirl .swirl-glow{stroke-width:72;opacity:.22;filter:blur(28px)}
+
+/* non-scaling-stroke means these are screen pixels, so the glow has to
+   step down with the viewport or it stops being a gesture beside the
+   work and becomes a wash over it: 72px is 3.8% of a 1900px screen but
+   9.4% of a tablet. Three steps, matching the timeline's own layout
+   breakpoints. */
+@media(max-width:1024px){
+  .work-swirl .swirl-glow{stroke-width:52;opacity:.21;filter:blur(22px)}
+}
 
 .work-item{position:relative;display:flex;align-items:center;margin-bottom:var(--tl-gap)}
 .work-item:last-child{margin-bottom:0}
@@ -318,6 +330,94 @@ section{padding:var(--pad-y) 0}
   position:absolute;inset:0;display:none;align-items:center;justify-content:center;
   font-family:var(--mono);font-size:11px;color:var(--ink-4);
   background:repeating-linear-gradient(135deg,var(--bone) 0 12px,var(--bone-2) 12px 24px);
+}
+/* .ph is normally revealed by an image's onerror. A card whose shot has
+   not been exported yet carries the plate on its own, with no img to
+   fail, so it would sit there as an empty frame. */
+.work-cover > .ph:only-child{display:flex}
+
+/* ---- device mockups on the timeline ---------------------------
+   Modelled on azizkhaldi.com/project/superhost: the screenshot is not
+   shown flat, it is a screen inside a device standing on a soft stage,
+   turned slightly off-axis. Theirs are baked 3D renders; this builds
+   the same read in CSS so it works with the screenshots we already
+   have and re-skins with the tokens.
+
+   Three parts: the stage (light ground + padding), the device (dark
+   bezel, radius, contact shadow) and the tilt.
+
+   A framed shot turns OFF the darken blend above. That blend dissolves
+   a screenshot's white chrome into the page; inside a bezel there is a
+   device doing that job, and the blend would drop the stage through
+   the glass. It also means a shot that already contains browser chrome
+   is fine here — chrome inside a monitor is just a monitor. */
+.work-cover[data-frame]{
+  aspect-ratio:16/11;
+  overflow:hidden;isolation:auto;
+  border-radius:12px;
+  /* literal values, not tokens: the stage stays light when the work
+     section flips dark, the same reason .work-cover keeps a light plate
+     for the darken blend. A dark device on a dark ground has no edge. */
+  background:linear-gradient(157deg,#F7F8F4 0%,#ECEDE7 58%,#E2E3DC 100%);
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(16px,3%,38px);
+  perspective:1400px;
+}
+/* .is-dark .work-cover sets a flat #EAEBE5 plate and lives further down
+   the file, so it wins on source order at equal specificity. One more
+   class here settles it in both themes. */
+.is-dark .work-cover[data-frame]{
+  background:linear-gradient(157deg,#F7F8F4 0%,#ECEDE7 58%,#E2E3DC 100%);
+}
+
+.work-cover[data-frame] img{
+  --tilt:rotateY(-9deg) rotateX(2.5deg) rotate(-1deg);
+  mix-blend-mode:normal;
+  width:auto;height:auto;max-width:100%;max-height:100%;
+  object-fit:cover;object-position:top center;
+  transform:var(--tilt) scale(.93);
+  transform-origin:50% 55%;
+  transition:transform .7s var(--ease);
+}
+/* the generic hover rule is scale-only, which would drop the tilt —
+   these carry both, and out-specify it */
+.work-card:hover .work-cover[data-frame] img,
+.work-item.is-active .work-cover[data-frame] img{transform:var(--tilt) scale(.965)}
+
+/* desktop: a monitor */
+.work-cover[data-frame="desktop"] img{
+  aspect-ratio:16/10;width:100%;
+  border:9px solid #15171b;border-radius:12px;
+  box-shadow:0 34px 60px -24px rgba(0,0,0,.55),0 4px 10px rgba(0,0,0,.18);
+}
+/* the shot already contains its own device shell, so the stage supplies
+   only the ground, the tilt and the contact shadow */
+.work-cover[data-frame="stage"] img{
+  height:100%;width:auto;
+  filter:drop-shadow(0 30px 46px rgba(0,0,0,.45));
+}
+
+/* mobile: a phone, narrower than the stage so it reads as a device */
+.work-cover[data-frame="phone"] img,
+.work-cover[data-frame="phone"] > .ph{
+  aspect-ratio:9/17;height:100%;width:auto;
+  border:7px solid #15171b;border-radius:26px;
+  box-shadow:0 34px 60px -24px rgba(0,0,0,.55),0 4px 10px rgba(0,0,0,.18);
+}
+.work-cover[data-frame="phone"] > .ph{position:static;transform:var(--tilt,none)}
+
+/* .ph is normally revealed by an image's onerror. A card whose shot has
+   not been exported yet carries the plate alone, with no img to fail. */
+.work-cover > .ph:only-child{display:flex}
+
+@media(max-width:767px){
+  .work-cover[data-frame] img{--tilt:rotateY(-5deg) rotate(-.5deg)}
+  .work-cover[data-frame="desktop"] img{border-width:6px;border-radius:9px}
+  .work-cover[data-frame="phone"] img,
+  .work-cover[data-frame="phone"] > .ph{border-width:5px;border-radius:20px}
+}
+@media(prefers-reduced-motion:reduce){
+  .work-cover[data-frame] img{--tilt:none}
 }
 
 .work-body{position:relative;z-index:2;padding:clamp(22px,2.2vw,32px) 0 0}
@@ -750,8 +850,7 @@ body,
      390px viewport against 1.7% on desktop — it lands as a band
      across the copy rather than a stroke beside it. Scaled to match
      and pulled back, since here it crosses the reading column. */
-  .work-swirl .swirl-bloom{stroke-width:44;opacity:.10;filter:blur(24px)}
-  .work-swirl .swirl-line{stroke-width:20;opacity:.20}
+  .work-swirl .swirl-glow{stroke-width:34;opacity:.20;filter:blur(15px)}
   .work-track,.work-progress{left:6px;transform:none}
   .work-dot{left:6px;top:28px;margin-left:-6px}
   .work-content,

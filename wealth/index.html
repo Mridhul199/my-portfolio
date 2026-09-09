@@ -25,7 +25,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Wealth · Mridhul Aswin","description":"Wealth: a bonds investing app that makes fixed income legible to first-time buyers, from Aadhaar and PAN onboarding through discovery, order and portfolio. Case study by Mridhul Aswin.","author":{"@type":"Person","name":"Mridhul Aswin"},"url":"https://mridhul199.github.io/my-portfolio/wealth/"}</script>
 <link rel="preload" href="../assets/fonts/switzer-800.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="../assets/fonts/switzer-500.woff2" as="font" type="font/woff2" crossorigin/>
-<link rel="stylesheet" href="../styles/type.css?v=40"/>
+<link rel="stylesheet" href="../styles/type.css?v=51"/>
 <style>
 :root{
   --orange:#F26522; --orange-hover:#D9541A; --orange-tint:#FEF0E8; --orange-tint-2:#FFF7F1;
@@ -183,17 +183,19 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
    The exports are not dropped in yet, so every image slot renders a
    labelled plate naming the file it wants. Same idea as the shell's
    .work-cover .ph, scoped here so it cannot leak into other pages. */
-.ph{display:flex;align-items:center;justify-content:center;min-height:220px;padding:24px;
+/* hidden until an image fails; a slot with no image at all still shows */
+.ph{display:none;align-items:center;justify-content:center;min-height:220px;padding:24px;
   text-align:center;font-family:var(--mono);font-size:12px;line-height:1.5;color:var(--text-3);
   background:repeating-linear-gradient(45deg,var(--surface) 0 12px,var(--surface-2) 12px 24px);
   border:1px dashed var(--border-strong);border-radius:var(--r-xl)}
 .hero-visual .ph{min-height:340px}
+.ph:only-child{display:flex}
 .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:#fff;
   background:var(--orange);padding:13px 22px;border-radius:var(--r-pill);
   transition:background 160ms ease,transform 160ms ease}
 .btn:hover{background:var(--orange-hover);transform:translateY(-1px)}
 </style>
-<link rel="stylesheet" href="../styles/casestudy-bone.css?v=40"/>
+<link rel="stylesheet" href="../styles/casestudy-bone.css?v=51"/>
 </head>
 <body data-auto-reveal>
 <nav class="pf-bridge" data-nav aria-label="Portfolio">
@@ -241,6 +243,10 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
           </p>
         </div>
         <div class="hero-visual">
+          <img src="assets/hero/wealth-detail.png"
+               alt="Wealth bond detail screen: yield to maturity, security cover, credit rating and next payout"
+               width="852" height="1640" decoding="async"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="ph">Hero export &rarr; assets/hero/wealth-detail.png</div>
         </div>
       </div>
@@ -307,7 +313,11 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
         <h2>The repayment schedule, laid out payout by payout.</h2>
         <p class="lead">The bond detail screen answers "what do I get, and when" before it says anything technical. Each scheduled payout is listed with its date and amount, so a buyer reads a series of dated payments rather than a percentage they have to model in their head. Rating and security cover sit on the same screen, directly against the return, so the comfort and the risk are weighed together.</p>
       </div>
-      <figure class="shot" data-shot>
+      <figure class="shot" data-shot="assets/detail/repayment-schedule.png">
+        <img src="assets/detail/repayment-schedule.png"
+             alt="Repayment schedule listed payout by payout, with comforts set against risks below it"
+             width="852" height="1640" loading="lazy" decoding="async"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
         <div class="ph">Bond detail export &rarr; assets/detail/repayment-schedule.png</div>
         <figcaption>The detail screen: payouts by date and amount, with rating and security cover set against them.</figcaption>
       </figure>
@@ -387,6 +397,6 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 
 <script>document.querySelectorAll('.cs-yr').forEach(function(e){e.textContent=new Date().getFullYear()});</script>
 
-<script src="../scripts/reveal.js?v=40" defer onerror="document.documentElement.classList.remove('js')"></script>
+<script src="../scripts/reveal.js?v=51" defer onerror="document.documentElement.classList.remove('js')"></script>
 </body>
 </html>

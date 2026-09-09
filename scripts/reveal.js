@@ -172,10 +172,21 @@
      the stroke. */
   function scopeProgress(topDoc, h, sy) {
     var vh = window.innerHeight;
+    var mid = vh * 0.5;
     var maxSy = Math.max(0, docEl.scrollHeight - vh);
-    var start = topDoc - vh;
-    var end = topDoc + h - vh;
+    /* Both ends measured against the viewport's centre line, so the
+       drawn head rides where the reader is looking: 0 when the box's
+       top crosses the centre, 1 when its bottom does. */
+    var start = topDoc - mid;
+    var end = topDoc + h - mid;
     if (start < 0) start = 0;
+    /* The plain centre measure cannot finish when less than half a
+       viewport follows the box — /work/ has 84px after it, which left
+       the swirl at 65% and the centre line at 96%. Clamping the end to
+       the document's real scroll range keeps the head on the centre
+       line for the whole travel and still lands it on the last pixel
+       of scroll; it only drifts below centre in that final stretch,
+       and only on pages short of trailing content. */
     if (end > maxSy) end = maxSy;
     if (end <= start) return sy >= end ? 1 : 0;
     var p = (sy - start) / (end - start);
