@@ -149,9 +149,38 @@
 
   /* How far ahead of the scroll the swirl runs. LEAD is the exponent
      on 1-(1-v)^n: 1 is level with the centre line, higher is faster.
-     OFFSET is a flat head start in section fractions. */
-  var SWIRL_LEAD = 1.45;
-  var SWIRL_OFFSET = 0.06;
+     OFFSET is a flat head start in section fractions.
+
+     Both sit at "level" now. At 1.45/0.06 the head ran so far ahead
+     that it was off-screen at five of six scroll positions — measured
+     1183-2170px below a 900px viewport — so the reader only ever saw
+     a stroke passing through, never an end being drawn. Level keeps
+     the head on the centre line, which is the part worth watching. */
+  var SWIRL_LEAD = 1;
+  var SWIRL_OFFSET = 0;
+
+
+  /* Progress of a box against the scroll it can actually receive.
+
+     The old measure was "where is the viewport centre inside the box",
+     which only reaches 1 when at least half a viewport of content sits
+     below the box. On /work/ there are 84px below it, so progress
+     stopped at 0.952 — the swirl finished at 65% and the centre line
+     at 96%, and neither ever completed. Anchoring the end on "box
+     bottom resting on the viewport bottom", clamped to the document's
+     real scroll range, means the last pixel of scroll always finishes
+     the stroke. */
+  function scopeProgress(topDoc, h, sy) {
+    var vh = window.innerHeight;
+    var maxSy = Math.max(0, docEl.scrollHeight - vh);
+    var start = topDoc - vh;
+    var end = topDoc + h - vh;
+    if (start < 0) start = 0;
+    if (end > maxSy) end = maxSy;
+    if (end <= start) return sy >= end ? 1 : 0;
+    var p = (sy - start) / (end - start);
+    return p < 0 ? 0 : p > 1 ? 1 : p;
+  }
 
   function lenAtHeight(lut, frac) {
     var y = lut.minY + lut.span * frac;
@@ -276,10 +305,10 @@
       scopeTopDoc = sr.top + sy; scopeH = sr.height || 1;
     }
 
-    /* progress of a box against the viewport centre, at scroll `sy` */
+    /* delegates to the shared measure so the line, the dots and the
+       swirl all finish together */
     function boxProgress(topDoc, h, sy) {
-      var p = (window.innerHeight * 0.5 - (topDoc - sy)) / h;
-      return p < 0 ? 0 : p > 1 ? 1 : p;
+      return scopeProgress(topDoc, h, sy);
     }
 
     measureBoxes();
@@ -791,8 +820,7 @@
 
     function paint(sy) {
       if (!lut) return;
-      var v = (window.innerHeight * 0.5 - (topDoc - sy)) / boxH;
-      if (v < 0) v = 0; else if (v > 1) v = 1;
+      var v = scopeProgress(topDoc, boxH, sy);
 
       var base = 1 - v;
       if (base < 0) base = 0; else if (base > 1) base = 1;
