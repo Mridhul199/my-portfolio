@@ -1,36 +1,40 @@
 /* ============================================================
    Mridhul Aswin — portfolio shell
-   Dark, minimal, editorial. Single accent (#F26522) threads to
-   the light case studies. No framework, no build step.
+   Bone + black. Tight bold grotesk, wide measure, stacking work
+   panels. Single hot accent (#E72604). No framework, no build.
    ============================================================ */
 
+/* @font-face lives in styles/type.css — linked before this file. */
+
 :root{
-  --bg:#0B0B0C;
-  --surface:#161617;
-  --surface-2:#1D1D1F;
-  --text-1:#EDEDEC;
-  --text-2:#A1A1A6;
-  --text-3:#6B6B70;
-  --border:rgba(255,255,255,.08);
-  --border-2:rgba(255,255,255,.16);
-  --accent:#F26522;
-  --accent-hover:#FF7A3D;
+  /* surface — warm bone, never pure white */
+  --bone:#EAEBE5;
+  --bone-2:#E1E2DA;
+  --bone-3:#D6D7CE;
+  --paper:#F4F5F0;
 
-  /* light "artwork" tones, for work-card surfaces */
-  --card:#F7F8FA;
-  --card-ink:#0D1526;
-  --card-muted:#8A97AC;
-  --tag-ink:#993C1D;
-  --tag-bg:#FEF0E8;
+  --ink:#000000;
+  --ink-2:#1E1E1E;
+  --ink-3:#5A5C55;
+  --ink-4:#8A8C83;
 
-  --f:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-  --display:'Manrope',var(--f);
-  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --border:rgba(0,0,0,.13);
+  --border-2:rgba(0,0,0,.26);
 
-  --container:1080px;
-  --gutter:28px;
-  --r-card:16px;
+  --accent:#E72604;
+  --accent-ink:#FFFFFF;
+
+  --f:'Switzer',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace;
+
+  --container:1600px;
+  --gutter:clamp(24px,5vw,72px);
+  --pad-y:clamp(80px,10vw,128px);
+  --r-card:8px;
   --r-pill:999px;
+
+  --nav-h:72px;
+  --ease:cubic-bezier(.16,1,.3,1);
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -38,129 +42,740 @@ html{scroll-behavior:smooth}
 body{
   margin:0;
   font-family:var(--f);
+  font-weight:500;
   font-size:16px;
-  line-height:1.6;
-  color:var(--text-1);
-  background:var(--bg);
+  line-height:1.5;
+  color:var(--ink);
+  background:var(--bone);
   -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
   text-rendering:optimizeLegibility;
 }
 img,svg{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
-::selection{background:var(--accent);color:#0B0B0C}
+::selection{background:var(--accent);color:#fff}
 
 .shell{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
 
-/* skip link */
-.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:#0B0B0C;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:600;z-index:200}
-.skip:focus{left:16px;top:16px}
+/* ============================================================
+   TYPE SCALE
+   Almost everything is 700/800. Only body copy is 500.
+   Headlines run at 90% leading with -3% tracking.
+   ============================================================ */
+.t-h1{font-weight:800;font-size:clamp(44px,8.6vw,128px);line-height:.90;letter-spacing:-.03em}
+.t-h2{font-weight:800;font-size:clamp(36px,6.2vw,96px);line-height:.90;letter-spacing:-.03em}
+.t-h3{font-weight:700;font-size:clamp(28px,3.9vw,56px);line-height:.94;letter-spacing:-.025em}
+.t-h4{font-weight:700;font-size:clamp(24px,2.6vw,40px);line-height:1;letter-spacing:-.02em}
+.t-h5{font-weight:700;font-size:clamp(20px,1.7vw,28px);line-height:1.05;letter-spacing:-.015em}
+.t-h6{font-weight:700;font-size:clamp(16px,1.3vw,24px);line-height:1.1;letter-spacing:-.01em}
 
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+/* body copy — the one Medium style in the system.
+   Leading is looser than the reference (1.5 vs 1.3): these
+   paragraphs are far longer than an agency site's. */
+.t-b1{font-weight:700;font-size:18px;line-height:1.35}
+.t-b2{font-weight:500;font-size:clamp(16px,1.15vw,18px);line-height:1.5}
+.t-b3{font-weight:700;font-size:13px;line-height:1.3;letter-spacing:.01em}
+
+.t-label{font-weight:700;font-size:13px;line-height:1.2;letter-spacing:.12em;text-transform:uppercase}
+.t-caption{font-weight:700;font-size:13px;line-height:1.2;letter-spacing:.01em;color:var(--ink-3)}
+.t-button{font-weight:700;font-size:14px;line-height:1;letter-spacing:-.01em}
+
+h1,h2,h3,h4,h5,h6{margin:0;font-weight:700}
+
+/* accent-coloured inline mark */
+.hot{color:var(--accent)}
+
+/* ---------- skip + focus ---------- */
+.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:#fff;padding:10px 16px;border-radius:6px;font-size:13px;font-weight:700;z-index:200}
+.skip:focus{left:16px;top:16px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* ============================================================
+   hover-link — underline wipes in from the left on hover.
+   Animates background-size, so there is no layout shift.
+   ============================================================ */
+.hover-link{
+  display:inline;
+  background-image:linear-gradient(currentColor,currentColor);
+  background-repeat:no-repeat;
+  background-position:100% 100%;
+  background-size:0 2px;
+  padding-bottom:2px;
+  transition:background-size .3s ease-in-out,color .15s ease;
+}
+.hover-link:hover,.hover-link:focus-visible,.hover-link.-is-active,
+.group:hover .hover-link,
+.work-item.is-active .hover-link{background-position:0 100%;background-size:100% 2px}
 
 /* ---------- nav ---------- */
-.nav{position:sticky;top:0;z-index:100;background:rgba(11,11,12,.72);-webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--border)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
-.brand{font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--text-1)}
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(234,235,229,.78);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid transparent;
+  transition:background .25s ease,border-color .25s ease;
+}
+.nav.is-scrolled{background:rgba(234,235,229,.92);border-bottom-color:var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h);gap:20px}
+/* The supplied mark is white + #FF1010, drawn for a dark ground. The
+   white paths are inlined as currentColor so they take --ink — black
+   on bone, white once the work section flips dark — and the red uses
+   --accent rather than its own #FF1010, since two reds a few degrees
+   apart on one screen reads as a mistake rather than a decision. */
+.brand{
+  display:inline-flex;align-items:center;gap:11px;
+  font-weight:800;font-size:16px;letter-spacing:-.02em;color:var(--ink);
+}
+.brand-mark{
+  height:26px;width:auto;flex:none;
+  transition:color .4s ease-in-out;
+}
 .brand .pip{color:var(--accent)}
-.nav-links{display:flex;gap:26px;align-items:center}
-.nav-links a{font-size:13.5px;color:var(--text-2);transition:color .15s ease}
-.nav-links a:hover{color:var(--text-1)}
+.nav-links{display:flex;gap:clamp(16px,2vw,32px);align-items:center}
+.nav-links a{font-weight:700;font-size:14px;letter-spacing:-.01em}
 .nav-links a.cta{color:var(--accent)}
-.nav-links a.cta:hover{color:var(--accent-hover)}
-.nav{transition:background .25s ease,border-color .25s ease}
-.nav.is-scrolled{background:rgba(11,11,12,.86);border-bottom-color:rgba(255,255,255,.12)}
 
-/* ---------- shared section rhythm ---------- */
-section{padding:84px 0;border-top:1px solid var(--border)}
-.eyebrow{display:inline-block;font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:34px;gap:16px}
-.sec-head .label{font-family:var(--mono);font-size:13px;color:var(--text-2);letter-spacing:.04em}
-.sec-head .count{font-family:var(--mono);font-size:12px;color:var(--text-3)}
-
-h1,h2,h3{margin:0;font-family:var(--display);font-weight:500;color:var(--text-1);letter-spacing:-.03em;line-height:1.08}
+/* ---------- section rhythm ---------- */
+section{padding:var(--pad-y) 0}
+.sec-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  padding-bottom:20px;margin-bottom:clamp(32px,4vw,56px);
+  border-bottom:1px solid var(--ink);
+}
+.eyebrow{display:inline-block;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
 
 /* ---------- hero ---------- */
-.hero{padding:96px 0 88px}
-.hero h1{font-size:clamp(34px,5.6vw,56px);max-width:17ch;margin:20px 0 0}
-.hero .intro{margin:24px 0 0;font-size:clamp(15px,1.6vw,18px);line-height:1.65;color:var(--text-2);max-width:56ch}
-.hero .intro strong{color:var(--text-1);font-weight:500}
-.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
-.btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:11px 20px;border-radius:var(--r-pill);transition:transform .12s ease,background .15s ease,border-color .15s ease}
+.hero{padding:clamp(56px,8vw,104px) 0 clamp(72px,9vw,120px)}
+.hero h1{max-width:19ch;margin:clamp(20px,2.4vw,32px) 0 0}
+/* wider than a typical reading measure — under a 128px headline a
+   58ch column reads as orphaned */
+.hero .intro{
+  margin:clamp(28px,3vw,40px) 0 0;max-width:72ch;color:var(--ink-2);
+  font-size:clamp(17px,1.45vw,22px);line-height:1.45;
+}
+.hero .intro strong{font-weight:700;color:var(--ink)}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(32px,3.4vw,44px)}
+
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-weight:700;font-size:14px;letter-spacing:-.01em;
+  padding:15px 26px;border-radius:var(--r-pill);
+  border:1px solid transparent;
+  transition:transform .12s ease,background .18s ease,border-color .18s ease,color .18s ease;
+}
 .btn:active{transform:scale(.97)}
-.btn-primary{background:var(--accent);color:#0B0B0C}
-.btn-primary:hover{background:var(--accent-hover)}
-.btn-ghost{border:1px solid var(--border-2);color:var(--text-1)}
-.btn-ghost:hover{border-color:var(--text-2);background:var(--surface)}
+.btn-primary{background:var(--ink);color:var(--bone)}
+.btn-primary:hover{background:var(--accent);color:#fff}
+.btn-ghost{border-color:var(--border-2);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--ink);background:var(--ink);color:var(--bone)}
 
-/* ---------- selected work ---------- */
-.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.work-card{background:var(--card);border-radius:var(--r-card);overflow:hidden;border:1px solid var(--border);transition:transform .2s ease,box-shadow .2s ease;display:flex;flex-direction:column}
-.work-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.45)}
-.work-cover{aspect-ratio:16/10;background:#fff;overflow:hidden;position:relative;border-bottom:1px solid rgba(13,21,38,.06)}
-.work-cover img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .55s cubic-bezier(.16,1,.3,1)}
-.work-card:hover .work-cover img{transform:scale(1.045)}
-.work-cover .ph{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--card-muted);background:repeating-linear-gradient(135deg,#fff 0 12px,#F1F3F6 12px 24px)}
-.work-body{padding:18px 20px 20px}
-.work-body h3{font-family:var(--display);font-size:18px;font-weight:600;color:var(--card-ink);letter-spacing:-.01em;line-height:1.25}
-.work-meta{margin-top:5px;font-size:13px;color:var(--card-muted)}
-.work-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
-.work-tags span{font-size:10.5px;font-weight:500;color:var(--tag-ink);background:var(--tag-bg);padding:4px 9px;border-radius:var(--r-pill);letter-spacing:.02em}
-.work-arrow{margin-top:16px;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--accent)}
-.work-card:hover .work-arrow svg{transform:translateX(3px)}
-.work-arrow svg{width:15px;height:15px;transition:transform .15s ease}
+/* ============================================================
+   SELECTED WORK — centre-rail scroll timeline.
+   Ported from azizkhaldi.com's experience section:
+     · 1px centred track at rgba(0,0,0,.2)
+     · 2px accent progress with a 15px glow, height 0%→100%
+     · 12px dot centred on the line per item
+     · items spaced 30vh / 50vh / 80vh apart
+     · content 45% wide, alternating side, aligned to the line
+   Progress is driven by scripts/reveal.js.
+   ============================================================ */
+/* Centred, as their experience headline is — the capabilities head
+   above stays left, matching where each sits in the reference. */
+.work-head{
+  max-width:28ch;margin:0 auto clamp(64px,8vw,128px);
+  text-align:center;text-wrap:balance;
+}
 
-/* ---------- about ---------- */
-.about-grid{display:grid;grid-template-columns:140px 1fr;gap:36px;align-items:start}
-.headshot{width:120px;height:120px;border-radius:var(--r-card);background:var(--surface-2);border:1px dashed var(--border-2);display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--mono);font-size:10px;color:var(--text-3);overflow:hidden}
-.headshot img{width:100%;height:100%;object-fit:cover}
-.headshot--monogram{background:rgba(242,101,34,.12);border:1px solid rgba(242,101,34,.32);border-style:solid;font-family:var(--display);font-weight:700;font-size:42px;letter-spacing:-.02em;color:var(--accent)}
-.about-body h2{font-size:clamp(24px,3.2vw,32px);max-width:20ch;margin-bottom:18px}
-.about-body p{margin:0;color:var(--text-2);max-width:62ch;font-size:16.5px;line-height:1.7}
-.about-body p + p{margin-top:14px}
-.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
-.chips span{font-size:12.5px;color:var(--text-2);border:1px solid var(--border-2);padding:7px 14px;border-radius:var(--r-pill)}
+.work-list{position:relative;--tl-gap:12vh}
+
+/* track */
+.work-track{
+  position:absolute;left:50%;top:0;height:100%;width:1px;
+  transform:translateX(-50%);background:rgba(0,0,0,.2);
+}
+/* progress. Height, not scaleY: scaleY would squash the glow with
+   the element. 2px inside a 1px track is intentional.
+   Layered bloom — a single 15px shadow reads on near-black but
+   disappears on bone, so the halo is doubled up and widened. */
+.work-progress{
+  position:absolute;left:50%;top:0;width:2px;height:0;
+  transform:translateX(-50%);
+  background:var(--accent);
+  box-shadow:0 0 10px var(--accent),0 0 30px rgba(231,38,4,.55),0 0 60px rgba(231,38,4,.28);
+  z-index:2;
+}
+
+/* ---- the swirl ----
+   Their decorative stroke, same path and viewBox. Two copies: a
+   heavily blurred one for the bloom, a crisper one on top. Drawn
+   with stroke-dashoffset off the same scroll progress as the line.
+   Sits at z-1, under everything including the track. */
+/* Full-bleed rather than column-width: with "slice" the scale is set
+   by height, so widening the element doesn't shrink the curve — it
+   just reveals more of it before the window crops. */
+/* Spans the list exactly. Theirs sits at top:10rem with height
+   calc(100% + 20vh) because its wrapper includes the section
+   heading above the timeline; this one is already scoped to the
+   items. Kept verbatim, those offsets put the drawn head
+   160–330px below the reader — the scroll maps 0→1 across the
+   list, so any mismatch between the list box and the SVG box
+   shows up directly as drift. */
+.swirl-scope{position:relative}
+
+/* ---- swirl parked ----
+   Hidden for now; everything driving it is intact. Delete this one
+   rule to bring it back. display:none makes getScreenCTM() return
+   null, so buildLut bails and paint() skips the swirl branch — no
+   errors, and the centre line and dots are unaffected. */
+.work-swirl{display:none}
+
+.work-swirl{
+  position:absolute;left:50%;top:0;width:100vw;height:100%;
+  transform:translateX(-50%);
+  pointer-events:none;z-index:1;overflow:visible;
+}
+/* preserveAspectRatio="none" on the element, not "slice" as theirs
+   uses: their section is ~5 screens tall, this one is ~12, and slice
+   scales to cover — the path would blow up to 4x the viewport and
+   only a sliver would land on screen. Stretching it to fit keeps the
+   whole gesture in frame; non-scaling-stroke stops the uneven scale
+   from squashing the stroke weight. */
+.work-swirl path{
+  fill:none;stroke:var(--accent);
+  stroke-linecap:round;stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+/* One lobe per work item, swinging into whichever half is empty —
+   item 01 sits left so the stroke sweeps right, 02 sits right so it
+   sweeps left, and so on. That is what ties a swell of the snake to
+   each section instead of letting it wander independently.
+   non-scaling-stroke means these widths are screen pixels. */
+.work-swirl .swirl-bloom{stroke-width:104;opacity:.14;filter:blur(44px)}
+.work-swirl .swirl-line{stroke-width:54;opacity:.32}
+
+.work-item{position:relative;display:flex;align-items:center;margin-bottom:var(--tl-gap)}
+.work-item:last-child{margin-bottom:0}
+
+.work-dot{
+  position:absolute;left:50%;top:50%;z-index:50;
+  width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;
+  background:var(--bone);border:1px solid rgba(0,0,0,.6);
+  transition:background .35s var(--ease),border-color .35s var(--ease),transform .35s var(--ease);
+}
+.work-item.is-passed .work-dot{
+  background:var(--accent);border-color:var(--accent);transform:scale(1.25);
+}
+
+/* 45% column, alternating sides, held against the centre line.
+   Items live in their own .work-items wrapper so the decorative
+   siblings (swirl, track) can't shift nth-child parity — that bug
+   flipped the whole layout twice while building this. Odd items
+   (01, 03, …) take the base rule and sit left, matching the
+   reference's experience-content-0 / -1 pattern. */
+.work-content{position:relative;width:45%;padding-right:80px;text-align:right}
+.work-items .work-item:nth-child(even) .work-content{
+  margin-left:auto;padding-right:0;padding-left:80px;text-align:left;
+}
+
+.work-num{
+  position:relative;z-index:2;display:block;font-weight:800;font-size:13px;letter-spacing:.12em;
+  color:var(--ink-4);margin-bottom:18px;transition:color .5s var(--ease);
+}
+.work-item.is-in .work-num{color:var(--accent)}
+
+/* No card. No surface, no border, no radius, no shadow — the mockup
+   sits straight on the bone and the copy hangs off it. */
+.work-card{
+  display:block;background:none;border:0;border-radius:0;overflow:visible;
+  transition:transform .4s var(--ease);
+}
+.work-card:hover,
+.work-item.is-active .work-card{transform:translateY(-4px)}
+
+/* Bone fill + isolation makes the blend deterministic: the mockup's
+   white chrome resolves against a known colour instead of whatever
+   happens to be behind it. The swirl no longer needs to show through,
+   because it now draws over the top — which is what the reference
+   does with the stroke crossing its portrait. */
+.work-cover{
+  position:relative;overflow:hidden;border:0;
+  background:var(--bone);isolation:isolate;
+  aspect-ratio:16/10;
+}
+/* darken blending is what dissolves the box: every screenshot's white
+   or near-white chrome resolves to the bone behind it, while anything
+   darker than the page survives untouched. Multiply would work too but
+   it drags the whole image ~8% darker; darken leaves colour alone. */
+.work-cover img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  mix-blend-mode:darken;
+  transition:transform .7s var(--ease);
+}
+.work-card:hover .work-cover img,
+.work-item.is-active .work-cover img{transform:scale(1.02)}
+.work-cover .ph{
+  position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:11px;color:var(--ink-4);
+  background:repeating-linear-gradient(135deg,var(--bone) 0 12px,var(--bone-2) 12px 24px);
+}
+
+.work-body{position:relative;z-index:2;padding:clamp(22px,2.2vw,32px) 0 0}
+/* title sits grey until its item reveals, then resolves to ink —
+   their #6B7280 → white, inverted for a light page */
+.work-card h3{margin:0;color:var(--ink-4);transition:color .6s var(--ease)}
+.work-item.is-in .work-card h3{color:var(--ink)}
+.work-meta{margin:16px 0 0 auto;color:var(--ink-3);font-weight:500;font-size:15px;line-height:1.45;max-width:38ch}
+.work-items .work-item:nth-child(even) .work-meta{margin-left:0;margin-right:auto}
+/* tags and CTA follow the item's side */
+.work-tags{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px;margin-top:22px}
+.work-items .work-item:nth-child(even) .work-tags{justify-content:flex-start}
+.work-tags span{
+  font-weight:700;font-size:11.5px;letter-spacing:.01em;
+  color:var(--ink-2);border:1px solid var(--border-2);
+  padding:6px 12px;border-radius:var(--r-pill);
+}
+.work-arrow{
+  margin-top:28px;display:inline-flex;align-items:center;gap:8px;
+  font-weight:700;font-size:14px;letter-spacing:-.01em;color:var(--ink);
+}
+.work-arrow svg{width:16px;height:16px;transition:transform .25s var(--ease)}
+.work-card:hover .work-arrow,
+.work-item.is-active .work-arrow{color:var(--accent)}
+.work-card:hover .work-arrow svg,
+.work-item.is-active .work-arrow svg{transform:translateX(5px)}
+
+/* ============================================================
+   ABOUT — portrait, lead, and counted stats.
+   Motion ported from azizkhaldi.com:
+     · photo 60%->100% width, scrubbed as it rises
+     · stat blocks fade + rise
+     · counters tick 0->n once, power2.out, integer-snapped
+   Driven by scripts/reveal.js.
+   ============================================================ */
+.about{background:none;border:0;padding-top:0}
+
+/* ---- the rising panel ----
+   Theirs: fromTo(#first-story-section, {width:80%, borderRadius:34px,
+   y:120}, {width:100%, borderRadius:0, y:0}) scrubbed top 80% -> top 10%.
+   Same motion via clip-path insets instead of width: animating width
+   reflows the whole column every frame and re-wraps the headline,
+   while inset() clips without touching layout and without the
+   horizontal squash a scaleX would introduce. */
+/* The animated surface is a separate layer from the content.
+   clip-path and transform each create a stacking context, so putting
+   them on the panel itself made it atomic — the swirl could only sit
+   wholly in front of or wholly behind it, and behind meant the bone
+   fill hid the stroke completely. Clipping a background-only child
+   lets the swirl slide between the fill and the copy. */
+.about-panel{position:relative;padding:var(--pad-y) 0}
+.about-panel-bg{
+  position:absolute;inset:0;z-index:-1;
+  background:var(--bone-2);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  will-change:clip-path,transform;
+}
+.js .about-panel-bg{clip-path:inset(0 10% round 34px);transform:translateY(120px)}
+/* copy rides above the swirl */
+.about-panel > .shell{position:relative;z-index:2}
+
+/* ---- role marquee (their .infinit-text) ---- */
+.marquee{
+  overflow:hidden;margin:0 0 clamp(40px,5vw,80px);
+  /* fade the ends so the loop seam never lands hard against the edge */
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+.marquee-track{
+  display:flex;width:max-content;
+  animation:marquee 34s linear infinite;
+}
+.marquee-track span{
+  display:flex;align-items:center;white-space:nowrap;
+  font-weight:800;font-size:clamp(40px,7vw,104px);
+  line-height:1;letter-spacing:-.03em;color:var(--ink);
+}
+.marquee-dot{
+  display:inline-block;width:.34em;height:.34em;border-radius:50%;
+  background:var(--accent);margin:0 .5em;flex:none;
+}
+/* the track holds the sequence twice, so -50% is one exact repeat */
+@keyframes marquee{ to{ transform:translateX(-50%) } }
+
+
+
+/* Their version scrubs `width` 60%->100%. Transform instead: it is
+   the same growth visually but costs no layout, which matters with
+   the work-list scroll handlers already running. */
+/* The shot is 1672x941 — a wide, centre-right composition with the
+   shadow sweeping left. Their h-[100vh] tall frame would crop it to a
+   narrow column and throw away both the shadow and most of the red
+   field, so the frame follows the image instead. */
+.about-portrait{
+  position:relative;margin:0 0 clamp(40px,5vw,80px);
+  aspect-ratio:16/9;overflow:hidden;border-radius:var(--r-card);
+  background:#140505;
+  transform-origin:center top;will-change:transform;
+}
+.js .about-portrait{transform:scale(.82)}
+/* Oversized so there is room to travel (124% -> 12% headroom each edge): --py is the parallax offset
+   and --grade the desaturation, both written by reveal.js.
+   The flat grayscale(1) that was here is gone — the whole subject of
+   this photograph is the red light, and desaturating it permanently
+   throws that away. It is now a scroll reveal instead: muted on
+   approach, full colour by the time it is centred. */
+.about-portrait img{
+  position:absolute;left:0;top:50%;
+  width:100%;height:124%;
+  object-fit:cover;object-position:center;
+  transform:translate3d(0,calc(-50% + var(--py,0px)),0);
+  filter:saturate(var(--grade,1)) contrast(1.02);
+  will-change:transform,filter;
+}
+
+/* The photograph is a spotlit subject, so the pointer carries a light
+   rather than a tilt — screen blend so it adds light instead of
+   washing the frame. */
+.portrait-glow{
+  position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:radial-gradient(circle 320px at var(--mx,50%) var(--my,50%),
+             rgba(255,120,90,.30), rgba(255,60,30,.10) 45%, transparent 70%);
+  mix-blend-mode:screen;
+  opacity:0;transition:opacity .45s var(--ease);
+}
+.about-portrait:hover .portrait-glow,
+.about-portrait:focus-within .portrait-glow{opacity:1}
+.about-portrait .ph{
+  position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:12px;color:var(--ink-4);
+  background:repeating-linear-gradient(135deg,var(--bone-2) 0 12px,var(--bone-3) 12px 24px);
+}
+.about-portrait.is-empty .ph{display:flex}
+
+/* headline left, copy right — their two-column lead */
+.about-lead{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(28px,5vw,80px);align-items:start;
+}
+.about-lead h2{max-width:18ch}
+.about-lead-body p{margin:0;color:var(--ink-2);max-width:52ch}
+.about-lead-body p + p{margin-top:18px}
+
+.about-stats{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(24px,4vw,64px);margin-top:clamp(48px,6vw,96px);
+}
+.stat{border-top:1px solid var(--ink);padding-top:clamp(20px,2.4vw,32px)}
+.stat-label{margin:0 0 clamp(16px,2vw,28px);color:var(--ink-3)}
+/* tabular figures: without them the box reflows on every tick as the
+   glyph widths change, and the number visibly jitters while counting */
+.stat-num{
+  font-weight:800;font-size:clamp(56px,9vw,128px);
+  line-height:.9;letter-spacing:-.04em;
+  font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;
+}
+
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(40px,5vw,72px)}
+.chips span{
+  font-weight:700;font-size:13px;color:var(--ink-2);
+  border:1px solid var(--border-2);padding:9px 16px;border-radius:var(--r-pill);
+}
+
+@media(max-width:860px){
+  .about-lead{grid-template-columns:1fr;gap:24px}
+  .about-stats{grid-template-columns:1fr;gap:32px}
+  .about-portrait{aspect-ratio:4/3}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .js .about-portrait{transform:none}
+  .about-portrait img{height:100%;transform:translate3d(0,-50%,0);filter:none}
+  .portrait-glow{display:none}
+  .js .about-panel-bg{clip-path:none;transform:none}
+  .marquee-track{animation:none}
+}
+
+
+/* ============================================================
+   CAPABILITIES — pinned horizontal scroll.
+   Theirs pins with GSAP ScrollTrigger and tweens x to
+   -(track.scrollWidth - innerWidth + 200), scrubbed, desktop only.
+   Same shape here with position:sticky doing the pin: the section
+   is tall enough to supply the scroll, the inner sticks to the top
+   for its duration, and reveal.js maps that range onto translateX.
+   Below 1024px it stacks, exactly as their flex-col fallback does.
+   ============================================================ */
+.cap{position:relative;padding:0}
+/* Offset by the nav: the nav is sticky at top:0 too, so pinning this
+   flush to the viewport top parked the section head underneath it. */
+.cap-sticky{
+  position:sticky;top:var(--nav-h);height:calc(100vh - var(--nav-h));
+  display:flex;flex-direction:column;justify-content:center;
+  gap:clamp(28px,4vw,56px);overflow:hidden;
+}
+/* .shell carries margin:0 auto. In a column flex container that is
+   the cross axis, and auto cross-margins suppress the default
+   align-items:stretch — the block shrink-wrapped to its widest child
+   and centred itself instead of sitting on the gutter. */
+.cap-sticky > .shell{width:100%}
+.cap-head{max-width:26ch}
+
+.cap-viewport{overflow:hidden;flex:1 1 auto;min-height:0;display:flex;align-items:stretch}
+.cap-track{
+  display:flex;align-items:stretch;
+  /* no gap — cards butt together and share their borders, which is
+     what makes the row read as one strip with dividers */
+  gap:0;
+  padding:0 var(--gutter);
+  width:max-content;height:100%;
+  will-change:transform;
+}
+
+.cap-card{
+  position:relative;flex:none;
+  /* their w-[480px] h-[480px]: a square, sized off the available
+     height so it shrinks instead of clipping on short viewports.
+     Transparent with no radius — border-r-0 on all but the last so
+     adjacent left borders form the dividers. */
+  aspect-ratio:1;height:100%;max-height:480px;width:auto;
+  display:flex;flex-direction:column;justify-content:flex-start;
+  padding:clamp(24px,2.6vw,40px);
+  border:1px solid var(--border-2);border-right:0;
+  border-radius:0;background:none;
+}
+.cap-card:last-child{border-right:1px solid var(--border-2)}
+/* font-light, text-2xl, pinned to the card's top-right */
+.cap-num{
+  position:absolute;top:clamp(16px,1.8vw,24px);right:clamp(16px,1.8vw,24px);
+  font-weight:300;font-size:clamp(16px,1.5vw,24px);color:var(--ink-3);
+  font-variant-numeric:tabular-nums;line-height:1;
+}
+/* h-20 w-20 circle, svg at w-16 inside it.
+   Theirs is text-sec/60 — a dark glyph at 60% on the chip. That works
+   on their lime (L~88%); on this accent (L~45%) the same value reads
+   as muddy maroon. Inverted to keep the intent — a softened glyph
+   against the fill — while staying legible. */
+.cap-icon{
+  display:flex;align-items:center;justify-content:center;
+  width:clamp(72px,6.4vw,104px);aspect-ratio:1;border-radius:50%;
+  margin-bottom:clamp(26px,2.8vw,44px);
+  background:var(--accent);color:rgba(255,255,255,.94);flex:none;
+}
+.cap-icon svg{width:56%;height:56%}
+/* lg:w-[70%] leading-tight */
+.cap-title{margin:0;width:70%;line-height:1.08}
+/* rule between title and copy, as theirs has */
+/* pt-6 border-t, text-lg leading-relaxed at 70% ink.
+   margin-top:auto rather than space-between: spreading three children
+   put half the slack between the chip and the title, which broke the
+   pairing. All the give now sits above the rule instead. */
+.cap-body{
+  margin:0;margin-top:auto;padding-top:clamp(18px,1.9vw,26px);
+  border-top:1px solid var(--border);color:var(--ink-3);
+  font-size:clamp(15px,1.15vw,18px);line-height:1.6;
+}
+
+
+/* A pinned 100vh section has to fit the viewport's HEIGHT, not just
+   its width. At full size the card content is ~510px; on a shorter
+   viewport the flex row squeezes below that and overflow:hidden cuts
+   the copy off mid-line. These steps buy the height back from type
+   and padding rather than losing the text. */
+.cap-viewport{min-height:0}
+.cap-card{flex:none}
+
+/* The card is a square capped at 480 and shrinks with the row, so
+   type only needs to give way once the card itself is small. Earlier
+   these steps shrank the type off viewport height alone — at 780 the
+   card was still a full 480 while the copy had shrunk, which opened a
+   dead void above the rule. Shell first, card type only when tight. */
+@media(max-height:940px){
+  .cap-sticky{gap:clamp(18px,2.4vw,32px)}
+  .cap-sticky .sec-head{padding-bottom:14px;margin-bottom:18px}
+}
+
+@media(max-height:820px){
+  .cap-head{font-size:clamp(24px,2.6vw,36px);line-height:1.05}
+  .cap-sticky{gap:16px}
+  .cap-sticky .sec-head{padding-bottom:10px;margin-bottom:12px}
+}
+
+/* Dropping the section head frees ~86px, which keeps the card at its
+   full 480 well below this. Card type is untouched here on purpose. */
+@media(max-height:730px){
+  .cap-sticky .sec-head{display:none}
+}
+
+/* card = min(480, vh - nav - shell - gap), so it only starts
+   shrinking around here — which is where its type should too */
+@media(max-height:650px){
+  .cap-head{font-size:22px}
+  .cap-title{font-size:clamp(20px,1.9vw,28px);line-height:1.08}
+  .cap-body{font-size:15px;line-height:1.5}
+  .cap-icon{width:clamp(60px,5.2vw,78px);margin-bottom:clamp(18px,2vw,26px)}
+  .cap-card{padding:clamp(20px,2.2vw,32px)}
+}
+
+@media(max-height:570px){
+  .cap-head{font-size:20px}
+  .cap-body{font-size:14px}
+  .cap-icon{width:56px;margin-bottom:16px}
+}
+
+/* Stacked below the pin breakpoint — a sticky horizontal track on a
+   touch device fights the browser's own scroll. */
+@media(max-width:1023px){
+  .cap{padding:var(--pad-y) 0}
+  .cap-sticky{position:static;height:auto;overflow:visible}
+  .cap-viewport{overflow:visible}
+  .cap-track{
+    flex-direction:column;width:auto;padding:0 var(--gutter);
+    transform:none !important;
+  }
+  /* stacked: cards are separate again, so restore the right edge and
+     drop the square ratio */
+  .cap-card{width:auto;height:auto;max-height:none;aspect-ratio:auto;
+            border-right:1px solid var(--border-2);margin-bottom:-1px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .cap-track{transform:none !important}
+}
+
+
+/* ============================================================
+   DARK SCROLL THEME
+   Their version tweens .home backgroundColor #e7e7e7 -> #1E1E1E with
+   matching text/line/dot colours, over 0.4s power1.inOut, while the
+   experience section owns the viewport. Same idea, but flipping the
+   variable set rather than tweening each element — the palette is
+   already tokenised, so one class swaps everything.
+
+   Custom properties are not animatable, so the easing has to live on
+   the elements that consume them. Scoped to the ones that actually
+   change rather than a blanket * selector.
+   ============================================================ */
+.is-dark{
+  --bone:#1E1E1E;
+  --bone-2:#232325;
+  --bone-3:#2A2A2C;
+  --paper:#232325;
+  --ink:#FFFFFF;
+  --ink-2:rgba(255,255,255,.86);
+  --ink-3:rgba(255,255,255,.60);   /* their experience-text-secondary */
+  --ink-4:rgba(255,255,255,.42);
+  --border:rgba(255,255,255,.18);
+  --border-2:rgba(255,255,255,.30);
+}
+
+body,
+.sec-head,.sec-head span,
+.work-head,
+.work-num,.work-card h3,.work-meta,.work-tags span,.work-arrow,
+.work-track,.work-dot,
+.cap-card,.cap-head,.cap-title,.cap-body,.cap-num,
+.nav,.nav-links a,.brand{
+  transition:background-color .4s ease-in-out,color .4s ease-in-out,
+             border-color .4s ease-in-out;
+}
+
+/* the nav's tint is hardcoded bone, so it needs its own pair */
+.is-dark .nav{background:rgba(30,30,30,.78)}
+.is-dark .nav.is-scrolled{background:rgba(30,30,30,.92);border-bottom-color:rgba(255,255,255,.14)}
+
+/* The mockups blend with mix-blend-mode:darken against --bone. Let
+   that follow the theme and every screenshot collapses to near-black,
+   because darken takes the min of each channel. The plate stays light
+   on purpose so the blend keeps working and the UI stays readable. */
+.is-dark .work-cover{background:#EAEBE5}
 
 /* ---------- contact ---------- */
-.contact{padding:96px 0}
-.contact-row{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:28px}
-.contact h2{font-size:clamp(28px,4.4vw,46px);max-width:14ch}
+.contact{background:var(--ink);color:var(--bone)}
+.contact .eyebrow{color:var(--accent)}
+.contact-row{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:clamp(32px,4vw,64px)}
+.contact h2{max-width:12ch;color:var(--bone)}
 .contact h2 a{color:var(--accent)}
-.contact h2 a:hover{color:var(--accent-hover)}
-.contact-links{display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:13px}
-.contact-links a{color:var(--text-2);display:inline-flex;align-items:center;gap:8px;transition:color .15s ease}
-.contact-links a:hover{color:var(--text-1)}
-.contact-links a .k{color:var(--text-3);width:62px;display:inline-block}
+.contact-links{display:flex;flex-direction:column;gap:14px}
+.contact-links a{
+  display:inline-flex;align-items:baseline;gap:14px;
+  font-weight:700;font-size:clamp(15px,1.2vw,18px);color:var(--bone);
+}
+.contact-links a .k{
+  font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-4);width:74px;flex:none;
+}
 
 /* ---------- footer ---------- */
-.foot{border-top:1px solid var(--border);padding:30px 0}
-.foot-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--text-3)}
-.foot-inner .brand{font-size:13px;color:var(--text-2)}
+.foot{background:var(--ink);color:var(--ink-4);padding:28px 0 36px}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-weight:700;font-size:12.5px}
+.foot-inner .brand{color:var(--bone);font-size:13px}
 
-/* ---------- entrance + scroll reveal (driven by scripts/reveal.js) ----------
-   Hidden only when JS is on; .is-in is added when the element enters view
-   (hero elements are in view on load, so they play as an entrance). */
-.js [data-reveal]{transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0ms)}
+/* ============================================================
+   entrance + scroll reveal (driven by scripts/reveal.js)
+   Hidden only when JS is on.
+   ============================================================ */
+.js [data-reveal]{transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
 .js [data-reveal]:not(.is-in){opacity:0;transform:translateY(18px)}
 
-/* word-by-word headline mask reveal */
+/* Word-by-word headline reveal.
+   Deliberately NOT an overflow:hidden mask. At 90% leading the word
+   boxes are taller than the line box, so a mask would overlap the
+   line below and clip descenders (p, y, g). Clip-free rise instead:
+   same staggered feel, nothing gets cut. */
 .js [data-split-words]:not([data-split]){visibility:hidden}
-.js [data-split-words] .w{display:inline-block;overflow:hidden;vertical-align:top;padding:.02em 0 .14em;margin-bottom:-.14em}
-.js [data-split-words] .w>span{display:inline-block;transform:translateY(110%);transition:transform .85s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--wi,0) * 55ms + 120ms)}
-.js [data-split-words].is-in .w>span{transform:none}
+.js [data-split-words] .w{display:inline-block;vertical-align:top}
+.js [data-split-words] .w>span{
+  display:inline-block;opacity:0;transform:translateY(.34em);
+  transition:opacity .6s var(--ease),transform .85s var(--ease);
+  transition-delay:calc(var(--wi,0) * 55ms + 120ms);
+}
+.js [data-split-words].is-in .w>span{opacity:1;transform:none}
 
 /* ---------- responsive ---------- */
-@media(max-width:760px){
-  :root{--gutter:20px}
-  section{padding:60px 0}
-  .hero{padding:64px 0 56px}
-  .work-grid{grid-template-columns:1fr}
-  .about-grid{grid-template-columns:1fr;gap:22px}
-  .headshot{width:96px;height:96px}
-  .nav-links{gap:18px}
-  .contact-row{align-items:flex-start}
+/* Their ladder is 30/50/80vh, but that is tuned to five short text
+   entries. Eight image cards are 5360px on their own, and "slice"
+   scales the swirl off height — at 80vh only 37% of the curve fits
+   across the page, which is what flattened it into a vertical stub.
+   14/16vh puts ~60% on screen against their ~75%. Raising these
+   trades swirl back for breathing room; see the note in reveal.js. */
+@media(min-width:768px){ .work-list{--tl-gap:14vh} }
+@media(min-width:1024px){ .work-list{--tl-gap:16vh} }
+
+/* Below md the two-column timeline collapses: the rail moves to the
+   left edge and every item takes the full width, left-aligned. */
+@media(max-width:767px){
+  .work-list{--tl-gap:12vh}
+  /* non-scaling-stroke is a screen-pixel width, so 26px is 6.7% of a
+     390px viewport against 1.7% on desktop — it lands as a band
+     across the copy rather than a stroke beside it. Scaled to match
+     and pulled back, since here it crosses the reading column. */
+  .work-swirl .swirl-bloom{stroke-width:44;opacity:.10;filter:blur(24px)}
+  .work-swirl .swirl-line{stroke-width:20;opacity:.20}
+  .work-track,.work-progress{left:6px;transform:none}
+  .work-dot{left:6px;top:28px;margin-left:-6px}
+  .work-content,
+  .work-items .work-item:nth-child(even) .work-content{
+    width:100%;margin-left:0;padding-left:34px;padding-right:0;text-align:left;
+  }
+  .work-meta,
+  .work-items .work-item:nth-child(even) .work-meta{margin-left:0;margin-right:auto}
+  .work-tags,
+  .work-items .work-item:nth-child(even) .work-tags{justify-content:flex-start}
 }
-@media(max-width:440px){
-  .nav-links .nav-extra{display:none}
+
+@media(max-width:1100px){
+}
+
+@media(max-width:600px){
+  /* the mark carries the brand on its own here */
+  .brand .brand-full{display:none}
+  .brand-mark{height:24px}
+  .nav-links{gap:15px}
+  .nav-links a{font-size:13px}
+  .contact-row{align-items:flex-start}
+  .contact-links a{flex-direction:column;gap:3px}
+  .contact-links a .k{width:auto}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -168,6 +783,64 @@ h1,h2,h3{margin:0;font-family:var(--display);font-weight:500;color:var(--text-1)
   .js [data-reveal],
   .js [data-reveal]:not(.is-in){opacity:1;transform:none;transition:none}
   .js [data-split-words]:not([data-split]){visibility:visible}
-  .js [data-split-words] .w>span{transform:none;transition:none}
-  .work-card,.work-cover img,.btn,.nav{transition:none}
+  .js [data-split-words] .w>span{opacity:1;transform:none;transition:none}
+  .work-card,.work-cover img,.btn,.nav,.hover-link,
+  .work-dot,.work-num,.work-card h3{transition:none}
+  /* the rail fill stays — it tracks scroll position rather than
+     animating on its own, so it reads as a progress indicator */
 }
+
+/* ============================================================
+   SUB-PAGES — /work/ and /about/
+   Same tokens, same rhythm as the home shell. Nothing here
+   overrides a home-page rule; these are additive components.
+   ============================================================ */
+
+/* current page in the nav */
+.nav-links a.is-current{color:var(--accent)}
+.nav-links a.is-current::after{
+  content:"";display:block;height:2px;margin-top:3px;
+  background:var(--accent);transform-origin:0 50%;
+}
+
+/* page hero — shorter than the home hero, same type scale */
+.page-hero{padding:clamp(40px,6vw,76px) 0 clamp(40px,5vw,64px)}
+.page-hero h1{max-width:16ch;margin:clamp(18px,2vw,28px) 0 0}
+.page-hero .intro{
+  max-width:52ch;margin:clamp(20px,2.2vw,30px) 0 0;color:var(--ink-3);
+}
+.page-hero .intro strong{font-weight:700;color:var(--ink)}
+
+/* ---- by the numbers ---------------------------------------- */
+.metrics{padding:var(--pad-y) 0 0}
+.metrics-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;margin-top:clamp(28px,3vw,44px);
+  background:var(--border);border:1px solid var(--border);
+}
+.metric{background:var(--bone);padding:clamp(22px,2.4vw,34px)}
+.metric-num{
+  font-weight:800;font-size:clamp(32px,4.4vw,60px);line-height:.92;
+  letter-spacing:-.03em;color:var(--ink);
+}
+.metric-num .unit{color:var(--accent);font-size:.42em;letter-spacing:-.01em;margin-left:.18em;vertical-align:.14em}
+.metric-label{
+  margin:12px 0 0;color:var(--ink-3);font-weight:500;
+  font-size:15px;line-height:1.4;max-width:26ch;
+}
+@media(max-width:900px){.metrics-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.metrics-grid{grid-template-columns:1fr}}
+
+/* ---- experience ledger ------------------------------------- */
+.ledger{padding:var(--pad-y) 0 0}
+.ledger-list{margin-top:clamp(24px,3vw,40px);border-top:1px solid var(--border)}
+.ledger-row{
+  display:grid;grid-template-columns:minmax(140px,1fr) minmax(0,2.4fr);
+  gap:clamp(16px,3vw,56px);
+  padding:clamp(22px,2.6vw,36px) 0;border-bottom:1px solid var(--border);
+}
+.ledger-when{color:var(--ink-4)}
+.ledger-role{margin:0;color:var(--ink)}
+.ledger-where{margin:8px 0 0;color:var(--accent);font-weight:700;font-size:14px}
+.ledger-body{margin:14px 0 0;color:var(--ink-3);max-width:62ch}
+@media(max-width:720px){.ledger-row{grid-template-columns:1fr;gap:10px}}

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your holding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../bonds-shared/motion.css">
+<style>
+  :root{
+    --grad-1:#7C3AED; --grad-2:#6D5CF6; --grad-3:#4F7DF3;
+    --ink:#F4F1FA; --ink-2:#B8B3CC; --ink-3:#7A7593;
+    --canvas:#0A0714; --surface:#160F24;
+    --border:#2A2138;
+    --up-tint:#12291C; --up:#22C55E;
+    --gold:#F5B860; --gold-tint:#2B2013;
+    --amber:#FB923C; --amber-tint:#2B1810;
+    --safe:#60A5FA;
+    --f:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{background:#DCDAE8}
+  body{font-family:var(--f);color:var(--ink);display:flex;justify-content:center;padding:28px 12px;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  button{font-family:var(--f);cursor:pointer;border:none;background:none}
+
+  .device{width:402px;max-width:100%;height:874px;background:var(--canvas);border-radius:40px;overflow:hidden;box-shadow:0 30px 70px rgba(30,15,80,.28),0 0 0 10px #0E0B1E;position:relative}
+  .scroll{height:100%;overflow-y:auto;scrollbar-width:none}
+  .scroll::-webkit-scrollbar{display:none}
+
+  .hero{position:relative;padding:18px 20px 24px;overflow:hidden;background:var(--surface)}
+  .hero::before{
+    content:"";position:absolute;top:0;right:0;width:150px;height:150px;
+    background-image:radial-gradient(circle,rgba(225,123,255,.4) 1px,transparent 1.4px);
+    background-size:11px 11px;
+    -webkit-mask-image:radial-gradient(circle at top right,#000 0%,transparent 70%);
+    mask-image:radial-gradient(circle at top right,#000 0%,transparent 70%);
+    pointer-events:none
+  }
+  .hero > *{position:relative;z-index:1}
+
+  .topbar{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+  .icon-btn{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.24);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .icon-btn svg{width:16px;height:16px;stroke:#fff}
+  .topbar .ttl{flex:1;text-align:center;font-size:13.5px;font-weight:700;color:#fff}
+
+  .issuer-row{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .mark{width:52px;height:52px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#fff}
+  .issuer-row .name{font-size:16.5px;font-weight:800;color:#fff;letter-spacing:-.2px}
+  .issuer-row .sub{font-size:12px;color:rgba(255,255,255,.72);font-weight:500;margin-top:2px}
+
+  .badge{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:6px}
+  .badge-row-hero{display:flex;gap:6px;margin-bottom:20px}
+  .badge-row-hero .badge{background:rgba(255,255,255,.22);color:#fff}
+
+  .position-hero .lbl{font-size:12.5px;color:rgba(255,255,255,.72);font-weight:600;margin-bottom:4px}
+  .position-hero .pct{font-size:36px;font-weight:800;color:#fff;letter-spacing:-1px;line-height:1;font-variant-numeric:tabular-nums}
+  .position-hero .meta{font-size:12px;color:rgba(255,255,255,.72);font-weight:500;margin-top:8px}
+  .position-hero .meta b{color:#fff}
+
+  .sheet{background:var(--canvas);border-radius:24px 24px 0 0;margin-top:-16px;padding:22px 18px 110px;position:relative;z-index:2;display:flex;flex-direction:column;gap:20px}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px;box-shadow:0 8px 20px rgba(60,40,140,.05)}
+  .card-h{font-size:14px;font-weight:800;letter-spacing:-.2px;margin-bottom:14px}
+
+  .status-card.gold{background:var(--gold-tint);border:1px solid #4A3820}
+  .status-card.green{background:var(--up-tint);border:1px solid #1E4430}
+  .status-card .head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .status-card .head svg{width:16px;height:16px;flex-shrink:0}
+  .status-card.gold .head svg{stroke:#F5B860}
+  .status-card.green .head svg{stroke:var(--up)}
+  .status-card .head b{font-size:13px;font-weight:800}
+  .status-card.gold .head b{color:#F5B860}
+  .status-card.green .head b{color:var(--up)}
+  .status-card .body{font-size:11.5px;color:var(--ink-2);font-weight:500;line-height:1.5}
+  .status-card .body b{color:var(--ink)}
+
+  .steps-mini{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+  .step-mini{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600}
+  .step-mini .dot{width:16px;height:16px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  .step-mini.done .dot{background:var(--up)}
+  .step-mini.done .dot svg{width:9px;height:9px;stroke:#fff}
+  .step-mini.done{color:var(--ink-2)}
+  .step-mini.current .dot{background:#F5B860;position:relative}
+  .step-mini.current .dot::after{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+  .step-mini.current{color:#F5B860;font-weight:800}
+
+
+  .schedule-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:12.5px}
+  .schedule-row:last-of-type{border-bottom:none}
+  .schedule-row .d{color:var(--ink-2);font-weight:600}
+  .schedule-row .p{color:var(--ink-3);font-weight:500}
+  .schedule-row .a{color:var(--ink);font-weight:800;font-variant-numeric:tabular-nums}
+  .see-all{display:flex;align-items:center;justify-content:center;gap:5px;text-align:center;font-size:12.5px;font-weight:700;color:var(--grad-2);margin-top:12px;width:100%}
+  .see-all svg{width:13px;height:13px;stroke:var(--grad-2)}
+
+  .sheet-backdrop{position:absolute;inset:0;background:rgba(15,10,35,.5);z-index:39;opacity:0;pointer-events:none;transition:opacity .22s}
+  .sheet-backdrop.open{opacity:1;pointer-events:auto}
+  .schedule-sheet{position:absolute;left:0;right:0;bottom:0;max-height:84%;background:var(--surface);border-radius:24px 24px 0 0;z-index:40;transform:translateY(100%);transition:transform .32s cubic-bezier(.32,.72,0,1);display:flex;flex-direction:column;box-shadow:0 -20px 50px rgba(20,10,50,.25);padding-bottom:26px}
+  .schedule-sheet.open{transform:translateY(0)}
+  .sheet-handle{width:36px;height:4px;border-radius:99px;background:var(--border);margin:10px auto 4px;flex-shrink:0}
+  .sheet-head{display:flex;align-items:center;justify-content:space-between;padding:10px 18px 16px;flex-shrink:0}
+  .sheet-head .t{font-size:16px;font-weight:800;letter-spacing:-.2px;display:flex;align-items:center;gap:8px}
+  .sheet-head .t svg{width:17px;height:17px;stroke:var(--grad-2)}
+  .sheet-head-actions{display:flex;align-items:center;gap:8px}
+  .sheet-icon-btn{width:30px;height:30px;border-radius:50%;background:var(--canvas);display:flex;align-items:center;justify-content:center}
+  .sheet-icon-btn svg{width:14px;height:14px;stroke:var(--ink-2)}
+
+  .sheet-tds-row{display:flex;align-items:center;gap:10px;padding:0 18px 16px;flex-shrink:0}
+  .sheet-tds-row .line{flex:1;height:1px;background:var(--border)}
+  .sheet-tds-row .txt{font-size:10.5px;color:var(--ink-3);font-weight:600;white-space:nowrap}
+
+  .sheet-summary{display:flex;margin:0 18px 16px;border:1px solid var(--border);border-radius:16px;overflow:hidden;flex-shrink:0}
+  .sheet-stat{flex:1;padding:14px;text-align:center}
+  .sheet-stat + .sheet-stat{border-left:1px solid var(--border)}
+  .sheet-stat .l{font-size:10.5px;color:var(--ink-3);font-weight:600;margin-bottom:5px}
+  .sheet-stat .v{font-size:15px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}
+
+  .sheet-table-head{display:flex;padding:0 18px 8px;flex-shrink:0}
+  .sheet-table-head span{flex:1;font-size:10px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.3px}
+  .sheet-table-head span:first-child{flex:1.2}
+  .sheet-table-head span:not(:first-child){text-align:right}
+
+  .sheet-rows{overflow-y:auto;padding:0 18px;flex:1;scrollbar-width:none}
+  .sheet-rows::-webkit-scrollbar{display:none}
+  .sheet-table-row{display:flex;align-items:center;padding:11px 6px;margin:0 -6px;border-radius:10px;font-size:12px}
+  .sheet-table-row:nth-child(even){background:var(--canvas)}
+  .sheet-table-row span{flex:1}
+  .sheet-table-row span:first-child{flex:1.2;color:var(--ink-2);font-weight:600}
+  .sheet-table-row span:not(:first-child){text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink-3)}
+  .sheet-table-row span.interest{color:var(--up)}
+  .sheet-table-row span.principal.paid{color:var(--ink)}
+
+  .sheet-row-total{display:flex;align-items:center;padding:14px 18px;margin:0 -18px;background:var(--up-tint);font-size:12px;font-weight:800;flex-shrink:0}
+  .sheet-row-total span{flex:1}
+  .sheet-row-total span:first-child{flex:1.2;color:var(--ink)}
+  .sheet-row-total span:not(:first-child){text-align:right;color:var(--up);font-variant-numeric:tabular-nums}
+
+  .info-link{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:var(--ink);cursor:pointer}
+  .info-link:last-of-type{border-bottom:none}
+  .info-link svg{width:15px;height:15px;stroke:var(--ink-3);transition:transform .2s}
+  .info-link.open svg{transform:rotate(90deg)}
+  .info-body{max-height:0;overflow:hidden;transition:max-height .25s ease;font-size:11.5px;color:var(--ink-2);font-weight:500;line-height:1.5}
+  .info-body-inner{padding:0 0 13px}
+
+  .help-card{display:flex;align-items:center;gap:12px;cursor:pointer}
+  .help-card .ic{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--grad-1),var(--grad-3));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .help-card .ic svg{width:18px;height:18px;stroke:#fff}
+  .help-card .t{font-size:13px;font-weight:700;flex:1}
+  .help-card .t .s{display:block;font-size:11px;color:var(--ink-3);font-weight:500;margin-top:2px}
+
+  .stickybar{position:absolute;left:0;right:0;bottom:0;background:rgba(10,7,20,.94);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:14px 18px 20px;display:flex;flex-direction:column;gap:6px;z-index:3}
+  .cta{background:var(--grad-2);color:#fff;border-radius:13px;padding:14px;font-size:14px;font-weight:700;text-align:center;display:block}
+  .cta.disabled{background:var(--border);color:var(--ink-3);pointer-events:none}
+  .stickybar .note{text-align:center;font-size:11px;color:var(--ink-3);font-weight:500}
+
+  .toast{position:absolute;left:50%;bottom:104px;transform:translate(-50%,20px);background:rgba(18,14,38,.94);color:#fff;font-size:12.5px;font-weight:600;padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50;max-width:85%;text-align:center;line-height:1.4}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+
+<div class="device">
+<div class="scroll">
+
+  <div class="hero">
+    <div class="topbar">
+      <a class="icon-btn" href="../bonds-portfolio/index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></a>
+      <div class="ttl">Your holding</div>
+      <button class="icon-btn" id="shareBtn"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.3 10.7l7.4-4.4M8.3 13.3l7.4 4.4"/></svg></button>
+    </div>
+
+    <div class="issuer-row">
+      <div class="mark" id="markEl"></div>
+      <div>
+        <div class="name" id="nameEl"></div>
+        <div class="sub" id="subEl"></div>
+      </div>
+    </div>
+
+    <div class="badge-row-hero" id="badgeRow"></div>
+
+    <div class="position-hero">
+      <div class="lbl">Current value</div>
+      <div class="pct" id="valueEl"></div>
+      <div class="meta" id="metaEl"></div>
+    </div>
+  </div>
+
+  <div class="sheet">
+
+    <div class="card status-card" id="statusCard"></div>
+
+    <div class="card" id="scheduleCard">
+      <div class="card-h" id="scheduleHead">Repayment schedule</div>
+      <div id="scheduleRows"></div>
+      <button class="see-all" id="seeAllBtn" style="display:none">
+        <span id="seeAllLabel">View all payouts</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+
+    <div class="card" style="padding:4px 16px" id="infoLinksCard"></div>
+
+    <div class="card help-card" id="helpCard">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18h.01M8 10a4 4 0 118 0c0 2-2 2.5-2 4.5"/></svg></div>
+      <div class="t">Got questions?<span class="s">We're here to help, tap to chat</span></div>
+    </div>
+
+  </div>
+
+  <div class="stickybar" id="stickybar"></div>
+
+</div>
+
+  <div class="sheet-backdrop" id="scheduleBackdrop"></div>
+  <div class="schedule-sheet" id="scheduleSheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-head">
+      <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>Repayment schedule</div>
+      <div class="sheet-head-actions">
+        <button class="sheet-icon-btn" id="scheduleDownloadBtn"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v3a1 1 0 001 1h14a1 1 0 001-1v-3"/></svg></button>
+        <button class="sheet-icon-btn" id="scheduleSheetClose"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <div class="sheet-tds-row"><span class="line"></span><span class="txt" id="sheetTdsNote"></span><span class="line"></span></div>
+    <div class="sheet-summary">
+      <div class="sheet-stat"><div class="l">Principal amount</div><div class="v" id="sheetPrincipalEl"></div></div>
+      <div class="sheet-stat"><div class="l">Total interest</div><div class="v" id="sheetInterestEl"></div></div>
+    </div>
+    <div class="sheet-table-head"><span>Date</span><span>Interest</span><span>Principal</span></div>
+    <div class="sheet-rows" id="sheetRows"></div>
+    <div class="sheet-row-total"><span>Total</span><span id="sheetTotalInterestEl"></span><span id="sheetTotalPrincipalEl"></span></div>
+  </div>
+</div>
+
+<script src="../bonds-shared/bonds-data.js"></script>
+<script src="../bonds-shared/ui.js"></script>
+<script>
+  const bond = getBondFromURL();
+  const params = new URLSearchParams(window.location.search);
+  const units = Math.max(1, parseInt(params.get('units'), 10) || bond.minUnits);
+  const status = params.get('status') === 'active' ? 'active' : 'pending';
+  const monthsHeld = parseInt(params.get('months'), 10) || 0;
+
+  const invested = units * bond.unitPrice;
+  const current = status === 'pending'
+    ? invested
+    : invested + invested * (bond.ytm / 100) * (monthsHeld / 12);
+  const gain = current - invested;
+
+  document.getElementById('markEl').textContent = bond.initials;
+  document.getElementById('markEl').style.background = `linear-gradient(135deg,${bond.grad[0]},${bond.grad[1]})`;
+  document.getElementById('nameEl').textContent = bond.name;
+  document.getElementById('subEl').textContent = bond.type;
+
+  document.getElementById('badgeRow').innerHTML =
+    `<span class="badge">${bond.rating} rated</span><span class="badge">${bond.tenureMonths} months</span>` +
+    (bond.liquidityAfterMonths ? `<span class="badge">Sell after ${bond.liquidityAfterMonths}mo</span>` : '');
+
+  document.getElementById('valueEl').textContent = fmtINR(current);
+  document.getElementById('metaEl').innerHTML = status === 'pending'
+    ? `${units} units · Invested <b>${fmtINR(invested)}</b>`
+    : `${units} units · Invested ${fmtINR(invested)} · <b style="color:#B8F5D6">+${fmtINR(gain)} gained</b>`;
+
+  const statusCard = document.getElementById('statusCard');
+  if (status === 'pending') {
+    statusCard.classList.add('gold');
+    statusCard.innerHTML = `
+      <div class="head"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><b>Awaiting allotment</b></div>
+      <div class="steps-mini">
+        <div class="step-mini done"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Payment confirmed</div>
+        <div class="step-mini done"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Order placed on NSE</div>
+        <div class="step-mini done"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Order confirmed on NSE</div>
+        <div class="step-mini current"><span class="dot"></span>Awaiting allotment — issuer processing</div>
+      </div>
+      <div class="body">The issue window closes, then the registrar finalises the Basis of Allotment (full if undersubscribed, pro-rata if not). Typically <b>3–6 business days</b> from your order date. Units move to demat and this holding turns "Active" once done.</div>
+    `;
+  } else {
+    statusCard.classList.add('green');
+    statusCard.innerHTML = `
+      <div class="head"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><b>Active &amp; allotted</b></div>
+      <div class="body">Units were allotted and credited to your demat account. You're earning ${bond.payoutFrequency === 'Monthly' ? 'monthly' : 'maturity-only'} returns on this holding.</div>
+    `;
+  }
+
+  const isMonthly = bond.payoutFrequency === 'Monthly';
+
+  const scheduleRows = document.getElementById('scheduleRows');
+  const seeAllBtn = document.getElementById('seeAllBtn');
+  if (status === 'pending') {
+    document.getElementById('scheduleHead').textContent = 'What to expect once allotted';
+    const r0 = computeReturns(bond, units);
+    scheduleRows.innerHTML = isMonthly
+      ? `<div class="schedule-row"><span class="d">${bond.nextPayout}</span><span class="p">First interest (est.)</span><span class="a">${fmtINR(r0.monthlyTotal)}</span></div>
+         <div class="schedule-row"><span class="d">${bond.maturity}</span><span class="p">Principal</span><span class="a">${fmtINR(invested)}</span></div>`
+      : `<div class="schedule-row"><span class="d">${bond.maturity}</span><span class="p">Principal + interest (est.)</span><span class="a">${fmtINR(r0.totalValue)}</span></div>`;
+  } else if (isMonthly) {
+    const monthlyAmt = computeReturns(bond, units).monthlyTotal;
+    const start = new Date(bond.nextPayout);
+    let rowsHTML = '';
+    for (let i = 0; i < 3; i++) {
+      const d = new Date(start); d.setMonth(d.getMonth() + i);
+      rowsHTML += `<div class="schedule-row"><span class="d">${d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})}</span><span class="p">Interest</span><span class="a">${fmtINR(monthlyAmt)}</span></div>`;
+    }
+    scheduleRows.innerHTML = rowsHTML;
+    seeAllBtn.style.display = 'flex';
+    document.getElementById('seeAllLabel').textContent = `View all ${bond.tenureMonths} payouts`;
+
+    const r = computeReturns(bond, units);
+    const totalInterest = r.totalValue - invested;
+    document.getElementById('sheetPrincipalEl').textContent = fmtINR(invested);
+    document.getElementById('sheetInterestEl').textContent = fmtINR(totalInterest);
+    document.getElementById('sheetTdsNote').textContent = `Interest shown before 10% TDS deduction`;
+
+    let sheetHTML = '';
+    for (let i = 0; i < bond.tenureMonths; i++) {
+      const d = new Date(start); d.setMonth(d.getMonth() + i);
+      sheetHTML += `<div class="sheet-table-row"><span>${d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})}</span><span class="interest">${fmtINR(monthlyAmt)}</span><span>${fmtINR(0)}</span></div>`;
+    }
+    sheetHTML += `<div class="sheet-table-row"><span>${bond.maturity}</span><span>${fmtINR(0)}</span><span class="principal paid">${fmtINR(invested)}</span></div>`;
+    document.getElementById('sheetRows').innerHTML = sheetHTML;
+    document.getElementById('sheetTotalInterestEl').textContent = fmtINR(totalInterest);
+    document.getElementById('sheetTotalPrincipalEl').textContent = fmtINR(invested);
+
+    const scheduleSheet = document.getElementById('scheduleSheet');
+    const scheduleBackdrop = document.getElementById('scheduleBackdrop');
+    const openSheet = () => { scheduleSheet.classList.add('open'); scheduleBackdrop.classList.add('open'); };
+    const closeSheet = () => { scheduleSheet.classList.remove('open'); scheduleBackdrop.classList.remove('open'); };
+    seeAllBtn.onclick = openSheet;
+    document.getElementById('scheduleSheetClose').addEventListener('click', closeSheet);
+    document.getElementById('scheduleDownloadBtn').addEventListener('click', () => showToast('Downloading schedule as PDF…'));
+    scheduleBackdrop.addEventListener('click', closeSheet);
+  } else {
+    const total = computeReturns(bond, units).totalValue;
+    scheduleRows.innerHTML = `<div class="schedule-row"><span class="d">${bond.maturity}</span><span class="p">Principal + interest</span><span class="a">${fmtINR(total)}</span></div>`;
+  }
+
+
+  const infoItems = [
+    { t: 'About the issuer', body: `${bond.name} is a ${bond.type.toLowerCase()} rated ${bond.rating} by ${bond.agency}. Full financials, incorporation details, and past issuances are available in the offer document.` },
+    { t: 'Security, trustee & registrar', body: `This holding is secured with ${bond.securityCover === 'Sovereign guarantee' ? 'a sovereign guarantee' : `${bond.securityCover} asset cover`}, held via Canara Bank as trustee and NSDL as depository. All transactions are SEBI-registered and settled through the exchange's clearing corporation.` },
+    { t: 'Taxation', body: 'Interest earned is taxed at your applicable income slab rate. Gains on sale before maturity may qualify for indexation if held over 12 months. Consult a tax advisor for your specific situation.' },
+    { t: 'Documents & disclosures', body: 'Offer document, credit rating rationale, allotment advice, and trustee agreement are available for download from Documents in your Profile.' }
+  ];
+  document.getElementById('infoLinksCard').innerHTML = infoItems.map((item, i) => `
+    <div class="info-link" id="infoHead${i}">${item.t}<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+    <div class="info-body" id="infoBody${i}"><div class="info-body-inner">${item.body}</div></div>
+  `).join('');
+  infoItems.forEach((_, i) => {
+    document.getElementById(`infoHead${i}`).addEventListener('click', function () {
+      toggleAccordion(this, document.getElementById(`infoBody${i}`));
+    });
+  });
+
+  document.getElementById('helpCard').addEventListener('click', () => showToast('Connecting you to support…'));
+  document.getElementById('shareBtn').addEventListener('click', () => showToast('Statement link copied to clipboard'));
+
+  const stickybar = document.getElementById('stickybar');
+  if (status === 'pending') {
+    stickybar.innerHTML = `
+      <div class="cta disabled">Sell holding</div>
+      <div class="note">Available once units are allotted to your demat account</div>`;
+  } else if (bond.liquidityAfterMonths) {
+    stickybar.innerHTML = `
+      <button class="cta" id="sellBtn">Sell holding</button>
+      <div class="note">We're still designing the withdraw &amp; settlement experience</div>`;
+    document.getElementById('sellBtn').addEventListener('click', () =>
+      showToast("Withdraw flow — coming soon. We're researching NSE's redemption & settlement process first."));
+  } else {
+    stickybar.innerHTML = `
+      <div class="cta disabled">Sell holding</div>
+      <div class="note">This bond is held to maturity — no early exit is offered</div>`;
+  }
+</script>
+
+</body>
+</html>

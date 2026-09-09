@@ -1,0 +1,156 @@
+/* ============================================================
+   Case-study bone theme
+   Replaces casestudy-dark.css. Linked AFTER each case study's
+   inline <style>, so these rules win by source order.
+
+   Same strategy as the dark theme, inverted: the case studies are
+   token-driven, so flipping :root converts all narrative chrome
+   (hero, sections, cards, meta bars, tables, timelines, modals,
+   footer) automatically — no markup changes.
+
+   Difference from the dark theme: there, screenshots had to be
+   re-lit as "artwork matted on dark". Here the page is already
+   light, so frames just need to sit a step ABOVE the bone —
+   pure white surface, hairline border, soft shadow.
+   ============================================================ */
+
+:root{
+  /* surfaces — warm bone page, white islands */
+  --canvas:#EAEBE5;
+  --surface:#FFFFFF;
+  --surface-2:#F4F5F0;
+
+  /* text */
+  --text-1:#000000;
+  --text-2:#3A3C36;
+  --text-3:#6E7068;
+
+  /* borders */
+  --border:rgba(0,0,0,.13);
+  --border-strong:rgba(0,0,0,.26);
+
+  /* accent — the portfolio's hot red-orange, replacing the old #F26522.
+     Every case study references --orange, so redefining it here
+     re-accents the whole document. */
+  --orange:#E72604;
+  --orange-hover:#B81E03;
+  --orange-tint:rgba(231,38,4,.10);
+  --orange-tint-2:rgba(231,38,4,.05);
+
+  --success:#0A6B45; --warning:#A85B06; --error:#A62B1C;
+  --success-tint:rgba(10,107,69,.10);
+  --warning-tint:rgba(168,91,6,.10);
+  --error-tint:rgba(166,43,28,.10);
+
+  /* type */
+  --f:'Switzer',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+
+  /* elevation — soft and low-contrast; this is a light page */
+  --sh-1:0 1px 2px rgba(0,0,0,.05),0 0 0 1px rgba(0,0,0,.05);
+  --sh-2:0 6px 18px -6px rgba(0,0,0,.13),0 0 0 1px rgba(0,0,0,.06);
+  --sh-3:0 18px 44px -16px rgba(0,0,0,.20),0 0 0 1px rgba(0,0,0,.07);
+
+  --container:1280px;
+}
+
+body{background:var(--canvas);font-weight:500}
+
+/* ---------- typography: tight bold display ----------
+   Matches the shell: 90% leading, -3% tracking, 800 on display. */
+h1,h2,h3,h4,h5{font-weight:700;color:var(--text-1)}
+h1{font-size:clamp(38px,6.4vw,84px);line-height:.92;letter-spacing:-.03em;font-weight:800}
+h2{font-size:clamp(28px,3.4vw,48px);line-height:.94;letter-spacing:-.03em;font-weight:800}
+h3{font-size:clamp(19px,1.6vw,24px);line-height:1.15;letter-spacing:-.02em}
+
+.hero h1{max-width:16ch}
+
+/* body copy stays Medium and comfortably led — these are long reads */
+.lead{font-weight:500;line-height:1.55}
+.hero .lead strong,.lead strong{font-weight:700;color:var(--text-1)}
+p.para{font-weight:500}
+
+/* eyebrow + section numbers: bold, tracked, no mono */
+.eyebrow{
+  font-family:var(--f);font-weight:700;font-size:12px;letter-spacing:.12em;
+  color:var(--orange);background:var(--orange-tint);
+}
+.sec-num{
+  font-family:var(--f);font-weight:700;font-size:12px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--orange);
+}
+
+/* section heads get the editorial rule the homepage uses */
+.section-head{border-bottom:1px solid var(--text-1);padding-bottom:20px}
+
+/* ---------- screenshot frames sit above the bone ---------- */
+.frame,
+.ba-frame{
+  background:var(--surface);
+  border:1px solid var(--border);
+  box-shadow:0 10px 30px -12px rgba(0,0,0,.18);
+}
+
+/* the dark theme dimmed these hairlines for a dark canvas; on bone
+   they go back to ink so swatches keep a visible edge */
+.lc,
+.ladder-head .lh-sw,
+.token-table .tok-swatch,
+.tok-swatch,
+.swatch-mini,
+.pg-dot{
+  border-color:rgba(0,0,0,.20);
+}
+
+code{color:var(--text-2);background:var(--surface-2);border-color:var(--border)}
+
+/* ambient corner glows were tinted to the old #F26522 — re-tint to the
+   new accent and lift the alpha slightly so they register on bone */
+.bg-deco::before{background:radial-gradient(circle,rgba(231,38,4,.07),transparent 60%)}
+.bg-deco::after{background:radial-gradient(circle,rgba(231,38,4,.055),transparent 60%)}
+
+/* the "fill-in" marker shipped hardcoded cream stripes — retint to bone */
+.fill{
+  background:repeating-linear-gradient(45deg,#F6E9E6 0 8px,#F1DDD8 8px 16px);
+  border-color:var(--orange);color:var(--orange-hover);font-family:var(--f);font-weight:700;
+}
+
+/* Some case studies ship their own sticky section-nav (.chrome) with a
+   hardcoded gradient. Retint to bone and offset it below the 48px
+   portfolio bridge bar so the two sticky bars stack. */
+.chrome{
+  background:linear-gradient(180deg,rgba(244,245,240,.94) 0%,rgba(234,235,229,.86) 100%);
+  border-bottom-color:var(--border);
+  top:48px;
+}
+.chrome .brand{color:var(--text-1)}
+.chrome .brand-sub{color:var(--text-3)}
+
+/* ============================================================
+   Entrance + scroll reveal (driven by scripts/reveal.js)
+   ============================================================ */
+.js body[data-auto-reveal] :is(main > section, main > header){
+  transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+}
+.js body[data-auto-reveal] :is(main > section, main > header):not(.is-in){
+  opacity:0;
+  transform:translateY(22px);
+}
+
+/* Word-by-word hero headline. Clip-free rise rather than an
+   overflow:hidden mask — at 92% leading the word boxes are taller
+   than the line box, so a mask would cut descenders. */
+.js [data-split-words]:not([data-split]){visibility:hidden}
+.js [data-split-words] .w{display:inline-block;overflow:visible;vertical-align:top;padding:0;margin-bottom:0}
+.js [data-split-words] .w>span{
+  display:inline-block;opacity:0;transform:translateY(.32em);
+  transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);
+  transition-delay:calc(var(--wi,0) * 45ms + 100ms);
+}
+.js [data-split-words].is-in .w>span{opacity:1;transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  .js body[data-auto-reveal] :is(main > section, main > header),
+  .js body[data-auto-reveal] :is(main > section, main > header):not(.is-in){opacity:1;transform:none;transition:none}
+  .js [data-split-words]:not([data-split]){visibility:visible}
+  .js [data-split-words] .w>span{opacity:1;transform:none;transition:none}
+}

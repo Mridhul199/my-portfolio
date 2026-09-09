@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wealth — Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --grad-1:#7C3AED; --grad-2:#6D5CF6; --grad-3:#4F7DF3;
+    --f:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    font-family:var(--f);display:flex;flex-direction:column;align-items:center;justify-content:center;
+    min-height:100vh;text-align:center;padding:32px;
+    background:linear-gradient(150deg,var(--grad-1) 0%,var(--grad-2) 48%,var(--grad-3) 100%);
+    color:#fff;-webkit-font-smoothing:antialiased;
+  }
+  .mark{width:64px;height:64px;border-radius:18px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+  .mark svg{width:36px;height:auto}
+  h1{font-size:24px;font-weight:800;letter-spacing:-.4px;margin-bottom:8px}
+  p{font-size:14px;color:rgba(255,255,255,.75);max-width:340px;line-height:1.5;margin-bottom:28px}
+  a.cta{background:#fff;color:var(--grad-1);font-weight:700;font-size:14.5px;padding:14px 28px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+  a.cta svg{width:14px;height:14px}
+  .note{margin-top:20px;font-size:12px;color:rgba(255,255,255,.5)}
+</style>
+</head>
+<body>
+  <div class="mark">
+    <svg viewBox="0 0 92 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M39.8346 54.9215C38.5778 57.5038 36.0073 59.2061 33.1355 59.1794C30.1376 59.1515 27.3737 57.3552 25.9934 54.6938C25.5285 53.7975 25.0953 52.9665 24.8018 52.3816C22.2947 47.368 19.7678 42.3723 17.2211 37.395C16.0254 35.053 14.8536 32.6891 13.706 30.3039C12.7917 28.4434 14.1327 26.0486 16.2051 25.9983C19.1879 25.926 22.1952 25.9331 25.1835 25.9037C28.4426 25.8718 31.4418 27.7417 32.8513 30.6804C34.0307 33.1392 35.2639 35.6135 36.4513 37.988C37.0568 39.199 38.1583 40.0057 39.5121 40.0296C42.5237 40.0827 44.624 36.5334 43.3341 33.8115C42.8043 32.6935 42.3018 31.6242 41.8643 30.7429C38.8811 24.7341 36.0098 18.6364 33.0146 12.6239C32.0966 10.7811 31.1651 8.72329 30.212 6.67904C28.7471 3.5374 30.7382 0.0212591 34.2045 0.0324084C35.8291 0.0376806 37.4806 0.0232789 39.1338 0.0149457C42.936 -0.00421908 46.3447 2.25074 47.9299 5.70676L61.3946 35.0612C61.7114 35.7862 62.0604 36.5249 62.4218 37.2565C63.1856 38.8023 64.7489 39.7081 66.4731 39.705C69.4761 39.6996 71.5056 36.9127 70.1863 34.2151C69.9767 33.7864 69.7781 33.3815 69.6008 33.0145C68.4841 30.6939 67.3548 28.3842 66.213 26.0858C64.9778 23.5992 64.8499 20.7299 66.0306 18.2169C66.3705 17.4933 66.6944 16.7965 66.951 16.1927C68.4033 12.7757 70.0756 9.26942 71.6526 5.7805C73.1917 2.37527 76.4034 0.0532262 80.1401 0.0967752C80.4832 0.100774 80.8179 0.103917 81.1405 0.104908C82.8628 0.101493 84.5851 0.105228 86.3073 0.116112C89.0559 0.133482 90.7382 2.83747 89.5751 5.32786C87.7744 9.22723 85.9505 13.1071 84.1034 16.967L70.1161 46.6934L66.2104 54.8795C65.0418 57.3339 62.4364 58.8877 59.718 58.8983C59.3345 58.8998 58.9503 58.9028 58.568 58.9065C56.3458 58.9283 54.274 57.6105 53.3655 55.5823L49.6011 47.1999C48.6482 45.0886 44.7537 45.0103 43.7173 47.0819C43.5065 47.5031 43.3319 47.852 43.2154 48.0878C42.0922 50.3603 40.9508 52.6281 39.8346 54.9215Z" fill="white"/>
+      <path d="M21.9115 6.2494C24.1323 10.7439 20.4424 16.4135 15.4291 16.4255C14.3909 16.428 13.3532 16.4286 12.3167 16.4259C9.54187 16.4184 7.07748 14.9357 5.9106 12.4181C5.88016 12.3525 5.85079 12.2894 5.82263 12.2292C4.62039 9.65093 3.40557 7.08418 2.17795 4.52876C1.21884 2.53725 2.60437 0.0921795 4.81476 0.10591C5.87385 0.112489 6.91747 0.127911 7.87472 0.127799C9.39073 0.127683 10.9224 0.117423 12.4565 0.110665C16.4647 0.0930078 20.1361 2.65586 21.9115 6.2494Z" fill="white"/>
+    </svg>
+  </div>
+  <h1>Wealth — Click-through prototype</h1>
+  <p>A bonds-investing app prototype: onboarding, KYC, browsing, and investing in fixed-income bonds. Click through to start from the splash screen.</p>
+  <a class="cta" href="bonds-splash/index.html">
+    Open prototype
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+  </a>
+  <div class="note">A "↺ Reset flow" button in the top-right of every screen takes you back to the start.</div>
+
+  <script>
+    setTimeout(() => { window.location.href = 'bonds-splash/index.html'; }, 2200);
+  </script>
+</body>
+</html>

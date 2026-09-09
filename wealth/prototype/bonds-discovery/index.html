@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wealth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../bonds-shared/motion.css">
+<style>
+  :root{
+    --bg:#0A0714; --surface:#160F24; --surface-2:#1D1530;
+    --border:#2A2138;
+    --ink:#F4F1FA; --ink-2:#B8B3CC; --ink-3:#7A7593;
+    --accent-1:#7C3AED; --accent-2:#6D5CF6; --accent-3:#4F7DF3;
+    --up:#22C55E; --up-tint:#12291C;
+    --gold:#F5B860; --gold-tint:#2B2013;
+    --amber:#FB923C;
+    --f:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{background:#DCDAE8}
+  body{font-family:var(--f);color:var(--ink);display:flex;justify-content:center;padding:28px 12px;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  button{font-family:var(--f);cursor:pointer;border:none;background:none;padding:0}
+
+  .device{width:402px;max-width:100%;height:874px;background:var(--bg);border-radius:40px;overflow:hidden;box-shadow:0 30px 70px rgba(30,15,80,.28),0 0 0 10px #0E0B1E;position:relative}
+  .scroll{height:100%;overflow-y:auto;scrollbar-width:none}
+  .scroll::-webkit-scrollbar{display:none}
+
+  .page{padding:18px 20px 110px;position:relative}
+  .page::before{content:"";position:absolute;top:-40px;left:-60px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(147,51,234,.28),transparent 70%);pointer-events:none;filter:blur(10px)}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px;position:relative;z-index:1}
+  .brand{display:flex;align-items:center;gap:9px}
+  .brand .mark{width:26px;height:auto;flex-shrink:0}
+  .brand .word{font-size:19px;font-weight:800;letter-spacing:-.3px;color:var(--ink)}
+  .acct{display:flex;align-items:center;gap:6px}
+  .acct .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#FFD37A,#FF8A5C);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11.5px;color:#5A2B00;border:1.5px solid rgba(255,255,255,.35)}
+
+  .asset-chip{display:flex;align-items:center;gap:4px;background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:5px 9px 5px 11px;font-size:11px;font-weight:700;color:var(--ink-2);margin-left:2px}
+  .asset-chip svg{width:10px;height:10px;stroke:var(--ink-3);flex-shrink:0}
+
+  .ghost{position:relative;z-index:1;margin-bottom:14px;pointer-events:none}
+  .ghost .l1{font-size:34px;font-weight:800;color:rgba(244,241,250,.14);line-height:1.15;letter-spacing:-.5px}
+
+  .feat-card{position:relative;z-index:1;border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 20px 50px rgba(88,28,135,.35);margin-bottom:26px}
+  .feat-top{padding:20px 20px 22px;position:relative;overflow:hidden;background:var(--surface)}
+  .feat-top::before{
+    content:"";position:absolute;top:0;right:0;width:150px;height:150px;
+    background-image:radial-gradient(circle,rgba(225,123,255,.4) 1px,transparent 1.4px);
+    background-size:11px 11px;
+    -webkit-mask-image:radial-gradient(circle at top right,#000 0%,transparent 70%);
+    mask-image:radial-gradient(circle at top right,#000 0%,transparent 70%);
+    pointer-events:none
+  }
+  .feat-badges{display:flex;gap:8px;margin-bottom:22px;position:relative;z-index:1}
+  .fbadge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:#fff;font-size:10px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:6px 11px;border-radius:8px}
+  .feat-rate-row{display:flex;align-items:flex-end;gap:12px;margin-bottom:10px;position:relative;z-index:1}
+  .feat-pct{font-size:52px;font-weight:800;color:#FDF4FF;letter-spacing:-1.5px;line-height:1}
+  .feat-prev{display:flex;flex-direction:column;padding-bottom:6px}
+  .feat-prev .strike{font-size:14px;font-weight:700;color:rgba(255,255,255,.55);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.4)}
+  .feat-prev .lbl{font-size:11px;font-weight:700;color:rgba(255,255,255,.65);letter-spacing:.3px;margin-top:2px}
+  .feat-maturity{font-size:13px;color:rgba(255,255,255,.78);font-weight:500;position:relative;z-index:1}
+  .feat-foot{background:var(--surface-2);border-top:1px solid rgba(255,255,255,.06);padding:15px 20px;display:flex;align-items:center;gap:12px}
+  .feat-foot .mark{width:38px;height:38px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;font-size:13px;color:var(--accent-2)}
+  .feat-foot .n{font-size:14px;font-weight:800;color:var(--ink)}
+  .feat-foot .s{font-size:11.5px;color:var(--ink-3);font-weight:500;margin-top:1px}
+
+  .fy-container{background:linear-gradient(160deg,#211A38 0%,#1D1E3D 100%);border-radius:22px;padding:18px 16px;margin-bottom:28px;position:relative;z-index:1}
+  .fy-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .fy-head .t{font-size:14px;font-weight:800;color:var(--ink)}
+  .fy-head .v{font-size:12px;font-weight:700;color:var(--accent-1)}
+  .fy-row{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+  .fy-card{background:var(--surface);border:1px solid var(--border);box-shadow:0 4px 14px rgba(0,0,0,.18);border-radius:16px;padding:14px 6px 12px;display:flex;flex-direction:column;align-items:center;gap:9px;transition:box-shadow .15s,transform .15s}
+  .fy-card.on{box-shadow:0 0 0 2px var(--accent-1)}
+  .fy-card .ic{width:32px;height:32px;display:flex;align-items:center;justify-content:center}
+  .fy-card .ic svg{width:22px;height:22px;stroke:#fff}
+  .fy-card span{font-size:10.5px;font-weight:700;color:var(--ink-2);text-align:center;line-height:1.25}
+
+  .banners{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-bottom:10px;padding-bottom:2px;scrollbar-width:none;position:relative;z-index:1}
+  .banners::-webkit-scrollbar{display:none}
+  .banner{flex:0 0 100%;scroll-snap-align:start;border-radius:20px;padding:18px;display:flex;align-items:center;gap:14px;border:1px solid var(--border);background:var(--surface)}
+  .banner .txt{flex:1}
+  .banner .txt .t1{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:4px}
+  .banner .txt .t2{font-size:11.5px;color:var(--ink-2);line-height:1.4}
+  .banner .art{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .banner .art svg{width:24px;height:24px;stroke:#fff}
+  .dots{display:flex;gap:5px;justify-content:center;margin:0 0 24px;position:relative;z-index:1}
+  .dots span{width:5px;height:5px;border-radius:50%;background:var(--border);transition:width .2s,background .2s}
+  .dots span.on{width:14px;background:var(--accent-1)}
+
+  .section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;position:relative;z-index:1}
+  .section-head h2{font-size:15.5px;font-weight:800;letter-spacing:-.2px;color:var(--ink)}
+  .section-head .see{font-size:12.5px;font-weight:700;color:var(--accent-1)}
+
+  .bond-list{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;position:relative;z-index:1}
+  .bond{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:14px;display:flex;flex-direction:column}
+  .bond-top{display:flex;align-items:center;gap:12px;width:100%}
+  .bond .mark{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff}
+  .bond .info{flex:1;min-width:0}
+  .bond .info .name{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bond .info .meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .badge{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:6px}
+  .badge.rating{background:var(--gold-tint);color:#F5B860}
+  .badge.tenure{background:#1F1830;color:var(--ink-2)}
+  .badge.liquid{background:var(--up-tint);color:var(--up)}
+  .bond .yield{text-align:right;flex-shrink:0}
+  .bond .yield .pct{font-size:17px;font-weight:800;letter-spacing:-.3px}
+  .bond .yield.elevated .pct{color:var(--amber)}
+  .bond .yield.safe .pct{color:#60A5FA}
+  .bond .yield .lbl{font-size:10px;color:var(--ink-3);font-weight:600}
+  .bond-foot{display:flex;align-items:center;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+  .sold-track{flex:1;height:4px;background:#1F1830;border-radius:999px;overflow:hidden}
+  .sold-track span{display:block;height:100%;background:linear-gradient(90deg,var(--accent-2),var(--accent-3));border-radius:999px}
+  .sold-meta{font-size:11px;color:var(--ink-3);white-space:nowrap;font-weight:600;flex-shrink:0}
+  .sold-meta b{color:var(--ink-2)}
+
+  .reco-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .reco-tag{font-size:11.5px;font-weight:700;color:var(--ink-3)}
+  .why-btn{width:18px;height:18px;border-radius:50%;border:1px solid var(--border);background:none;color:var(--ink-3);font-size:10px;font-weight:700;font-style:italic;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+  .cta-banner{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--surface);border:1px solid var(--border);color:var(--ink-2);font-size:13.5px;font-weight:700;padding:14px;border-radius:14px;position:relative;z-index:1}
+
+  .trust-bar{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px 8px 16px;margin-top:16px;position:relative;z-index:1}
+  .trust-row{display:flex}
+  .trust-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;padding:0 6px}
+  .trust-item + .trust-item{border-left:1px solid var(--border)}
+  .trust-item .ic{width:38px;height:38px;border-radius:11px;background:rgba(124,58,237,.14);display:flex;align-items:center;justify-content:center}
+  .trust-item .ic svg{width:18px;height:18px;stroke:var(--accent-1)}
+  .trust-item span{font-size:12px;font-weight:700;color:var(--ink);line-height:1.3}
+  .trust-foot{border-top:1px solid var(--border);margin-top:16px;padding-top:12px;text-align:center;font-size:11px;color:var(--ink-3);font-weight:500}
+  .trust-foot b{color:var(--ink-2);font-weight:700}
+  .cta-banner svg{width:16px;height:16px}
+
+  .bottom-nav{position:absolute;left:16px;right:16px;bottom:20px;background:rgba(20,14,34,.72);backdrop-filter:blur(22px) saturate(1.6);-webkit-backdrop-filter:blur(22px) saturate(1.6);border:1px solid rgba(255,255,255,.12);border-radius:30px;display:flex;padding:12px 8px;z-index:3;box-shadow:0 8px 30px rgba(0,0,0,.35),0 20px 45px rgba(0,0,0,.4)}
+  .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--ink-3);position:relative}
+  .nav-item svg{width:20px;height:20px}
+  .nav-item span{font-size:10px;font-weight:600}
+  .nav-item.on{color:var(--grad-2)}
+  .nav-badge{position:absolute;top:-4px;right:calc(50% - 20px);background:var(--up);color:#08150F;font-size:8px;font-weight:800;padding:2px 5px;border-radius:999px;display:flex;align-items:center;gap:2px}
+  .nav-dot{position:absolute;top:-2px;right:calc(50% - 16px);width:8px;height:8px;border-radius:50%;background:#EF4444;border:1.5px solid var(--bg)}
+
+  .dropdown{position:absolute;top:56px;right:20px;background:var(--surface-2);border:1px solid var(--border);border-radius:16px;box-shadow:0 16px 40px rgba(20,10,50,.2);width:220px;z-index:20;opacity:0;transform:translateY(-8px) scale(0.97);transform-origin:top right;pointer-events:none;transition:opacity 160ms var(--ease-out),transform 160ms var(--ease-out)}
+  .dropdown.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+  .dropdown .d-item, .bottom-sheet .d-item{display:flex;align-items:center;gap:10px;padding:12px 14px;font-size:12.5px;font-weight:600;color:var(--ink-2);border-bottom:1px solid var(--border)}
+  .dropdown .d-item:last-child, .bottom-sheet .d-item:last-child{border-bottom:none}
+  .dropdown .d-item svg, .bottom-sheet .d-item svg{width:15px;height:15px;stroke:var(--ink-3)}
+  .dropdown .d-head{padding:12px 14px 8px;font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.4px}
+
+  .sheet-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:14px}
+  .asset-row{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-radius:14px}
+  .asset-row.active{background:var(--surface)}
+  .asset-row .ar-l{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:700;color:var(--ink)}
+  .asset-row .ar-l svg{width:16px;height:16px;stroke:var(--accent-2)}
+  .asset-row .check{width:16px;height:16px;stroke:var(--up)}
+  .asset-row .soon-tag{font-size:10px;font-weight:700;color:var(--ink-3);background:var(--surface);border:1px solid var(--border);padding:3px 8px;border-radius:999px}
+
+  .sheet-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:29;opacity:0;pointer-events:none;transition:opacity .22s}
+  .sheet-backdrop.open{opacity:1;pointer-events:auto}
+  .bottom-sheet{position:absolute;left:0;right:0;bottom:0;background:var(--surface-2);border-radius:24px 24px 0 0;padding:10px 20px 28px;z-index:30;transform:translateY(100%);transition:transform .32s cubic-bezier(.32,.72,0,1);box-shadow:0 -20px 50px rgba(0,0,0,.4)}
+  .bottom-sheet.open{transform:translateY(0)}
+  .sheet-handle{width:36px;height:4px;border-radius:999px;background:var(--border);margin:6px auto 18px}
+  .sheet-user{display:flex;align-items:center;gap:12px;margin-bottom:8px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+  .sheet-user .av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#FFD37A,#FF8A5C);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#5A2B00;flex-shrink:0}
+  .sheet-user .name{font-size:14.5px;font-weight:800;color:var(--ink)}
+  .sheet-user .sub{font-size:11.5px;color:var(--ink-3);margin-top:1px}
+
+  .toast{position:absolute;left:50%;bottom:100px;transform:translate(-50%,20px);background:rgba(18,14,38,.94);color:#fff;font-size:12.5px;font-weight:700;padding:10px 18px;border-radius:16px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50;max-width:82%;text-align:center;line-height:1.4}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+
+<div class="device">
+<div class="scroll">
+
+  <div class="page">
+    <div class="topbar">
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 92 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M39.8346 54.9215C38.5778 57.5038 36.0073 59.2061 33.1355 59.1794C30.1376 59.1515 27.3737 57.3552 25.9934 54.6938C25.5285 53.7975 25.0953 52.9665 24.8018 52.3816C22.2947 47.368 19.7678 42.3723 17.2211 37.395C16.0254 35.053 14.8536 32.6891 13.706 30.3039C12.7917 28.4434 14.1327 26.0486 16.2051 25.9983C19.1879 25.926 22.1952 25.9331 25.1835 25.9037C28.4426 25.8718 31.4418 27.7417 32.8513 30.6804C34.0307 33.1392 35.2639 35.6135 36.4513 37.988C37.0568 39.199 38.1583 40.0057 39.5121 40.0296C42.5237 40.0827 44.624 36.5334 43.3341 33.8115C42.8043 32.6935 42.3018 31.6242 41.8643 30.7429C38.8811 24.7341 36.0098 18.6364 33.0146 12.6239C32.0966 10.7811 31.1651 8.72329 30.212 6.67904C28.7471 3.5374 30.7382 0.0212591 34.2045 0.0324084C35.8291 0.0376806 37.4806 0.0232789 39.1338 0.0149457C42.936 -0.00421908 46.3447 2.25074 47.9299 5.70676L61.3946 35.0612C61.7114 35.7862 62.0604 36.5249 62.4218 37.2565C63.1856 38.8023 64.7489 39.7081 66.4731 39.705C69.4761 39.6996 71.5056 36.9127 70.1863 34.2151C69.9767 33.7864 69.7781 33.3815 69.6008 33.0145C68.4841 30.6939 67.3548 28.3842 66.213 26.0858C64.9778 23.5992 64.8499 20.7299 66.0306 18.2169C66.3705 17.4933 66.6944 16.7965 66.951 16.1927C68.4033 12.7757 70.0756 9.26942 71.6526 5.7805C73.1917 2.37527 76.4034 0.0532262 80.1401 0.0967752C80.4832 0.100774 80.8179 0.103917 81.1405 0.104908C82.8628 0.101493 84.5851 0.105228 86.3073 0.116112C89.0559 0.133482 90.7382 2.83747 89.5751 5.32786C87.7744 9.22723 85.9505 13.1071 84.1034 16.967L70.1161 46.6934L66.2104 54.8795C65.0418 57.3339 62.4364 58.8877 59.718 58.8983C59.3345 58.8998 58.9503 58.9028 58.568 58.9065C56.3458 58.9283 54.274 57.6105 53.3655 55.5823L49.6011 47.1999C48.6482 45.0886 44.7537 45.0103 43.7173 47.0819C43.5065 47.5031 43.3319 47.852 43.2154 48.0878C42.0922 50.3603 40.9508 52.6281 39.8346 54.9215Z" fill="white"/>
+          <path d="M21.9115 6.2494C24.1323 10.7439 20.4424 16.4135 15.4291 16.4255C14.3909 16.428 13.3532 16.4286 12.3167 16.4259C9.54187 16.4184 7.07748 14.9357 5.9106 12.4181C5.88016 12.3525 5.85079 12.2894 5.82263 12.2292C4.62039 9.65093 3.40557 7.08418 2.17795 4.52876C1.21884 2.53725 2.60437 0.0921795 4.81476 0.10591C5.87385 0.112489 6.91747 0.127911 7.87472 0.127799C9.39073 0.127683 10.9224 0.117423 12.4565 0.110665C16.4647 0.0930078 20.1361 2.65586 21.9115 6.2494Z" fill="white"/>
+        </svg>
+        <button class="asset-chip" id="assetChipBtn">Bonds<svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+      </div>
+      <button class="acct" id="avatarBtn">
+        <div class="av">JD</div>
+      </button>
+    </div>
+
+    <div class="ghost">
+      <div class="l1">Exclusive offer<br>For you</div>
+    </div>
+
+    <div class="feat-card" id="featCard">
+      <div class="feat-top">
+        <div class="feat-badges">
+          <span class="fbadge" id="featSold"></span>
+          <span class="fbadge">Trending now</span>
+        </div>
+        <div class="feat-rate-row">
+          <div class="feat-pct" id="featPct"></div>
+          <div class="feat-prev"><span class="strike" id="featStrike"></span><span class="lbl">YTM UPTO</span></div>
+        </div>
+        <div class="feat-maturity" id="featMaturity"></div>
+      </div>
+      <div class="feat-foot">
+        <div class="mark" id="featMark"></div>
+        <div>
+          <div class="n" id="featName"></div>
+          <div class="s" id="featSub"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fy-container">
+      <div class="fy-head">
+        <span class="t">For you</span>
+        <a class="v" href="../bonds-listing/index.html">View all</a>
+      </div>
+      <div class="fy-row" id="fyRow">
+        <a class="fy-card" href="../bonds-listing/index.html?tag=short-tenure">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <span>Short tenure</span>
+        </a>
+        <a class="fy-card" href="../bonds-listing/index.html?tag=low-min">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg></div>
+          <span>Invest with ₹5k</span>
+        </a>
+        <a class="fy-card" href="../bonds-listing/index.html?tag=sell6mo">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 018 0"/></svg></div>
+          <span>Early exit</span>
+        </a>
+        <a class="fy-card" href="../bonds-listing/index.html?tag=aa-above">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div>
+          <span>High rated</span>
+        </a>
+        <a class="fy-card" href="../bonds-listing/index.html?tag=monthly-payout">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></div>
+          <span>Monthly interest</span>
+        </a>
+        <a class="fy-card" href="../bonds-listing/index.html?tag=high-yield">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M21 7h-6v6"/></svg></div>
+          <span>High returns</span>
+        </a>
+        <a class="fy-card" href="../bonds-listing/index.html?tag=aaa-above">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <span>AAA &amp; above</span>
+        </a>
+        <a class="fy-card" href="../bonds-listing/index.html?tag=govt">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l8-6 8 6v12M9 21v-6h6v6"/></svg></div>
+          <span>Govt. bonds</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="banners" id="banners">
+      <div class="banner">
+        <div class="txt">
+          <div class="t1">100% on-time repayments</div>
+          <div class="t2">₹1,200Cr+ redeemed to date across 18,000+ investors</div>
+        </div>
+        <div class="art" style="background:linear-gradient(135deg,var(--accent-2),var(--accent-3))">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 6.8L21 11l-6.6 2.2L12 20l-2.4-6.8L3 11l6.6-2.2z"/></svg>
+        </div>
+      </div>
+      <div class="banner">
+        <div class="txt">
+          <div class="t1">KYC in under 3 minutes</div>
+          <div class="t2">Just your PAN &amp; Aadhaar — no paperwork, no branch visit</div>
+        </div>
+        <div class="art" style="background:linear-gradient(135deg,#0FA968,#0A8556)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+      </div>
+      <div class="banner">
+        <div class="txt">
+          <div class="t1">Refer &amp; earn ₹500</div>
+          <div class="t2">Invite a friend — you both earn when they invest ₹5,000+</div>
+        </div>
+        <div class="art" style="background:linear-gradient(135deg,var(--gold),var(--amber))">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21a8 8 0 10-16 0"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="dots" id="dots"><span class="on"></span><span></span><span></span></div>
+
+    <div class="section-head">
+      <h2>Recommended for you</h2>
+      <a class="see" href="../bonds-listing/index.html">View all</a>
+    </div>
+    <div class="bond-list" id="recoList"></div>
+
+    <a class="cta-banner" href="../bonds-listing/index.html">
+      Explore all bonds
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+
+    <div class="trust-bar">
+      <div class="trust-row">
+        <div class="trust-item">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <span>SEBI regulated</span>
+        </div>
+        <div class="trust-item">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6"/></svg></div>
+          <span>NSE settled</span>
+        </div>
+        <div class="trust-item">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div>
+          <span>Handpicked bonds</span>
+        </div>
+      </div>
+      <div class="trust-foot">SEBI Reg. No.: <b>INZ000031536</b></div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <div class="nav-item on">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 10h8M8 14h5"/></svg>
+      <span>Bonds</span>
+    </div>
+    <a class="nav-item" href="../bonds-sips/index.html">
+      <span class="nav-badge">↑0.25%</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9.5a3 3 0 013-1.5c1.7 0 3 1 3 2.2 0 2.8-6 1.8-6 4.6 0 1.2 1.3 2.2 3 2.2a3 3 0 003-1.5"/></svg>
+      <span>SIPs</span>
+    </a>
+    <a class="nav-item" href="../bonds-portfolio/index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2M3 12h18"/></svg>
+      <span>Portfolio</span>
+    </a>
+    <a class="nav-item" href="../bonds-referral/index.html">
+      <span class="nav-dot"></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7C10 3 5 4 5 7s5 3 7 0zm0 0c2-4 7-3 7 0s-5 3-7 0z"/></svg>
+      <span>Refer&amp;Earn</span>
+    </a>
+    <button class="nav-item" id="moreBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="1.5"/><circle cx="18" cy="6" r="1.5"/><circle cx="6" cy="18" r="1.5"/><circle cx="18" cy="18" r="1.5"/></svg>
+      <span>More</span>
+    </button>
+  </nav>
+
+  <div class="sheet-backdrop" id="profileBackdrop"></div>
+  <div class="bottom-sheet" id="profileMenu">
+    <div class="sheet-handle"></div>
+    <div class="sheet-user">
+      <div class="av">JD</div>
+      <div>
+        <div class="name">John Doe</div>
+        <div class="sub">KYC verified</div>
+      </div>
+    </div>
+    <div class="d-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>Account &amp; KYC status</div>
+    <div class="d-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 10h8M8 14h5"/></svg>Statements &amp; documents</div>
+    <div class="d-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z"/></svg>Help &amp; support</div>
+  </div>
+
+  <div class="bottom-sheet" id="assetSheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Choose what to explore</div>
+    <div class="asset-row active" id="assetRowBonds">
+      <div class="ar-l"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg>Bonds</div>
+      <svg class="check" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <div class="asset-row" id="assetRowStocks">
+      <div class="ar-l"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>Stocks</div>
+      <span class="soon-tag">Coming soon</span>
+    </div>
+    <div class="asset-row" id="assetRowMF">
+      <div class="ar-l"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="4" height="8" rx="1"/><rect x="10" y="6" width="4" height="13" rx="1"/><rect x="17" y="3" width="4" height="16" rx="1"/></svg>Mutual Funds</div>
+      <span class="soon-tag">Coming soon</span>
+    </div>
+  </div>
+
+  <div class="dropdown" id="moreMenu" style="right:auto;left:6px;top:auto;bottom:70px;transform-origin:bottom left">
+    <a class="d-item" href="../bonds-learn/index.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z"/></svg>Learn</a>
+    <div class="d-item" id="settingsItem"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1-1.6 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.9.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.9V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg>Settings</div>
+    <div class="d-item" id="helpItem"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18h.01M8 10a4 4 0 118 0c0 2-2 2.5-2 4.5"/></svg>Help &amp; support</div>
+  </div>
+
+  <div class="dropdown" id="notifMenu">
+    <div class="d-head">Notifications</div>
+    <div class="d-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Anand Gold Finance payout tomorrow</div>
+    <div class="d-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>KYC verified — you're all set</div>
+    <div class="d-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>New bond: Vistaar Microfin, 11.25% YTM</div>
+  </div>
+
+</div>
+</div>
+
+<script src="../bonds-shared/bonds-data.js"></script>
+<script src="../bonds-shared/ui.js"></script>
+<script>
+  const featured = BONDS['vistaar-micro'];
+  document.getElementById('featSold').textContent = featured.soldPct + '% sold';
+  document.getElementById('featPct').textContent = featured.ytm.toFixed(2) + '%';
+  document.getElementById('featStrike').textContent = (featured.ytm - 0.5).toFixed(2) + '%';
+  document.getElementById('featMaturity').textContent = `Maturity: ${featured.tenureMonths} months left`;
+  document.getElementById('featMark').textContent = featured.initials;
+  document.getElementById('featMark').style.color = featured.grad[1];
+  document.getElementById('featName').textContent = featured.name;
+  document.getElementById('featSub').textContent = `${fmtINR(featured.unitPrice * featured.minUnits)} min. investment`;
+  document.getElementById('featCard').addEventListener('click', () => {
+    window.location.href = `../bonds-detail/index.html?bond=${featured.id}`;
+  });
+
+  const RECOMMENDED = [
+    { id: 'vistaar-micro', medal: '🥇', reason: 'High yield (11.25%) and AA rated, with 82% already sold — strong demand signal.' },
+    { id: 'anand-gold', medal: '🥈', reason: 'Gold-secured with a 3-year on-time repayment track record and a shorter 12-month tenure.' }
+  ];
+
+  function recoCardHTML(item, index) {
+    const bond = BONDS[item.id];
+    const meta = bond.liquidityAfterMonths
+      ? `${bond.tenureMonths} mo · Sell after ${bond.liquidityAfterMonths}mo`
+      : `${bond.tenureMonths} mo`;
+    return `
+      <div class="bond stagger-in" style="animation-delay:${index * 60}ms">
+        <div class="reco-head">
+          <span class="reco-tag">${item.medal} Recommended</span>
+          <button class="why-btn" data-reason="${item.reason}" aria-label="Why is this recommended?">i</button>
+        </div>
+        <a class="bond-top" style="text-decoration:none;color:inherit" href="../bonds-detail/index.html?bond=${bond.id}">
+          <div class="mark" style="background:linear-gradient(135deg,${bond.grad[0]},${bond.grad[1]})">${bond.initials}</div>
+          <div class="info">
+            <div class="name">${bond.name}</div>
+            <div class="meta">
+              <span class="badge rating">${bond.rating}</span>
+              <span class="badge tenure">${meta}</span>
+            </div>
+          </div>
+          <div class="yield ${bond.riskTier}"><div class="pct">${bond.ytm.toFixed(2)}%</div><div class="lbl">YTM</div></div>
+        </a>
+        <div class="bond-foot">
+          <div class="sold-track"><span style="width:${bond.soldPct}%"></span></div>
+          <div class="sold-meta"><b>${bond.soldPct}% sold</b> · Min ${fmtINR(bond.unitPrice * bond.minUnits)}</div>
+        </div>
+      </div>`;
+  }
+
+  document.getElementById('recoList').innerHTML = RECOMMENDED.map(recoCardHTML).join('');
+  document.querySelectorAll('.why-btn').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); showToast(btn.dataset.reason, 3200); });
+  });
+
+  const track = document.getElementById('banners');
+  const dots = document.getElementById('dots').children;
+  track.addEventListener('scroll', () => {
+    const i = Math.round(track.scrollLeft / track.clientWidth);
+    for (let j = 0; j < dots.length; j++) dots[j].classList.toggle('on', j === i);
+  }, { passive: true });
+
+  function toggleMenu(id, others) {
+    const el = document.getElementById(id);
+    const willOpen = !el.classList.contains('open');
+    others.forEach(o => document.getElementById(o).classList.remove('open'));
+    el.classList.toggle('open', willOpen);
+    if (el.classList.contains('bottom-sheet')) document.getElementById('profileBackdrop').classList.toggle('open', willOpen);
+  }
+  document.getElementById('avatarBtn').addEventListener('click', e => { e.stopPropagation(); toggleMenu('profileMenu', ['notifMenu', 'moreMenu', 'assetSheet']); });
+  document.getElementById('assetChipBtn').addEventListener('click', e => { e.stopPropagation(); toggleMenu('assetSheet', ['notifMenu', 'moreMenu', 'profileMenu']); });
+  document.getElementById('moreBtn').addEventListener('click', e => { e.stopPropagation(); toggleMenu('moreMenu', ['notifMenu', 'profileMenu', 'assetSheet']); document.getElementById('profileBackdrop').classList.remove('open'); });
+  document.getElementById('profileBackdrop').addEventListener('click', () => {
+    ['profileMenu', 'assetSheet'].forEach(id => document.getElementById(id).classList.remove('open'));
+    document.getElementById('profileBackdrop').classList.remove('open');
+  });
+  document.addEventListener('click', () => {
+    ['profileMenu', 'notifMenu', 'moreMenu', 'assetSheet'].forEach(id => document.getElementById(id).classList.remove('open'));
+    document.getElementById('profileBackdrop').classList.remove('open');
+  });
+  document.getElementById('settingsItem').addEventListener('click', e => { e.stopPropagation(); showToast('Coming soon'); });
+  document.getElementById('helpItem').addEventListener('click', e => { e.stopPropagation(); showToast('Connecting you to support…'); });
+  document.querySelectorAll('#profileMenu .d-item, #notifMenu .d-item').forEach(item => {
+    item.addEventListener('click', e => { e.stopPropagation(); showToast('Coming soon'); });
+  });
+  document.getElementById('assetRowBonds').addEventListener('click', e => {
+    e.stopPropagation();
+    document.getElementById('assetSheet').classList.remove('open');
+    document.getElementById('profileBackdrop').classList.remove('open');
+  });
+  document.getElementById('assetRowStocks').addEventListener('click', e => { e.stopPropagation(); window.location.href = '../asset-coming-soon/index.html?asset=stocks'; });
+  document.getElementById('assetRowMF').addEventListener('click', e => { e.stopPropagation(); window.location.href = '../asset-coming-soon/index.html?asset=mutual-funds'; });
+</script>
+
+</body>
+</html>

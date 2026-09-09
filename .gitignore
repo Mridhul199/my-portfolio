@@ -3,3 +3,8 @@
 .vscode/
 .claude/
 _planning/
+
+# local scratch — not part of the published site
+_s.html
+assets/portrait-original.jpg
+resume (2).pdf

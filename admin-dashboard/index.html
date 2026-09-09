@@ -22,10 +22,12 @@
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"/>
 <link rel="icon" href="../assets/favicon-32.png" sizes="32x32"/>
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
+<meta name="theme-color" content="#EAEBE5"/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Admin & Dashboard Designs · Mridhul Aswin","description":"The admin portal that turns manual, spreadsheet-driven operations into a single automated console for an interoperable admin rail. UX / product design case study by Mridhul Aswin (two clients live in production).","author":{"@type":"Person","name":"Mridhul Aswin"},"url":"https://mridhul199.github.io/my-portfolio/admin-dashboard/"}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- self-hosted type: no third-party font request -->
+<link rel="preload" href="../assets/fonts/switzer-800.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="../assets/fonts/switzer-500.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="stylesheet" href="../styles/type.css"/>
 <style>
 /* project-overview: base design system
    Extracted from the Standing Instruction Hub overview doc. Paste inside a <style> tag in the new doc's <head>.
@@ -111,12 +113,41 @@ section{padding:72px 0;position:relative;border-top:1px solid var(--border)}
 .meta-cell{background:var(--surface);padding:18px 20px}
 .meta-cell .mk{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:6px}
 .meta-cell .mv{font-size:14px;font-weight:500;color:var(--text-1);line-height:1.4}
+.meta-cell .mv-sub{font-size:12px;color:var(--text-3)}
 
 /* Stat strip */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
 @media(max-width:760px){.stats{grid-template-columns:1fr}}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;padding:44px 0;align-items:start}
+@media(max-width:860px){.foot-grid{grid-template-columns:1fr 1fr;gap:26px}}
+@media(max-width:520px){.foot-grid{grid-template-columns:1fr}}
+.foot-brand{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--text-1)}
+.foot-bio{font-size:13px;color:var(--text-2);line-height:1.5;margin:10px 0 0;max-width:38ch}
+.foot-h{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px}
+.foot-grid a{display:block;font-size:13px;color:var(--text-2);margin-bottom:8px}
+.foot-grid a:hover{color:var(--orange)}
+.foot-meta{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--text-3)}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:28px}
+/* these captures range from a short table to a full-page scroll, so
+   the tiles are cropped to a common ratio; the lightbox still opens
+   each one whole */
+.gallery-grid .frame{aspect-ratio:16/11;overflow:hidden}
+.gallery-grid .frame img{width:100%;height:100%;object-fit:cover;object-position:top center}
+@media(max-width:760px){.gallery-grid{grid-template-columns:1fr}}
+.stack-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;margin-top:28px}
+@media(max-width:760px){.stack-cols{grid-template-columns:1fr;gap:22px}}
+.stack-h{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin:0 0 12px}
+.clean.tight li{margin-bottom:6px}
+.more-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+@media(max-width:900px){.more-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.more-grid{grid-template-columns:1fr}}
+.more-card{display:block;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:20px 22px;transition:transform .2s ease,box-shadow .2s ease}
+.more-card:hover{transform:translateY(-3px);box-shadow:var(--sh-1)}
+.more-card .t{font-size:16px;font-weight:700;color:var(--text-1);letter-spacing:-.01em}
+.more-card .d{font-size:13px;color:var(--text-2);margin-top:6px;line-height:1.45}
+@media(max-width:760px){.stats{grid-template-columns:1fr}}
 .stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:22px 24px;box-shadow:var(--sh-1)}
-.stat .n{font-size:40px;font-weight:800;letter-spacing:-.03em;font-family:'Manrope',var(--f);line-height:1}
+.stat .n{font-size:40px;font-weight:800;letter-spacing:-.03em;font-family:var(--f);line-height:1;font-variant-numeric:tabular-nums}
 .stat .n .u{color:var(--orange)}
 .stat .l{font-size:13px;color:var(--text-2);margin-top:8px}
 
@@ -775,7 +806,7 @@ body.fmodal-open{overflow:hidden}
 @media(max-width:680px){.fmodal-card{inset:0;width:100vw;max-height:100vh;border-radius:0}}
 
 </style>
-<link rel="stylesheet" href="../styles/casestudy-dark.css"/>
+<link rel="stylesheet" href="../styles/casestudy-bone.css"/>
 </head>
 <body data-auto-reveal>
 <style>
@@ -808,10 +839,11 @@ body.fmodal-open{overflow:hidden}
         connect once instead of per-gateway, and customers pay straight from their own app, UPI-style. This is
         the admin portal that operates that rail, replacing the manual,
         spreadsheet-driven back office it launched on.</p>
-        <div class="meta-bar" style="grid-template-columns:repeat(3,1fr)">
-          <div class="meta-cell"><div class="mk">Role</div><div class="mv">UX / Product design</div></div>
-          <div class="meta-cell"><div class="mk">Platform</div><div class="mv">Web · desktop admin</div></div>
-          <div class="meta-cell"><div class="mk">Status</div><div class="mv">2 clients live in production</div></div>
+        <div class="meta-bar" style="grid-template-columns:repeat(4,1fr)">
+          <div class="meta-cell"><div class="mk">Client</div><div class="mv">Hatio Innovations<br><span class="mv-sub">BillDesk subsidiary</span></div></div>
+          <div class="meta-cell"><div class="mk">Role</div><div class="mv">UX / Product design<br><span class="mv-sub">Individual contributor</span></div></div>
+          <div class="meta-cell"><div class="mk">Timeline</div><div class="mv">2022 &ndash; Present</div></div>
+          <div class="meta-cell"><div class="mk">Platform</div><div class="mv">Web &middot; desktop admin<br><span class="mv-sub">2 clients in production</span></div></div>
         </div>
       </div>
       <div class="hero-art">
@@ -843,6 +875,76 @@ body.fmodal-open{overflow:hidden}
   </section>
 
   <!-- 02 THE PROBLEM -->
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">The portal &middot; At a glance</span>
+        <h2>Five surfaces, one console.</h2>
+        <p class="lead">The dashboard, access management, refund reporting, merchant configuration and
+        partner theming. Each is taken apart further down.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="frame" data-shot="assets/after/business-dashboard.png">
+          <img src="assets/after/business-dashboard.png" alt="Business dashboard: revenue, payment count and total payment value with trend graphs" loading="lazy" decoding="async"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="placeholder" style="display:none;">Missing <code>assets/after/business-dashboard.png</code></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+        <div class="frame" data-shot="assets/after/uam-users.png">
+          <img src="assets/after/uam-users.png" alt="User access management: every user and where they are in onboarding" loading="lazy" decoding="async"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="placeholder" style="display:none;">Missing <code>assets/after/uam-users.png</code></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+        <div class="frame" data-shot="assets/maker-checker/maker-checker-reports.png">
+          <img src="assets/maker-checker/maker-checker-reports.png" alt="Maker-checker refund reports queue carrying file state" loading="lazy" decoding="async"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="placeholder" style="display:none;">Missing <code>assets/maker-checker/maker-checker-reports.png</code></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+        <div class="frame" data-shot="assets/merchant-config/merchant-config-list.png">
+          <img src="assets/merchant-config/merchant-config-list.png" alt="Merchant configuration registry of MCC and MID entities" loading="lazy" decoding="async"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="placeholder" style="display:none;">Missing <code>assets/merchant-config/merchant-config-list.png</code></div>
+          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS & METHODS -->
+  <section id="stack">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">The portal &middot; Tools &amp; methods</span>
+        <h2>How it was designed.</h2>
+      </div>
+      <div class="stack-cols">
+        <div>
+          <h4 class="stack-h">Tools</h4>
+          <ul class="clean tight">
+            <li>Figma &mdash; interface design, prototypes, specs</li>
+            <li>FigJam &mdash; flows, service maps, workshops</li>
+            <li>Miro &mdash; journey and exception mapping</li>
+            <li>Notion &mdash; design documentation and handoff</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="stack-h">Methods</h4>
+          <ul class="clean tight">
+            <li>Task-based information architecture</li>
+            <li>Exception-state modelling against backend lifecycle events</li>
+            <li>Funnel-friction analysis on operator workflows</li>
+            <li>Usability walkthroughs with the operations team</li>
+            <li>Design tokens and a shared component library</li>
+            <li>API-constrained, compliance-aware UX</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="problem">
     <div class="shell narrow">
       <div class="section-head">
@@ -1816,15 +1918,52 @@ body.fmodal-open{overflow:hidden}
     </div>
   </div>
 
+  <!-- 08b MY ROLE -->
+  <section id="role">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">The portal &middot; My role</span>
+        <h2>UX / Product design, individual contributor.</h2>
+        <p class="lead">Owned the console end to end &mdash; dashboard, access management, maker-checker
+        reporting, merchant configuration and whitelabel theming &mdash; inside a wider remit of 7+ fintech
+        platform initiatives at Hatio Innovations, a BillDesk subsidiary, across 9 bank integration variants.</p>
+      </div>
+      <ul class="clean">
+        <li><strong>Information architecture</strong>: task-based IA and exception-state modelling for the
+        settlement, reconciliation and reporting workflows the portal replaced.</li>
+        <li><strong>Interaction design</strong>: the two-step invite, the permissions matrix, the bulk-action
+        rules and the acknowledgement gate on the one irreversible action.</li>
+        <li><strong>Design system</strong>: the token set that lets a single portal carry every partner's
+        brand, applied once rather than themed per screen.</li>
+        <li><strong>Engineering partnership</strong>: resolved API and backend edge cases with product and
+        engineering before build, so states were designed against real lifecycle events.</li>
+      </ul>
+    </div>
+  </section>
+
   <section id="impact" data-unit>
     <div class="shell narrow">
       <div class="section-head">
         <span class="sec-num">The portal · Impact</span>
         <h2>Live, and carrying real clients.</h2>
       </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="n">&minus;24<span class="u">%</span></div>
+          <div class="l">Operator effort across settlement, reconciliation and reporting</div>
+        </div>
+        <div class="stat">
+          <div class="n">11<span class="u">h</span></div>
+          <div class="l">Turnaround recovered per week</div>
+        </div>
+        <div class="stat">
+          <div class="n">2</div>
+          <div class="l">Clients live in production on the portal today</div>
+        </div>
+      </div>
       <ul class="clean">
-        <li><strong>2 clients live in production</strong>: operating on the portal today.</li>
         <li><strong>Manual work automated</strong>: reconciliation, statement handling, and access moved into the system.</li>
+        <li><strong>Auditability</strong>: file lifecycles carry state, so hand-offs prove themselves instead of living in an inbox.</li>
       </ul>
     </div>
   </section>
@@ -1840,12 +1979,49 @@ body.fmodal-open{overflow:hidden}
       </div>
     </div>
   </section>
+  <!-- 10 OTHER PROJECTS -->
+  <section id="more">
+    <div class="shell narrow">
+      <div class="section-head">
+        <span class="sec-num">More work</span>
+        <h2>Other projects.</h2>
+      </div>
+      <div class="more-grid">
+        <a class="more-card" href="../wallet/"><div class="t">Wallet Solution</div><div class="d">Stored-value wallet SDK and its admin portal, whitelabelled for transit and logistics partners.</div></a>
+        <a class="more-card" href="../bill-pay-portal/"><div class="t">Bill-Pay Portal Refresh</div><div class="d">SSO bill-pay portal serving 30&ndash;50 partner organizations, plus DLS micro-illustrations.</div></a>
+        <a class="more-card" href="../recurring-payments-hub/"><div class="t">Recurring Payments Hub</div><div class="d">Mandate lifecycle redesigned into one dashboard across 50+ partner organizations.</div></a>
+        <a class="more-card" href="../in-app-travel-booking/"><div class="t">In-App Travel Booking</div><div class="d">Buyer-app flight booking for organizations joining an open commerce network.</div></a>
+        <a class="more-card" href="../whitelabel-theme-automation/"><div class="t">Whitelabel Theming, Automated</div><div class="d">One brand HEX to a fully themed partner &mdash; 29 partners themed so far.</div></a>
+        <a class="more-card" href="../dls-overview/"><div class="t">DLS Component Catalog</div><div class="d">Component-by-component design system audit, pulled from Figma into a reference catalog.</div></a>
+      </div>
+      <p class="lead" style="margin-top:26px"><a href="../">&larr; All work</a></p>
+    </div>
+  </section>
+
 </main>
 
 <footer>
-  <div class="shell chrome-inner">
-    <span>Admin & Dashboard Designs · Case study</span>
-    <span>Built with the project-overview skill</span>
+  <div class="shell foot-grid">
+    <div>
+      <div class="foot-brand">Mridhul Aswin</div>
+      <p class="foot-bio">UX / product designer working on fintech infrastructure &mdash; admin and dashboard
+      systems, wallet SDKs, and the operator tooling behind them.</p>
+    </div>
+    <div>
+      <div class="foot-h">Pages</div>
+      <a href="../">Work</a>
+      <a href="../#about">About</a>
+      <a href="../resume/">R&eacute;sum&eacute;</a>
+    </div>
+    <div>
+      <div class="foot-h">Contact</div>
+      <a href="mailto:mridhulaswin92@gmail.com">mridhulaswin92@gmail.com</a>
+      <a href="https://www.linkedin.com/in/mridhul-aswin-6637202bb/" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="foot-meta">
+      <span>Admin &amp; Dashboard Designs</span>
+      <span>Case study &middot; 2026</span>
+    </div>
   </div>
 </footer>
 

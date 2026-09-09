@@ -23,12 +23,14 @@
 <link rel="icon" href="../assets/favicon-32.png" sizes="32x32"/>
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Bill-Pay Portal Refresh · Mridhul Aswin","description":"A UI/UX refresh of a payments fintech's whitelabelled Bill-Pay SSO portal for 30–50 partner organizations, paired with a set of micro-illustrations contributed to the design system. Case study by Mridhul Aswin.","author":{"@type":"Person","name":"Mridhul Aswin"},"url":"https://mridhul199.github.io/my-portfolio/bill-pay-portal/"}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#EAEBE5"/>
+<!-- self-hosted type: no third-party font request -->
+<link rel="preload" href="../assets/fonts/switzer-800.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="../assets/fonts/switzer-500.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="stylesheet" href="../styles/type.css"/>
 <style>
-/* project-overview: base design system
-   Extracted from the Standing Instruction Hub overview doc. Paste inside a <style> tag in the new doc's <head>.
+/* project-overview: base design system.
+   Token values below are overridden by ../styles/casestudy-bone.css.
    Palette: neutral surfaces + one accent (--orange). Swap --orange to re-skin. */
 
 :root{
@@ -791,16 +793,17 @@ body.fmodal-open{overflow:hidden}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:28px}.hero-art{margin:4px auto 0}.hero .lead{max-width:none}}
 
 </style>
-<link rel="stylesheet" href="../styles/casestudy-dark.css"/>
+<link rel="stylesheet" href="../styles/casestudy-bone.css"/>
 </head>
 <body data-auto-reveal>
 <style>
-.pf-bridge{position:sticky;top:0;z-index:50;background:rgba(11,11,12,.72);-webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
+.pf-bridge{position:sticky;top:0;z-index:50;background:rgba(234,235,229,.82);-webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border)}
 .pf-bridge .pf-bridge-inner{display:flex;align-items:center;justify-content:space-between;height:48px}
-.pf-bridge-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text-1);letter-spacing:-.01em}
-.pf-bridge-link svg{width:15px;height:15px;stroke:var(--orange)}
+.pf-bridge-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--text-1);letter-spacing:-.01em}
+.pf-bridge-link svg{width:15px;height:15px;stroke:var(--orange);transition:transform .25s cubic-bezier(.16,1,.3,1)}
 .pf-bridge-link:hover{color:var(--orange)}
-.pf-bridge-ctx{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+.pf-bridge-link:hover svg{transform:translateX(-3px)}
+.pf-bridge-ctx{font-family:var(--f);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
 </style>
 <nav class="pf-bridge" aria-label="Portfolio">
   <div class="shell pf-bridge-inner">
