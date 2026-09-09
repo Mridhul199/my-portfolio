@@ -331,6 +331,64 @@ section{padding:var(--pad-y) 0}
   font-family:var(--mono);font-size:11px;color:var(--ink-4);
   background:repeating-linear-gradient(135deg,var(--bone) 0 12px,var(--bone-2) 12px 24px);
 }
+/* .ph is normally revealed by an image's onerror. A card whose shot has
+   not been exported yet carries the plate on its own, with no img to
+   fail, so it would sit there as an empty frame. */
+.work-cover > .ph:only-child{display:flex}
+
+/* ---- device frames on the timeline ----------------------------
+   Opt-in, per card, because the right frame is a fact about the
+   screenshot rather than something to infer: business-dashboard and the
+   DLS board are both portrait but neither is a phone screen.
+
+   A framed shot turns OFF the darken blend above. That blend exists to
+   dissolve a screenshot's white chrome into the page; once the shot
+   sits inside a window there is a frame doing that job, and leaving the
+   blend on would drop the page's ground through the glass. */
+.work-cover[data-frame]{
+  aspect-ratio:auto;background:transparent;overflow:visible;isolation:auto;
+}
+.work-cover[data-frame] img{mix-blend-mode:normal;height:auto;object-fit:cover}
+
+/* desktop: a browser window */
+.work-cover[data-frame="browser"]{
+  border-radius:10px;overflow:hidden;
+  border:1px solid var(--border);
+  background:var(--paper);
+  box-shadow:0 18px 44px rgba(0,0,0,.16);
+  padding-top:30px;
+}
+.work-cover[data-frame="browser"]::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:30px;
+  background:var(--bone-2);
+  border-bottom:1px solid var(--border);
+  background-image:
+    radial-gradient(circle 4px at 16px 15px, var(--ink-4) 98%, transparent 100%),
+    radial-gradient(circle 4px at 32px 15px, var(--ink-4) 98%, transparent 100%),
+    radial-gradient(circle 4px at 48px 15px, var(--ink-4) 98%, transparent 100%);
+  background-repeat:no-repeat;
+  z-index:2;
+}
+.work-cover[data-frame="browser"] img{aspect-ratio:16/10;object-position:top center}
+.work-cover[data-frame="browser"]:has(> .ph){aspect-ratio:16/10}
+
+/* mobile: a phone body, narrower than the column so it reads as a device */
+.work-cover[data-frame="phone"]{
+  border-radius:26px;overflow:hidden;
+  border:6px solid var(--ink-2);
+  background:var(--paper);
+  box-shadow:0 18px 44px rgba(0,0,0,.22);
+  width:min(62%,260px);margin-inline:auto;
+  /* on the frame itself, not the img: a card whose shot has not landed
+     yet holds a placeholder div, and the frame would otherwise collapse
+     to its border */
+  aspect-ratio:9/17;
+}
+.work-items .work-item:nth-child(odd) .work-cover[data-frame="phone"]{margin-right:0}
+.work-cover[data-frame="phone"] img{width:100%;height:100%;object-position:top center}
+.work-cover[data-frame="phone"] .ph{position:absolute;inset:0}
+
+.is-dark .work-cover[data-frame]{background:var(--paper)}
 
 .work-body{position:relative;z-index:2;padding:clamp(22px,2.2vw,32px) 0 0}
 /* title sits grey until its item reveals, then resolves to ink —
