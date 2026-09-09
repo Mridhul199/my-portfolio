@@ -760,10 +760,48 @@
   }
 
 
+
+  /* ------------------------------------------------------------
+     Work accordion. One panel open at a time; the header is a real
+     button so Enter, Space and focus come from the platform rather
+     than being re-implemented. Panels animate on grid-template-rows,
+     which is the only way to transition to an unknown height without
+     measuring it.
+     ------------------------------------------------------------ */
+  function workAccordion() {
+    var acc = document.querySelector('[data-acc]');
+    if (!acc) return;
+    var items = [].slice.call(acc.querySelectorAll('.acc-item'));
+    if (!items.length) return;
+
+    function setOpen(item, open) {
+      item.classList.toggle('is-open', open);
+      var btn = item.querySelector('.acc-head');
+      if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    items.forEach(function (item) {
+      var btn = item.querySelector('.acc-head');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var willOpen = !item.classList.contains('is-open');
+        items.forEach(function (o) { if (o !== item) setOpen(o, false); });
+        setOpen(item, willOpen);
+        /* the swirl and rail measure off document geometry, and an
+           opening panel changes it under them */
+        window.dispatchEvent(new Event('resize'));
+      });
+    });
+
+    /* open the first so the page never lands fully collapsed */
+    setOpen(items[0], true);
+  }
+
   function run() {
     try { splitWords(); } catch (e) {}
     navSentinel();
     try { workRail(); } catch (e) {}
+    try { workAccordion(); } catch (e) {}
     try { aboutMotion(); } catch (e) {}
     try { capScroll(); } catch (e) {}
     try { sectionTheme(); } catch (e) {}
