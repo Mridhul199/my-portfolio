@@ -232,6 +232,11 @@ section{padding:var(--pad-y) 0}
 
 .work-swirl{
   position:absolute;left:50%;top:0;width:100vw;height:100%;
+  /* the global img,svg{max-width:100%} caps this at the parent's width.
+     That was invisible while the SVG sat in the full-width scope, where
+     100% and 100vw are the same number; inside .work-list it clamped a
+     1470px viewport down to the list's 1326px and pulled the lobes in. */
+  max-width:none;
   transform:translateX(-50%);
   pointer-events:none;z-index:0;overflow:visible;
 }
