@@ -27,7 +27,7 @@
 <!-- self-hosted type: no third-party font request -->
 <link rel="preload" href="../assets/fonts/switzer-800.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="../assets/fonts/switzer-500.woff2" as="font" type="font/woff2" crossorigin/>
-<link rel="stylesheet" href="../styles/type.css?v=53"/>
+<link rel="stylesheet" href="../styles/type.css?v=54"/>
 <style>
 /* project-overview: base design system.
    Token values below are overridden by ../styles/casestudy-bone.css.
@@ -793,7 +793,7 @@ body.fmodal-open{overflow:hidden}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:28px}.hero-art{margin:4px auto 0}.hero .lead{max-width:none}}
 
 </style>
-<link rel="stylesheet" href="../styles/casestudy-bone.css?v=53"/>
+<link rel="stylesheet" href="../styles/casestudy-bone.css?v=54"/>
 </head>
 <body data-auto-reveal>
 <style>
@@ -897,19 +897,9 @@ body.fmodal-open{overflow:hidden}
         <li><strong>Inconsistent surfaces:</strong> forms, lists, and detail screens didn't feel like one product.</li>
         <li><strong>Live across 30–50 partner organizations</strong>, so any change had to be an enhancement, not a rebuild.</li>
       </ul>
-      <div class="ba-grid" style="align-items:start">
+      <div class="ba-grid" style="align-items:start;grid-template-columns:1fr;max-width:720px">
         <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> Before · existing portal</div>
-          <div class="ba-frame" data-shot="assets/before/legacy-add-biller.png">
-            <img src="assets/before/legacy-add-biller.png" alt="Existing Bill-Pay SSO add-biller screen (drop the legacy screenshot here)"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-            <div class="ph" style="display:flex;">Drop the existing add-biller screenshot at<br><code>assets/before/legacy-add-biller.png</code></div>
-            <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
-          </div>
-          <p class="ba-cap">The legacy add-biller experience (drop the current screenshot here to anchor the before/after).</p>
-        </div>
-        <div class="ba-col">
-          <div class="ba-label"><span class="bdot"></span> After · enhanced</div>
+          <div class="ba-label"><span class="bdot"></span> The enhanced picker</div>
           <div class="ba-frame" data-shot="assets/add-biller/select-biller.png">
             <img src="assets/add-biller/select-biller.png" alt="Enhanced Select Electricity Biller · search, recents, category illustrations"
                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
@@ -966,7 +956,7 @@ body.fmodal-open{overflow:hidden}
         <div class="frame" data-shot="assets/add-biller/select-biller.png">
           <img src="assets/add-biller/select-biller.png" alt="Select Electricity Biller modal · search, biller list, category illustrations behind"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-          <div class="placeholder" style="display:none;">Drop the select-biller screen at<code>assets/add-biller/select-biller.png</code></div>
+          <div class="placeholder" style="display:none;">assets/add-biller/select-biller.png</div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
         <figcaption>The biller picker pairs search with a short biller list, while the category illustrations give the screen context and warmth.</figcaption>
@@ -987,7 +977,7 @@ body.fmodal-open{overflow:hidden}
         <div class="frame" data-shot="assets/add-biller/biller-details.png">
           <img src="assets/add-biller/biller-details.png" alt="Biller details · form, sample bill with the consumer number highlighted, inline help"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-          <div class="placeholder" style="display:none;">Drop the biller-details screen at<code>assets/add-biller/biller-details.png</code></div>
+          <div class="placeholder" style="display:none;">assets/add-biller/biller-details.png</div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
         <figcaption>Form plus a sample bill that points to the exact field, pre-empting the most common reason an add fails.</figcaption>
@@ -1022,7 +1012,7 @@ body.fmodal-open{overflow:hidden}
         <div class="frame" data-shot="assets/recharges/recharge-plans.png">
           <img src="assets/recharges/recharge-plans.png" alt="Recharge plan picker · Airtel, plans grouped by type, pay action, offer banner"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-          <div class="placeholder" style="display:none;">Drop the recharge-plans screen at<code>assets/recharges/recharge-plans.png</code></div>
+          <div class="placeholder" style="display:none;">assets/recharges/recharge-plans.png</div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
         <figcaption>A plan list built for comparison (price, validity, and benefits in line), with the pay amount always visible.</figcaption>
@@ -1129,7 +1119,7 @@ body.fmodal-open{overflow:hidden}
         <div class="frame" data-shot="assets/illustrations/micro-illustrations.png">
           <img src="assets/illustrations/micro-illustrations.png" alt="Grid of ~40 biller-category micro-illustrations in one line style"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-          <div class="placeholder" style="display:none;">Drop the illustration sheet at<code>assets/illustrations/micro-illustrations.png</code></div>
+          <div class="placeholder" style="display:none;">assets/illustrations/micro-illustrations.png</div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
         <figcaption>The contributed set: ~40 biller-category marks on a shared grid, one consistent line style across the family.</figcaption>
@@ -1150,7 +1140,7 @@ body.fmodal-open{overflow:hidden}
         <div class="frame" data-shot="assets/illustrations/new-set-states.png">
           <img src="assets/illustrations/new-set-states.png" alt="Micro-illustrations in active (dark + orange) and inactive (grey) states"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-          <div class="placeholder" style="display:none;">Drop the states sheet at<code>assets/illustrations/new-set-states.png</code></div>
+          <div class="placeholder" style="display:none;">assets/illustrations/new-set-states.png</div>
           <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
         </div>
         <figcaption>Active (dark with an orange accent) vs inactive (grey): the state pair that lets one mark do two jobs in the list.</figcaption>
@@ -1300,6 +1290,6 @@ document.addEventListener('keydown', function(e){
 
 <script>document.querySelectorAll('.cs-yr').forEach(function(e){e.textContent=new Date().getFullYear()});</script>
 
-<script src="../scripts/reveal.js?v=53" defer onerror="document.documentElement.classList.remove('js')"></script>
+<script src="../scripts/reveal.js?v=54" defer onerror="document.documentElement.classList.remove('js')"></script>
 </body>
 </html>
