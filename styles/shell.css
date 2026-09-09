@@ -336,59 +336,89 @@ section{padding:var(--pad-y) 0}
    fail, so it would sit there as an empty frame. */
 .work-cover > .ph:only-child{display:flex}
 
-/* ---- device frames on the timeline ----------------------------
-   Opt-in, per card, because the right frame is a fact about the
-   screenshot rather than something to infer: business-dashboard and the
-   DLS board are both portrait but neither is a phone screen.
+/* ---- device mockups on the timeline ---------------------------
+   Modelled on azizkhaldi.com/project/superhost: the screenshot is not
+   shown flat, it is a screen inside a device standing on a soft stage,
+   turned slightly off-axis. Theirs are baked 3D renders; this builds
+   the same read in CSS so it works with the screenshots we already
+   have and re-skins with the tokens.
 
-   A framed shot turns OFF the darken blend above. That blend exists to
-   dissolve a screenshot's white chrome into the page; once the shot
-   sits inside a window there is a frame doing that job, and leaving the
-   blend on would drop the page's ground through the glass. */
+   Three parts: the stage (light ground + padding), the device (dark
+   bezel, radius, contact shadow) and the tilt.
+
+   A framed shot turns OFF the darken blend above. That blend dissolves
+   a screenshot's white chrome into the page; inside a bezel there is a
+   device doing that job, and the blend would drop the stage through
+   the glass. It also means a shot that already contains browser chrome
+   is fine here — chrome inside a monitor is just a monitor. */
 .work-cover[data-frame]{
-  aspect-ratio:auto;background:transparent;overflow:visible;isolation:auto;
+  aspect-ratio:16/11;
+  overflow:hidden;isolation:auto;
+  border-radius:12px;
+  /* literal values, not tokens: the stage stays light when the work
+     section flips dark, the same reason .work-cover keeps a light plate
+     for the darken blend. A dark device on a dark ground has no edge. */
+  background:linear-gradient(157deg,#F7F8F4 0%,#ECEDE7 58%,#E2E3DC 100%);
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(16px,3%,38px);
+  perspective:1400px;
 }
-.work-cover[data-frame] img{mix-blend-mode:normal;height:auto;object-fit:cover}
+/* .is-dark .work-cover sets a flat #EAEBE5 plate and lives further down
+   the file, so it wins on source order at equal specificity. One more
+   class here settles it in both themes. */
+.is-dark .work-cover[data-frame]{
+  background:linear-gradient(157deg,#F7F8F4 0%,#ECEDE7 58%,#E2E3DC 100%);
+}
 
-/* desktop: a browser window */
-.work-cover[data-frame="browser"]{
-  border-radius:10px;overflow:hidden;
-  border:1px solid var(--border);
-  background:var(--paper);
-  box-shadow:0 18px 44px rgba(0,0,0,.16);
-  padding-top:30px;
+.work-cover[data-frame] img{
+  --tilt:rotateY(-9deg) rotateX(2.5deg) rotate(-1deg);
+  mix-blend-mode:normal;
+  width:auto;height:auto;max-width:100%;max-height:100%;
+  object-fit:cover;object-position:top center;
+  transform:var(--tilt) scale(.93);
+  transform-origin:50% 55%;
+  transition:transform .7s var(--ease);
 }
-.work-cover[data-frame="browser"]::before{
-  content:"";position:absolute;top:0;left:0;right:0;height:30px;
-  background:var(--bone-2);
-  border-bottom:1px solid var(--border);
-  background-image:
-    radial-gradient(circle 4px at 16px 15px, var(--ink-4) 98%, transparent 100%),
-    radial-gradient(circle 4px at 32px 15px, var(--ink-4) 98%, transparent 100%),
-    radial-gradient(circle 4px at 48px 15px, var(--ink-4) 98%, transparent 100%);
-  background-repeat:no-repeat;
-  z-index:2;
-}
-.work-cover[data-frame="browser"] img{aspect-ratio:16/10;object-position:top center}
-.work-cover[data-frame="browser"]:has(> .ph){aspect-ratio:16/10}
+/* the generic hover rule is scale-only, which would drop the tilt —
+   these carry both, and out-specify it */
+.work-card:hover .work-cover[data-frame] img,
+.work-item.is-active .work-cover[data-frame] img{transform:var(--tilt) scale(.965)}
 
-/* mobile: a phone body, narrower than the column so it reads as a device */
-.work-cover[data-frame="phone"]{
-  border-radius:26px;overflow:hidden;
-  border:6px solid var(--ink-2);
-  background:var(--paper);
-  box-shadow:0 18px 44px rgba(0,0,0,.22);
-  width:min(62%,260px);margin-inline:auto;
-  /* on the frame itself, not the img: a card whose shot has not landed
-     yet holds a placeholder div, and the frame would otherwise collapse
-     to its border */
-  aspect-ratio:9/17;
+/* desktop: a monitor */
+.work-cover[data-frame="desktop"] img{
+  aspect-ratio:16/10;width:100%;
+  border:9px solid #15171b;border-radius:12px;
+  box-shadow:0 34px 60px -24px rgba(0,0,0,.55),0 4px 10px rgba(0,0,0,.18);
 }
-.work-items .work-item:nth-child(odd) .work-cover[data-frame="phone"]{margin-right:0}
-.work-cover[data-frame="phone"] img{width:100%;height:100%;object-position:top center}
-.work-cover[data-frame="phone"] .ph{position:absolute;inset:0}
+/* the shot already contains its own device shell, so the stage supplies
+   only the ground, the tilt and the contact shadow */
+.work-cover[data-frame="stage"] img{
+  height:100%;width:auto;
+  filter:drop-shadow(0 30px 46px rgba(0,0,0,.45));
+}
 
-.is-dark .work-cover[data-frame]{background:var(--paper)}
+/* mobile: a phone, narrower than the stage so it reads as a device */
+.work-cover[data-frame="phone"] img,
+.work-cover[data-frame="phone"] > .ph{
+  aspect-ratio:9/17;height:100%;width:auto;
+  border:7px solid #15171b;border-radius:26px;
+  box-shadow:0 34px 60px -24px rgba(0,0,0,.55),0 4px 10px rgba(0,0,0,.18);
+}
+.work-cover[data-frame="phone"] > .ph{position:static;transform:var(--tilt,none)}
+
+/* .ph is normally revealed by an image's onerror. A card whose shot has
+   not been exported yet carries the plate alone, with no img to fail. */
+.work-cover > .ph:only-child{display:flex}
+
+@media(max-width:767px){
+  .work-cover[data-frame] img{--tilt:rotateY(-5deg) rotate(-.5deg)}
+  .work-cover[data-frame="desktop"] img{border-width:6px;border-radius:9px}
+  .work-cover[data-frame="phone"] img,
+  .work-cover[data-frame="phone"] > .ph{border-width:5px;border-radius:20px}
+}
+@media(prefers-reduced-motion:reduce){
+  .work-cover[data-frame] img{--tilt:none}
+}
 
 .work-body{position:relative;z-index:2;padding:clamp(22px,2.2vw,32px) 0 0}
 /* title sits grey until its item reveals, then resolves to ink —
