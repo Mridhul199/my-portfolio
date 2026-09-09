@@ -191,6 +191,10 @@ code{color:var(--text-2);background:var(--surface-2);border-color:var(--border)}
 .pf-bridge.is-scrolled{background:rgba(234,235,229,.92);border-bottom-color:var(--border)}
 .pf-bridge .pf-bridge-inner{height:72px;gap:20px}
 .pf-bridge-link{font-weight:800;font-size:16px;letter-spacing:-.02em;color:var(--text-1)}
+/* the mark from the home nav, sized for the bridge. currentColor picks
+   up the link's ink; the red path falls back through --orange here,
+   since the case studies do not define --accent. */
+.pf-bridge-link .brand-mark{height:21px;width:auto;flex:none;color:var(--text-1)}
 .pf-bridge-link svg{stroke:var(--orange)}
 .pf-bridge-link:hover{color:var(--text-1)}
 .pf-bridge-ctx{color:var(--text-3)}
