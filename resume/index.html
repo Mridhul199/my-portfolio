@@ -16,15 +16,16 @@
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"/>
 <link rel="icon" href="../assets/favicon-32.png" sizes="32x32"/>
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="../assets/fonts/switzer-800.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="../assets/fonts/switzer-500.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="stylesheet" href="../styles/type.css"/>
 <style>
 :root{
-  --bg:#0B0B0C; --surface:#161619; --text-1:#EDEDEC; --text-2:#A6A6AD; --text-3:#74747B;
-  --border:rgba(255,255,255,.10); --border-2:rgba(255,255,255,.16); --accent:#F26522;
-  --f:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; --display:'Manrope',var(--f);
-  --mono:'JetBrains Mono',ui-monospace,monospace; --maxw:760px;
+  --bg:#EAEBE5; --surface:#FFFFFF; --text-1:#000000; --text-2:#5A5C55; --text-3:#8A8C83;
+  --border:rgba(0,0,0,.13); --border-2:rgba(0,0,0,.26); --accent:#E72604;
+  --f:'Switzer',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+  --display:var(--f);
+  --mono:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace; --maxw:760px;
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -35,7 +36,7 @@ a:hover{text-decoration:underline}
 .shell{max-width:var(--maxw);margin:0 auto;padding:0 28px}
 
 /* bridge */
-.bridge{position:sticky;top:0;z-index:50;background:rgba(11,11,12,.72);
+.bridge{position:sticky;top:0;z-index:50;background:rgba(234,235,229,.82);
   -webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);
   border-bottom:1px solid var(--border)}
 .bridge-in{display:flex;align-items:center;justify-content:space-between;height:52px}
@@ -128,7 +129,7 @@ ul.bul li a:hover{text-decoration-style:solid}
 
   <header class="r-head">
     <h1>Mridhul Aswin</h1>
-    <div class="role">Product Designer</div>
+    <div class="role">UX Designer</div>
     <div class="contacts">
       <a href="tel:+919167575167" style="white-space:nowrap">+91 91675 75167</a><span class="sep">·</span><a href="mailto:mridhulaswin92@gmail.com">mridhulaswin92@gmail.com</a><span class="sep">·</span><a href="https://www.linkedin.com/in/mridhul-aswin-6637202bb/?skipRedirect=true" target="_blank" rel="noopener">linkedin.com/in/mridhul-aswin-6637202bb</a><span class="sep">·</span><a href="https://mridhul199.github.io/my-portfolio/">mridhul199.github.io/my-portfolio</a>
     </div>
@@ -136,14 +137,14 @@ ul.bul li a:hover{text-decoration-style:solid}
 
   <section class="r">
     <p class="r-label">Summary</p>
-    <p class="lead">UX / product designer in fintech: admin and dashboard systems, wallets, bill-pay, open commerce, and recurring mandates, taken from concept to production and whitelabelled across partner organizations.</p>
+    <p class="lead">UX designer on netbanking and payments: settlement and reconciliation, the redirection flows customers pay through, recurring mandates, wallets, and the design system behind them. Redesign work across those payment journeys took completion from about 68% to 79%. Close to three years, seven platform initiatives, 50+ partner organizations.</p>
   </section>
 
   <section class="r">
     <p class="r-label">Work Experience</p>
     <div class="job-co-line">
       <span class="job-co-name">Hatio Innovations Pvt Ltd, Ernakulam, Kerala, India</span>
-      <span class="when">2024 – Present</span>
+      <span class="when">Dec 2023 – Present</span>
     </div>
     <div class="job-title">Product Designer (UX / UI)</div>
     <ul class="bul">
@@ -153,8 +154,9 @@ ul.bul li a:hover{text-decoration-style:solid}
       <li><b><a href="../in-app-travel-booking/">In-App Travel Booking.</a></b> Designed an in-app flight-booking buyer flow for partner organizations joining an open commerce network as buyer apps.</li>
       <li><b><a href="../recurring-payments-hub/">Recurring Payments Hub.</a></b> Redesigned recurring-mandate management into one dashboard, live across 50+ partner organizations.</li>
       <li><b><a href="../whitelabel-theme-automation/">Whitelabel Theming, Automated.</a></b> Built a Claude Code + Python pipeline turning one brand HEX into a fully themed partner; 29 partners themed so far.</li>
-      <li><b><a href="../kyc-tokenization/">KYC Tokenization.</a></b> Concept design for a reusable, consent-gated identity token (TrustKYC).</li>
+      <li><b><a href="../kyc-tokenization/">KYC Tokenization.</a></b> Internal hackathon project: a reusable, consent-gated identity token (TrustKYC).</li>
       <li><b><a href="../dls-overview/">DLS Component Catalog.</a></b> Ongoing component-by-component design system audit, pulled from Figma into a reference catalog.</li>
+      <li><b><a href="../wealth/">Wealth.</a></b> A bonds investing app for a new product line the company is taking to pitch: onboarding, discovery, order flow, portfolio and SIPs, prototyped end to end across 20+ screens.</li>
     </ul>
   </section>
 

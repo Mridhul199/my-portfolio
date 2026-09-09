@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wealth · Verify</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../bonds-shared/motion.css">
+<style>
+  :root{
+    --grad-1:#7C3AED; --grad-2:#6D5CF6; --grad-3:#4F7DF3;
+    --ink:#F4F1FA; --ink-2:#B8B3CC; --ink-3:#7A7593;
+    --canvas:#0A0714; --surface:#160F24;
+    --border:#2A2138;
+    --f:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{background:#DCDAE8}
+  body{font-family:var(--f);color:var(--ink);display:flex;justify-content:center;padding:28px 12px;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  button{font-family:var(--f);cursor:pointer;border:none;background:none}
+
+  .device{width:402px;max-width:100%;height:874px;background:var(--surface);border-radius:40px;overflow:hidden;box-shadow:0 30px 70px rgba(30,15,80,.28),0 0 0 10px #0E0B1E;position:relative;display:flex;flex-direction:column}
+
+  .content{flex:1;padding:40px 24px 20px;overflow-y:auto}
+  .back-btn{width:36px;height:36px;border-radius:50%;background:var(--canvas);display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+  .back-btn svg{width:15px;height:15px;stroke:var(--ink-2)}
+
+  h1{font-size:22px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px}
+  .sub{font-size:13px;color:var(--ink-2);font-weight:500;line-height:1.5;margin-bottom:28px}
+  .sub b{color:var(--ink)}
+  .sub .chg{color:var(--grad-2);font-weight:700}
+
+  .otp-row{display:flex;gap:9px;margin-bottom:18px}
+  .otp-box{width:44px;height:52px;border-radius:12px;background:var(--canvas);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;color:var(--ink)}
+  .otp-box.on{border-color:var(--grad-2);background:var(--surface)}
+  .otp-box.empty{color:var(--ink-3)}
+
+  .resend{font-size:12.5px;color:var(--ink-3);font-weight:600}
+  .resend b{color:var(--ink)}
+
+  .actions{padding:14px 24px 24px}
+  .cta{display:block;background:var(--grad-2);color:#fff;border-radius:13px;padding:15px;font-size:14.5px;font-weight:700;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="device">
+  <div class="content">
+    <a class="back-btn" href="../bonds-signup/index.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></a>
+
+    <h1>Verify your number</h1>
+    <div class="sub">Enter the 6-digit code sent to <b>+91 98765 43210</b> · <a class="chg" href="../bonds-signup/index.html">Change</a></div>
+
+    <div class="otp-row">
+      <div class="otp-box on">4</div>
+      <div class="otp-box on">8</div>
+      <div class="otp-box on">2</div>
+      <div class="otp-box on">1</div>
+      <div class="otp-box on">9</div>
+      <div class="otp-box empty">•</div>
+    </div>
+
+    <div class="resend">Resend OTP in <b>00:28</b></div>
+  </div>
+
+  <div class="actions">
+    <a class="cta" href="../bonds-kyc-pan/index.html">Verify &amp; continue</a>
+  </div>
+</div>
+
+<script src="../bonds-shared/ui.js"></script>
+</body>
+</html>

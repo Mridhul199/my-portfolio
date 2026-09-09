@@ -4,25 +4,25 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <script>document.documentElement.classList.add('js')</script>
-<title>KYC Tokenization · Reusable identity token concept · Case Study</title>
-<meta name="description" content="TrustKYC: a concept for turning a one-time KYC verification into a reusable, consent-gated identity token, so merchants request access to a document template instead of collecting it again. Case study by Mridhul Aswin."/>
+<title>Wealth · Fixed-income investing app · Case Study</title>
+<meta name="description" content="Wealth: a bonds investing app that makes fixed income legible to first-time buyers, from Aadhaar and PAN onboarding through discovery, order and portfolio. Case study by Mridhul Aswin."/>
 <meta name="author" content="Mridhul Aswin"/>
-<link rel="canonical" href="https://mridhul199.github.io/my-portfolio/kyc-tokenization/"/>
+<link rel="canonical" href="https://mridhul199.github.io/my-portfolio/wealth/"/>
 <meta property="og:type" content="article"/>
-<meta property="og:url" content="https://mridhul199.github.io/my-portfolio/kyc-tokenization/"/>
-<meta property="og:title" content="KYC Tokenization · Mridhul Aswin"/>
-<meta property="og:description" content="TrustKYC: a concept for turning a one-time KYC verification into a reusable, consent-gated identity token, so merchants request access to a document template instead of collecting it again. Case study by Mridhul Aswin."/>
-<meta property="og:image" content="https://mridhul199.github.io/my-portfolio/assets/og/kyc-tokenization.png"/>
+<meta property="og:url" content="https://mridhul199.github.io/my-portfolio/wealth/"/>
+<meta property="og:title" content="Wealth · Mridhul Aswin"/>
+<meta property="og:description" content="Wealth: a bonds investing app that makes fixed income legible to first-time buyers, from Aadhaar and PAN onboarding through discovery, order and portfolio. Case study by Mridhul Aswin."/>
+<meta property="og:image" content="https://mridhul199.github.io/my-portfolio/assets/og/wealth.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="KYC Tokenization · Mridhul Aswin"/>
-<meta name="twitter:description" content="TrustKYC: a concept for turning a one-time KYC verification into a reusable, consent-gated identity token, so merchants request access to a document template instead of collecting it again. Case study by Mridhul Aswin."/>
-<meta name="twitter:image" content="https://mridhul199.github.io/my-portfolio/assets/og/kyc-tokenization.png"/>
+<meta name="twitter:title" content="Wealth · Mridhul Aswin"/>
+<meta name="twitter:description" content="Wealth: a bonds investing app that makes fixed income legible to first-time buyers, from Aadhaar and PAN onboarding through discovery, order and portfolio. Case study by Mridhul Aswin."/>
+<meta name="twitter:image" content="https://mridhul199.github.io/my-portfolio/assets/og/wealth.png"/>
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"/>
 <link rel="icon" href="../assets/favicon-32.png" sizes="32x32"/>
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png"/>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"KYC Tokenization · Mridhul Aswin","description":"TrustKYC: a concept for turning a one-time KYC verification into a reusable, consent-gated identity token, so merchants request access to a document template instead of collecting it again. Case study by Mridhul Aswin.","author":{"@type":"Person","name":"Mridhul Aswin"},"url":"https://mridhul199.github.io/my-portfolio/kyc-tokenization/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Wealth · Mridhul Aswin","description":"Wealth: a bonds investing app that makes fixed income legible to first-time buyers, from Aadhaar and PAN onboarding through discovery, order and portfolio. Case study by Mridhul Aswin.","author":{"@type":"Person","name":"Mridhul Aswin"},"url":"https://mridhul199.github.io/my-portfolio/wealth/"}</script>
 <link rel="preload" href="../assets/fonts/switzer-800.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href="../assets/fonts/switzer-500.woff2" as="font" type="font/woff2" crossorigin/>
 <link rel="stylesheet" href="../styles/type.css"/>
@@ -178,6 +178,20 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
 .zoom-hint{position:absolute;top:10px;right:10px;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#fff;background:rgba(13,21,38,.62);backdrop-filter:blur(4px);padding:5px 10px;border-radius:999px;pointer-events:none;opacity:0;transform:translateY(-2px);transition:opacity 160ms,transform 160ms;z-index:3}
 [data-shot]:hover .zoom-hint{opacity:1;transform:none}
 .zoom-hint svg{width:12px;height:12px}
+
+/* ---- page-local: export placeholders + inline CTA ------------------
+   The exports are not dropped in yet, so every image slot renders a
+   labelled plate naming the file it wants. Same idea as the shell's
+   .work-cover .ph, scoped here so it cannot leak into other pages. */
+.ph{display:flex;align-items:center;justify-content:center;min-height:220px;padding:24px;
+  text-align:center;font-family:var(--mono);font-size:12px;line-height:1.5;color:var(--text-3);
+  background:repeating-linear-gradient(45deg,var(--surface) 0 12px,var(--surface-2) 12px 24px);
+  border:1px dashed var(--border-strong);border-radius:var(--r-xl)}
+.hero-visual .ph{min-height:340px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:#fff;
+  background:var(--orange);padding:13px 22px;border-radius:var(--r-pill);
+  transition:background 160ms ease,transform 160ms ease}
+.btn:hover{background:var(--orange-hover);transform:translateY(-1px)}
 </style>
 <link rel="stylesheet" href="../styles/casestudy-bone.css"/>
 </head>
@@ -188,16 +202,16 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Mridhul Aswin
     </a>
-    <span class="pf-bridge-ctx">Selected work · KYC Tokenization</span>
+    <span class="pf-bridge-ctx">Selected work · Wealth</span>
   </div>
 </nav>
 <div class="bg-deco"></div>
 
 <div class="chrome">
   <div class="shell chrome-inner">
-    <div class="brand"><span class="brand-logo">KT</span> KYC Tokenization <span class="brand-sub">Case Study</span></div>
+    <div class="brand"><span class="brand-logo">W</span> Wealth <span class="brand-sub">Case Study</span></div>
     <nav class="chrome-nav">
-      <a href="#problem">Problem</a><a href="#process">Process</a><a href="#solution">Solution</a><a href="#impact">Impact</a>
+      <a href="#problem">Problem</a><a href="#process">Process</a><a href="#solution">Solution</a><a href="#stage">Stage</a>
     </nav>
   </div>
 </div>
@@ -207,18 +221,20 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
     <div class="shell">
       <div class="hero-grid">
         <div>
-          <span class="eyebrow"><span class="dot"></span> Concept · Digital identity</span>
-          <h1 data-split-words>Verify once. Reuse the token everywhere.</h1>
-          <p class="lead">TrustKYC turns a one-time KYC verification into a reusable, consent-gated identity token. Merchants request access to a "template" of documents instead of collecting them again.</p>
+          <span class="eyebrow"><span class="dot"></span> New product · Fixed income</span>
+          <h1 data-split-words>Bonds, made legible enough to actually buy.</h1>
+          <p class="lead">Wealth is a fixed-income investing app: browse bonds, place an order, hold a portfolio. The design problem was not the transaction. It was that a bond hides behind yield to maturity, credit ratings and security cover, and a first-time buyer cannot see what they are actually being promised.</p>
           <div class="meta-bar">
-            <div class="meta-cell"><div class="mk">My role</div><div class="mv">Sole designer · internal hackathon</div></div>
-            <div class="meta-cell"><div class="mk">Timeline</div><div class="mv">Two weeks</div></div>
-            <div class="meta-cell"><div class="mk">Platform</div><div class="mv">Mobile · iOS &amp; Android</div></div>
+            <div class="meta-cell"><div class="mk">My role</div><div class="mv">Product design, end to end</div></div>
+            <div class="meta-cell"><div class="mk">Scope</div><div class="mv">20+ screens · click-through prototype</div></div>
+            <div class="meta-cell"><div class="mk">Stage</div><div class="mv">New product line · pitch ongoing</div></div>
           </div>
+          <p style="margin-top:26px">
+            <a class="btn" href="prototype/" target="_blank" rel="noopener">Open the click-through prototype &rarr;</a>
+          </p>
         </div>
         <div class="hero-visual">
-          <img src="assets/hero/hero-device-binding.png" alt="TrustKYC app open on a phone in hand, showing the device-binding security step"
-               onerror="this.style.display='none';" />
+          <div class="ph">Hero export &rarr; assets/hero/wealth-detail.png</div>
         </div>
       </div>
     </div>
@@ -228,8 +244,8 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
     <div class="shell narrow">
       <div class="section-head">
         <span class="sec-num">01 · Overview</span>
-        <h2>One verification, a reusable token.</h2>
-        <p class="lead"><strong style="color:var(--text-1)">TrustKYC</strong> is a digital document vault: it verifies a user once and issues a reusable, consent-gated identity token. I designed it end to end: onboarding, verification, and the merchant consent flow that lets other services request access to that token instead of collecting documents themselves.</p>
+        <h2>A fixed-income product for people who have only ever held equity.</h2>
+        <p class="lead"><strong style="color:var(--text-1)">Wealth</strong> is a new product line the company is taking to pitch. I designed it end to end: Aadhaar and PAN onboarding, bond discovery and filtering, the order and OTP flow, a portfolio with holdings and tax certificates, recurring SIPs, referrals, and a Learn section. The whole thing exists as a working click-through prototype rather than a slide deck, because the argument for it is easier to feel than to describe.</p>
       </div>
     </div>
   </section>
@@ -238,12 +254,12 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
     <div class="shell narrow">
       <div class="section-head">
         <span class="sec-num">02 · The Problem</span>
-        <h2>Every new service means redoing KYC from scratch.</h2>
-        <p class="lead">A user who's already KYC-verified with one financial institution still has to re-upload the same Aadhaar, PAN, and address proof for the next insurer, lender, or wallet. Each service re-collects and re-stores the same sensitive documents, with no way for the user to control what's shared or with whom.</p>
+        <h2>A bond is a promise you cannot see.</h2>
+        <p class="lead">Indian retail investors are moving into fixed income, but the instrument is opaque in a way equity is not. A stock has a price. A bond has yield to maturity, coupon frequency, credit rating, security cover, and a maturity date, and none of those answer the only question a first-time buyer actually has: what do I get, and when?</p>
       </div>
       <div class="cards-grid">
-        <div class="pcard"><span class="tag">Friction</span><h4>Repeated verification</h4><p>Document upload, OTP, and manual review happen again for every new merchant relationship, even when the user was verified days earlier elsewhere.</p></div>
-        <div class="pcard"><span class="tag">Exposure</span><h4>No consent boundary</h4><p>Once documents are shared, the user has no visibility into what a merchant holds or for how long. Sharing is all-or-nothing, not scoped.</p></div>
+        <div class="pcard"><span class="tag">Comprehension</span><h4>The vocabulary is the barrier</h4><p>YTM, coupon, security cover and AAA-to-D ratings all have to be understood before the first purchase makes sense. Most apps show the numbers and assume the rest.</p></div>
+        <div class="pcard"><span class="tag">Trust</span><h4>Risk is stated, not shown</h4><p>A rating letter is not a feeling. Nothing tells a buyer what happens if the issuer misses a payment, or what the security cover would actually cover.</p></div>
       </div>
     </div>
   </section>
@@ -252,12 +268,12 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
     <div class="shell narrow">
       <div class="section-head">
         <span class="sec-num">03 · Goals</span>
-        <h2>What the token needed to do.</h2>
+        <h2>What the product had to do.</h2>
       </div>
       <div class="cards-grid three">
-        <div class="pcard ok"><span class="tag">Goal</span><h4>Verify once</h4><p>Onboarding should feel like a one-time setup cost, not a recurring tax on every new service.</p></div>
-        <div class="pcard ok"><span class="tag">Goal</span><h4>Consent, not documents</h4><p>Merchants request access to a named bundle of data. The user sees and approves exactly what's shared, every time.</p></div>
-        <div class="pcard ok"><span class="tag">Goal</span><h4>Reusable beyond KYC</h4><p>The same verified identity should carry into other use cases, not stay siloed to one app or integration.</p></div>
+        <div class="pcard ok"><span class="tag">Goal</span><h4>Show the payout, not the jargon</h4><p>Lead with money and dates. The technical terms stay available, but they are not the thing a buyer has to decode first.</p></div>
+        <div class="pcard ok"><span class="tag">Goal</span><h4>Put risk beside comfort</h4><p>Rating and security cover belong on the same screen as the return, so the trade-off is read in one glance instead of two.</p></div>
+        <div class="pcard ok"><span class="tag">Goal</span><h4>Teach inside the flow</h4><p>Education sits in the product rather than in a help centre, reachable at the moment the question comes up.</p></div>
       </div>
     </div>
   </section>
@@ -266,13 +282,13 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
     <div class="shell narrow">
       <div class="section-head">
         <span class="sec-num">04 · Process</span>
-        <h2>From friction map to a testable model.</h2>
-        <p class="lead">A short, focused sprint: map where re-KYC friction actually bites, design the token/consent model, then prototype the onboarding and merchant flows against it.</p>
+        <h2>Prototype first, argue later.</h2>
+        <p class="lead">This is a pitch for a product that does not exist yet, so the fastest way to test the idea was to build something people could hold. I designed the flows, then built them as a working click-through so the pitch could be walked rather than narrated.</p>
       </div>
-      <div class="timeline" style="grid-template-columns:repeat(3,1fr)">
-        <div class="tl-step"><div class="tl-dot"></div><div class="tl-line"></div><div class="tl-num">01</div><h4>Map the friction</h4><p>Where re-verification actually happens, and what it costs the user.</p></div>
-        <div class="tl-step"><div class="tl-dot"></div><div class="tl-line"></div><div class="tl-num">02</div><h4>Design the token model</h4><p>What a "template" is, who can request it, and what consent looks like.</p></div>
-        <div class="tl-step"><div class="tl-dot"></div><div class="tl-num">03</div><h4>Prototype onboarding + consent</h4><p>TrustKYC verification flow and the merchant request/approve screens.</p></div>
+      <div class="cards-grid three">
+        <div class="pcard"><span class="tag">01</span><h4>Map the instrument</h4><p>What a bond actually promises, and which of those facts a buyer needs before committing money.</p></div>
+        <div class="pcard"><span class="tag">02</span><h4>Design the detail screen first</h4><p>The hardest screen sets the vocabulary for the rest. Everything else was designed outward from it.</p></div>
+        <div class="pcard"><span class="tag">03</span><h4>Build it click-through</h4><p>20+ linked screens covering the full path, so the pitch is a demo instead of a description.</p></div>
       </div>
     </div>
   </section>
@@ -281,17 +297,12 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
     <div class="shell narrow">
       <div class="section-head">
         <span class="sec-num">05 · The Solution</span>
-        <h2>Verify once, in TrustKYC.</h2>
-        <p class="lead">Mobile OTP, Aadhaar verification, and a progress state that's honest about the wait. Then a quick-login and device-binding step, so the token, once issued, doesn't need re-verifying on every open.</p>
+        <h2>The repayment schedule, laid out payout by payout.</h2>
+        <p class="lead">The bond detail screen answers "what do I get, and when" before it says anything technical. Each scheduled payout is listed with its date and amount, so a buyer reads a series of dated payments rather than a percentage they have to model in their head. Rating and security cover sit on the same screen, directly against the return, so the comfort and the risk are weighed together.</p>
       </div>
-      <figure>
-        <div class="frame filmstrip" data-shot="assets/kyc-onboarding/onboarding-flow.png">
-          <img src="assets/kyc-onboarding/onboarding-flow.png" alt="TrustKYC onboarding flow: get started, create account, verify mobile OTP, verify Aadhaar, verification progress, quick login, device binding, home"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-          <div class="placeholder" style="display:none;">TrustKYC onboarding flow<code>assets/kyc-onboarding/onboarding-flow.png</code></div>
-          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
-        </div>
-        <figcaption>Get started → mobile OTP → Aadhaar verification → progress → quick login → device binding. Verification happens once; everything after reuses the same session.</figcaption>
+      <figure class="shot" data-shot>
+        <div class="ph">Bond detail export &rarr; assets/detail/repayment-schedule.png</div>
+        <figcaption>The detail screen: payouts by date and amount, with rating and security cover set against them.</figcaption>
       </figure>
     </div>
   </section>
@@ -300,46 +311,28 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
     <div class="shell narrow">
       <div class="section-head">
         <span class="sec-num">06 · The Solution</span>
-        <h2>Consent, not documents.</h2>
-        <p class="lead">When a merchant (an insurer, in this case) needs KYC data, they don't get the user's documents. They request access to a named <strong style="color:var(--text-1)">template</strong>: a defined bundle of documents for a defined purpose. The user sees exactly what's being asked for and approves or declines it directly.</p>
+        <h2>Everything either side of the buy.</h2>
+        <p class="lead">Onboarding runs Aadhaar, PAN and a selfie check. Discovery filters by rating, yield and maturity. The order flow confirms with OTP. The portfolio carries holdings, maturity dates and tax certificates, and SIPs turn a one-off purchase into a recurring position. A Learn section explains ratings, security cover, taxation and laddering, written for someone buying their first bond rather than for someone who already knows.</p>
       </div>
-      <figure>
-        <div class="frame filmstrip" data-shot="assets/merchant-consent/consent-flow.png">
-          <img src="assets/merchant-consent/consent-flow.png" alt="Merchant consent flow: insurer app requests access to a KYC template, user reviews documents included, approves with PIN"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-          <div class="placeholder" style="display:none;">Merchant consent flow<code>assets/merchant-consent/consent-flow.png</code></div>
-          <span class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>Click to zoom</span>
-        </div>
-        <figcaption>LIC requests "Template 1." The user sees every document in it before approving with a PIN, and no raw documents change hands until then.</figcaption>
-      </figure>
-
-      <div class="decision">
-        <div class="d-num">01</div>
-        <div><h4>The template model over raw document sharing</h4><p class="d-rationale">Instead of merchants pulling a document list, they request a named, pre-defined bundle. <b>Why it matters:</b> the user reviews one clear request ("Template 1: 5 documents") instead of a permissions checklist. Honestly, that single consent screen took more iteration than the entire onboarding flow: naming and scoping the bundle so it reads as trustworthy in one glance turned out to be the hard part.</p></div>
+      <div class="cards-grid">
+        <div class="pcard"><span class="tag">Onboarding</span><h4>KYC without the dead ends</h4><p>Aadhaar, PAN and selfie verification, with the wait states written honestly rather than hidden behind a spinner.</p></div>
+        <div class="pcard"><span class="tag">Discovery</span><h4>Filters that match the question</h4><p>Rating, yield and maturity, because those are the three axes a buyer actually chooses along.</p></div>
+        <div class="pcard"><span class="tag">Portfolio</span><h4>Holdings and paperwork together</h4><p>Positions, maturity dates and tax certificates in one place, so the annual filing is not a separate hunt.</p></div>
+        <div class="pcard"><span class="tag">Learn</span><h4>Education in the product</h4><p>Ratings, security cover, taxation and laddering, explained where the question arises instead of in a help centre.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="impact">
+  <section id="stage">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">07 · Impact</span>
-        <h2>Presented as a direction, not a shipped product.</h2>
-        <p class="lead">This is concept-stage work, presented internally to stakeholders rather than built and released. Its value was in making the token/consent model concrete enough to react to.</p>
+        <span class="sec-num">07 · Stage</span>
+        <h2>An ongoing pitch, not a shipped product.</h2>
+        <p class="lead">Wealth is a new product line still being pitched. Nothing here has shipped, so there are no engagement or conversion numbers to report, and I would rather say that plainly than dress a prototype as a launch. What it has done is make the proposition concrete enough to argue about: the conversation moved from whether retail fixed income is worth building to which instruments to open with.</p>
       </div>
-      <ul class="clean">
-        <li><strong>Made the abstract concrete.</strong> "Reusable KYC" is easy to say and hard to picture. Walking stakeholders through an actual consent screen made the idea legible in a way a slide couldn't.</li>
-        <li><strong>Surfaced the real design problem early.</strong> The internal discussion converged quickly on consent and template scoping as the crux of the idea, not onboarding, which is what most KYC conversations default to.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="future">
-    <div class="shell narrow">
-      <div class="section-head">
-        <span class="sec-num">08 · Future Scope</span>
-        <h2>Open, for now.</h2>
-        <p class="lead">There's no defined next phase yet. This stays a concept until there's a specific integration to design for. The open question worth returning to: how the template model scales past a handful of merchants without turning into a permissions system nobody reads.</p>
+      <div class="cards-grid">
+        <div class="pcard ok"><span class="tag">Outcome</span><h4>The pitch is walkable</h4><p>A working click-through answers "what would it feel like" in the room, which a deck cannot.</p></div>
+        <div class="pcard ok"><span class="tag">Outcome</span><h4>The hard problem surfaced early</h4><p>Every review converged on legibility of the instrument rather than on the transaction flow, which is where the design effort then went.</p></div>
       </div>
     </div>
   </section>
@@ -347,42 +340,17 @@ footer .shell{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px
   <section id="reflection">
     <div class="shell narrow">
       <div class="section-head">
-        <span class="sec-num">09 · Reflection</span>
-        <h2>The hard part wasn't verification. It was consent.</h2>
+        <span class="sec-num">08 · Reflection</span>
+        <h2>What I would push on next.</h2>
+        <p class="lead">The detail screen works for a single bond, but not yet for comparison, and comparison is how people actually decide. A side-by-side that holds two repayment schedules against each other is the obvious next move. The Learn section also needs testing with real first-time buyers rather than with colleagues who already know what a coupon is, and that is the gap I would close before this went anywhere near a build.</p>
       </div>
-      <div class="reflect">
-        <p>Onboarding (OTP, Aadhaar, biometric setup) is a well-worn pattern. The genuinely hard design problem was the merchant consent screen: naming a bundle of documents so a user trusts it in one glance, without turning it into a checklist nobody reads. If I did this again, I'd start there, not with onboarding.</p>
-      </div>
+      <p class="lead" style="margin-top:8px">
+        <a class="btn" href="prototype/" target="_blank" rel="noopener">Walk the prototype yourself &rarr;</a>
+      </p>
     </div>
   </section>
 </main>
 
-<footer>
-  <div class="shell">
-    <span>KYC Tokenization · Concept case study</span>
-    <span class="muted">TrustKYC</span>
-  </div>
-</footer>
-
-<div class="lightbox" id="lightbox" role="dialog" aria-hidden="true"><img id="lightbox-img" alt=""></div>
-<script>
-document.addEventListener('click', e => {
-  const shot = e.target.closest('[data-shot]');
-  if (shot) {
-    const lb = document.getElementById('lightbox');
-    document.getElementById('lightbox-img').src = shot.dataset.shot;
-    lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false');
-  }
-  if (e.target.id === 'lightbox' || e.target.id === 'lightbox-img') {
-    const lb = document.getElementById('lightbox');
-    lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true');
-    document.getElementById('lightbox-img').src = '';
-  }
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    const lb = document.getElementById('lightbox');
-    if (lb.classList.contains('is-open')) {
       lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true');
       document.getElementById('lightbox-img').src = '';
     }

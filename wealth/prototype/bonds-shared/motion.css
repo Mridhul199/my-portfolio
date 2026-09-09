@@ -1,0 +1,59 @@
+/* Shared motion system for the Bondly prototype.
+   Fintech tone: crisp and responsive, not bouncy. ease-out for entrances/press,
+   ease-in-out for on-screen movement, never ease-in (feels sluggish). */
+
+:root{
+  --ease-out: cubic-bezier(0.23,1,0.32,1);
+  --ease-in-out: cubic-bezier(0.77,0,0.175,1);
+  --ease-drawer: cubic-bezier(0.32,0.72,0,1);
+}
+
+/* Cross-document view transitions — free page-to-page motion for this multi-page
+   prototype. Progressive enhancement: browsers without support just skip it. */
+@view-transition {
+  navigation: auto;
+}
+
+/* Press feedback on every tappable surface in the app. Keep the scale subtle —
+   this is a fintech app, not a game. */
+a, button,
+.chip, .cta, .cta-primary, .cta-secondary, .cta-banner,
+.fy-card, .cat-card, .bond, .qa, .nav-item, .icon-btn,
+.d-item, .pay-opt, .pill-btn, .sort-btn, .share-btn, .notify-btn,
+.back-btn, .close-btn, .why-btn, .acct, .avatar, .stepper button,
+.opt-row, .feat-card, .banner {
+  transition: transform 140ms var(--ease-out);
+}
+a:active, button:active,
+.chip:active, .cta:active, .cta-primary:active, .cta-secondary:active, .cta-banner:active,
+.fy-card:active, .cat-card:active, .bond:active, .qa:active, .nav-item:active, .icon-btn:active,
+.d-item:active, .pay-opt:active, .pill-btn:active, .sort-btn:active, .share-btn:active, .notify-btn:active,
+.back-btn:active, .close-btn:active, .why-btn:active, .acct:active, .avatar:active, .stepper button:active,
+.opt-row:active, .feat-card:active, .banner:active {
+  transform: scale(0.97);
+}
+
+/* Entrance animation for dynamically-rendered cards (bond lists, holdings, recos).
+   Applied via class + inline animation-delay per index for a short, tasteful stagger. */
+@keyframes motionCardIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.stagger-in {
+  animation: motionCardIn 320ms var(--ease-out) both;
+}
+
+/* Generic fade-scale entrance for one-off elements (logos, checkmarks, empty states). */
+@keyframes motionPopIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.motion-pop-in {
+  animation: motionPopIn 360ms var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-in, .motion-pop-in { animation: none; opacity: 1; transform: none; }
+  a, button, .chip, .cta, .cta-primary, .cta-secondary, .cta-banner,
+  .fy-card, .cat-card, .bond, .qa, .nav-item, .icon-btn { transition: none; }
+}

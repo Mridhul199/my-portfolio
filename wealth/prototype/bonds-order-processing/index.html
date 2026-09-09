@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Placing your order</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../bonds-shared/motion.css">
+<style>
+  :root{
+    --grad-1:#7C3AED; --grad-2:#6D5CF6; --grad-3:#4F7DF3;
+    --ink:#F4F1FA; --ink-2:#B8B3CC; --ink-3:#7A7593;
+    --canvas:#0A0714; --surface:#160F24;
+    --border:#2A2138;
+    --up:#22C55E; --up-tint:#12291C;
+    --f:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{background:#DCDAE8}
+  body{font-family:var(--f);color:var(--ink);display:flex;justify-content:center;padding:28px 12px;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+
+  .device{width:402px;max-width:100%;height:874px;background:var(--surface);border-radius:40px;overflow:hidden;box-shadow:0 30px 70px rgba(30,15,80,.28),0 0 0 10px #0E0B1E;position:relative;display:flex;flex-direction:column}
+
+  .content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px}
+  .spinner{width:52px;height:52px;border-radius:50%;border:4px solid var(--border);border-top-color:var(--grad-2);animation:spin 0.9s linear infinite;margin-bottom:28px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  h1{font-size:17px;font-weight:800;text-align:center;margin-bottom:6px}
+  .sub{font-size:12.5px;color:var(--ink-2);font-weight:500;text-align:center;line-height:1.5;max-width:280px;margin-bottom:30px}
+
+  .steps{width:100%;display:flex;flex-direction:column;gap:4px}
+  .step{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;transition:background .2s}
+  .step.active{background:var(--surface)}
+  .step-dot{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+  .step-dot svg{width:13px;height:13px;stroke:#fff;opacity:0;transition:opacity .15s}
+  .step.done .step-dot{background:var(--up);border-color:var(--up)}
+  .step.done .step-dot svg{opacity:1}
+  .step.active .step-dot{border-color:var(--grad-2)}
+  .step.active .step-dot::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--grad-2);animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+  .step-label{font-size:13px;font-weight:600;color:var(--ink-3);transition:color .2s}
+  .step.active .step-label, .step.done .step-label{color:var(--ink)}
+  .step-sub{font-size:10.5px;color:var(--ink-3);font-weight:500;margin-top:1px}
+</style>
+</head>
+<body>
+
+<div class="device">
+  <div class="content">
+    <div class="spinner"></div>
+    <h1>Placing your order</h1>
+    <div class="sub">Your order must be routed through the exchange — this is a SEBI requirement for all bond platforms, not just us.</div>
+
+    <div class="steps" id="steps">
+      <div class="step" id="s1">
+        <div class="step-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div>
+          <div class="step-label">Payment confirmed</div>
+          <div class="step-sub">₹<span id="amtEl"></span> received</div>
+        </div>
+      </div>
+      <div class="step" id="s2">
+        <div class="step-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div>
+          <div class="step-label">Order placed on NSE</div>
+          <div class="step-sub">Bid submitted to the exchange</div>
+        </div>
+      </div>
+      <div class="step" id="s3">
+        <div class="step-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div>
+          <div class="step-label">Order confirmed on NSE</div>
+          <div class="step-sub" id="refEl">Reference ID assigned</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../bonds-shared/bonds-data.js"></script>
+<script>
+  const bond = getBondFromURL();
+  const params = new URLSearchParams(window.location.search);
+  const units = Math.max(bond.minUnits, parseInt(params.get('units'), 10) || bond.minUnits);
+  const invest = units * bond.unitPrice;
+  document.getElementById('amtEl').textContent = Math.round(invest).toLocaleString('en-IN');
+
+  const steps = ['s1', 's2', 's3'];
+  let i = 0;
+  function advance() {
+    if (i > 0) document.getElementById(steps[i - 1]).classList.remove('active');
+    if (i >= steps.length) {
+      setTimeout(() => {
+        window.location.href = `../bonds-success/index.html?bond=${bond.id}&units=${units}`;
+      }, 450);
+      return;
+    }
+    const el = document.getElementById(steps[i]);
+    el.classList.add('active');
+    setTimeout(() => {
+      el.classList.remove('active');
+      el.classList.add('done');
+      i++;
+      setTimeout(advance, 280);
+    }, 650);
+  }
+  advance();
+</script>
+
+</body>
+</html>

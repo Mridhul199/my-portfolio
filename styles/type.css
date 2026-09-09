@@ -1,0 +1,21 @@
+/* ============================================================
+   Switzer — self-hosted (Fontshare, free for commercial use).
+   Single source of truth for @font-face; linked by the shell and
+   by every case study so the files are declared exactly once.
+
+   500 = body copy (the only Medium style in the system)
+   700 = labels, captions, buttons, sub-heads
+   800 = display headlines
+   ============================================================ */
+@font-face{
+  font-family:'Switzer';src:url('../assets/fonts/switzer-500.woff2') format('woff2');
+  font-weight:500;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Switzer';src:url('../assets/fonts/switzer-700.woff2') format('woff2');
+  font-weight:700;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:'Switzer';src:url('../assets/fonts/switzer-800.woff2') format('woff2');
+  font-weight:800;font-style:normal;font-display:swap;
+}

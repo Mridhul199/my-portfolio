@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sort &amp; Filters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../bonds-shared/motion.css">
+<style>
+  :root{
+    --grad-1:#7C3AED; --grad-2:#6D5CF6; --grad-3:#4F7DF3;
+    --ink:#F4F1FA; --ink-2:#B8B3CC; --ink-3:#7A7593;
+    --canvas:#0A0714; --surface:#160F24;
+    --border:#2A2138;
+    --f:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{background:#DCDAE8}
+  body{font-family:var(--f);color:var(--ink);display:flex;justify-content:center;padding:28px 12px;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  button{font-family:var(--f);cursor:pointer;border:none;background:none}
+
+  .device{width:402px;max-width:100%;height:874px;background:linear-gradient(150deg,var(--grad-1) 0%,var(--grad-2) 48%,var(--grad-3) 100%);border-radius:40px;overflow:hidden;box-shadow:0 30px 70px rgba(30,15,80,.28),0 0 0 10px #0E0B1E;position:relative;display:flex;flex-direction:column}
+
+  .backdrop{flex:1;position:relative}
+  .backdrop-tap{position:absolute;inset:0}
+
+  .sheet-modal{background:var(--surface);border-radius:24px 24px 0 0;padding:18px 18px 20px;max-height:78%;display:flex;flex-direction:column;box-shadow:0 -20px 50px rgba(20,10,50,.25)}
+  .sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .sheet-head h1{font-size:15.5px;font-weight:800;letter-spacing:-.2px}
+  .close-btn{width:32px;height:32px;border-radius:50%;background:var(--canvas);display:flex;align-items:center;justify-content:center}
+  .close-btn svg{width:14px;height:14px;stroke:var(--ink-2)}
+
+  .scroll-body{overflow-y:auto;scrollbar-width:none}
+  .scroll-body::-webkit-scrollbar{display:none}
+
+  .grp-label{font-size:11.5px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.4px;margin:14px 0 8px}
+  .opt-row{display:flex;align-items:center;justify-content:space-between;padding:11px 2px;border-bottom:1px solid var(--border)}
+  .opt-row:last-child{border-bottom:none}
+  .opt-row .lbl{font-size:13px;font-weight:600;color:var(--ink)}
+
+  .radio{width:19px;height:19px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;position:relative}
+  .radio.on{border-color:var(--grad-2)}
+  .radio.on::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--grad-2)}
+
+  .checkbox{width:19px;height:19px;border-radius:6px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  .checkbox.on{border-color:var(--grad-2);background:var(--grad-2)}
+  .checkbox.on svg{width:12px;height:12px;stroke:#fff}
+
+  .sheet-foot{display:flex;gap:10px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
+  .btn-clear{flex:1;background:var(--canvas);color:var(--ink-2);border-radius:13px;padding:13px;font-size:13.5px;font-weight:700;text-align:center}
+  .btn-apply{flex:2;background:var(--grad-2);color:#fff;border-radius:13px;padding:13px;font-size:13.5px;font-weight:700;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="device">
+
+  <div class="backdrop">
+    <a class="backdrop-tap" href="../bonds-listing/index.html" aria-label="Close"></a>
+  </div>
+
+  <div class="sheet-modal">
+    <div class="sheet-head">
+      <h1>Sort &amp; Filters</h1>
+      <a class="close-btn" href="../bonds-listing/index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </a>
+    </div>
+
+    <div class="scroll-body" id="scrollBody">
+      <div class="grp-label">Sort by</div>
+      <div class="opt-group" data-group="sort">
+        <div class="opt-row" data-opt><span class="lbl">Relevance (default)</span><span class="radio on"></span></div>
+        <div class="opt-row" data-opt><span class="lbl">YTM: High to low</span><span class="radio"></span></div>
+        <div class="opt-row" data-opt><span class="lbl">Rating: High to low</span><span class="radio"></span></div>
+        <div class="opt-row" data-opt><span class="lbl">Min investment: Low to high</span><span class="radio"></span></div>
+        <div class="opt-row" data-opt><span class="lbl">Tenure: Short to long</span><span class="radio"></span></div>
+      </div>
+
+      <div class="grp-label">Filters</div>
+      <div class="opt-group">
+        <div class="opt-row" data-opt><span class="lbl">AA &amp; above</span><span class="checkbox on"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></div>
+        <div class="opt-row" data-opt><span class="lbl">AAA &amp; above</span><span class="checkbox"></span></div>
+        <div class="opt-row" data-opt><span class="lbl">Sovereign / govt-backed</span><span class="checkbox"></span></div>
+        <div class="opt-row" data-opt><span class="lbl">Tax-free</span><span class="checkbox"></span></div>
+        <div class="opt-row" data-opt><span class="lbl">Short tenure (under 12mo)</span><span class="checkbox"></span></div>
+        <div class="opt-row" data-opt><span class="lbl">Sell after 6 months</span><span class="checkbox"></span></div>
+      </div>
+    </div>
+
+    <div class="sheet-foot">
+      <a class="btn-clear" href="../bonds-listing/index.html">Clear all</a>
+      <a class="btn-apply" href="../bonds-listing/index.html">Apply filters</a>
+    </div>
+  </div>
+
+</div>
+
+<script src="../bonds-shared/ui.js"></script>
+<script>
+  document.querySelectorAll('.opt-row[data-opt]').forEach(row => {
+    row.addEventListener('click', () => {
+      const box = row.querySelector('.radio, .checkbox');
+      if (box.classList.contains('radio')) {
+        const group = row.closest('.opt-group');
+        group.querySelectorAll('.radio').forEach(r => r.classList.remove('on'));
+        box.classList.add('on');
+      } else {
+        box.classList.toggle('on');
+        box.innerHTML = box.classList.contains('on')
+          ? '<svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>'
+          : '';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

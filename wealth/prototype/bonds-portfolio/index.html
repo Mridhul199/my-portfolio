@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bonds · Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../bonds-shared/motion.css">
+<style>
+  :root{
+    --grad-1:#7C3AED; --grad-2:#6D5CF6; --grad-3:#4F7DF3;
+    --ink:#F4F1FA; --ink-2:#B8B3CC; --ink-3:#7A7593;
+    --canvas:#0A0714; --surface:#160F24;
+    --border:#2A2138;
+    --up-tint:#12291C; --up:#22C55E;
+    --gold-tint:#2B2013;
+    --f:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{background:#DCDAE8}
+  body{font-family:var(--f);color:var(--ink);display:flex;justify-content:center;padding:28px 12px;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  button{font-family:var(--f);cursor:pointer;border:none;background:none}
+
+  .device{width:402px;max-width:100%;height:874px;background:var(--canvas);border-radius:40px;overflow:hidden;box-shadow:0 30px 70px rgba(30,15,80,.28),0 0 0 10px #0E0B1E;position:relative}
+  .scroll{height:100%;overflow-y:auto;scrollbar-width:none}
+  .scroll::-webkit-scrollbar{display:none}
+
+  .hero{position:relative;padding:18px 20px 26px;overflow:hidden;background:var(--surface)}
+  .hero::before{
+    content:"";position:absolute;top:0;right:0;width:150px;height:150px;
+    background-image:radial-gradient(circle,rgba(225,123,255,.4) 1px,transparent 1.4px);
+    background-size:11px 11px;
+    -webkit-mask-image:radial-gradient(circle at top right,#000 0%,transparent 70%);
+    mask-image:radial-gradient(circle at top right,#000 0%,transparent 70%);
+    pointer-events:none
+  }
+  .hero > *{position:relative;z-index:1}
+
+  .topbar{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+  .topbar .ttl{flex:1;font-size:14.5px;font-weight:800;color:#fff}
+  .icon-btn{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.24);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .icon-btn svg{width:16px;height:16px;stroke:#fff}
+
+  .balance-block .label{font-size:12.5px;color:rgba(255,255,255,.72);font-weight:600;letter-spacing:.2px;margin-bottom:6px}
+  .balance-block .amount{font-size:38px;font-weight:800;letter-spacing:-1px;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+  .balance-block .amount .cur{font-size:22px;font-weight:700;opacity:.75;margin-right:2px}
+
+  .split-row{display:flex;gap:8px;margin-top:16px}
+  .split{flex:1;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:10px 12px}
+  .split .l{font-size:10.5px;color:rgba(255,255,255,.72);font-weight:600;margin-bottom:3px}
+  .split .v{font-size:14.5px;font-weight:800;color:#fff}
+  .split .v.pos{color:#B8F5D6}
+
+  .sheet{background:var(--canvas);border-radius:24px 24px 0 0;margin-top:-16px;padding:20px 18px 110px;position:relative;z-index:2}
+
+  .section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .section-head h2{font-size:15.5px;font-weight:800;letter-spacing:-.2px}
+
+  .bond-list{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+  .bond{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:14px;display:flex;flex-direction:column;box-shadow:0 8px 20px rgba(60,40,140,.05)}
+  .bond-top{display:flex;align-items:center;gap:12px;width:100%}
+  .bond .mark{width:42px;height:42px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff}
+  .bond .info{flex:1;min-width:0}
+  .bond .info .name{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:4px}
+  .bond .info .meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .badge{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:6px}
+  .badge.status-pending{background:var(--gold-tint);color:#F5B860}
+  .badge.status-active{background:var(--up-tint);color:var(--up)}
+  .bond .val{text-align:right;flex-shrink:0}
+  .bond .val .amt{font-size:15px;font-weight:800;letter-spacing:-.2px;color:var(--ink)}
+  .bond .val .lbl{font-size:10px;color:var(--ink-3);font-weight:600}
+  .bond-foot{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--ink-3);font-weight:600}
+  .bond-foot b{color:var(--ink-2)}
+
+  .empty-note{font-size:11.5px;color:var(--ink-3);font-weight:500;text-align:center;padding:14px 0 20px}
+
+  .bottom-nav{position:absolute;left:16px;right:16px;bottom:20px;background:rgba(20,14,34,.72);backdrop-filter:blur(22px) saturate(1.6);-webkit-backdrop-filter:blur(22px) saturate(1.6);border:1px solid rgba(255,255,255,.12);border-radius:30px;display:flex;padding:12px 8px;z-index:3;box-shadow:0 8px 30px rgba(0,0,0,.35),0 20px 45px rgba(0,0,0,.4)}
+  .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--ink-3);position:relative}
+  .nav-item svg{width:20px;height:20px}
+  .nav-item span{font-size:10px;font-weight:600}
+  .nav-item.on{color:var(--grad-2)}
+  .nav-badge{position:absolute;top:-4px;right:calc(50% - 20px);background:var(--up);color:#fff;font-size:8px;font-weight:800;padding:2px 5px;border-radius:999px}
+  .nav-dot{position:absolute;top:-2px;right:calc(50% - 16px);width:8px;height:8px;border-radius:50%;background:#EF4444;border:1.5px solid var(--canvas)}
+
+  .dropdown{position:absolute;top:60px;right:20px;background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:0 16px 40px rgba(20,10,50,.2);width:210px;z-index:20;opacity:0;transform:translateY(-8px) scale(0.97);transform-origin:top right;pointer-events:none;transition:opacity 160ms var(--ease-out),transform 160ms var(--ease-out)}
+  .dropdown.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+  .dropdown .d-item{display:flex;align-items:center;gap:10px;padding:12px 14px;font-size:12.5px;font-weight:600;color:var(--ink-2);border-bottom:1px solid var(--border)}
+  .dropdown .d-item:last-child{border-bottom:none}
+  .dropdown .d-item svg{width:15px;height:15px;stroke:var(--ink-3)}
+
+  .toast{position:absolute;left:50%;bottom:100px;transform:translate(-50%,20px);background:rgba(18,14,38,.94);color:#fff;font-size:12.5px;font-weight:600;padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50;white-space:nowrap;max-width:90%;text-align:center}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+
+<div class="device">
+<div class="scroll">
+
+  <div class="hero">
+    <div class="topbar">
+      <div class="ttl">Portfolio</div>
+      <button class="icon-btn" id="menuBtn"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 12h16M4 19h16"/></svg></button>
+    </div>
+
+    <div class="balance-block">
+      <div class="label">Total portfolio value</div>
+      <div class="amount"><span class="cur">₹</span><span id="totalValueEl"></span></div>
+    </div>
+
+    <div class="split-row">
+      <div class="split">
+        <div class="l">Total invested</div>
+        <div class="v" id="totalInvestedEl"></div>
+      </div>
+      <div class="split">
+        <div class="l">Returns earned</div>
+        <div class="v pos" id="returnsEl"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet">
+
+    <div class="section-head">
+      <h2 id="holdingsHead"></h2>
+    </div>
+
+    <div class="bond-list" id="bondList"></div>
+
+    <div class="empty-note">Tap a holding for repayment schedule &amp; documents</div>
+
+  </div>
+
+  <div class="dropdown" id="menuDropdown">
+    <div class="d-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 10h8M8 14h5"/></svg>Download statement</div>
+    <div class="d-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-6"/></svg>Sort by returns</div>
+    <div class="d-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z"/></svg>Tax certificates</div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a class="nav-item" href="../bonds-discovery/index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 10h8M8 14h5"/></svg>
+      <span>Bonds</span>
+    </a>
+    <a class="nav-item" href="../bonds-sips/index.html">
+      <span class="nav-badge">↑0.25%</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9.5a3 3 0 013-1.5c1.7 0 3 1 3 2.2 0 2.8-6 1.8-6 4.6 0 1.2 1.3 2.2 3 2.2a3 3 0 003-1.5"/></svg>
+      <span>SIPs</span>
+    </a>
+    <div class="nav-item on">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2M3 12h18"/></svg>
+      <span>Portfolio</span>
+    </div>
+    <a class="nav-item" href="../bonds-referral/index.html">
+      <span class="nav-dot"></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7C10 3 5 4 5 7s5 3 7 0zm0 0c2-4 7-3 7 0s-5 3-7 0z"/></svg>
+      <span>Refer&amp;Earn</span>
+    </a>
+    <button class="nav-item" id="moreBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="1.5"/><circle cx="18" cy="6" r="1.5"/><circle cx="6" cy="18" r="1.5"/><circle cx="18" cy="18" r="1.5"/></svg>
+      <span>More</span>
+    </button>
+  </nav>
+
+  <div class="dropdown" id="moreMenu" style="right:auto;left:6px;top:auto;bottom:70px;transform-origin:bottom left">
+    <a class="d-item" href="../bonds-learn/index.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z"/></svg>Learn</a>
+    <div class="d-item" id="settingsItem"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9"/></svg>Settings</div>
+    <div class="d-item" id="helpItem"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18h.01M8 10a4 4 0 118 0c0 2-2 2.5-2 4.5"/></svg>Help &amp; support</div>
+  </div>
+
+</div>
+</div>
+
+<script src="../bonds-shared/bonds-data.js"></script>
+<script src="../bonds-shared/ui.js"></script>
+<script>
+  const HOLDINGS = [
+    { bondId: 'anand-gold', units: 10, status: 'pending', investedLabel: 'Invested today' },
+    { bondId: 'meridian-housing', units: 25, status: 'active', investedLabel: 'Held since Feb 2026', monthsHeld: 5 }
+  ];
+
+  function holdingCardHTML(h, i) {
+    const bond = BONDS[h.bondId];
+    const invested = h.units * bond.unitPrice;
+    const current = h.status === 'pending'
+      ? invested
+      : invested + invested * (bond.ytm / 100) * (h.monthsHeld / 12);
+    const statusBadge = h.status === 'pending'
+      ? `<span class="badge status-pending">Awaiting allotment</span>`
+      : `<span class="badge status-active">Active</span>`;
+    const inner = `
+        <div class="bond-top">
+          <div class="mark" style="background:linear-gradient(135deg,${bond.grad[0]},${bond.grad[1]})">${bond.initials}</div>
+          <div class="info">
+            <div class="name">${bond.name}</div>
+            <div class="meta">${statusBadge}</div>
+          </div>
+          <div class="val"><div class="amt">${fmtINR(current)}</div><div class="lbl">${h.units} units</div></div>
+        </div>
+        <div class="bond-foot">
+          <span>${h.investedLabel}</span>
+          <span>${bond.payoutFrequency === 'Monthly' ? 'Next payout' : 'Maturity'} <b>${bond.payoutFrequency === 'Monthly' ? bond.nextPayout : bond.maturity}</b></span>
+        </div>`;
+    const href = `../bonds-holding-detail/index.html?bond=${bond.id}&units=${h.units}&status=${h.status}` + (h.monthsHeld ? `&months=${h.monthsHeld}` : '');
+    return `<a class="bond stagger-in" style="animation-delay:${i * 60}ms" href="${href}">${inner}</a>`;
+  }
+
+  document.getElementById('bondList').innerHTML = HOLDINGS.map(holdingCardHTML).join('');
+  document.getElementById('holdingsHead').textContent = `Your holdings (${HOLDINGS.length})`;
+
+  let totalInvested = 0, totalCurrent = 0;
+  HOLDINGS.forEach(h => {
+    const bond = BONDS[h.bondId];
+    const invested = h.units * bond.unitPrice;
+    const current = h.status === 'pending' ? invested : invested + invested * (bond.ytm / 100) * (h.monthsHeld / 12);
+    totalInvested += invested; totalCurrent += current;
+  });
+  document.getElementById('totalValueEl').textContent = Math.round(totalCurrent).toLocaleString('en-IN');
+  document.getElementById('totalInvestedEl').textContent = fmtINR(totalInvested);
+  document.getElementById('returnsEl').textContent = '+' + fmtINR(totalCurrent - totalInvested);
+
+  document.getElementById('menuBtn').addEventListener('click', e => {
+    e.stopPropagation();
+    document.getElementById('menuDropdown').classList.toggle('open');
+    document.getElementById('moreMenu').classList.remove('open');
+  });
+  document.getElementById('moreBtn').addEventListener('click', e => {
+    e.stopPropagation();
+    document.getElementById('moreMenu').classList.toggle('open');
+    document.getElementById('menuDropdown').classList.remove('open');
+  });
+  document.addEventListener('click', () => {
+    document.getElementById('menuDropdown').classList.remove('open');
+    document.getElementById('moreMenu').classList.remove('open');
+  });
+  document.querySelectorAll('#menuDropdown .d-item').forEach(item => {
+    item.addEventListener('click', e => { e.stopPropagation(); showToast('Coming soon'); });
+  });
+  document.getElementById('settingsItem').addEventListener('click', e => { e.stopPropagation(); showToast('Coming soon'); });
+  document.getElementById('helpItem').addEventListener('click', e => { e.stopPropagation(); showToast('Connecting you to support…'); });
+</script>
+</body>
+</html>

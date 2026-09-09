@@ -7,6 +7,7 @@
 <title>Mridhul Aswin · Product Designer, Fintech</title>
 <meta name="description" content="Mridhul Aswin is a UX / product designer working in fintech and payments: admin and dashboard systems, wallet SDKs, and the operator tooling behind them, shipped to production for enterprise clients."/>
 <meta name="author" content="Mridhul Aswin"/>
+<meta name="theme-color" content="#EAEBE5"/>
 <link rel="canonical" href="https://mridhul199.github.io/my-portfolio/"/>
 
 <!-- Open Graph / social -->
@@ -28,10 +29,12 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Mridhul Aswin","jobTitle":"Product Designer","description":"UX / product designer working in fintech and payments, specifically admin and dashboard systems, wallet SDKs, and operator tooling.","url":"https://mridhul199.github.io/my-portfolio/","knowsAbout":["Product design","UX","Design systems","Whitelabel theming","Fintech","Payments"]}
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles/shell.css"/>
+
+<!-- self-hosted type: no third-party font request -->
+<link rel="preload" href="assets/fonts/switzer-800.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href="assets/fonts/switzer-500.woff2" as="font" type="font/woff2" crossorigin/>
+<link rel="stylesheet" href="styles/type.css?v=33"/>
+<link rel="stylesheet" href="styles/shell.css?v=33"/>
 </head>
 <body>
 <a class="skip" href="#work">Skip to work</a>
@@ -39,12 +42,19 @@
 <!-- NAV -->
 <header class="nav" data-nav>
   <div class="shell nav-inner">
-    <a class="brand" href="#top">Mridhul Aswin<span class="pip">.</span></a>
+    <a class="brand" href="#top" aria-label="Mridhul Aswin — home">
+      <svg class="brand-mark" viewBox="0 0 1127 570" role="img" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M702.404 295.468C693.803 312.714 683.746 330.461 675.43 347.745L648.393 402.667C637.394 424.903 628.861 446.62 606.8 459.822C601.867 462.775 598.53 465.207 592.788 467.051C557.047 478.535 520.497 467.721 498.837 436.846C492.128 427.154 488.017 416.899 483.098 406.325C475.671 392.548 468.976 376.433 461.735 363.101C445.747 333.656 431.777 303.729 416.832 273.772L360.833 162.654C346.2 133.396 332.243 103.791 317.057 74.8195C309.298 60.0089 302.955 44.8875 295.058 30.1668C292.633 25.6491 288.404 16.5237 285.268 12.7381L285.033 12.2823C283.409 9.18063 282.041 8.73162 281.35 5.1257C282.11 2.12768 281.585 3.26742 283.906 0.746037C288.163 -0.255607 304.662 0.0415046 309.892 0.041505L360.951 0.0415095C426.933 0.0484232 492.985 0.11058 558.975 0.0207829C560.875 0.0207831 563.127 0.186569 564.799 1.13986C566.181 1.92736 566.07 2.41783 566.692 3.91685L566.775 6.47965L568.779 9.31878C569.435 11.7158 570.333 13.0905 571.308 15.301C579.806 34.4843 590.487 52.8317 599.69 71.5313C633.124 140.4 667.354 208.884 702.369 276.965L703.274 276.307C704.487 277.896 704.293 278.752 704.322 280.805L704.33 281.551L705.23 282.168C705.542 283.997 705.493 288.736 705.524 290.827L710.313 295.851L709.359 297.022L708.188 295.585C706.603 297.203 706.242 297.824 704.021 298.302L702.715 297.862C702.528 296.841 702.397 296.481 702.404 295.468Z"/>
+        <path fill="currentColor" d="M1126.95 561.482L1126.63 567.443C1125.86 568.689 1125.56 569.439 1123.76 569.305C1105.86 567.962 1087.82 568.412 1069.87 568.416L905.37 568.423C895.212 568.418 854.531 567.591 847.655 569.308C842.104 557.755 834.517 545.506 828.7 533.683C800.931 476.675 772.602 419.942 743.715 363.491C740.408 357.114 710.776 296.272 710.313 295.851L705.524 290.827C705.493 288.736 705.542 283.998 705.23 282.168C712.588 272.522 716.377 264.056 721.828 253.269C736.182 224.863 750.427 196.321 764.645 167.854C777.92 141.276 787.836 116.709 818.597 106.596C819.943 105.574 821.887 104.234 822.987 103.045C826.741 99.2322 840.765 96.6693 846.325 96.8489C856.271 97.1736 856.412 97.5467 864.643 100.448C868.667 101.001 872.223 103.266 874.341 106.707C890.248 109.981 902.235 122.028 912.187 134.373C916.261 139.425 923.882 155.666 927.105 161.885C935.777 178.618 943.341 195.409 951.965 212.303L1069.78 447.183L1111.07 530.134C1115.8 539.478 1121.5 553.627 1126.95 561.482Z"/>
+        <path fill="var(--accent)" d="M8.6642 568.977L5.99921e-05 569.597C2.86737 559.391 5.78303 555.826 10.4398 546.554L30.0066 507.746L107.7 351.643C116.945 332.766 132.318 306.453 139.061 286.995C144.872 286.391 150.71 286.103 156.548 286.133L272.892 286.115C283.021 286.117 319.038 285.443 327.053 287.073C338.059 289.239 348.174 294.61 356.127 302.51C378.112 323.359 383.073 340.868 379.432 370.759C377.898 383.334 364.625 404.476 358.78 416.344L314.858 503.901C310.554 512.365 307.051 521.827 302.753 530.543C298.124 539.933 285.646 559.143 284.534 568.795C268.891 567.672 250.437 568.274 234.719 568.363L163.243 568.451L69.1057 568.436C49.2003 568.421 28.4521 567.948 8.6642 568.977Z"/>
+      </svg>
+      <span class="brand-full">Mridhul Aswin<span class="pip">.</span></span>
+    </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#work">Work</a>
-      <a href="#about" class="nav-extra">About</a>
-      <a href="resume/" class="nav-extra">Résumé</a>
-      <a href="#contact" class="cta">Contact</a>
+      <a class="hover-link" href="about/">About</a>
+      <a class="hover-link" href="work/">Work</a>
+      <a class="hover-link" href="resume/">Résumé</a>
+      <a class="hover-link cta" href="#contact">Contact</a>
     </nav>
   </div>
 </header>
@@ -55,8 +65,8 @@
   <section class="hero" aria-labelledby="hero-h">
     <div class="shell">
       <span class="eyebrow" data-reveal>Product Designer · Fintech</span>
-      <h1 id="hero-h" data-split-words>Designing payment systems people actually trust.</h1>
-      <p class="intro" data-reveal style="--d:160ms">
+      <h1 class="t-h1" id="hero-h" data-split-words>Designing payment systems people actually trust.</h1>
+      <p class="intro t-b2" data-reveal style="--d:160ms">
         I'm a UX / product designer working on fintech infrastructure
         (<strong>admin and dashboard systems, wallet SDKs, and the operator tooling behind them</strong>),
         taking products from concept through to production for enterprise clients.
@@ -68,208 +78,388 @@
     </div>
   </section>
 
-  <!-- SELECTED WORK -->
-  <section id="work" aria-labelledby="work-h">
-    <div class="shell">
-      <div class="sec-head" data-reveal>
-        <span class="label" id="work-h">Selected work</span>
-        <span class="count">08</span>
-      </div>
-
-      <div class="work-grid">
-        <!-- Admin & Dashboard Designs -->
-        <a class="work-card" data-reveal href="admin-dashboard/" aria-label="Admin & Dashboard Designs case study">
-          <div class="work-cover">
-            <img src="admin-dashboard/assets/after/business-dashboard.png"
-                 alt="Admin & Dashboard Designs · business dashboard"
-                 loading="lazy" decoding="async"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
-            <div class="ph">admin-dashboard / business-dashboard.png</div>
-          </div>
-          <div class="work-body">
-            <h3>Admin &amp; Dashboard Designs</h3>
-            <div class="work-meta">UX / Product design · 2 clients live in production</div>
-            <div class="work-tags"><span>Dashboard</span><span>UAM</span><span>Whitelabel</span></div>
-            <span class="work-arrow">View case study
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-          </div>
-        </a>
-
-        <!-- Wallet Solution -->
-        <a class="work-card" data-reveal style="--d:110ms" href="wallet/" aria-label="Wallet Solution case study">
-          <div class="work-cover">
-            <img src="wallet/assets/sdk/sdk-desktop-wallet.png"
-                 alt="Wallet Solution · wallet SDK on desktop"
-                 loading="lazy" decoding="async"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
-            <div class="ph">wallet / sdk-desktop-wallet.png</div>
-          </div>
-          <div class="work-body">
-            <h3>Wallet Solution</h3>
-            <div class="work-meta">UX / Product design · SDK + admin portal</div>
-            <div class="work-tags"><span>Wallet SDK</span><span>Transit · Logistics</span><span>Admin</span></div>
-            <span class="work-arrow">View case study
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-          </div>
-        </a>
-
-        <!-- Bill-Pay Portal -->
-        <a class="work-card" data-reveal style="--d:220ms" href="bill-pay-portal/" aria-label="Bill-Pay Portal refresh case study">
-          <div class="work-cover">
-            <img src="bill-pay-portal/assets/add-biller/select-biller.png"
-                 alt="Bill-Pay Portal · add a biller"
-                 loading="lazy" decoding="async"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
-            <div class="ph">bill-pay-portal / select-biller.png</div>
-          </div>
-          <div class="work-body">
-            <h3>Bill-Pay Portal Refresh</h3>
-            <div class="work-meta">UX / UI · illustration · 30–50 partner organizations</div>
-            <div class="work-tags"><span>Bill-pay SSO</span><span>Add Biller</span><span>DLS illustration</span></div>
-            <span class="work-arrow">View case study
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-          </div>
-        </a>
-
-        <!-- In-App Travel Booking -->
-        <a class="work-card" data-reveal style="--d:330ms" href="in-app-travel-booking/" aria-label="In-App Travel Booking case study">
-          <div class="work-cover">
-            <img src="in-app-travel-booking/assets/results/results-vd.png"
-                 alt="In-app travel booking · flight results screen"
-                 loading="lazy" decoding="async"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
-            <div class="ph">in-app-travel-booking / results-vd.png</div>
-          </div>
-          <div class="work-body">
-            <h3>In-App Travel Booking</h3>
-            <div class="work-meta">UX / Product design · buyer app flow, platform as TSP</div>
-            <div class="work-tags"><span>Open commerce</span><span>Wireframe → VD</span><span>Booking flow</span></div>
-            <span class="work-arrow">View case study
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-          </div>
-        </a>
-
-        <!-- Recurring Payments Hub -->
-        <a class="work-card" data-reveal style="--d:440ms" href="recurring-payments-hub/" aria-label="Recurring Payments Hub case study">
-          <div class="work-cover">
-            <img src="recurring-payments-hub/assets/after/dweb-dashboard.png"
-                 alt="Recurring Payments Hub · subscriptions dashboard on desktop"
-                 loading="lazy" decoding="async"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
-            <div class="ph">recurring-payments-hub / dweb-dashboard.png</div>
-          </div>
-          <div class="work-body">
-            <h3>Recurring Payments Hub</h3>
-            <div class="work-meta">UX / UI · recurring mandates · web + mobile</div>
-            <div class="work-tags"><span>Recurring mandates</span><span>Revamp</span><span>Web + mobile</span></div>
-            <span class="work-arrow">View case study
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-          </div>
-        </a>
-
-        <!-- Whitelabel Theming, Automated -->
-        <a class="work-card" data-reveal style="--d:550ms" href="whitelabel-theme-automation/" aria-label="Whitelabel Theming, Automated case study">
-          <div class="work-cover">
-            <img src="whitelabel-theme-automation/assets/partner-a/website.png"
-                 alt="Whitelabel Theming, Automated · themed partner website"
-                 loading="lazy" decoding="async"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
-            <div class="ph">whitelabel-theme-automation / website.png</div>
-          </div>
-          <div class="work-body">
-            <h3>Whitelabel Theming, Automated</h3>
-            <div class="work-meta">Design systems · automation · 29 partners themed</div>
-            <div class="work-tags"><span>Claude Code skill</span><span>Design tokens</span><span>AI + automation</span></div>
-            <span class="work-arrow">View case study
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-          </div>
-        </a>
-
-        <!-- KYC Tokenization -->
-        <a class="work-card" data-reveal style="--d:660ms" href="kyc-tokenization/" aria-label="KYC Tokenization case study">
-          <div class="work-cover">
-            <img src="kyc-tokenization/assets/hero/hero-device-binding.png"
-                 alt="KYC Tokenization · TrustKYC device-binding screen on a phone"
-                 loading="lazy" decoding="async"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
-            <div class="ph">kyc-tokenization / hero-device-binding.png</div>
-          </div>
-          <div class="work-body">
-            <h3>KYC Tokenization</h3>
-            <div class="work-meta">UX / Product design · concept · reusable identity token</div>
-            <div class="work-tags"><span>Digital identity</span><span>Consent model</span><span>Concept</span></div>
-            <span class="work-arrow">View case study
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-          </div>
-        </a>
-
-        <!-- DLS Component Catalog -->
-        <a class="work-card" data-reveal style="--d:770ms" href="dls-overview/" aria-label="DLS Component Catalog case study">
-          <div class="work-cover">
-            <img src="dls-overview/assets/buttons/button-variant-grid.png"
-                 alt="DLS Component Catalog · button component variant grid"
-                 loading="lazy" decoding="async"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
-            <div class="ph">dls-overview / button-variant-grid.png</div>
-          </div>
-          <div class="work-body">
-            <h3>DLS Component Catalog</h3>
-            <div class="work-meta">UX / Design systems · in progress · pulled from Figma</div>
-            <div class="work-tags"><span>Design system</span><span>Component audit</span><span>Figma</span></div>
-            <span class="work-arrow">View case study
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
+  <!-- ABOUT + WORK share one swirl scope -->
+  <div class="swirl-scope" data-swirl-scope>
+    <svg class="work-swirl" viewBox="0 0 1200 4800" fill="none"
+         preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path class="swirl-bloom" d="M600 0C600 150 980 150 980 300C980 600 220 600 220 900C220 1200 980 1200 980 1500C980 1800 220 1800 220 2100C220 2400 980 2400 980 2700C980 3000 220 3000 220 3300C220 3600 980 3600 980 3900C980 4200 220 4200 220 4500C220 4650 600 4650 600 4800"/>
+      <path class="swirl-line"  d="M600 0C600 150 980 150 980 300C980 600 220 600 220 900C220 1200 980 1200 980 1500C980 1800 220 1800 220 2100C220 2400 980 2400 980 2700C980 3000 220 3000 220 3300C220 3600 980 3600 980 3900C980 4200 220 4200 220 4500C220 4650 600 4650 600 4800"/>
+    </svg>
 
   <!-- ABOUT -->
-  <section id="about" aria-labelledby="about-h">
-    <div class="shell about-grid">
-      <div class="headshot headshot--monogram" data-reveal aria-hidden="true">MA</div>
-      <div class="about-body">
-        <span class="eyebrow" data-reveal style="margin-bottom:14px">About</span>
-        <h2 id="about-h" data-reveal style="--d:60ms">A designer for fintech infrastructure.</h2>
-        <p data-reveal style="--d:120ms">
-          I focus on the unglamorous core of payments. That means turning manual, spreadsheet-driven
-          back-office operations into auditable, automated consoles, and packaging complex flows into SDKs
-          other teams can drop in and re-skin.
-        </p>
-        <p data-reveal style="--d:160ms">
-          My work spans a payments platform's stack: admin and dashboard systems, stored-value wallets,
-          bill-pay, open commerce integrations, and recurring mandates, shipped to production and
-          whitelabelled across partner organizations. I care about operational clarity, design
-          systems that scale by tokens, and interfaces that hold up under real back-office load.
-        </p>
-        <div class="chips">
-          <span data-reveal style="--d:60ms">Product design</span>
-          <span data-reveal style="--d:110ms">UX</span>
-          <span data-reveal style="--d:160ms">Design systems</span>
-          <span data-reveal style="--d:210ms">Whitelabel theming</span>
-          <span data-reveal style="--d:260ms">Stakeholder collaboration</span>
-          <span data-reveal style="--d:310ms">AI-assisted design</span>
+  <section id="about" class="about" aria-labelledby="about-h" data-about>
+   <div class="about-panel">
+    <div class="about-panel-bg" data-panel aria-hidden="true"></div>
+    <div class="shell">
+      <div class="sec-head" data-reveal>
+        <span class="t-label">About</span>
+        <span class="t-label">Mumbai, India</span>
+      </div>
+
+      <!-- role marquee — their .infinit-text -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>Product Designer<i class="marquee-dot"></i>Fintech Infrastructure<i class="marquee-dot"></i>Design Systems<i class="marquee-dot"></i></span>
+          <span>Product Designer<i class="marquee-dot"></i>Fintech Infrastructure<i class="marquee-dot"></i>Design Systems<i class="marquee-dot"></i></span>
+        </div>
+      </div>
+
+      <!-- portrait scales up as it rises through the viewport -->
+      <figure class="about-portrait" data-portrait>
+        <img src="assets/portrait.jpg" alt="Mridhul Aswin" width="1672" height="941"
+             loading="lazy" decoding="async"
+             onerror="this.closest('.about-portrait').classList.add('is-empty');this.remove()"/>
+        <span class="portrait-glow" aria-hidden="true"></span>
+        <span class="ph" aria-hidden="true">assets/portrait.jpg</span>
+      </figure>
+
+      <div class="about-lead">
+        <h2 class="t-h3" id="about-h" data-reveal>
+          Driving measurable clarity into payment operations through design.
+        </h2>
+        <div class="about-lead-body">
+          <p class="t-b2" data-reveal style="--d:120ms">
+            I focus on the unglamorous core of payments. That means turning manual, spreadsheet-driven
+            back-office operations into auditable, automated consoles, and packaging complex flows into
+            SDKs other teams can drop in and re-skin.
+          </p>
+          <p class="t-b2" data-reveal style="--d:180ms">
+            My work spans a payments platform's stack: admin and dashboard systems, stored-value wallets,
+            bill-pay, open commerce integrations, and recurring mandates, shipped to production and
+            whitelabelled across partner organizations.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-stats">
+        <div class="stat" data-reveal>
+          <p class="t-label stat-label">Years of experience</p>
+          <div class="stat-num" data-count="2">0+</div>
+        </div>
+        <div class="stat" data-reveal style="--d:140ms">
+          <p class="t-label stat-label">Projects completed</p>
+          <div class="stat-num" data-count="9">0+</div>
+        </div>
+      </div>
+
+      <div class="chips">
+        <span data-reveal style="--d:60ms">Product design</span>
+        <span data-reveal style="--d:110ms">UX</span>
+        <span data-reveal style="--d:160ms">Design systems</span>
+        <span data-reveal style="--d:210ms">Whitelabel theming</span>
+        <span data-reveal style="--d:260ms">Stakeholder collaboration</span>
+        <span data-reveal style="--d:310ms">AI-assisted design</span>
+      </div>
+    </div>
+   </div>
+  </section>
+
+  <!-- CAPABILITIES — pinned horizontal scroll -->
+  <section id="capabilities" class="cap" aria-labelledby="cap-h" data-cap>
+    <div class="cap-sticky">
+      <div class="shell">
+        <div class="sec-head" data-reveal>
+          <span class="t-label">Capabilities</span>
+          <span class="t-label">04</span>
+        </div>
+        <h2 class="cap-head t-h3" id="cap-h" data-reveal>
+          Turning back-office complexity into systems teams can actually operate.
+        </h2>
+      </div>
+      <div class="cap-viewport">
+        <div class="cap-track" data-cap-track>
+          <article class="cap-card" data-reveal style="--d:0ms">
+            <span class="cap-num" aria-hidden="true">01</span>
+            <span class="cap-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8h20v20H8zM36 8h20v12H36zM36 28h20v28H36zM8 36h20v20H8z"/></svg>
+            </span>
+            <h3 class="cap-title t-h4">Admin &amp; Dashboard Systems</h3>
+            <p class="cap-body t-b2">Operator consoles for an interoperable admin rail — maker-checker approvals, merchant configuration, settlement recon and user access management. Two clients live in production.</p>
+          </article>
+          <article class="cap-card" data-reveal style="--d:90ms">
+            <span class="cap-num" aria-hidden="true">02</span>
+            <span class="cap-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="16" width="48" height="34" rx="6"/><path d="M8 26h48"/><circle cx="44" cy="38" r="4"/></svg>
+            </span>
+            <h3 class="cap-title t-h4">Wallet &amp; SDK Design</h3>
+            <p class="cap-body t-b2">A stored-value wallet SDK plus its admin portal, packaged so partner teams can drop it in and re-skin it. Whitelabelled for a transit operator and a logistics partner.</p>
+          </article>
+          <article class="cap-card" data-reveal style="--d:180ms">
+            <span class="cap-num" aria-hidden="true">03</span>
+            <span class="cap-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 6 56 20v24L32 58 8 44V20z"/><path d="M32 6v52M8 20l48 24M56 20L8 44"/></svg>
+            </span>
+            <h3 class="cap-title t-h4">Design Systems &amp; Whitelabel Theming</h3>
+            <p class="cap-body t-b2">Token-driven theming and a component-by-component catalog audit. A Claude Code and Python pipeline turns one brand HEX into a fully themed partner — 29 themed so far.</p>
+          </article>
+          <article class="cap-card" data-reveal style="--d:270ms">
+            <span class="cap-num" aria-hidden="true">04</span>
+            <span class="cap-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 24a18 18 0 0 1 32-8"/><path d="M50 40a18 18 0 0 1-32 8"/><path d="M46 8v10H36M18 56V46h10"/></svg>
+            </span>
+            <h3 class="cap-title t-h4">Open Commerce &amp; Recurring Mandates</h3>
+            <p class="cap-body t-b2">Buyer-app flows for partner organizations joining an open commerce network, and recurring-mandate management pulled into one dashboard across 50+ partner organizations.</p>
+          </article>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- SELECTED WORK -->
+  <section id="work" aria-labelledby="work-h" data-theme-dark>
+    <div class="shell">
+      <div class="sec-head" data-reveal>
+        <span class="t-label">Selected work</span>
+        <span class="t-label">Nine projects</span>
+      </div>
+
+      <h2 class="work-head t-h3" id="work-h" data-reveal data-split-words>Nine systems taken from concept to production, and what each one had to solve.</h2>
+
+      <div class="work-list" data-rail>
+        <div class="work-track" aria-hidden="true"><div class="work-progress"></div></div>
+
+
+        <!-- 01 Admin & Dashboard Designs -->
+        <div class="work-items">
+          <div class="work-item" data-reveal>
+            <span class="work-dot" aria-hidden="true"></span>
+            <div class="work-content">
+              <span class="work-num">01</span>
+              <a class="work-card group" href="admin-dashboard/" aria-label="Admin and Dashboard Designs case study">
+              <div class="work-cover">
+              <img src="admin-dashboard/assets/after/business-dashboard.png"
+              alt="Admin and Dashboard Designs · business dashboard"
+              width="1668" height="4761" loading="lazy" decoding="async"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+              <div class="ph">admin-dashboard / business-dashboard.png</div>
+              </div>
+              <div class="work-body">
+              <h3 class="t-h3">Admin &amp; Dashboard Designs</h3>
+              <p class="work-meta">UX / Product design · live in production for 2 clients</p>
+              <div class="work-tags"><span>Dashboard</span><span>UAM</span><span>Whitelabel</span></div>
+              <span class="work-arrow"><span class="hover-link">View case study</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+              </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 02 Wallet Solution -->
+          <div class="work-item" data-reveal>
+            <span class="work-dot" aria-hidden="true"></span>
+            <div class="work-content">
+              <span class="work-num">02</span>
+              <a class="work-card group" href="wallet/" aria-label="Wallet Solution case study">
+              <div class="work-cover">
+              <img src="wallet/assets/sdk/sdk-desktop-wallet.png"
+              alt="Wallet Solution · wallet SDK on desktop"
+              width="1280" height="900" loading="lazy" decoding="async"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+              <div class="ph">wallet / sdk-desktop-wallet.png</div>
+              </div>
+              <div class="work-body">
+              <h3 class="t-h3">Wallet Solution</h3>
+              <p class="work-meta">UX / Product design · SDK and admin portal</p>
+              <div class="work-tags"><span>Wallet SDK</span><span>Transit · Logistics</span><span>Admin</span></div>
+              <span class="work-arrow"><span class="hover-link">View case study</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+              </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 03 Bill-Pay Portal -->
+          <div class="work-item" data-reveal>
+            <span class="work-dot" aria-hidden="true"></span>
+            <div class="work-content">
+              <span class="work-num">03</span>
+              <a class="work-card group" href="bill-pay-portal/" aria-label="Bill-Pay Portal refresh case study">
+              <div class="work-cover">
+              <img src="bill-pay-portal/assets/add-biller/select-biller.png"
+              alt="Bill-Pay Portal · add a biller"
+              width="1440" height="1080" loading="lazy" decoding="async"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+              <div class="ph">bill-pay-portal / select-biller.png</div>
+              </div>
+              <div class="work-body">
+              <h3 class="t-h3">Bill-Pay Portal Refresh</h3>
+              <p class="work-meta">UX / UI · illustration · 30–50 partner organizations</p>
+              <div class="work-tags"><span>Bill-pay SSO</span><span>Add Biller</span><span>DLS illustration</span></div>
+              <span class="work-arrow"><span class="hover-link">View case study</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+              </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 04 In-App Travel Booking -->
+          <div class="work-item" data-reveal>
+            <span class="work-dot" aria-hidden="true"></span>
+            <div class="work-content">
+              <span class="work-num">04</span>
+              <a class="work-card group" href="in-app-travel-booking/" aria-label="In-App Travel Booking case study">
+              <div class="work-cover">
+              <img src="in-app-travel-booking/assets/results/results-vd.png"
+              alt="In-app travel booking · flight results screen"
+              width="1440" height="966" loading="lazy" decoding="async"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+              <div class="ph">in-app-travel-booking / results-vd.png</div>
+              </div>
+              <div class="work-body">
+              <h3 class="t-h3">In-App Travel Booking</h3>
+              <p class="work-meta">UX / Product design · buyer app flow, platform as TSP</p>
+              <div class="work-tags"><span>Open commerce</span><span>Wireframe → VD</span><span>Booking flow</span></div>
+              <span class="work-arrow"><span class="hover-link">View case study</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+              </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 05 Recurring Payments Hub -->
+          <div class="work-item" data-reveal>
+            <span class="work-dot" aria-hidden="true"></span>
+            <div class="work-content">
+              <span class="work-num">05</span>
+              <a class="work-card group" href="recurring-payments-hub/" aria-label="Recurring Payments Hub case study">
+              <div class="work-cover">
+              <img src="recurring-payments-hub/assets/after/dweb-dashboard.png"
+              alt="Recurring Payments Hub · subscriptions dashboard on desktop"
+              width="1280" height="900" loading="lazy" decoding="async"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+              <div class="ph">recurring-payments-hub / dweb-dashboard.png</div>
+              </div>
+              <div class="work-body">
+              <h3 class="t-h3">Recurring Payments Hub</h3>
+              <p class="work-meta">UX / UI · recurring mandates · web and mobile</p>
+              <div class="work-tags"><span>Recurring mandates</span><span>Revamp</span><span>Web + mobile</span></div>
+              <span class="work-arrow"><span class="hover-link">View case study</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+              </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 06 Whitelabel Theming, Automated -->
+          <div class="work-item" data-reveal>
+            <span class="work-dot" aria-hidden="true"></span>
+            <div class="work-content">
+              <span class="work-num">06</span>
+              <a class="work-card group" href="whitelabel-theme-automation/" aria-label="Whitelabel Theming, Automated case study">
+              <div class="work-cover">
+              <img src="whitelabel-theme-automation/assets/partner-a/website.png"
+              alt="Whitelabel Theming, Automated · themed partner website"
+              width="1911" height="644" loading="lazy" decoding="async"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+              <div class="ph">whitelabel-theme-automation / website.png</div>
+              </div>
+              <div class="work-body">
+              <h3 class="t-h3">Whitelabel Theming, Automated</h3>
+              <p class="work-meta">Design systems · automation · 29 partners themed</p>
+              <div class="work-tags"><span>Claude Code skill</span><span>Design tokens</span><span>AI + automation</span></div>
+              <span class="work-arrow"><span class="hover-link">View case study</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+              </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 07 KYC Tokenization -->
+          <div class="work-item" data-reveal>
+            <span class="work-dot" aria-hidden="true"></span>
+            <div class="work-content">
+              <span class="work-num">07</span>
+              <a class="work-card group" href="kyc-tokenization/" aria-label="KYC Tokenization case study">
+              <div class="work-cover">
+              <img src="kyc-tokenization/assets/hero/hero-device-binding.png"
+              alt="KYC Tokenization · TrustKYC device-binding screen on a phone"
+              width="2354" height="2188" loading="lazy" decoding="async"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+              <div class="ph">kyc-tokenization / hero-device-binding.png</div>
+              </div>
+              <div class="work-body">
+              <h3 class="t-h3">KYC Tokenization</h3>
+              <p class="work-meta">UX / Product design · internal hackathon · concept</p>
+              <div class="work-tags"><span>Digital identity</span><span>Consent model</span><span>Concept</span></div>
+              <span class="work-arrow"><span class="hover-link">View case study</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+              </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 08 DLS Component Catalog -->
+          <div class="work-item" data-reveal>
+            <span class="work-dot" aria-hidden="true"></span>
+            <div class="work-content">
+              <span class="work-num">08</span>
+              <a class="work-card group" href="dls-overview/" aria-label="DLS Component Catalog case study">
+              <div class="work-cover">
+              <img src="dls-overview/assets/buttons/button-variant-grid.png"
+              alt="DLS Component Catalog · button component variant grid"
+              width="2611" height="4637" loading="lazy" decoding="async"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+              <div class="ph">dls-overview / button-variant-grid.png</div>
+              </div>
+              <div class="work-body">
+              <h3 class="t-h3">DLS Component Catalog</h3>
+              <p class="work-meta">UX / Design systems · in progress · pulled from Figma</p>
+              <div class="work-tags"><span>Design system</span><span>Component audit</span><span>Figma</span></div>
+              <span class="work-arrow"><span class="hover-link">View case study</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+              </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
   <!-- CONTACT -->
   <section id="contact" class="contact" aria-labelledby="contact-h">
-    <div class="shell contact-row">
-      <h2 id="contact-h" data-reveal>Let's <a href="mailto:mridhulaswin92@gmail.com">work together</a> &rarr;</h2>
-      <div class="contact-links" data-reveal style="--d:120ms">
-        <a href="mailto:mridhulaswin92@gmail.com"><span class="k">Email</span> <span>mridhulaswin92@gmail.com</span></a>
-        <a href="https://www.linkedin.com/in/mridhul-aswin-6637202bb/?skipRedirect=true" target="_blank" rel="noopener"><span class="k">LinkedIn</span> <span>/in/mridhul-aswin-6637202bb</span></a>
-        <a href="resume/"><span class="k">Résumé</span> <span>View résumé</span></a>
+    <div class="shell">
+      <div class="contact-row">
+        <h2 class="t-h2" id="contact-h" data-reveal>Let's <a class="hover-link" href="mailto:mridhulaswin92@gmail.com">work together</a> &rarr;</h2>
+        <div class="contact-links" data-reveal style="--d:120ms">
+          <a href="mailto:mridhulaswin92@gmail.com"><span class="k">Email</span> <span class="hover-link">mridhulaswin92@gmail.com</span></a>
+          <a href="https://www.linkedin.com/in/mridhul-aswin-6637202bb/?skipRedirect=true" target="_blank" rel="noopener"><span class="k">LinkedIn</span> <span class="hover-link">/in/mridhul-aswin-6637202bb</span></a>
+          <a href="resume/"><span class="k">Résumé</span> <span class="hover-link">View résumé</span></a>
+
+          <!-- 09 Wealth -->
+          <div class="work-item" data-reveal>
+            <span class="work-dot" aria-hidden="true"></span>
+            <div class="work-content">
+              <span class="work-num">09</span>
+              <a class="work-card group" href="wealth/" aria-label="Wealth fixed-income investing app case study">
+              <div class="work-cover">
+              <div class="ph">wealth / bond-detail.png</div>
+              </div>
+              <div class="work-body">
+              <h3 class="t-h3">Wealth</h3>
+              <p class="work-meta">Product design · new product line · pitch ongoing</p>
+              <div class="work-tags"><span>Fixed income</span><span>Prototype</span><span>Onboarding</span></div>
+              <span class="work-arrow"><span class="hover-link">View case study</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+              </div>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -278,12 +468,12 @@
 
 <footer class="foot">
   <div class="shell foot-inner">
-    <span class="brand">Mridhul Aswin<span class="pip" style="color:var(--accent)">.</span></span>
+    <span class="brand">Mridhul Aswin<span class="pip">.</span></span>
     <span>Product designer, fintech · <span id="yr">2026</span></span>
   </div>
 </footer>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="scripts/reveal.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+<script src="scripts/reveal.js?v=33" defer onerror="document.documentElement.classList.remove('js')"></script>
 </body>
 </html>

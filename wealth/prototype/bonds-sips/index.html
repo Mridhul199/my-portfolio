@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bonds · SIPs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../bonds-shared/motion.css">
+<style>
+  :root{
+    --grad-1:#7C3AED; --grad-2:#6D5CF6; --grad-3:#4F7DF3;
+    --ink:#F4F1FA; --ink-2:#B8B3CC; --ink-3:#7A7593;
+    --canvas:#0A0714; --surface:#160F24;
+    --border:#2A2138;
+    --up-tint:#12291C; --up:#22C55E;
+    --f:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{background:#DCDAE8}
+  body{font-family:var(--f);color:var(--ink);display:flex;justify-content:center;padding:28px 12px;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  button{font-family:var(--f);cursor:pointer;border:none;background:none}
+
+  .device{width:402px;max-width:100%;height:874px;background:var(--canvas);border-radius:40px;overflow:hidden;box-shadow:0 30px 70px rgba(30,15,80,.28),0 0 0 10px #0E0B1E;position:relative}
+  .scroll{height:100%;overflow-y:auto;scrollbar-width:none}
+  .scroll::-webkit-scrollbar{display:none}
+
+  .hero{position:relative;padding:18px 20px 24px;overflow:hidden;background:var(--surface)}
+  .hero::before{
+    content:"";position:absolute;top:0;right:0;width:150px;height:150px;
+    background-image:radial-gradient(circle,rgba(225,123,255,.4) 1px,transparent 1.4px);
+    background-size:11px 11px;
+    -webkit-mask-image:radial-gradient(circle at top right,#000 0%,transparent 70%);
+    mask-image:radial-gradient(circle at top right,#000 0%,transparent 70%);
+    pointer-events:none
+  }
+  .hero > *{position:relative;z-index:1}
+  .hero .ttl{font-size:14.5px;font-weight:800;color:#fff}
+
+  .content{flex:1;padding:60px 24px 110px;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .ic-ring{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,var(--grad-1),var(--grad-3));display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+  .ic-ring svg{width:28px;height:28px;stroke:#fff}
+  .content h1{font-size:19px;font-weight:800;letter-spacing:-.3px;margin-bottom:8px}
+  .content .sub{font-size:13px;color:var(--ink-2);font-weight:500;line-height:1.55;max-width:280px;margin-bottom:24px}
+
+  .notify-card{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 20px rgba(60,40,140,.05)}
+  .notify-card .ic{width:38px;height:38px;border-radius:10px;background:var(--up-tint);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .notify-card .ic svg{width:17px;height:17px;stroke:var(--up)}
+  .notify-card .t{font-size:12.5px;font-weight:700;text-align:left;flex:1}
+  .notify-card .t .s{display:block;font-size:11px;color:var(--ink-3);font-weight:500;margin-top:2px}
+  .notify-btn{font-size:12px;font-weight:700;color:var(--grad-2);flex-shrink:0}
+
+  .bottom-nav{position:absolute;left:16px;right:16px;bottom:20px;background:rgba(20,14,34,.72);backdrop-filter:blur(22px) saturate(1.6);-webkit-backdrop-filter:blur(22px) saturate(1.6);border:1px solid rgba(255,255,255,.12);border-radius:30px;display:flex;padding:12px 8px;z-index:3;box-shadow:0 8px 30px rgba(0,0,0,.35),0 20px 45px rgba(0,0,0,.4)}
+  .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--ink-3);position:relative}
+  .nav-item svg{width:20px;height:20px}
+  .nav-item span{font-size:10px;font-weight:600}
+  .nav-item.on{color:var(--grad-2)}
+  .nav-badge{position:absolute;top:-4px;right:calc(50% - 20px);background:var(--up);color:#fff;font-size:8px;font-weight:800;padding:2px 5px;border-radius:999px}
+  .nav-dot{position:absolute;top:-2px;right:calc(50% - 16px);width:8px;height:8px;border-radius:50%;background:#EF4444;border:1.5px solid var(--canvas)}
+
+  .toast{position:absolute;left:50%;bottom:100px;transform:translate(-50%,20px);background:rgba(18,14,38,.94);color:#fff;font-size:12.5px;font-weight:600;padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50;white-space:nowrap;max-width:90%;text-align:center}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+
+<div class="device">
+<div class="scroll">
+
+  <div class="hero"><div class="ttl">SIPs</div></div>
+
+  <div class="content">
+    <div class="ic-ring"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9.5a3 3 0 013-1.5c1.7 0 3 1 3 2.2 0 2.8-6 1.8-6 4.6 0 1.2 1.3 2.2 3 2.2a3 3 0 003-1.5"/></svg></div>
+    <h1>SIPs are coming soon</h1>
+    <div class="sub">Auto-invest a fixed amount into bonds every month and build a laddered fixed-income portfolio — no need to time the market.</div>
+
+    <div class="notify-card">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+      <div class="t">Notify me at launch<span class="s">We'll ping you the day this goes live</span></div>
+      <button class="notify-btn" id="notifyBtn">Notify</button>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a class="nav-item" href="../bonds-discovery/index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 10h8M8 14h5"/></svg>
+      <span>Bonds</span>
+    </a>
+    <div class="nav-item on">
+      <span class="nav-badge">↑0.25%</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9.5a3 3 0 013-1.5c1.7 0 3 1 3 2.2 0 2.8-6 1.8-6 4.6 0 1.2 1.3 2.2 3 2.2a3 3 0 003-1.5"/></svg>
+      <span>SIPs</span>
+    </div>
+    <a class="nav-item" href="../bonds-portfolio/index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2M3 12h18"/></svg>
+      <span>Portfolio</span>
+    </a>
+    <a class="nav-item" href="../bonds-referral/index.html">
+      <span class="nav-dot"></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7C10 3 5 4 5 7s5 3 7 0zm0 0c2-4 7-3 7 0s-5 3-7 0z"/></svg>
+      <span>Refer&amp;Earn</span>
+    </a>
+    <button class="nav-item" id="moreBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="1.5"/><circle cx="18" cy="6" r="1.5"/><circle cx="6" cy="18" r="1.5"/><circle cx="18" cy="18" r="1.5"/></svg>
+      <span>More</span>
+    </button>
+  </nav>
+
+</div>
+</div>
+
+<script src="../bonds-shared/ui.js"></script>
+<script>
+  document.getElementById('notifyBtn').addEventListener('click', () => showToast("You're on the list"));
+  document.getElementById('moreBtn').addEventListener('click', () => showToast('More menu — coming soon'));
+</script>
+
+</body>
+</html>
