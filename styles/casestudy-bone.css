@@ -115,12 +115,13 @@ code{color:var(--text-2);background:var(--surface-2);border-color:var(--border)}
 }
 
 /* Some case studies ship their own sticky section-nav (.chrome) with a
-   hardcoded gradient. Retint to bone and offset it below the 48px
-   portfolio bridge bar so the two sticky bars stack. */
+   hardcoded gradient. Retint to bone and offset it below the
+   portfolio bridge bar (72px desktop, 56px mobile) so the two
+   sticky bars stack rather than overlap. */
 .chrome{
   background:linear-gradient(180deg,rgba(244,245,240,.94) 0%,rgba(234,235,229,.86) 100%);
   border-bottom-color:var(--border);
-  top:48px;
+  top:72px;
 }
 .chrome .brand{color:var(--text-1)}
 .chrome .brand-sub{color:var(--text-3)}
@@ -181,22 +182,22 @@ code{color:var(--text-2);background:var(--surface-2);border-color:var(--border)}
    The inline rule paints this bar rgba(11,11,12,.72): a leftover from
    the retired dark theme that read as a foreign strip above a bone
    page. Same geometry and blur as .nav in the shell. */
-.pf-bridge{
+nav.pf-bridge{
   background:rgba(234,235,229,.78);
   -webkit-backdrop-filter:saturate(180%) blur(14px);
   backdrop-filter:saturate(180%) blur(14px);
   border-bottom:1px solid transparent;
   transition:background .25s ease,border-color .25s ease;
 }
-.pf-bridge.is-scrolled{background:rgba(234,235,229,.92);border-bottom-color:var(--border)}
-.pf-bridge .pf-bridge-inner{height:72px;gap:20px}
-.pf-bridge-link{font-weight:800;font-size:16px;letter-spacing:-.02em;color:var(--text-1)}
+nav.pf-bridge.is-scrolled{background:rgba(234,235,229,.92);border-bottom-color:var(--border)}
+nav.pf-bridge .pf-bridge-inner{height:72px;gap:20px}
+nav.pf-bridge .pf-bridge-link{font-weight:800;font-size:16px;letter-spacing:-.02em;color:var(--text-1)}
 /* the mark from the home nav, sized for the bridge. currentColor picks
    up the link's ink; the red path falls back through --orange here,
    since the case studies do not define --accent. */
-.pf-bridge-link .brand-mark{height:21px;width:auto;flex:none;color:var(--text-1)}
-.pf-bridge-link svg{stroke:var(--orange)}
-.pf-bridge-link:hover{color:var(--text-1)}
+nav.pf-bridge .pf-bridge-link .brand-mark{height:21px;width:auto;flex:none;color:var(--text-1)}
+nav.pf-bridge .pf-bridge-link svg{stroke:var(--orange)}
+nav.pf-bridge .pf-bridge-link:hover{color:var(--text-1)}
 .pf-bridge-ctx{color:var(--text-3)}
 
 .cs-nav-links{display:flex;gap:clamp(16px,2vw,32px);align-items:center;margin-left:auto}
@@ -242,4 +243,98 @@ code{color:var(--text-2);background:var(--surface-2);border-color:var(--border)}
   .js [data-reveal],
   .js [data-reveal]:not(.is-in){opacity:1;transform:none;transition:none}
   .hover-link{transition:none}
+}
+
+/* ============================================================
+   MOBILE
+   The case studies were authored desktop-first: a 72px bar, 72px
+   section padding, a 32px gutter and multi-column grids — several
+   of them pinned by inline style="grid-template-columns:…"
+   attributes, which outrank every stylesheet rule and are why the
+   existing max-width:760px blocks never took effect. Hence the
+   !important on those two selectors; nothing else here needs it.
+   ============================================================ */
+
+/* ---- 1. top bar ----
+   At 375px the wordmark wrapped to two lines and collided with the
+   links. The back arrow goes (the mark already links home), the bar
+   loses 16px of height, and the wordmark drops on the narrowest
+   screens so the mark carries the brand on its own. */
+@media(max-width:760px){
+  nav.pf-bridge .pf-bridge-inner{height:56px;gap:12px}
+  nav.pf-bridge .pf-bridge-link{font-size:15px;gap:7px;white-space:nowrap;flex:none}
+  nav.pf-bridge .pf-bridge-link>svg:first-child{display:none}
+  nav.pf-bridge .pf-bridge-link .brand-mark{height:18px;width:auto}
+  .cs-nav-links{gap:15px;flex:none}
+  .cs-nav-links a{font-size:13px;white-space:nowrap}
+  /* the secondary sticky bar some studies ship must follow the
+     shorter bridge, or it overlaps the content beneath it */
+  .chrome{top:56px}
+}
+@media(max-width:560px){
+  nav.pf-bridge .pf-brand-name{display:none}
+  nav.pf-bridge .pf-bridge-link .brand-mark{height:20px;width:auto}
+  .cs-nav-links{gap:17px}
+}
+
+/* ---- 2. headers: subtle and short ----
+   h1 was 38px against a 16ch measure, so the admin hero ran six
+   lines and 210px tall before a word of copy. Dropping the cap lets
+   each line use the full column, which costs less height than the
+   type size does. */
+@media(max-width:760px){
+  h1{font-size:clamp(27px,7.2vw,34px);line-height:1.0;letter-spacing:-.022em}
+  h2{font-size:clamp(21px,5.1vw,27px);line-height:1.04;letter-spacing:-.022em}
+  h3{font-size:17px;line-height:1.2}
+  .hero h1,.cs-contact h2{max-width:none}
+  .eyebrow{font-size:10.5px;letter-spacing:.09em}
+  .section-head{margin-bottom:22px;padding-bottom:14px}
+  .lead{font-size:16px;line-height:1.5}
+}
+
+/* ---- 3. vertical rhythm ----
+   11 sections x 144px of padding was roughly two phone screens of
+   empty space on its own. */
+@media(max-width:760px){
+  :root{--gutter:20px}
+  section{padding:44px 0}
+  .hero{padding:36px 0 4px}
+  .cs-contact{padding:56px 0}
+  .cs-foot{padding:22px 0 28px}
+  .meta-bar{margin-top:28px}
+}
+
+/* ---- 4. grids pinned by inline style attributes ----
+   The meta bar stays 2-up: its cells are short labels and a 2x2
+   block reads better, and shorter, than four stacked rows. */
+@media(max-width:760px){
+  .meta-bar[style]{grid-template-columns:repeat(2,1fr)!important}
+  [style*="grid-template-columns"]:not(.meta-bar){grid-template-columns:1fr!important}
+  .meta-cell{padding:14px 16px}
+}
+
+/* ---- 5. overflow guards ----
+   Media and wide blocks must not push the document sideways. */
+@media(max-width:760px){
+  img,svg,video,canvas{max-width:100%;height:auto}
+  .hero-art,.hero-art-ph{max-width:100%}
+  table{display:block;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  pre{overflow-x:auto}
+}
+
+/* ---- 6. per-study components that stayed desktop-width ----
+   Each of these was clipped rather than scrolling the page, so the
+   symptom was cut-off content, not a sideways drag.
+   Deliberately NOT touched: whitelabel's .bt-pvwrap half-phone,
+   which is designed to bleed off the card edge, and kyc's
+   .filmstrip images, which live in a horizontal scroller. */
+@media(max-width:760px){
+  /* whitelabel: a fixed 2-up token list inside a 335px column */
+  .gen-tokens{grid-template-columns:1fr;gap:14px 0}
+  /* dls-overview: .icon-grid declares grid columns but computes as
+     flex, so grid-template-columns was inert and the tiles never
+     wrapped — they ran straight off the card */
+  .icon-grid{flex-wrap:wrap}
+  /* recurring-payments: the peek card cleared the gutter by 4px */
+  .pv-mrp-card{flex-basis:86%}
 }
