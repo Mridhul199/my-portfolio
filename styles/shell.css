@@ -359,21 +359,19 @@ section{padding:var(--pad-y) 0}
 .work-cover[data-frame]{
   aspect-ratio:16/11;
   overflow:hidden;isolation:auto;
-  border-radius:12px;
-  /* literal values, not tokens: the stage stays light when the work
-     section flips dark, the same reason .work-cover keeps a light plate
-     for the darken blend. A dark device on a dark ground has no edge. */
-  background:linear-gradient(157deg,#F7F8F4 0%,#ECEDE7 58%,#E2E3DC 100%);
+  border-radius:0;
+  /* no stage. The device stands directly on the page, so the only thing
+     separating it from the ground is its own silhouette — hence --rim
+     below, which gives the bezel an edge once the section flips dark
+     and a near-black device would otherwise disappear into it. */
+  background:none;
+  --rim:rgba(0,0,0,.10);
+  --pad:clamp(14px,2.6%,32px);
   display:flex;align-items:center;justify-content:center;
-  padding:clamp(16px,3%,38px);
+  padding:var(--pad);
   perspective:1400px;
 }
-/* .is-dark .work-cover sets a flat #EAEBE5 plate and lives further down
-   the file, so it wins on source order at equal specificity. One more
-   class here settles it in both themes. */
-.is-dark .work-cover[data-frame]{
-  background:linear-gradient(157deg,#F7F8F4 0%,#ECEDE7 58%,#E2E3DC 100%);
-}
+.is-dark .work-cover[data-frame]{background:none;--rim:rgba(255,255,255,.16)}
 
 .work-cover[data-frame] img{
   --tilt:rotateY(-9deg) rotateX(2.5deg) rotate(-1deg);
@@ -388,18 +386,52 @@ section{padding:var(--pad-y) 0}
    these carry both, and out-specify it */
 .work-card:hover .work-cover[data-frame] img,
 .work-item.is-active .work-cover[data-frame] img{transform:var(--tilt) scale(.965)}
-
-/* desktop: a monitor */
-.work-cover[data-frame="desktop"] img{
-  aspect-ratio:16/10;width:100%;
-  border:9px solid #15171b;border-radius:12px;
-  box-shadow:0 34px 60px -24px rgba(0,0,0,.55),0 4px 10px rgba(0,0,0,.18);
+/* the lid overlay carries the base, so it has to follow the same scale */
+.work-card:hover .work-cover[data-frame="laptop"]::after,
+.work-item.is-active .work-cover[data-frame="laptop"]::after{
+  transform:translate(-50%,-50%) var(--tilt) scale(.965);
 }
+
+/* web: a laptop. The old "desktop" frame was a bare bezel, which at
+   this size and tilt read as a tablet — the lid needs a base under it
+   to say laptop.
+
+   The base is not a separate box with its own position, which is what
+   first went wrong: percentages inside translate() resolve against the
+   pseudo-element's own height, so a 9px bar translated by "half the
+   lid" landed in the middle of the screen. Instead ::after is an
+   invisible box the exact size of the lid, carrying the exact same
+   transform, and the base is drawn by an offset box-shadow. A shadow
+   paints outside the border box and travels with the element, so the
+   two cannot come apart however the tilt or the scale change. */
+.work-cover[data-frame="laptop"]{position:relative}
+.work-cover[data-frame="laptop"] img{
+  aspect-ratio:16/10;width:100%;
+  border:8px solid #15171b;border-bottom-width:12px;
+  border-radius:10px 10px 3px 3px;
+  box-shadow:0 0 0 1px var(--rim);
+}
+.work-cover[data-frame="laptop"]::after{
+  content:"";position:absolute;left:50%;top:50%;
+  width:calc(100% - 2 * var(--pad));aspect-ratio:16/10;
+  border-radius:0 0 18px 18px;
+  transform:translate(-50%,-50%) var(--tilt) scale(.93);
+  transform-origin:50% 55%;
+  --tilt:rotateY(-9deg) rotateX(2.5deg) rotate(-1deg);
+  /* 1: the deck, overhanging the lid on both sides — the overhang is
+     what actually says laptop rather than tablet. 2: the darker front
+     lip under it. 3: the contact shadow on the page. */
+  box-shadow:0 16px 0 14px #1f2229,
+             0 22px 0 14px #0E1013,
+             0 42px 40px -18px rgba(0,0,0,.65);
+  pointer-events:none;
+}
+
 /* the shot already contains its own device shell, so the stage supplies
    only the ground, the tilt and the contact shadow */
 .work-cover[data-frame="stage"] img{
   height:100%;width:auto;
-  filter:drop-shadow(0 30px 46px rgba(0,0,0,.45));
+  filter:drop-shadow(0 26px 40px rgba(0,0,0,.5));
 }
 
 /* mobile: a phone, narrower than the stage so it reads as a device */
@@ -407,7 +439,7 @@ section{padding:var(--pad-y) 0}
 .work-cover[data-frame="phone"] > .ph{
   aspect-ratio:9/17;height:100%;width:auto;
   border:7px solid #15171b;border-radius:26px;
-  box-shadow:0 34px 60px -24px rgba(0,0,0,.55),0 4px 10px rgba(0,0,0,.18);
+  box-shadow:0 30px 54px -22px rgba(0,0,0,.55),0 0 0 1px var(--rim);
 }
 .work-cover[data-frame="phone"] > .ph{position:static;transform:var(--tilt,none)}
 
@@ -417,12 +449,16 @@ section{padding:var(--pad-y) 0}
 
 @media(max-width:767px){
   .work-cover[data-frame] img{--tilt:rotateY(-5deg) rotate(-.5deg)}
-  .work-cover[data-frame="desktop"] img{border-width:6px;border-radius:9px}
+  .work-cover[data-frame="laptop"] img{border-width:6px;border-bottom-width:9px;border-radius:8px 8px 2px 2px}
+  .work-cover[data-frame="laptop"]::after{border-radius:0 0 12px 12px;box-shadow:0 10px 0 8px #1f2229,0 14px 0 8px #0E1013,0 26px 26px -12px rgba(0,0,0,.65)}
   .work-cover[data-frame="phone"] img,
   .work-cover[data-frame="phone"] > .ph{border-width:5px;border-radius:20px}
 }
 @media(prefers-reduced-motion:reduce){
-  .work-cover[data-frame] img{--tilt:none}
+  /* the base and lid-dent declare --tilt on themselves, so clearing it
+     on the img alone would leave them turned while the lid sat square */
+  .work-cover[data-frame] img,
+  .work-cover[data-frame="laptop"]::after{--tilt:none}
 }
 
 .work-body{position:relative;z-index:2;padding:clamp(22px,2.2vw,32px) 0 0}
