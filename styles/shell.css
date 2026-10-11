@@ -367,6 +367,15 @@ section{padding:var(--pad-y) 0}
   background:none;
   --rim:rgba(0,0,0,.10);
   --pad:clamp(14px,2.6%,32px);
+  /* a framed shot is centred on its lid, but a laptop is lid + deck,
+     so the silhouette hangs below centre and the cover clips its front
+     edge. --lift re-centres the whole machine, --dev scales it to fit. */
+  --dev:.93;--lift:0%;
+  /* one source for the turn. It lives on the cover, not on the img:
+     a var() that is undefined on the element using it invalidates the
+     whole transform, which is how the phone's hardware overlay ended
+     up untransformed and parked at the bottom-right corner. */
+  --tilt:rotateY(-9deg) rotateX(2.5deg) rotate(-1deg);
   display:flex;align-items:center;justify-content:center;
   padding:var(--pad);
   perspective:1400px;
@@ -374,57 +383,79 @@ section{padding:var(--pad-y) 0}
 .is-dark .work-cover[data-frame]{background:none;--rim:rgba(255,255,255,.16)}
 
 .work-cover[data-frame] img{
-  --tilt:rotateY(-9deg) rotateX(2.5deg) rotate(-1deg);
   mix-blend-mode:normal;
   width:auto;height:auto;max-width:100%;max-height:100%;
   object-fit:cover;object-position:top center;
-  transform:var(--tilt) scale(.93);
+  transform:translateY(var(--lift)) var(--tilt) scale(var(--dev));
   transform-origin:50% 55%;
   transition:transform .7s var(--ease);
 }
 /* the generic hover rule is scale-only, which would drop the tilt —
    these carry both, and out-specify it */
 .work-card:hover .work-cover[data-frame] img,
-.work-item.is-active .work-cover[data-frame] img{transform:var(--tilt) scale(.965)}
-/* the lid overlay carries the base, so it has to follow the same scale */
+.work-item.is-active .work-cover[data-frame] img{
+  transform:translateY(var(--lift)) var(--tilt) scale(calc(var(--dev) + .035));
+}
+/* the deck and hinge are positioned in lid units, so they have to
+   follow the lid's hover scale or the machine comes apart */
 .work-card:hover .work-cover[data-frame="laptop"]::after,
 .work-item.is-active .work-cover[data-frame="laptop"]::after{
-  transform:translate(-50%,-50%) var(--tilt) scale(.965);
+  transform:translate(-50%,calc(-50% + var(--lift))) var(--tilt) scale(calc(var(--dev) + .035))
+            translateY(50%) rotateX(-75deg) translateY(50%);
+}
+.work-card:hover .work-cover[data-frame="laptop"]::before,
+.work-item.is-active .work-cover[data-frame="laptop"]::before{
+  transform:translate(-50%,calc(-50% + var(--lift))) var(--tilt) scale(calc(var(--dev) + .035)) translateY(1.5%);
 }
 
-/* web: a laptop. The old "desktop" frame was a bare bezel, which at
-   this size and tilt read as a tablet — the lid needs a base under it
-   to say laptop.
+/* web: a laptop, built as an actual hinged machine rather than a
+   screenshot with a bar under it.
 
-   The base is not a separate box with its own position, which is what
-   first went wrong: percentages inside translate() resolve against the
-   pseudo-element's own height, so a 9px bar translated by "half the
-   lid" landed in the middle of the screen. Instead ::after is an
-   invisible box the exact size of the lid, carrying the exact same
-   transform, and the base is drawn by an offset box-shadow. A shadow
-   paints outside the border box and travels with the element, so the
-   two cannot come apart however the tilt or the scale change. */
-.work-cover[data-frame="laptop"]{position:relative}
+   The lid is the img. The base is ::after: a box the same size as the
+   lid, swung down about the hinge and laid almost flat, so the page's
+   own perspective foreshortens it into a deck that recedes. That is
+   also the depth control — the base is lid-deep in its own plane and
+   it is the rotation, not a height, that decides how much of it you
+   see. Keeping it lid-sized is deliberate: percentages inside
+   translate() resolve against the element's own box, so a base that
+   matches the lid can be positioned in lid units and the two cannot
+   drift apart under the tilt or the hover scale.
+
+   ::before is the hinge, a dark seam at the joint that stops the lid
+   and deck reading as one folded sheet. */
+.work-cover[data-frame="laptop"]{position:relative;transform-style:preserve-3d;--dev:.84;--lift:-7%}
 .work-cover[data-frame="laptop"] img{
   aspect-ratio:16/10;width:100%;
-  border:8px solid #15171b;border-bottom-width:12px;
-  border-radius:10px 10px 3px 3px;
+  border:8px solid #15171b;border-bottom-width:14px;
+  border-radius:11px 11px 4px 4px;
   box-shadow:0 0 0 1px var(--rim);
 }
-.work-cover[data-frame="laptop"]::after{
+.work-cover[data-frame="laptop"]::after,
+.work-cover[data-frame="laptop"]::before{
   content:"";position:absolute;left:50%;top:50%;
   width:calc(100% - 2 * var(--pad));aspect-ratio:16/10;
-  border-radius:0 0 18px 18px;
-  transform:translate(-50%,-50%) var(--tilt) scale(.93);
   transform-origin:50% 55%;
-  --tilt:rotateY(-9deg) rotateX(2.5deg) rotate(-1deg);
-  /* 1: the deck, overhanging the lid on both sides — the overhang is
-     what actually says laptop rather than tablet. 2: the darker front
-     lip under it. 3: the contact shadow on the page. */
-  box-shadow:0 16px 0 14px #1f2229,
-             0 22px 0 14px #0E1013,
-             0 42px 40px -18px rgba(0,0,0,.65);
   pointer-events:none;
+}
+/* the deck. translateY(50%) walks from the lid's centre to its bottom
+   edge, rotateX lays the slab down, the second translateY(50%) pushes
+   it away along its own, now almost horizontal, plane. */
+.work-cover[data-frame="laptop"]::after{
+  /* light at the hinge, falling away to the front edge: the deck is
+     catching the same top light the lid is. Without that fall-off it
+     disappears into a dark page and the machine reads as a tablet. */
+  background:linear-gradient(180deg,#515864 0%,#2A3039 38%,#15181E 100%);
+  border-radius:3px 3px 9px 9px;
+  box-shadow:0 0 0 1px var(--rim);
+  transform:translate(-50%,calc(-50% + var(--lift))) var(--tilt) scale(var(--dev))
+            translateY(50%) rotateX(-75deg) translateY(50%);
+}
+/* the hinge seam, sitting just under the lid's bottom edge */
+.work-cover[data-frame="laptop"]::before{
+  z-index:2;height:auto;
+  border-bottom:3px solid #0B0D10;
+  border-radius:0 0 4px 4px;
+  transform:translate(-50%,calc(-50% + var(--lift))) var(--tilt) scale(var(--dev)) translateY(1.5%);
 }
 
 /* the shot already contains its own device shell, so the stage supplies
@@ -442,23 +473,48 @@ section{padding:var(--pad-y) 0}
   box-shadow:0 30px 54px -22px rgba(0,0,0,.55),0 0 0 1px var(--rim);
 }
 .work-cover[data-frame="phone"] > .ph{position:static;transform:var(--tilt,none)}
+/* the phone's hardware, as one overlay sized exactly like the device
+   and carrying the same transform: the island, its camera, and the
+   volume/wake buttons on the rails. A bare bezel reads as a slab; the
+   buttons are what make it a handset. */
+.work-cover[data-frame="phone"]::after{
+  content:"";position:absolute;left:50%;top:50%;z-index:2;
+  /* this has to resolve to exactly the img's box or the hardware lands
+     off the device. Two things differ from the img: an absolutely
+     positioned pseudo-element sizes against the padding box, not the
+     flex content box, hence the subtraction; and the img is also held
+     by max-width, which binds whenever the cover is tall and narrow,
+     so the overlay needs the same ceiling or it stays full height
+     while the phone shrinks under it. */
+  height:calc(100% - 2 * var(--pad));aspect-ratio:9/17;width:auto;
+  max-width:calc(100% - 2 * var(--pad));
+  max-height:calc(100% - 2 * var(--pad));
+  background:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http:%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2090%20170'%20preserveAspectRatio%3D'none'%3E%3Crect%20x%3D'34'%20y%3D'6.2'%20width%3D'22'%20height%3D'5.2'%20rx%3D'2.6'%20fill%3D'%230A0B0D'%2F%3E%3Ccircle%20cx%3D'52.6'%20cy%3D'8.8'%20r%3D'1.5'%20fill%3D'%23161A22'%2F%3E%3Crect%20x%3D'0'%20y%3D'40'%20width%3D'1.5'%20height%3D'7'%20rx%3D'.75'%20fill%3D'%232B3039'%2F%3E%3Crect%20x%3D'0'%20y%3D'52'%20width%3D'1.5'%20height%3D'12'%20rx%3D'.75'%20fill%3D'%232B3039'%2F%3E%3Crect%20x%3D'0'%20y%3D'68'%20width%3D'1.5'%20height%3D'12'%20rx%3D'.75'%20fill%3D'%232B3039'%2F%3E%3Crect%20x%3D'88.5'%20y%3D'56'%20width%3D'1.5'%20height%3D'19'%20rx%3D'.75'%20fill%3D'%232B3039'%2F%3E%3C%2Fsvg%3E") center/100% 100% no-repeat;
+  transform:translate(-50%,calc(-50% + var(--lift))) var(--tilt) scale(var(--dev));
+  transform-origin:50% 55%;
+  pointer-events:none;
+}
+.work-card:hover .work-cover[data-frame="phone"]::after,
+.work-item.is-active .work-cover[data-frame="phone"]::after{
+  transform:translate(-50%,calc(-50% + var(--lift))) var(--tilt) scale(calc(var(--dev) + .035));
+}
 
 /* .ph is normally revealed by an image's onerror. A card whose shot has
    not been exported yet carries the plate alone, with no img to fail. */
 .work-cover > .ph:only-child{display:flex}
 
 @media(max-width:767px){
-  .work-cover[data-frame] img{--tilt:rotateY(-5deg) rotate(-.5deg)}
-  .work-cover[data-frame="laptop"] img{border-width:6px;border-bottom-width:9px;border-radius:8px 8px 2px 2px}
-  .work-cover[data-frame="laptop"]::after{border-radius:0 0 12px 12px;box-shadow:0 10px 0 8px #1f2229,0 14px 0 8px #0E1013,0 26px 26px -12px rgba(0,0,0,.65)}
+  .work-cover[data-frame]{--tilt:rotateY(-5deg) rotate(-.5deg)}
+  .work-cover[data-frame="laptop"] img{border-width:6px;border-bottom-width:10px;border-radius:9px 9px 3px 3px}
+  .work-cover[data-frame="laptop"]::after{border-radius:2px 2px 7px 7px}
+  .work-cover[data-frame="laptop"]::before{border-bottom-width:2px}
   .work-cover[data-frame="phone"] img,
   .work-cover[data-frame="phone"] > .ph{border-width:5px;border-radius:20px}
 }
 @media(prefers-reduced-motion:reduce){
   /* the base and lid-dent declare --tilt on themselves, so clearing it
      on the img alone would leave them turned while the lid sat square */
-  .work-cover[data-frame] img,
-  .work-cover[data-frame="laptop"]::after{--tilt:none}
+  .work-cover[data-frame]{--tilt:none}
 }
 
 .work-body{position:relative;z-index:2;padding:clamp(22px,2.2vw,32px) 0 0}
