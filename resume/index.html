@@ -125,14 +125,21 @@ a.print-btn,a.print-btn:hover{text-decoration:none}
        just looked at. <object> renders it inline where the browser has a
        PDF viewer and falls back to its own children where it does not —
        iOS and most Android browsers refuse to render a PDF in-page, so
-       the fallback has to be a real offer, not an apology. -->
+       the fallback has to be a real offer, not an apology.
+
+       The fragment suppresses the viewer's own furniture — Chrome and
+       Edge otherwise draw a dark toolbar and a thumbnail rail straight
+       through the page, which reads as the browser's UI sitting on top
+       of the site rather than as a document. Firefox and Safari ignore
+       these keys and keep their own chrome; nothing breaks either way,
+       since an unrecognised fragment is simply dropped. -->
   <a class="pdf-shot" href="../assets/Mridhul_Aswin_Resume.pdf" target="_blank" rel="noopener"
      aria-label="Open the résumé PDF">
     <img src="../assets/resume-preview.jpg" width="800" height="1132" alt="Résumé of Mridhul Aswin, first page" loading="lazy"/>
   </a>
 
   <div class="pdf-wrap">
-    <object class="pdf-frame" data="../assets/Mridhul_Aswin_Resume.pdf#view=FitH" type="application/pdf"
+    <object class="pdf-frame" data="../assets/Mridhul_Aswin_Resume.pdf#toolbar=0&amp;navpanes=0&amp;scrollbar=0&amp;view=FitH" type="application/pdf"
             aria-label="Résumé of Mridhul Aswin, PDF">
       <a class="pdf-fallback" href="../assets/Mridhul_Aswin_Resume.pdf" target="_blank" rel="noopener">
         <img src="../assets/resume-preview.jpg" width="800" height="1132" alt="Résumé of Mridhul Aswin, first page"/>
