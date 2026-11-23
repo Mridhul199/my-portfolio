@@ -948,7 +948,16 @@ body,
      across the copy rather than a stroke beside it. Scaled to match
      and pulled back, since here it crosses the reading column. */
   .work-swirl .swirl-glow{stroke-width:34;opacity:.20;filter:blur(15px)}
-  .work-track,.work-progress{left:6px;transform:none}
+  /* only the track moves. .work-progress is a child of it, so giving
+     it the same left:6px stacked the two offsets and pushed the red
+     line 6px clear of the rail and the dots. Left alone it keeps the
+     desktop rule -- left:50% of the track, pulled back half its own
+     width -- which centres it on the rail wherever the rail goes. */
+  /* 5.5 rather than 6 so the 1px rail's centre lands on 6, where the
+     12px dot's centre already is. A 1px line can only ever centre on
+     a half pixel; on desktop it sits the same way, at 50% minus half
+     its width, so this is the existing rendering, not a new seam. */
+  .work-track{left:5.5px;transform:none}
   .work-dot{left:6px;top:28px;margin-left:-6px}
   .work-content,
   .work-items .work-item:nth-child(even) .work-content{
